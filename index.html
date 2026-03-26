@@ -1,502 +1,601 @@
 <!DOCTYPE html>
-
-<html class="light" lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Full Library | Cognitive Engine</title>
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Config -->
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "surface-variant": "#e1e3e4",
-              "outline": "#6f7979",
-              "inverse-on-surface": "#f0f1f2",
-              "primary-fixed": "#a6eff3",
-              "surface-container-low": "#f3f4f5",
-              "inverse-surface": "#2e3132",
-              "error-container": "#ffdad6",
-              "on-primary-fixed": "#002021",
-              "on-primary-fixed-variant": "#004f53",
-              "outline-variant": "#bec8c9",
-              "on-secondary-fixed": "#071e27",
-              "on-tertiary-fixed": "#002204",
-              "tertiary-fixed-dim": "#88d982",
-              "on-tertiary-container": "#8ddf87",
-              "primary-container": "#006064",
-              "on-surface": "#191c1d",
-              "surface-bright": "#f8f9fa",
-              "on-error-container": "#93000a",
-              "secondary-fixed": "#cfe6f2",
-              "on-secondary-container": "#526772",
-              "on-tertiary-fixed-variant": "#005312",
-              "error": "#ba1a1a",
-              "on-secondary": "#ffffff",
-              "on-tertiary": "#ffffff",
-              "on-background": "#191c1d",
-              "surface": "#f8f9fa",
-              "on-error": "#ffffff",
-              "on-primary": "#ffffff",
-              "on-secondary-fixed-variant": "#354a53",
-              "tertiary-container": "#0f641c",
-              "surface-container": "#edeeef",
-              "secondary-container": "#cfe6f2",
-              "secondary": "#4c616c",
-              "tertiary": "#004a0f",
-              "surface-container-lowest": "#ffffff",
-              "on-surface-variant": "#3f4949",
-              "primary-fixed-dim": "#8ad3d7",
-              "surface-container-high": "#e7e8e9",
-              "surface-dim": "#d9dadb",
-              "tertiary-fixed": "#a3f69c",
-              "inverse-primary": "#8ad3d7",
-              "surface-tint": "#14696d",
-              "on-primary-container": "#8fd8dc",
-              "background": "#f8f9fa",
-              "surface-container-highest": "#e1e3e4",
-              "secondary-fixed-dim": "#b4cad6",
-              "primary": "#00464a"
-            },
-            fontFamily: {
-              "headline": ["Manrope"],
-              "body": ["Inter"],
-              "label": ["Inter"]
-            },
-            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
-          },
-        },
-      }
-    </script>
-<style>
-      .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-      }
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 4px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #bec8c9;
-        border-radius: 10px;
-      }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 <script>
-// Decision system interactivity
-document.addEventListener('DOMContentLoaded', function() {
-  // Handle decision chips
-  const decisionChips = document.querySelectorAll('.decision-chip');
-  const contextChips = document.querySelectorAll('.context-chip');
-  
-  decisionChips.forEach(chip => {
-    chip.addEventListener('click', function() {
-      decisionChips.forEach(c => c.classList.remove('bg-primary/20', 'border-primary'));
-      this.classList.add('bg-primary/20', 'border-primary');
-      updatePrinciples();
-    });
-  });
-  
-  contextChips.forEach(chip => {
-    chip.addEventListener('click', function() {
-      contextChips.forEach(c => c.classList.remove('bg-primary/20', 'border-primary'));
-      this.classList.add('bg-primary/20', 'border-primary');
-      updatePrinciples();
-    });
-  });
-  
-  // Handle principle card expansion
-  const principleCards = document.querySelectorAll('.principle-card');
-  principleCards.forEach(card => {
-    const header = card.querySelector('.p-6');
-    const actionLayer = card.querySelector('.action-layer');
-    const expandIcon = card.querySelector('.expand-icon');
-    
-    header.addEventListener('click', function() {
-      actionLayer.classList.toggle('hidden');
-      expandIcon.textContent = actionLayer.classList.contains('hidden') ? 'expand_more' : 'expand_less';
-    });
-  });
-  
-  // Simulate principle updates based on selection
-  function updatePrinciples() {
-    const matchPercentage = document.querySelectorAll('.text-primary.font-semibold');
-    matchPercentage.forEach(el => {
-      if (el.textContent.includes('match')) {
-        const newMatch = Math.floor(Math.random() * 20) + 80; // 80-99%
-        el.textContent = newMatch + '% match';
-      }
-    });
-  }
-});
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: '#3D63DD',
+        'brand-hover': '#2C4EC4',
+        'brand-lt': '#EEF2FD',
+        'brand-bd': '#C3D0F8',
+        appbg: '#F3F5FB',
+        surf: '#FFFFFF',
+        ln: '#E2E8F2',
+        't1': '#0B1228',
+        't2': '#3B4466',
+        't3': '#6E7DA0',
+        't4': '#9BAFC8',
+      },
+      fontFamily: { hl: ['Manrope'], bd: ['Inter'] },
+    },
+  },
+}
 </script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #F3F5FB; color: #3B4466; }
+h1,h2,h3,h4,h5 { font-family: 'Manrope', sans-serif; }
+
+.icon {
+  font-family: 'Material Symbols Rounded';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-size: 20px; line-height: 1; vertical-align: middle;
+  display: inline-block; user-select: none; flex-shrink: 0;
+}
+.icon.f { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+/* === SIDEBAR === */
+.sidebar { background: #0E1624; width: 240px; height: 100vh; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; z-index: 50; }
+.nav-link { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: 8px; font-size: 13.5px; font-weight: 500; color: #7A90B0; transition: all 0.15s; text-decoration: none; }
+.nav-link:hover { background: rgba(255,255,255,0.06); color: #C0D0E8; }
+.nav-link.active { background: rgba(61,99,221,0.20); color: #A8BFFF; }
+.nav-link.active .icon { color: #7AA5FF; }
+
+/* === SCROLLBAR === */
+.scr::-webkit-scrollbar { width: 4px; }
+.scr::-webkit-scrollbar-thumb { background: #C3D0F8; border-radius: 4px; }
+.scr::-webkit-scrollbar-track { background: transparent; }
+
+/* === CHIPS === */
+.gchip {
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+  padding: 14px 10px; border-radius: 10px; border: 1.5px solid #E2E8F2;
+  background: white; color: #3B4466; cursor: pointer; transition: all 0.15s;
+  flex: 1; text-align: center; font-size: 12.5px; font-weight: 600; font-family: Inter, sans-serif;
+}
+.gchip:hover { border-color: #A3BFFF; background: #F4F7FF; }
+.gchip.on { border-color: #3D63DD; background: #EEF2FD; color: #3D63DD; }
+.gchip.on .icon { color: #3D63DD; }
+
+.cchip {
+  display: flex; align-items: center; gap: 5px; padding: 7px 13px;
+  border-radius: 8px; border: 1px solid #E2E8F2; background: #F8FAFE;
+  color: #6E7DA0; font-size: 12.5px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; font-family: Inter, sans-serif;
+}
+.cchip:hover { border-color: #A3BFFF; color: #3B4466; background: white; }
+.cchip.on { border-color: #3D63DD; background: #EEF2FD; color: #3D63DD; }
+
+/* === BADGES === */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+  padding: 3px 8px; border-radius: 100px; text-transform: uppercase; border: 1px solid;
+}
+.badge-low { background: #E8FAF4; color: #0A6B4D; border-color: #9DE0C4; }
+.badge-mod { background: #FFF8E5; color: #7A5408; border-color: #F2D28A; }
+.badge-hi  { background: #FFEEED; color: #8E2222; border-color: #F4B6B4; }
+.badge-cond{ background: #EEF2FD; color: #2C4EC4; border-color: #C3D0F8; }
+
+/* === PRINCIPLE CARD === */
+.pcard { background: white; border: 1px solid #E2E8F2; border-radius: 12px; overflow: hidden; transition: all 0.2s; margin-bottom: 10px; }
+.pcard:hover { border-color: #C3D0F8; box-shadow: 0 4px 20px rgba(15,20,50,0.07); }
+.pcard.open { border-color: #A3BFFF; box-shadow: 0 4px 24px rgba(61,99,221,0.10); }
+.card-body { display: none; border-top: 1px solid #F0F3FA; padding: 20px; }
+.pcard.open .card-body { display: block; }
+.chevron { transition: transform 0.2s; }
+.pcard.open .chevron { transform: rotate(180deg); }
+
+/* === BUTTONS === */
+.btn-primary { display: inline-flex; align-items: center; gap: 6px; background: #3D63DD; color: white; padding: 9px 20px; border-radius: 9px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; box-shadow: 0 4px 12px rgba(61,99,221,0.28); transition: all 0.15s; }
+.btn-primary:hover { background: #2C4EC4; }
+.btn-ghost { display: inline-flex; align-items: center; gap: 6px; background: white; color: #3B4466; padding: 9px 20px; border-radius: 9px; border: 1px solid #E2E8F2; font-size: 13px; font-weight: 600; cursor: pointer; font-family: Inter, sans-serif; transition: all 0.15s; }
+.btn-ghost:hover { background: #F3F5FB; border-color: #C3D0F8; }
+
+/* === TOP NAV === */
+.topnav { height: 60px; background: rgba(255,255,255,0.90); backdrop-filter: blur(16px); border-bottom: 1px solid #E2E8F2; position: fixed; top: 0; left: 240px; right: 0; z-index: 40; display: flex; align-items: center; padding: 0 24px; justify-content: space-between; }
+</style>
 </head>
-<body class="bg-surface font-body text-on-surface overflow-hidden">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/20 shadow-sm flex justify-between items-center px-6 h-16">
-<div class="flex items-center gap-8">
-<span class="text-xl font-bold text-cyan-950 dark:text-cyan-50 font-headline">Cognitive Engine</span>
-<nav class="hidden md:flex gap-6 items-center h-full">
-<a class="font-['Manrope'] font-semibold tracking-tight text-slate-500 hover:text-cyan-600 transition-colors" href="updated-dashboard.html" target="_self">Dashboard</a>
-<a class="font-['Manrope'] font-semibold tracking-tight text-cyan-700 border-b-2 border-cyan-700 pb-1" href="index.html" target="_self">Full Library</a>
-<a class="font-['Manrope'] font-semibold tracking-tight text-slate-500 hover:text-cyan-600 transition-colors" href="compare-mode.html" target="_self">Compare Mode</a>
-</nav>
-</div>
-<div class="flex items-center gap-4">
-<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-</button>
-<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-</button>
-<div class="w-8 h-8 rounded-full overflow-hidden ml-2 border border-outline-variant/20">
-<img class="w-full h-full object-cover" data-alt="professional profile portrait of a data scientist with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxpUQe5F6I_JMS8OZk5b1KsNKooUd8nq2gwS9pWJtMwW7F2wsxsXYa5K_C9Cx7fkkmALDT3M93NGItu_HGuHT6yuEnXMAGpByo2q5NGtUTGzPMTAeB5qecp5gymrm_9_wnJK7qkGXXKUeoqFrHVZkZw58Ubth5N4QztfHZsBZoP7oTEJrY70rDS8HRrEPByUylstq88_BPFOyF6hJQYxvBH4Yfm9QZvpa0Kzp-Tr8MtZJ_-NX7mmMoCJqzQT2qO7a-g6o__icQdDE"/>
-</div>
-</div>
-</header>
-<div class="flex pt-16 h-screen overflow-hidden">
-<!-- SideNavBar -->
-<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-50 dark:bg-slate-950 flex flex-col gap-2 p-4 border-r border-slate-200">
-<div class="mb-6 px-3">
-<div class="flex items-center gap-3 mb-2">
-<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-on-primary-container shadow-sm">
-<span class="material-symbols-outlined" data-icon="memory">memory</span>
-</div>
-<div>
-<p class="text-sm font-black text-cyan-900 font-headline uppercase tracking-wider">System Load</p>
-<p class="text-xs text-slate-500">Optimal State</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 flex flex-col gap-1">
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
-<span>Overview</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
-<span>Analysis</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="psychology">psychology</span>
-<span>Interventions</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="history">history</span>
-<span>History</span>
-</a>
-<div class="mt-6 pt-6 border-t border-slate-200">
-<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-2.5 px-4 rounded-xl font-semibold text-sm shadow-md hover:brightness-110 active:scale-95 transition-all">
-                        New Analysis
-                    </button>
-</div>
-</nav>
-<div class="mt-auto pb-6 flex flex-col gap-1">
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors rounded-lg text-sm" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="description">description</span>
-<span>Docs</span>
-</a>
-<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors rounded-lg text-sm" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
-<span>Support</span>
-</a>
-</div>
-</aside>
-<!-- Main Content Area -->
-<main class="ml-64 flex-1 bg-surface overflow-y-auto custom-scrollbar">
-<div class="p-8 max-w-[1400px] mx-auto">
-<!-- Decision System -->
-<div class="mb-10">
-  <div class="bg-gradient-to-br from-primary-container/10 to-surface-container-low rounded-2xl p-8 border border-outline-variant/20">
-    <h2 class="text-2xl font-headline font-bold text-on-surface mb-6">What are you trying to improve?</h2>
-    
-    <!-- Step 1: Primary Goal -->
-    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
-      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
-        <span class="material-symbols-outlined text-2xl mb-2 text-primary">error_outline</span>
-        <div class="text-sm font-semibold">Reduce errors</div>
-      </button>
-      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
-        <span class="material-symbols-outlined text-2xl mb-2 text-primary">speed</span>
-        <div class="text-sm font-semibold">Speed up decisions</div>
-      </button>
-      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
-        <span class="material-symbols-outlined text-2xl mb-2 text-primary">psychology</span>
-        <div class="text-sm font-semibold">Reduce overload</div>
-      </button>
-      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
-        <span class="material-symbols-outlined text-2xl mb-2 text-primary">search</span>
-        <div class="text-sm font-semibold">Improve findability</div>
-      </button>
-      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
-        <span class="material-symbols-outlined text-2xl mb-2 text-primary">groups</span>
-        <div class="text-sm font-semibold">Improve collaboration</div>
-      </button>
-    </div>
+<body>
 
-    <!-- Step 2: Context -->
-    <div class="mb-6">
-      <h3 class="text-lg font-headline font-semibold text-on-surface mb-4">Where is this happening?</h3>
-      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
-        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
-          <span class="material-symbols-outlined text-lg mb-1">input</span>
-          <div class="text-xs font-medium">Data entry & forms</div>
-        </button>
-        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
-          <span class="material-symbols-outlined text-lg mb-1">gavel</span>
-          <div class="text-xs font-medium">Decision & approvals</div>
-        </button>
-        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
-          <span class="material-symbols-outlined text-lg mb-1">explore</span>
-          <div class="text-xs font-medium">Navigation & search</div>
-        </button>
-        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
-          <span class="material-symbols-outlined text-lg mb-1">monitoring</span>
-          <div class="text-xs font-medium">Monitoring & alerts</div>
-        </button>
-        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
-          <span class="material-symbols-outlined text-lg mb-1">handshake</span>
-          <div class="text-xs font-medium">Collaboration & handover</div>
-        </button>
+<!-- ===== SIDEBAR ===== -->
+<nav class="sidebar">
+  <!-- Brand -->
+  <div style="height:60px; display:flex; align-items:center; padding:0 16px; border-bottom:1px solid rgba(255,255,255,0.07); flex-shrink:0;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="width:32px; height:32px; border-radius:8px; background:rgba(61,99,221,0.25); display:flex; align-items:center; justify-content:center;">
+        <span class="icon" style="color:#7AA5FF; font-size:18px;">psychology</span>
       </div>
-    </div>
-
-    <!-- Step 3: Optional Input -->
-    <div class="relative">
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-        <span class="material-symbols-outlined text-lg">edit_note</span>
-      </div>
-      <input class="block w-full pl-10 pr-4 py-3 bg-white border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" placeholder="Describe your UX problem (optional)" type="text"/>
+      <span style="font-family:Manrope,sans-serif; font-weight:800; color:white; font-size:14px; letter-spacing:-0.01em;">Cognitive Engine</span>
     </div>
   </div>
-</div>
-<!-- Filters Bento -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Discipline</label>
-<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
-<option>All Disciplines</option>
-<option>UX Psychology</option>
-<option>Neuroscience</option>
-<option>Visual Design</option>
-</select>
-</div>
-<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Problem Type</label>
-<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
-<option>Any Complexity</option>
-<option>Information Overload</option>
-<option>Choice Paralysis</option>
-<option>Navigation Fatigue</option>
-</select>
-</div>
-<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Context</label>
-<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
-<option>All Contexts</option>
-<option>Mobile App</option>
-<option>Dashboard</option>
-<option>Onboarding</option>
-</select>
-</div>
-<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
-<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Impact Level</label>
-<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
-<option>All Levels</option>
-<option>Critical</option>
-<option>Moderate</option>
-<option>Optimizing</option>
-</select>
-</div>
-</div>
-<!-- Recommended Principles -->
-<div class="mb-8">
-  <h3 class="text-xl font-headline font-bold text-on-surface mb-6">Top 5 Principles for Your Context</h3>
-  <div class="space-y-4">
-    
-    <!-- Principle Card 1 -->
-    <div class="principle-card bg-white rounded-xl border border-outline-variant/20 overflow-hidden hover:shadow-lg transition-all">
-      <div class="p-6 cursor-pointer" onclick="this.parentElement.classList.toggle('expanded')">
-        <div class="flex items-start justify-between">
-          <div class="flex items-center gap-4">
-            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-              <span class="material-symbols-outlined text-2xl text-primary">linear_scale</span>
-            </div>
-            <div>
-              <h4 class="text-lg font-bold text-on-surface">Hick's Law</h4>
-              <p class="text-sm text-on-surface-variant">Decision Making • Choice Paralysis</p>
-              <div class="flex items-center gap-2 mt-2">
-                <div class="inline-flex items-center gap-1 bg-tertiary-fixed/30 px-2 py-1 rounded-full">
-                  <div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-                  <span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
-                </div>
-                <span class="text-xs text-primary font-semibold">95% match</span>
-              </div>
-            </div>
-          </div>
-          <span class="material-symbols-outlined text-slate-400 expand-icon">expand_more</span>
+
+  <!-- Status -->
+  <div style="padding:10px 16px; border-bottom:1px solid rgba(255,255,255,0.05); flex-shrink:0;">
+    <div style="display:flex; align-items:center; gap:6px; padding:5px 10px; background:rgba(16,166,121,0.15); border-radius:7px; width:fit-content;">
+      <span style="width:6px; height:6px; border-radius:50%; background:#10A679; display:block;"></span>
+      <span style="font-size:10.5px; color:#5CC9A0; font-weight:700; letter-spacing:0.07em; text-transform:uppercase;">Optimal Load</span>
+    </div>
+  </div>
+
+  <!-- Nav items -->
+  <div style="flex:1; padding:12px 12px; display:flex; flex-direction:column; gap:2px; overflow-y:auto;" class="scr">
+    <a href="updated-dashboard.html" class="nav-link">
+      <span class="icon">dashboard</span><span>Overview</span>
+    </a>
+    <a href="#" class="nav-link">
+      <span class="icon">analytics</span><span>Analysis</span>
+    </a>
+    <a href="index.html" class="nav-link active">
+      <span class="icon">auto_stories</span><span>Library</span>
+    </a>
+    <a href="#" class="nav-link">
+      <span class="icon">history</span><span>History</span>
+    </a>
+  </div>
+
+  <!-- CTA -->
+  <div style="padding:0 12px 12px; flex-shrink:0;">
+    <button onclick="this.style.background='#2C4EC4'" onmouseout="this.style.background='#3D63DD'" style="width:100%; display:flex; align-items:center; justify-content:center; gap:6px; background:#3D63DD; color:white; font-size:13.5px; font-weight:600; padding:10px 16px; border-radius:10px; border:none; cursor:pointer; box-shadow:0 4px 12px rgba(61,99,221,0.30); font-family:Inter,sans-serif;">
+      <span class="icon" style="font-size:18px;">add</span>New Analysis
+    </button>
+  </div>
+
+  <!-- Bottom -->
+  <div style="padding:10px 12px 16px; border-top:1px solid rgba(255,255,255,0.06); flex-shrink:0; display:flex; flex-direction:column; gap:2px;">
+    <a href="#" class="nav-link" style="font-size:12.5px; color:#4F6080;">
+      <span class="icon" style="font-size:17px;">description</span><span>Docs</span>
+    </a>
+    <a href="#" class="nav-link" style="font-size:12.5px; color:#4F6080;">
+      <span class="icon" style="font-size:17px;">help_outline</span><span>Support</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<div style="margin-left:240px; height:100vh; display:flex; flex-direction:column;">
+
+  <!-- Top Nav -->
+  <header class="topnav">
+    <nav style="display:flex; align-items:center; gap:2px;">
+      <a href="updated-dashboard.html" style="padding:6px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:#6E7DA0; text-decoration:none; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB';this.style.color='#0B1228'" onmouseout="this.style.background='transparent';this.style.color='#6E7DA0'">Dashboard</a>
+      <a href="index.html" style="padding:6px 14px; border-radius:8px; font-size:13.5px; font-weight:600; color:#3D63DD; background:#EEF2FD; text-decoration:none;">Full Library</a>
+      <a href="compare-mode.html" style="padding:6px 14px; border-radius:8px; font-size:13.5px; font-weight:500; color:#6E7DA0; text-decoration:none; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB';this.style.color='#0B1228'" onmouseout="this.style.background='transparent';this.style.color='#6E7DA0'">Compare Mode</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:6px;">
+      <div style="position:relative;">
+        <span class="icon" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); font-size:16px; color:#9BAFC8;">search</span>
+        <input type="text" placeholder="Search principles…" onfocus="this.style.borderColor='#A3BFFF';this.style.boxShadow='0 0 0 3px rgba(61,99,221,0.10)'" onblur="this.style.borderColor='#E2E8F2';this.style.boxShadow='none'" style="background:#F3F5FB; border:1px solid #E2E8F2; border-radius:100px; padding:7px 14px 7px 32px; font-size:13px; width:220px; outline:none; font-family:Inter; color:#0B1228; transition:all 0.2s;" />
+      </div>
+      <button onmouseover="this.style.background='#F0F3FA'" onmouseout="this.style.background='transparent'" style="padding:7px; border-radius:8px; background:transparent; border:none; color:#6E7DA0; cursor:pointer; display:flex; transition:all 0.15s;">
+        <span class="icon">notifications</span>
+      </button>
+      <button onmouseover="this.style.background='#F0F3FA'" onmouseout="this.style.background='transparent'" style="padding:7px; border-radius:8px; background:transparent; border:none; color:#6E7DA0; cursor:pointer; display:flex; transition:all 0.15s;">
+        <span class="icon">settings</span>
+      </button>
+      <img src="https://i.pravatar.cc/32?u=cog-ux" alt="User" style="width:32px; height:32px; border-radius:50%; border:2px solid #E2E8F2; object-fit:cover;"/>
+    </div>
+  </header>
+
+  <!-- Content Row -->
+  <div style="display:flex; flex:1; overflow:hidden; margin-top:60px;">
+
+    <!-- Main scroll -->
+    <main style="flex:1; overflow-y:auto; padding:24px 24px 8px;" class="scr">
+
+      <!-- ── Decision Section ── -->
+      <div style="background:white; border:1px solid #E2E8F2; border-radius:16px; padding:24px; margin-bottom:18px;">
+        <div style="margin-bottom:18px;">
+          <h2 style="font-size:18px; font-weight:800; color:#0B1228; margin:0 0 4px; letter-spacing:-0.01em;">What are you trying to improve?</h2>
+          <p style="font-size:13px; color:#6E7DA0; margin:0;">Select a goal and context to surface the most relevant cognitive principles.</p>
+        </div>
+
+        <!-- Goal chips -->
+        <div style="display:flex; gap:8px; margin-bottom:16px;" id="goal-group">
+          <button class="gchip on" onclick="selectChip(this,'goal-group')">
+            <span class="icon" style="font-size:22px; color:#3D63DD;">error</span>Reduce errors
+          </button>
+          <button class="gchip" onclick="selectChip(this,'goal-group')">
+            <span class="icon" style="font-size:22px; color:#9BAFC8;">speed</span>Speed up decisions
+          </button>
+          <button class="gchip" onclick="selectChip(this,'goal-group')">
+            <span class="icon" style="font-size:22px; color:#9BAFC8;">psychology</span>Reduce overload
+          </button>
+          <button class="gchip" onclick="selectChip(this,'goal-group')">
+            <span class="icon" style="font-size:22px; color:#9BAFC8;">travel_explore</span>Findability
+          </button>
+          <button class="gchip" onclick="selectChip(this,'goal-group')">
+            <span class="icon" style="font-size:22px; color:#9BAFC8;">group</span>Collaboration
+          </button>
+        </div>
+
+        <div style="border-top:1px solid #F0F3FA; margin-bottom:14px;"></div>
+        <p style="font-size:10.5px; font-weight:800; color:#9BAFC8; text-transform:uppercase; letter-spacing:0.09em; margin:0 0 10px;">Where is this happening?</p>
+
+        <!-- Context chips -->
+        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px;" id="ctx-group">
+          <button class="cchip" onclick="selectChip(this,'ctx-group')">
+            <span class="icon" style="font-size:15px;">edit_square</span>Data entry &amp; forms
+          </button>
+          <button class="cchip on" onclick="selectChip(this,'ctx-group')">
+            <span class="icon" style="font-size:15px;">gavel</span>Decision &amp; approvals
+          </button>
+          <button class="cchip" onclick="selectChip(this,'ctx-group')">
+            <span class="icon" style="font-size:15px;">explore</span>Navigation &amp; search
+          </button>
+          <button class="cchip" onclick="selectChip(this,'ctx-group')">
+            <span class="icon" style="font-size:15px;">monitoring</span>Monitoring &amp; alerts
+          </button>
+          <button class="cchip" onclick="selectChip(this,'ctx-group')">
+            <span class="icon" style="font-size:15px;">handshake</span>Collaboration
+          </button>
+        </div>
+
+        <!-- Free text -->
+        <div style="position:relative;">
+          <span class="icon" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:17px; color:#9BAFC8;">edit_note</span>
+          <input type="text" placeholder="Optionally describe your UX problem in detail…" onfocus="this.style.borderColor='#A3BFFF';this.style.boxShadow='0 0 0 3px rgba(61,99,221,0.08)'" onblur="this.style.borderColor='#E2E8F2';this.style.boxShadow='none'" style="width:100%; background:#F8FAFE; border:1px solid #E2E8F2; border-radius:10px; padding:11px 16px 11px 38px; font-size:13.5px; font-family:Inter; color:#0B1228; outline:none; transition:all 0.2s;"/>
         </div>
       </div>
-      
-      <!-- Action Layer (Hidden by default) -->
-      <div class="action-layer hidden border-t border-outline-variant/20 p-6 bg-surface-container-lowest">
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h5 class="font-semibold text-on-surface mb-3 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary">build</span>
-              Design Actions
-            </h5>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
-                <span>Limit primary actions to 3–5 options</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
-                <span>Group secondary actions under "More" menu</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
-                <span>Use progressive disclosure for advanced options</span>
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h5 class="font-semibold text-on-surface mb-3 flex items-center gap-2">
-              <span class="material-symbols-outlined text-primary">layers</span>
-              UI Patterns
-            </h5>
-            <ul class="space-y-2 text-sm">
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
-                <span>Dropdown instead of full list</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
-                <span>Stepper for multi-step decisions</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
-                <span>Tabs for grouping related options</span>
-              </li>
-            </ul>
-          </div>
+
+      <!-- ── Filters ── -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:18px;">
+        <div style="background:white; border:1px solid #E2E8F2; border-radius:10px; padding:12px 14px;">
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.09em; color:#9BAFC8; margin:0 0 4px;">Discipline</p>
+          <select style="width:100%; background:transparent; border:none; padding:0; font-size:13.5px; font-weight:700; color:#3D63DD; font-family:Inter; outline:none; cursor:pointer;">
+            <option>All Disciplines</option><option>UX Psychology</option><option>Neuroscience</option><option>Visual Design</option>
+          </select>
         </div>
-        
-        <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-          <h6 class="font-semibold text-amber-900 mb-2 flex items-center gap-2">
-            <span class="material-symbols-outlined text-amber-600">warning</span>
-            Anti-patterns
-          </h6>
-          <ul class="text-sm text-amber-800 space-y-1">
-            <li>• Showing all options at once</li>
-            <li>• Equal visual weight for all actions</li>
-            <li>• No clear primary action</li>
-          </ul>
+        <div style="background:white; border:1px solid #E2E8F2; border-radius:10px; padding:12px 14px;">
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.09em; color:#9BAFC8; margin:0 0 4px;">Problem Type</p>
+          <select style="width:100%; background:transparent; border:none; padding:0; font-size:13.5px; font-weight:700; color:#3D63DD; font-family:Inter; outline:none; cursor:pointer;">
+            <option>Any Type</option><option>Information Overload</option><option>Choice Paralysis</option><option>Navigation Fatigue</option>
+          </select>
         </div>
-        
-        <div class="mt-4 p-4 bg-primary/5 rounded-lg">
-          <h6 class="font-semibold text-primary mb-2">Life Science Example</h6>
-          <p class="text-sm text-on-surface">Test ordering: show "most common panels" first instead of full catalogue, reducing selection time by 60%.</p>
+        <div style="background:white; border:1px solid #E2E8F2; border-radius:10px; padding:12px 14px;">
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.09em; color:#9BAFC8; margin:0 0 4px;">Context</p>
+          <select style="width:100%; background:transparent; border:none; padding:0; font-size:13.5px; font-weight:700; color:#3D63DD; font-family:Inter; outline:none; cursor:pointer;">
+            <option>All Contexts</option><option>Mobile App</option><option>Dashboard</option><option>Onboarding</option>
+          </select>
         </div>
-        
-        <div class="mt-6 flex gap-3">
-          <button class="bg-primary text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors flex items-center gap-2">
-            <span class="material-symbols-outlined">play_arrow</span>
-            Apply This Principle
+        <div style="background:white; border:1px solid #E2E8F2; border-radius:10px; padding:12px 14px;">
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.09em; color:#9BAFC8; margin:0 0 4px;">Impact Level</p>
+          <select style="width:100%; background:transparent; border:none; padding:0; font-size:13.5px; font-weight:700; color:#3D63DD; font-family:Inter; outline:none; cursor:pointer;">
+            <option>All Levels</option><option>Critical</option><option>Moderate</option><option>Optimizing</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ── Principles Header ── -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+        <div>
+          <h3 style="font-size:15.5px; font-weight:800; color:#0B1228; margin:0 0 2px; letter-spacing:-0.01em;">Top 5 Principles for Your Context</h3>
+          <p style="font-size:12.5px; color:#6E7DA0; margin:0;">Based on "Reduce errors" in "Decision &amp; approvals"</p>
+        </div>
+        <div style="display:flex; gap:6px;">
+          <button style="display:flex; align-items:center; gap:5px; padding:6px 12px; border-radius:8px; border:1px solid #E2E8F2; background:white; color:#3D63DD; font-size:12.5px; font-weight:600; cursor:pointer; font-family:Inter; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'">
+            <span class="icon" style="font-size:15px;">filter_list</span>Filter
           </button>
-          <button class="border border-outline-variant/30 text-on-surface px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-surface-container-low transition-colors">
-            Compare with Others
+          <button style="display:flex; align-items:center; gap:5px; padding:6px 12px; border-radius:8px; border:1px solid #E2E8F2; background:white; color:#3D63DD; font-size:12.5px; font-weight:600; cursor:pointer; font-family:Inter; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'">
+            <span class="icon" style="font-size:15px;">sort</span>Sort by Impact
           </button>
         </div>
-</div>
-<!-- Pagination -->
-<div class="px-8 py-4 border-t border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest">
-<span class="text-xs text-on-surface-variant">Showing 1-20 of 128 principles</span>
-<div class="flex items-center gap-2">
-<button class="p-2 hover:bg-surface-container text-slate-400 rounded-lg transition-colors">
-</button>
-<span class="px-4 py-1 text-xs font-bold text-primary bg-primary/5 rounded-md">1</span>
-<button class="px-4 py-1 text-xs font-medium text-slate-500 hover:text-primary transition-colors">2</button>
-<button class="px-4 py-1 text-xs font-medium text-slate-500 hover:text-primary transition-colors">3</button>
-<button class="p-2 hover:bg-surface-container text-slate-400 rounded-lg transition-colors">
-<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<footer class="w-full py-6 mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
-<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-4">
-<p class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400">© 2024 Cognitive Load Intervention Engine</p>
-<div class="flex gap-6">
-<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Documentation</a>
-<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Support</a>
-<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Privacy Policy</a>
-</div>
-</div>
-</footer>
-</main>
-<!-- Contextual Detail Panel (Hidden/Peek) -->
-<aside class="w-96 h-screen border-l border-outline-variant/10 bg-surface-container-lowest hidden xl:flex flex-col pt-16">
-<div class="p-8">
-<div class="mb-6">
-<span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary-fixed/20 px-2 py-1 rounded">Selected Principle</span>
-<h2 class="text-2xl font-headline font-bold mt-4 text-on-surface">Miller's Law</h2>
-<p class="text-sm text-on-surface-variant mt-2 leading-relaxed italic">"The average person can only keep 7 (plus or minus 2) items in their working memory."</p>
-</div>
-<div class="space-y-6">
-<div>
-<h3 class="text-xs font-bold text-on-surface uppercase mb-3 flex items-center gap-2">
-<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
-                            Description
-                        </h3>
-<p class="text-sm text-on-surface-variant leading-relaxed">
-                            Organizing content into smaller chunks helps users process, memorize, and recall information more easily. Large datasets should be segmented into manageable logical groups.
-                        </p>
-</div>
-<div class="p-4 bg-error-container/10 rounded-xl border border-error/10">
-<h3 class="text-xs font-bold text-error uppercase mb-2">Cognitive Impact</h3>
-<div class="flex items-center gap-3">
-<div class="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
-<div class="h-full bg-error w-[85%]"></div>
-</div>
-<span class="text-xs font-bold text-error">85% High</span>
-</div>
-<p class="text-[11px] text-on-error-container mt-2">Violating this principle causes immediate user disorientation and loss of current task state.</p>
-</div>
-<div>
-<h3 class="text-xs font-bold text-on-surface uppercase mb-3">Suggested Interventions</h3>
-<ul class="space-y-2">
-<li class="flex items-start gap-2 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
-                                Implement progressive disclosure for secondary data.
-                            </li>
-<li class="flex items-start gap-2 text-sm text-on-surface-variant">
-<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
-                                Group related navigation elements into categories of max 5 items.
-                            </li>
-</ul>
-</div>
-</div>
-<div class="mt-8">
-<button class="w-full py-3 border border-outline-variant/20 rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container transition-all flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-lg" data-icon="open_in_new">open_in_new</span>
-                        View Full Case Study
-                    </button>
-</div>
-</div>
-</aside>
-</div>
-</body></html>
+      </div>
+
+      <!-- ── Principle Cards ── -->
+      <!-- Card 1: Hick's Law (open) -->
+      <div class="pcard open" id="c1">
+        <div onclick="toggleCard('c1')" style="padding:18px 20px; cursor:pointer; display:flex; align-items:flex-start; gap:14px;">
+          <span style="font-family:Manrope; font-size:10.5px; font-weight:800; color:#9BAFC8; padding-top:3px; letter-spacing:0.05em; flex-shrink:0;">#01</span>
+          <div style="flex-shrink:0; width:42px; height:42px; border-radius:10px; background:#EEF2FD; display:flex; align-items:center; justify-content:center;">
+            <span class="icon" style="font-size:22px; color:#3D63DD;">linear_scale</span>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+              <h4 style="font-size:15px; font-weight:800; color:#0B1228; margin:0; letter-spacing:-0.01em;">Hick's Law</h4>
+              <span class="badge badge-low"><span style="width:5px; height:5px; border-radius:50%; background:#10A679; display:block;"></span>Low Load</span>
+              <span style="font-size:11px; font-weight:700; color:#3D63DD; background:#EEF2FD; padding:2px 9px; border-radius:100px; border:1px solid #C3D0F8;">97% match</span>
+            </div>
+            <p style="font-size:11px; color:#9BAFC8; margin:0 0 5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Decision Making · Choice Architecture</p>
+            <p style="font-size:13px; color:#6E7DA0; margin:0; line-height:1.6;">Decision time increases logarithmically with the number of choices. Limit options to accelerate user decisions.</p>
+          </div>
+          <span class="icon chevron" style="color:#9BAFC8; flex-shrink:0; margin-top:2px;">expand_more</span>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px; display:flex; align-items:center; gap:5px;"><span class="icon" style="font-size:14px; color:#3D63DD;">construction</span>Design Actions</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Limit primary actions to 3–5 options per view</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Group secondary actions under an overflow "More" menu</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Use progressive disclosure for advanced configuration</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px; display:flex; align-items:center; gap:5px;"><span class="icon" style="font-size:14px; color:#3D63DD;">layers</span>UI Patterns</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Dropdown instead of an expanded flat list</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Stepper wizard for multi-step decisions</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Tabs to group related action clusters</li>
+              </ul>
+            </div>
+          </div>
+          <div style="background:#FFF8E5; border:1px solid #F2D28A; border-radius:10px; padding:14px; margin-bottom:14px;">
+            <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#7A5408; margin:0 0 8px; display:flex; align-items:center; gap:5px;"><span class="icon" style="font-size:14px; color:#C98B0A;">warning</span>Anti-Patterns to Avoid</p>
+            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">
+              <li style="font-size:12.5px; color:#7A5408; line-height:1.5;">• Displaying all options simultaneously without visual hierarchy</li>
+              <li style="font-size:12.5px; color:#7A5408; line-height:1.5;">• Assigning equal visual weight to primary and secondary actions</li>
+              <li style="font-size:12.5px; color:#7A5408; line-height:1.5;">• Omitting a clear recommended or default option</li>
+            </ul>
+          </div>
+          <div style="background:#EEF2FD; border:1px solid #C3D0F8; border-radius:10px; padding:14px; margin-bottom:16px;">
+            <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#2C4EC4; margin:0 0 6px; display:flex; align-items:center; gap:5px;"><span class="icon" style="font-size:14px;">biotech</span>Life Science Example</p>
+            <p style="font-size:13px; color:#3B4466; line-height:1.6; margin:0;">Test ordering redesign: showing "Most Common Panels" first instead of the full catalogue reduced lab technician selection time by 60% in clinical workflows.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary"><span class="icon" style="font-size:16px;">play_arrow</span>Apply This Principle</button>
+            <button class="btn-ghost"><span class="icon" style="font-size:16px;">compare_arrows</span>Compare with Others</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Miller's Law -->
+      <div class="pcard" id="c2">
+        <div onclick="toggleCard('c2')" style="padding:18px 20px; cursor:pointer; display:flex; align-items:flex-start; gap:14px;">
+          <span style="font-family:Manrope; font-size:10.5px; font-weight:800; color:#9BAFC8; padding-top:3px; letter-spacing:0.05em; flex-shrink:0;">#02</span>
+          <div style="flex-shrink:0; width:42px; height:42px; border-radius:10px; background:#FFF8E5; display:flex; align-items:center; justify-content:center;">
+            <span class="icon" style="font-size:22px; color:#C98B0A;">memory</span>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+              <h4 style="font-size:15px; font-weight:800; color:#0B1228; margin:0; letter-spacing:-0.01em;">Miller's Law</h4>
+              <span class="badge badge-hi"><span style="width:5px; height:5px; border-radius:50%; background:#D03535; display:block;"></span>High Load</span>
+              <span style="font-size:11px; font-weight:700; color:#3D63DD; background:#EEF2FD; padding:2px 9px; border-radius:100px; border:1px solid #C3D0F8;">92% match</span>
+            </div>
+            <p style="font-size:11px; color:#9BAFC8; margin:0 0 5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Working Memory · Information Density</p>
+            <p style="font-size:13px; color:#6E7DA0; margin:0; line-height:1.6;">The average person holds 7 ±2 items in working memory. Chunk content into groups of 5–9 to optimize recall.</p>
+          </div>
+          <span class="icon chevron" style="color:#9BAFC8; flex-shrink:0; margin-top:2px;">expand_more</span>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">Design Actions</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Segment long forms into thematic sections ≤7 fields</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Apply whitespace and dividers to create visual chunks</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">UI Patterns</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Multi-step wizard for complex workflows</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Accordion panels to group related content</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary"><span class="icon" style="font-size:16px;">play_arrow</span>Apply This Principle</button>
+            <button class="btn-ghost"><span class="icon" style="font-size:16px;">compare_arrows</span>Compare with Others</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Von Restorff Effect -->
+      <div class="pcard" id="c3">
+        <div onclick="toggleCard('c3')" style="padding:18px 20px; cursor:pointer; display:flex; align-items:flex-start; gap:14px;">
+          <span style="font-family:Manrope; font-size:10.5px; font-weight:800; color:#9BAFC8; padding-top:3px; letter-spacing:0.05em; flex-shrink:0;">#03</span>
+          <div style="flex-shrink:0; width:42px; height:42px; border-radius:10px; background:#E8FAF4; display:flex; align-items:center; justify-content:center;">
+            <span class="icon" style="font-size:22px; color:#10A679;">visibility</span>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+              <h4 style="font-size:15px; font-weight:800; color:#0B1228; margin:0; letter-spacing:-0.01em;">Von Restorff Effect</h4>
+              <span class="badge badge-low"><span style="width:5px; height:5px; border-radius:50%; background:#10A679; display:block;"></span>Low Load</span>
+              <span style="font-size:11px; font-weight:700; color:#3D63DD; background:#EEF2FD; padding:2px 9px; border-radius:100px; border:1px solid #C3D0F8;">88% match</span>
+            </div>
+            <p style="font-size:11px; color:#9BAFC8; margin:0 0 5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Visual Attention · Salience Design</p>
+            <p style="font-size:13px; color:#6E7DA0; margin:0; line-height:1.6;">Items that stand out from surroundings are more likely to be remembered. Isolate critical elements visually.</p>
+          </div>
+          <span class="icon chevron" style="color:#9BAFC8; flex-shrink:0; margin-top:2px;">expand_more</span>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">Design Actions</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Use contrasting color for critical alerts vs. routine items</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Apply subtle animation only to high-priority indicators</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">UI Patterns</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Highlight badges for critical status rows in tables</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Pin-to-top for urgent action items</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary"><span class="icon" style="font-size:16px;">play_arrow</span>Apply This Principle</button>
+            <button class="btn-ghost"><span class="icon" style="font-size:16px;">compare_arrows</span>Compare with Others</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Fitts's Law -->
+      <div class="pcard" id="c4">
+        <div onclick="toggleCard('c4')" style="padding:18px 20px; cursor:pointer; display:flex; align-items:flex-start; gap:14px;">
+          <span style="font-family:Manrope; font-size:10.5px; font-weight:800; color:#9BAFC8; padding-top:3px; letter-spacing:0.05em; flex-shrink:0;">#04</span>
+          <div style="flex-shrink:0; width:42px; height:42px; border-radius:10px; background:#EEF2FD; display:flex; align-items:center; justify-content:center;">
+            <span class="icon" style="font-size:22px; color:#3D63DD;">touch_app</span>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+              <h4 style="font-size:15px; font-weight:800; color:#0B1228; margin:0; letter-spacing:-0.01em;">Fitts's Law</h4>
+              <span class="badge badge-cond"><span style="width:5px; height:5px; border-radius:50%; background:#3D63DD; display:block;"></span>Conditional</span>
+              <span style="font-size:11px; font-weight:700; color:#3D63DD; background:#EEF2FD; padding:2px 9px; border-radius:100px; border:1px solid #C3D0F8;">84% match</span>
+            </div>
+            <p style="font-size:11px; color:#9BAFC8; margin:0 0 5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Motor Efficiency · Input Optimization</p>
+            <p style="font-size:13px; color:#6E7DA0; margin:0; line-height:1.6;">Time to reach a target is a function of its size and distance. Make critical interactive elements large and proximate.</p>
+          </div>
+          <span class="icon chevron" style="color:#9BAFC8; flex-shrink:0; margin-top:2px;">expand_more</span>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">Design Actions</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Minimum 44×44px touch targets for mobile interfaces</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Place the primary CTA within the thumb-reachable zone</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">UI Patterns</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Floating action button for the primary mobile action</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Context menu anchored to current cursor/touch position</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary"><span class="icon" style="font-size:16px;">play_arrow</span>Apply This Principle</button>
+            <button class="btn-ghost"><span class="icon" style="font-size:16px;">compare_arrows</span>Compare with Others</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5: Serial Position Effect -->
+      <div class="pcard" id="c5">
+        <div onclick="toggleCard('c5')" style="padding:18px 20px; cursor:pointer; display:flex; align-items:flex-start; gap:14px;">
+          <span style="font-family:Manrope; font-size:10.5px; font-weight:800; color:#9BAFC8; padding-top:3px; letter-spacing:0.05em; flex-shrink:0;">#05</span>
+          <div style="flex-shrink:0; width:42px; height:42px; border-radius:10px; background:#FFF8E5; display:flex; align-items:center; justify-content:center;">
+            <span class="icon" style="font-size:22px; color:#C98B0A;">format_list_numbered</span>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:5px; flex-wrap:wrap;">
+              <h4 style="font-size:15px; font-weight:800; color:#0B1228; margin:0; letter-spacing:-0.01em;">Serial Position Effect</h4>
+              <span class="badge badge-mod"><span style="width:5px; height:5px; border-radius:50%; background:#C98B0A; display:block;"></span>Moderate</span>
+              <span style="font-size:11px; font-weight:700; color:#3D63DD; background:#EEF2FD; padding:2px 9px; border-radius:100px; border:1px solid #C3D0F8;">79% match</span>
+            </div>
+            <p style="font-size:11px; color:#9BAFC8; margin:0 0 5px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em;">Memory · List Complexity</p>
+            <p style="font-size:13px; color:#6E7DA0; margin:0; line-height:1.6;">Items at the beginning and end of a list are remembered better. Place critical actions at primacy and recency positions.</p>
+          </div>
+          <span class="icon chevron" style="color:#9BAFC8; flex-shrink:0; margin-top:2px;">expand_more</span>
+        </div>
+        <div class="card-body">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:16px;">
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">Design Actions</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Place the most critical nav items first and last in each list</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#3D63DD; margin-top:1px;">check_circle</span>Surface primary CTA at top; confirmation/exit at bottom</li>
+              </ul>
+            </div>
+            <div>
+              <p style="font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#9BAFC8; margin:0 0 10px;">UI Patterns</p>
+              <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Sticky header bar for primary action in long scrolling pages</li>
+                <li style="display:flex; align-items:flex-start; gap:7px; font-size:13px; color:#3B4466; line-height:1.55;"><span class="icon" style="font-size:14px; color:#9BAFC8; margin-top:1px;">arrow_forward</span>Summary/confirmation anchored at bottom of multi-step forms</li>
+              </ul>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-primary"><span class="icon" style="font-size:16px;">play_arrow</span>Apply This Principle</button>
+            <button class="btn-ghost"><span class="icon" style="font-size:16px;">compare_arrows</span>Compare with Others</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:13px 18px; background:white; border:1px solid #E2E8F2; border-radius:12px; margin-bottom:24px;">
+        <span style="font-size:12.5px; color:#9BAFC8;">Showing 1–5 of 128 principles</span>
+        <div style="display:flex; align-items:center; gap:4px;">
+          <button style="padding:6px 10px; border-radius:7px; border:1px solid #E2E8F2; background:white; color:#9BAFC8; cursor:pointer; display:flex; align-items:center; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'"><span class="icon" style="font-size:16px;">chevron_left</span></button>
+          <button style="padding:6px 14px; border-radius:7px; border:1px solid #3D63DD; background:#EEF2FD; color:#3D63DD; font-size:12.5px; font-weight:700; cursor:pointer; font-family:Inter;">1</button>
+          <button style="padding:6px 14px; border-radius:7px; border:1px solid transparent; background:transparent; color:#6E7DA0; font-size:12.5px; font-weight:500; cursor:pointer; font-family:Inter; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='transparent'">2</button>
+          <button style="padding:6px 14px; border-radius:7px; border:1px solid transparent; background:transparent; color:#6E7DA0; font-size:12.5px; font-weight:500; cursor:pointer; font-family:Inter; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='transparent'">3</button>
+          <button style="padding:6px 10px; border-radius:7px; border:1px solid #E2E8F2; background:white; color:#6E7DA0; cursor:pointer; display:flex; align-items:center; transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'"><span class="icon" style="font-size:16px;">chevron_right</span></button>
+        </div>
+      </div>
+
+    </main><!-- /main scroll -->
+
+    <!-- ===== RIGHT PANEL ===== -->
+    <aside id="right-panel" style="width:310px; flex-shrink:0; border-left:1px solid #E2E8F2; background:white; overflow-y:auto; display:none; padding:24px;" class="scr">
+      <!-- populated by JS -->
+    </aside>
+
+  </div><!-- /content row -->
+</div><!-- /main wrapper -->
+
+<!-- Right panel content via JS -->
+<style>@media (min-width:1280px) { #right-panel { display:block !important; } }</style>
+
+<script>
+function populateRightPanel() {
+  var el = document.getElementById('right-panel');
+  if (!el) return;
+  el.innerHTML =
+    '<div style="margin-bottom:20px;">' +
+      '<span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.10em;color:#3D63DD;background:#EEF2FD;padding:3px 10px;border-radius:100px;border:1px solid #C3D0F8;">Selected Principle</span>' +
+      '<h2 style="font-size:21px;font-weight:800;color:#0B1228;margin:14px 0 6px;font-family:Manrope,sans-serif;letter-spacing:-0.02em;">Miller\'s Law</h2>' +
+      '<p style="font-size:12.5px;color:#6E7DA0;margin:0;line-height:1.7;font-style:italic;">"The average person can only keep 7 (\u00b12) items in their working memory at any given time."</p>' +
+    '</div>' +
+    '<div style="border-top:1px solid #F0F3FA;padding-top:18px;margin-bottom:18px;">' +
+      '<p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">Description</p>' +
+      '<p style="font-size:13px;color:#3B4466;line-height:1.7;margin:0;">Organizing content into smaller chunks helps users process, memorize, and recall information more easily. Large datasets should be segmented into manageable logical groups of 5\u20139 items.</p>' +
+    '</div>' +
+    '<div style="background:#FFEEED;border:1px solid #F4B6B4;border-radius:10px;padding:14px;margin-bottom:16px;">' +
+      '<p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#8E2222;margin:0 0 10px;">Cognitive Impact</p>' +
+      '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">' +
+        '<div style="flex:1;height:4px;background:#F4B6B4;border-radius:4px;overflow:hidden;">' +
+          '<div style="width:85%;height:100%;background:linear-gradient(90deg,#D03535,#F47070);border-radius:4px;"></div>' +
+        '</div>' +
+        '<span style="font-size:11.5px;font-weight:800;color:#8E2222;white-space:nowrap;">85% High</span>' +
+      '</div>' +
+      '<p style="font-size:12px;color:#8E2222;margin:0;line-height:1.5;">Violating this principle causes immediate disorientation and loss of current task state.</p>' +
+    '</div>' +
+    '<div style="margin-bottom:20px;">' +
+      '<p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">Suggested Interventions</p>' +
+      '<div style="display:flex;flex-direction:column;gap:8px;">' +
+        '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:#F8FAFE;border-radius:9px;border:1px solid #E2E8F2;">' +
+          '<span class="icon" style="font-size:16px;color:#10A679;margin-top:1px;">check_circle</span>' +
+          '<p style="font-size:13px;color:#3B4466;margin:0;line-height:1.5;">Implement progressive disclosure for secondary data points.</p>' +
+        '</div>' +
+        '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:#F8FAFE;border-radius:9px;border:1px solid #E2E8F2;">' +
+          '<span class="icon" style="font-size:16px;color:#10A679;margin-top:1px;">check_circle</span>' +
+          '<p style="font-size:13px;color:#3B4466;margin:0;line-height:1.5;">Group navigation elements into categories of max 5 items per section.</p>' +
+        '</div>' +
+        '<div style="display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:#F8FAFE;border-radius:9px;border:1px solid #E2E8F2;">' +
+          '<span class="icon" style="font-size:16px;color:#10A679;margin-top:1px;">check_circle</span>' +
+          '<p style="font-size:13px;color:#3B4466;margin:0;line-height:1.5;">Use chunked phone number inputs (NNN-NNN-NNNN) as a reference UI pattern.</p>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;gap:8px;">' +
+      '<button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;font-size:13.5px;border-radius:10px;"><span class="icon" style="font-size:16px;">play_arrow</span>Apply Principle</button>' +
+      '<button class="btn-ghost" style="width:100%;justify-content:center;padding:11px 20px;font-size:13.5px;border-radius:10px;"><span class="icon" style="font-size:16px;">open_in_new</span>View Full Case Study</button>' +
+    '</div>';
+}
+populateRightPanel();
+
+function selectChip(el, groupId) {
+  document.getElementById(groupId).querySelectorAll('.gchip,.cchip').forEach(function(c) { c.classList.remove('on'); });
+  el.classList.add('on');
+}
+function toggleCard(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+</script>
+</body>
+</html>
