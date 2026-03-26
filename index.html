@@ -91,6 +91,54 @@
         border-radius: 10px;
       }
     </style>
+<script>
+// Decision system interactivity
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle decision chips
+  const decisionChips = document.querySelectorAll('.decision-chip');
+  const contextChips = document.querySelectorAll('.context-chip');
+  
+  decisionChips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      decisionChips.forEach(c => c.classList.remove('bg-primary/20', 'border-primary'));
+      this.classList.add('bg-primary/20', 'border-primary');
+      updatePrinciples();
+    });
+  });
+  
+  contextChips.forEach(chip => {
+    chip.addEventListener('click', function() {
+      contextChips.forEach(c => c.classList.remove('bg-primary/20', 'border-primary'));
+      this.classList.add('bg-primary/20', 'border-primary');
+      updatePrinciples();
+    });
+  });
+  
+  // Handle principle card expansion
+  const principleCards = document.querySelectorAll('.principle-card');
+  principleCards.forEach(card => {
+    const header = card.querySelector('.p-6');
+    const actionLayer = card.querySelector('.action-layer');
+    const expandIcon = card.querySelector('.expand-icon');
+    
+    header.addEventListener('click', function() {
+      actionLayer.classList.toggle('hidden');
+      expandIcon.textContent = actionLayer.classList.contains('hidden') ? 'expand_more' : 'expand_less';
+    });
+  });
+  
+  // Simulate principle updates based on selection
+  function updatePrinciples() {
+    const matchPercentage = document.querySelectorAll('.text-primary.font-semibold');
+    matchPercentage.forEach(el => {
+      if (el.textContent.includes('match')) {
+        const newMatch = Math.floor(Math.random() * 20) + 80; // 80-99%
+        el.textContent = newMatch + '% match';
+      }
+    });
+  }
+});
+</script>
 </head>
 <body class="bg-surface font-body text-on-surface overflow-hidden">
 <!-- TopNavBar -->
@@ -166,18 +214,70 @@
 <!-- Main Content Area -->
 <main class="ml-64 flex-1 bg-surface overflow-y-auto custom-scrollbar">
 <div class="p-8 max-w-[1400px] mx-auto">
-<!-- Page Header & Search -->
-<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-<div>
-<h1 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight mb-2">Full Library</h1>
-<p class="text-on-surface-variant text-lg font-light">Explore design principles and cognitive intervention patterns.</p>
-</div>
-<div class="relative w-full md:w-96 group">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
-<span class="material-symbols-outlined" data-icon="search">search</span>
-</div>
-<input class="block w-full pl-10 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm ring-1 ring-outline-variant/20 focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" placeholder="Search patterns or principles..." type="text"/>
-</div>
+<!-- Decision System -->
+<div class="mb-10">
+  <div class="bg-gradient-to-br from-primary-container/10 to-surface-container-low rounded-2xl p-8 border border-outline-variant/20">
+    <h2 class="text-2xl font-headline font-bold text-on-surface mb-6">What are you trying to improve?</h2>
+    
+    <!-- Step 1: Primary Goal -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
+      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
+        <span class="material-symbols-outlined text-2xl mb-2 text-primary">error_outline</span>
+        <div class="text-sm font-semibold">Reduce errors</div>
+      </button>
+      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
+        <span class="material-symbols-outlined text-2xl mb-2 text-primary">speed</span>
+        <div class="text-sm font-semibold">Speed up decisions</div>
+      </button>
+      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
+        <span class="material-symbols-outlined text-2xl mb-2 text-primary">psychology</span>
+        <div class="text-sm font-semibold">Reduce overload</div>
+      </button>
+      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
+        <span class="material-symbols-outlined text-2xl mb-2 text-primary">search</span>
+        <div class="text-sm font-semibold">Improve findability</div>
+      </button>
+      <button class="decision-chip bg-white border-2 border-outline-variant/30 hover:border-primary hover:bg-primary/5 rounded-xl p-4 text-center transition-all">
+        <span class="material-symbols-outlined text-2xl mb-2 text-primary">groups</span>
+        <div class="text-sm font-semibold">Improve collaboration</div>
+      </button>
+    </div>
+
+    <!-- Step 2: Context -->
+    <div class="mb-6">
+      <h3 class="text-lg font-headline font-semibold text-on-surface mb-4">Where is this happening?</h3>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
+          <span class="material-symbols-outlined text-lg mb-1">input</span>
+          <div class="text-xs font-medium">Data entry & forms</div>
+        </button>
+        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
+          <span class="material-symbols-outlined text-lg mb-1">gavel</span>
+          <div class="text-xs font-medium">Decision & approvals</div>
+        </button>
+        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
+          <span class="material-symbols-outlined text-lg mb-1">explore</span>
+          <div class="text-xs font-medium">Navigation & search</div>
+        </button>
+        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
+          <span class="material-symbols-outlined text-lg mb-1">monitoring</span>
+          <div class="text-xs font-medium">Monitoring & alerts</div>
+        </button>
+        <button class="context-chip bg-surface-container-low border border-outline-variant/20 hover:border-primary hover:bg-primary/5 rounded-xl p-3 text-center transition-all">
+          <span class="material-symbols-outlined text-lg mb-1">handshake</span>
+          <div class="text-xs font-medium">Collaboration & handover</div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Optional Input -->
+    <div class="relative">
+      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+        <span class="material-symbols-outlined text-lg">edit_note</span>
+      </div>
+      <input class="block w-full pl-10 pr-4 py-3 bg-white border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" placeholder="Describe your UX problem (optional)" type="text"/>
+    </div>
+  </div>
 </div>
 <!-- Filters Bento -->
 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -218,143 +318,113 @@
 </select>
 </div>
 </div>
-<!-- Data Table -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
-<div class="overflow-x-auto">
-<table class="w-full border-separate border-spacing-y-2 px-6 pb-6">
-<thead>
-<tr class="text-left">
-<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Principle name</th>
-<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Category</th>
-<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Problem Type</th>
-<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold text-right">Impact level</th>
-</tr>
-</thead>
-<tbody>
-<!-- Row 1 -->
-<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg" data-icon="grid_view">grid_view</span>
-</div>
-<span class="font-bold text-on-surface text-sm">Miller's Law</span>
-</div>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Working Memory</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Information Density</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
-<div class="inline-flex items-center gap-2 bg-error-container/40 px-3 py-1 rounded-full">
-<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
-<span class="text-[11px] font-bold text-on-error-container uppercase">High Load</span>
-</div>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg" data-icon="linear_scale">linear_scale</span>
-</div>
-<span class="font-bold text-on-surface text-sm">Hick's Law</span>
-</div>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Decision Making</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Choice Paralysis</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
-<div class="inline-flex items-center gap-2 bg-tertiary-fixed/30 px-3 py-1 rounded-full">
-<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-<span class="text-[11px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
-</div>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg" data-icon="architecture">architecture</span>
-</div>
-<span class="font-bold text-on-surface text-sm">Fitts's Law</span>
-</div>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Motor Effort</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Input Fatigue</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
-<div class="inline-flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full">
-<div class="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
-<span class="text-[11px] font-bold text-on-surface-variant uppercase">Conditional</span>
-</div>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg" data-icon="filter_center_focus">filter_center_focus</span>
-</div>
-<span class="font-bold text-on-surface text-sm">Gestalt Continuity</span>
-</div>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Perception</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Visual Search</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
-<div class="inline-flex items-center gap-2 bg-tertiary-fixed/30 px-3 py-1 rounded-full">
-<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
-<span class="text-[11px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
-</div>
-</td>
-</tr>
-<!-- Row 5 -->
-<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-lg" data-icon="stacks">stacks</span>
-</div>
-<span class="font-bold text-on-surface text-sm">Serial Position</span>
-</div>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">Recall</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
-<span class="text-on-surface-variant text-sm">List Complexity</span>
-</td>
-<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
-<div class="inline-flex items-center gap-2 bg-error-container/40 px-3 py-1 rounded-full">
-<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
-<span class="text-[11px] font-bold text-on-error-container uppercase">High Load</span>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
+<!-- Recommended Principles -->
+<div class="mb-8">
+  <h3 class="text-xl font-headline font-bold text-on-surface mb-6">Top 5 Principles for Your Context</h3>
+  <div class="space-y-4">
+    
+    <!-- Principle Card 1 -->
+    <div class="principle-card bg-white rounded-xl border border-outline-variant/20 overflow-hidden hover:shadow-lg transition-all">
+      <div class="p-6 cursor-pointer" onclick="this.parentElement.classList.toggle('expanded')">
+        <div class="flex items-start justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+              <span class="material-symbols-outlined text-2xl text-primary">linear_scale</span>
+            </div>
+            <div>
+              <h4 class="text-lg font-bold text-on-surface">Hick's Law</h4>
+              <p class="text-sm text-on-surface-variant">Decision Making • Choice Paralysis</p>
+              <div class="flex items-center gap-2 mt-2">
+                <div class="inline-flex items-center gap-1 bg-tertiary-fixed/30 px-2 py-1 rounded-full">
+                  <div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                  <span class="text-[10px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
+                </div>
+                <span class="text-xs text-primary font-semibold">95% match</span>
+              </div>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-slate-400 expand-icon">expand_more</span>
+        </div>
+      </div>
+      
+      <!-- Action Layer (Hidden by default) -->
+      <div class="action-layer hidden border-t border-outline-variant/20 p-6 bg-surface-container-lowest">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h5 class="font-semibold text-on-surface mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">build</span>
+              Design Actions
+            </h5>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
+                <span>Limit primary actions to 3–5 options</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
+                <span>Group secondary actions under "More" menu</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-primary mt-0.5">check_circle</span>
+                <span>Use progressive disclosure for advanced options</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div>
+            <h5 class="font-semibold text-on-surface mb-3 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">layers</span>
+              UI Patterns
+            </h5>
+            <ul class="space-y-2 text-sm">
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
+                <span>Dropdown instead of full list</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
+                <span>Stepper for multi-step decisions</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="material-symbols-outlined text-xs text-tertiary mt-0.5">arrow_right</span>
+                <span>Tabs for grouping related options</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <h6 class="font-semibold text-amber-900 mb-2 flex items-center gap-2">
+            <span class="material-symbols-outlined text-amber-600">warning</span>
+            Anti-patterns
+          </h6>
+          <ul class="text-sm text-amber-800 space-y-1">
+            <li>• Showing all options at once</li>
+            <li>• Equal visual weight for all actions</li>
+            <li>• No clear primary action</li>
+          </ul>
+        </div>
+        
+        <div class="mt-4 p-4 bg-primary/5 rounded-lg">
+          <h6 class="font-semibold text-primary mb-2">Life Science Example</h6>
+          <p class="text-sm text-on-surface">Test ordering: show "most common panels" first instead of full catalogue, reducing selection time by 60%.</p>
+        </div>
+        
+        <div class="mt-6 flex gap-3">
+          <button class="bg-primary text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors flex items-center gap-2">
+            <span class="material-symbols-outlined">play_arrow</span>
+            Apply This Principle
+          </button>
+          <button class="border border-outline-variant/30 text-on-surface px-6 py-2.5 rounded-lg font-semibold text-sm hover:bg-surface-container-low transition-colors">
+            Compare with Others
+          </button>
+        </div>
 </div>
 <!-- Pagination -->
 <div class="px-8 py-4 border-t border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest">
-<span class="text-xs text-on-surface-variant">Showing 1-15 of 128 principles</span>
+<span class="text-xs text-on-surface-variant">Showing 1-20 of 128 principles</span>
 <div class="flex items-center gap-2">
 <button class="p-2 hover:bg-surface-container text-slate-400 rounded-lg transition-colors">
-<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
 </button>
 <span class="px-4 py-1 text-xs font-bold text-primary bg-primary/5 rounded-md">1</span>
 <button class="px-4 py-1 text-xs font-medium text-slate-500 hover:text-primary transition-colors">2</button>
