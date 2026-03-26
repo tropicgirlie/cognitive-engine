@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Full Library | Cognitive Engine</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-variant": "#e1e3e4",
+              "outline": "#6f7979",
+              "inverse-on-surface": "#f0f1f2",
+              "primary-fixed": "#a6eff3",
+              "surface-container-low": "#f3f4f5",
+              "inverse-surface": "#2e3132",
+              "error-container": "#ffdad6",
+              "on-primary-fixed": "#002021",
+              "on-primary-fixed-variant": "#004f53",
+              "outline-variant": "#bec8c9",
+              "on-secondary-fixed": "#071e27",
+              "on-tertiary-fixed": "#002204",
+              "tertiary-fixed-dim": "#88d982",
+              "on-tertiary-container": "#8ddf87",
+              "primary-container": "#006064",
+              "on-surface": "#191c1d",
+              "surface-bright": "#f8f9fa",
+              "on-error-container": "#93000a",
+              "secondary-fixed": "#cfe6f2",
+              "on-secondary-container": "#526772",
+              "on-tertiary-fixed-variant": "#005312",
+              "error": "#ba1a1a",
+              "on-secondary": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "on-background": "#191c1d",
+              "surface": "#f8f9fa",
+              "on-error": "#ffffff",
+              "on-primary": "#ffffff",
+              "on-secondary-fixed-variant": "#354a53",
+              "tertiary-container": "#0f641c",
+              "surface-container": "#edeeef",
+              "secondary-container": "#cfe6f2",
+              "secondary": "#4c616c",
+              "tertiary": "#004a0f",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#3f4949",
+              "primary-fixed-dim": "#8ad3d7",
+              "surface-container-high": "#e7e8e9",
+              "surface-dim": "#d9dadb",
+              "tertiary-fixed": "#a3f69c",
+              "inverse-primary": "#8ad3d7",
+              "surface-tint": "#14696d",
+              "on-primary-container": "#8fd8dc",
+              "background": "#f8f9fa",
+              "surface-container-highest": "#e1e3e4",
+              "secondary-fixed-dim": "#b4cad6",
+              "primary": "#00464a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #bec8c9;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/20 shadow-sm flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-cyan-950 dark:text-cyan-50 font-headline">Cognitive Engine</span>
+<nav class="hidden md:flex gap-6 items-center h-full">
+<a class="font-['Manrope'] font-semibold tracking-tight text-slate-500 hover:text-cyan-600 transition-colors" href="#">Dashboard</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-cyan-700 border-b-2 border-cyan-700 pb-1" href="#">Full Library</a>
+<a class="font-['Manrope'] font-semibold tracking-tight text-slate-500 hover:text-cyan-600 transition-colors" href="#">Compare Mode</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden ml-2 border border-outline-variant/20">
+<img class="w-full h-full object-cover" data-alt="professional profile portrait of a data scientist with soft studio lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxpUQe5F6I_JMS8OZk5b1KsNKooUd8nq2gwS9pWJtMwW7F2wsxsXYa5K_C9Cx7fkkmALDT3M93NGItu_HGuHT6yuEnXMAGpByo2q5NGtUTGzPMTAeB5qecp5gymrm_9_wnJK7qkGXXKUeoqFrHVZkZw58Ubth5N4QztfHZsBZoP7oTEJrY70rDS8HRrEPByUylstq88_BPFOyF6hJQYxvBH4Yfm9QZvpa0Kzp-Tr8MtZJ_-NX7mmMoCJqzQT2qO7a-g6o__icQdDE"/>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-50 dark:bg-slate-950 flex flex-col gap-2 p-4 border-r border-slate-200">
+<div class="mb-6 px-3">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 bg-primary-container rounded-xl flex items-center justify-center text-on-primary-container shadow-sm">
+<span class="material-symbols-outlined" data-icon="memory">memory</span>
+</div>
+<div>
+<p class="text-sm font-black text-cyan-900 font-headline uppercase tracking-wider">System Load</p>
+<p class="text-xs text-slate-500">Optimal State</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="analytics">analytics</span>
+<span>Analysis</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="psychology">psychology</span>
+<span>Interventions</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg text-sm font-medium" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="history">history</span>
+<span>History</span>
+</a>
+<div class="mt-6 pt-6 border-t border-slate-200">
+<button class="w-full bg-gradient-to-br from-primary to-primary-container text-white py-2.5 px-4 rounded-xl font-semibold text-sm shadow-md hover:brightness-110 active:scale-95 transition-all">
+                        New Analysis
+                    </button>
+</div>
+</nav>
+<div class="mt-auto pb-6 flex flex-col gap-1">
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="description">description</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors rounded-lg text-sm" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 bg-surface overflow-y-auto custom-scrollbar">
+<div class="p-8 max-w-[1400px] mx-auto">
+<!-- Page Header & Search -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-4xl font-headline font-extrabold text-on-surface tracking-tight mb-2">Full Library</h1>
+<p class="text-on-surface-variant text-lg font-light">Explore design principles and cognitive intervention patterns.</p>
+</div>
+<div class="relative w-full md:w-96 group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-surface-container-lowest border-none rounded-xl shadow-sm ring-1 ring-outline-variant/20 focus:ring-2 focus:ring-primary outline-none transition-all placeholder:text-slate-400" placeholder="Search patterns or principles..." type="text"/>
+</div>
+</div>
+<!-- Filters Bento -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Discipline</label>
+<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
+<option>All Disciplines</option>
+<option>UX Psychology</option>
+<option>Neuroscience</option>
+<option>Visual Design</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Problem Type</label>
+<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
+<option>Any Complexity</option>
+<option>Information Overload</option>
+<option>Choice Paralysis</option>
+<option>Navigation Fatigue</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Context</label>
+<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
+<option>All Contexts</option>
+<option>Mobile App</option>
+<option>Dashboard</option>
+<option>Onboarding</option>
+</select>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/10">
+<label class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-2 block">Impact Level</label>
+<select class="w-full bg-transparent border-none p-0 text-sm font-semibold text-primary focus:ring-0 cursor-pointer">
+<option>All Levels</option>
+<option>Critical</option>
+<option>Moderate</option>
+<option>Optimizing</option>
+</select>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant/10 overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full border-separate border-spacing-y-2 px-6 pb-6">
+<thead>
+<tr class="text-left">
+<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Principle name</th>
+<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Category</th>
+<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold">Problem Type</th>
+<th class="py-6 px-4 font-label text-[11px] uppercase tracking-[0.1em] text-on-surface-variant font-bold text-right">Impact level</th>
+</tr>
+</thead>
+<tbody>
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="grid_view">grid_view</span>
+</div>
+<span class="font-bold text-on-surface text-sm">Miller's Law</span>
+</div>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Working Memory</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Information Density</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
+<div class="inline-flex items-center gap-2 bg-error-container/40 px-3 py-1 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+<span class="text-[11px] font-bold text-on-error-container uppercase">High Load</span>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="linear_scale">linear_scale</span>
+</div>
+<span class="font-bold text-on-surface text-sm">Hick's Law</span>
+</div>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Decision Making</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Choice Paralysis</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
+<div class="inline-flex items-center gap-2 bg-tertiary-fixed/30 px-3 py-1 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-[11px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="architecture">architecture</span>
+</div>
+<span class="font-bold text-on-surface text-sm">Fitts's Law</span>
+</div>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Motor Effort</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Input Fatigue</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
+<div class="inline-flex items-center gap-2 bg-surface-container-highest px-3 py-1 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-amber-500"></div>
+<span class="text-[11px] font-bold text-on-surface-variant uppercase">Conditional</span>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="filter_center_focus">filter_center_focus</span>
+</div>
+<span class="font-bold text-on-surface text-sm">Gestalt Continuity</span>
+</div>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Perception</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Visual Search</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
+<div class="inline-flex items-center gap-2 bg-tertiary-fixed/30 px-3 py-1 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<span class="text-[11px] font-bold text-on-tertiary-fixed-variant uppercase">Low Load</span>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-surface-container-low transition-all cursor-pointer">
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-l-xl">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-lg" data-icon="stacks">stacks</span>
+</div>
+<span class="font-bold text-on-surface text-sm">Serial Position</span>
+</div>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">Recall</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent">
+<span class="text-on-surface-variant text-sm">List Complexity</span>
+</td>
+<td class="py-4 px-4 bg-surface-container-low/30 group-hover:bg-transparent rounded-r-xl text-right">
+<div class="inline-flex items-center gap-2 bg-error-container/40 px-3 py-1 rounded-full">
+<div class="w-1.5 h-1.5 rounded-full bg-error"></div>
+<span class="text-[11px] font-bold text-on-error-container uppercase">High Load</span>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-8 py-4 border-t border-outline-variant/10 flex justify-between items-center bg-surface-container-lowest">
+<span class="text-xs text-on-surface-variant">Showing 1-15 of 128 principles</span>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container text-slate-400 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="px-4 py-1 text-xs font-bold text-primary bg-primary/5 rounded-md">1</span>
+<button class="px-4 py-1 text-xs font-medium text-slate-500 hover:text-primary transition-colors">2</button>
+<button class="px-4 py-1 text-xs font-medium text-slate-500 hover:text-primary transition-colors">3</button>
+<button class="p-2 hover:bg-surface-container text-slate-400 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="w-full py-6 mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-4">
+<p class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400">© 2024 Cognitive Load Intervention Engine</p>
+<div class="flex gap-6">
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Documentation</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Support</a>
+<a class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400 hover:text-cyan-700 underline-offset-4 hover:underline transition-all" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</main>
+<!-- Contextual Detail Panel (Hidden/Peek) -->
+<aside class="w-96 h-screen border-l border-outline-variant/10 bg-surface-container-lowest hidden xl:flex flex-col pt-16">
+<div class="p-8">
+<div class="mb-6">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest bg-primary-fixed/20 px-2 py-1 rounded">Selected Principle</span>
+<h2 class="text-2xl font-headline font-bold mt-4 text-on-surface">Miller's Law</h2>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed italic">"The average person can only keep 7 (plus or minus 2) items in their working memory."</p>
+</div>
+<div class="space-y-6">
+<div>
+<h3 class="text-xs font-bold text-on-surface uppercase mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="description">description</span>
+                            Description
+                        </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                            Organizing content into smaller chunks helps users process, memorize, and recall information more easily. Large datasets should be segmented into manageable logical groups.
+                        </p>
+</div>
+<div class="p-4 bg-error-container/10 rounded-xl border border-error/10">
+<h3 class="text-xs font-bold text-error uppercase mb-2">Cognitive Impact</h3>
+<div class="flex items-center gap-3">
+<div class="flex-1 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+<div class="h-full bg-error w-[85%]"></div>
+</div>
+<span class="text-xs font-bold text-error">85% High</span>
+</div>
+<p class="text-[11px] text-on-error-container mt-2">Violating this principle causes immediate user disorientation and loss of current task state.</p>
+</div>
+<div>
+<h3 class="text-xs font-bold text-on-surface uppercase mb-3">Suggested Interventions</h3>
+<ul class="space-y-2">
+<li class="flex items-start gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+                                Implement progressive disclosure for secondary data.
+                            </li>
+<li class="flex items-start gap-2 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="check_circle">check_circle</span>
+                                Group related navigation elements into categories of max 5 items.
+                            </li>
+</ul>
+</div>
+</div>
+<div class="mt-8">
+<button class="w-full py-3 border border-outline-variant/20 rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="open_in_new">open_in_new</span>
+                        View Full Case Study
+                    </button>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

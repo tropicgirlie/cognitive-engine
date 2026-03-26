@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Compare Mode | Cognitive Engine</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#6f7979",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed": "#a6eff3",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-surface": "#2e3132",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#002021",
+                        "on-primary-fixed-variant": "#004f53",
+                        "outline-variant": "#bec8c9",
+                        "on-secondary-fixed": "#071e27",
+                        "on-tertiary-fixed": "#002204",
+                        "tertiary-fixed-dim": "#88d982",
+                        "on-tertiary-container": "#8ddf87",
+                        "primary-container": "#006064",
+                        "on-surface": "#191c1d",
+                        "surface-bright": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-secondary-container": "#526772",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-container": "#0f641c",
+                        "surface-container": "#edeeef",
+                        "secondary-container": "#cfe6f2",
+                        "secondary": "#4c616c",
+                        "tertiary": "#004a0f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3f4949",
+                        "primary-fixed-dim": "#8ad3d7",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-fixed": "#a3f69c",
+                        "inverse-primary": "#8ad3d7",
+                        "surface-tint": "#14696d",
+                        "on-primary-container": "#8fd8dc",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "primary": "#00464a"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Manrope', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200/20 dark:border-slate-800/20 shadow-sm flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-cyan-950 dark:text-cyan-50 font-headline">Cognitive Engine</span>
+<div class="hidden md:flex gap-6 font-['Manrope'] font-semibold tracking-tight">
+<a class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-200 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-200 transition-colors" href="#">Full Library</a>
+<a class="text-cyan-700 dark:text-cyan-300 border-b-2 border-cyan-700 dark:border-cyan-300 pb-1" href="#">Compare Mode</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-slate-600">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-50 dark:hover:bg-slate-800/50 rounded-full active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-slate-600">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-slate-200 overflow-hidden ml-2">
+<img alt="User Profile" data-alt="professional headshot of a product designer in a minimalist studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1LYP4Ww9bBcbmL3NE1vnOyz5h1tf2A1IUFmFcPvGs1uwN3TqVLvyXKZ_fD1HaQ2lKzzKHvcRCcu3rmX3kA0XZodHQDmGdF97tu4e2TkhAQ9lQN7TGfhooRNUs9PDT7cTsdv3SE5CUcjOT8fbvp9DAIYdtFehHEcQW24Bve687_9BUlKjx7yjV4QQM9fsnn_04NjUAeARC-1e-EWDzoClvM3_ZTi3i_Ptx-tpA1awi_gOLUFoBYKxVMzjNgrfsKaMIGuDLyznnOfs"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-50 dark:bg-slate-950 flex flex-col gap-2 p-4 border-r border-slate-200 dark:border-slate-800 z-40">
+<div class="mb-6 px-3">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></div>
+<span class="text-lg font-black text-cyan-900 dark:text-cyan-100 font-headline">System Load</span>
+</div>
+<p class="text-xs text-slate-500 font-medium">Optimal State</p>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-3 py-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Overview
+            </a>
+<a class="flex items-center gap-3 bg-cyan-100/50 dark:bg-cyan-900/30 text-cyan-900 dark:text-cyan-100 rounded-lg px-3 py-2 transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span> Analysis
+            </a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-3 py-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span> Interventions
+            </a>
+<a class="flex items-center gap-3 text-slate-600 dark:text-slate-400 px-3 py-2 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span> History
+            </a>
+</div>
+<button class="mt-4 mx-3 bg-primary text-white py-2 rounded-xl text-sm font-semibold hover:opacity-90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span> New Analysis
+        </button>
+<div class="mt-auto flex flex-col gap-1 border-t border-slate-200 pt-4">
+<a class="flex items-center gap-3 text-slate-500 px-3 py-2 hover:text-cyan-700 transition-colors text-xs font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]">description</span> Docs
+            </a>
+<a class="flex items-center gap-3 text-slate-500 px-3 py-2 hover:text-cyan-700 transition-colors text-xs font-medium" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span> Support
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 min-h-screen bg-surface flex flex-col">
+<header class="px-10 py-12">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-display-lg font-headline font-extrabold text-on-surface tracking-tight text-5xl mb-2">Compare Mode</h1>
+<p class="text-on-surface-variant font-body max-w-xl text-lg">Deconstruct and evaluate cognitive intervention strategies side-by-side to minimize friction and maximize user throughput.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl border border-outline-variant/20 bg-surface-container-low text-on-surface font-semibold text-sm hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-[20px]">save</span> Save Analysis
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-br from-primary to-primary-container text-white font-semibold text-sm shadow-sm active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span> Add Principle
+                    </button>
+</div>
+</div>
+</header>
+<!-- Comparison Matrix -->
+<section class="px-10 pb-20 flex-1">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-12 gap-px bg-slate-200 dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-800">
+<!-- Attribute Labels Column -->
+<div class="col-span-3 bg-surface-container-low flex flex-col">
+<div class="h-24 p-6 flex items-center border-b border-white/10">
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-on-surface-variant">Core Attributes</span>
+</div>
+<div class="p-6 h-32 flex items-center bg-white/30">
+<span class="font-headline font-bold text-on-surface-variant">Mechanism</span>
+</div>
+<div class="p-6 h-40 flex items-center bg-transparent">
+<span class="font-headline font-bold text-on-surface-variant">Use Cases</span>
+</div>
+<div class="p-6 h-32 flex items-center bg-white/30">
+<span class="font-headline font-bold text-on-surface-variant text-error">Cognitive Risks</span>
+</div>
+<div class="p-6 h-48 flex items-center bg-transparent">
+<span class="font-headline font-bold text-on-surface-variant">Design Actions</span>
+</div>
+</div>
+<!-- Principle 1: Progressive Disclosure -->
+<div class="col-span-3 bg-surface-container-lowest flex flex-col relative group">
+<button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-error-container hover:text-on-error-container rounded-lg">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="h-24 p-6 border-b border-surface-container">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-[10px] font-bold text-tertiary uppercase tracking-widest">Low Load</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg leading-tight">Progressive Disclosure</h3>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-surface-variant leading-relaxed italic">Defers complex features to secondary screens to maintain initial clarity.</p>
+</div>
+<div class="p-6 h-40 flex flex-col gap-2">
+<ul class="text-sm text-on-surface leading-relaxed list-none space-y-2">
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Advanced filter systems</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Multi-step onboarding</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Admin dashboards</li>
+</ul>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-error-container leading-relaxed flex gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+                                Discoverability issues; users may never find 'hidden' power features.
+                            </p>
+</div>
+<div class="p-6 h-48 flex flex-col justify-center gap-3">
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Implementation</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Use 'Show More' accordions and contextual tooltips.</p>
+</div>
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Constraint</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Max 3 layers of nesting before task abandonment peaks.</p>
+</div>
+</div>
+</div>
+<!-- Principle 2: Miller's Law (Chunking) -->
+<div class="col-span-3 bg-surface-container-lowest flex flex-col relative group">
+<button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-error-container hover:text-on-error-container rounded-lg">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="h-24 p-6 border-b border-surface-container bg-surface-container-lowest">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-2 h-2 rounded-full bg-[#fbc02d]"></div>
+<span class="text-[10px] font-bold text-[#fbc02d] uppercase tracking-widest">Moderate Load</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg leading-tight">Chunking (Miller's Law)</h3>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-surface-variant leading-relaxed italic">Groups information into manageable units (5-9 items) for working memory.</p>
+</div>
+<div class="p-6 h-40 flex flex-col gap-2">
+<ul class="text-sm text-on-surface leading-relaxed list-none space-y-2">
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Form field grouping</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Navigation menu structure</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Credit card input formatting</li>
+</ul>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-error-container leading-relaxed flex gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+                                Over-chunking can lead to fragmented UX and excessive scrolling.
+                            </p>
+</div>
+<div class="p-6 h-48 flex flex-col justify-center gap-3">
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Implementation</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Use whitespace and clear section headers to divide data.</p>
+</div>
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Constraint</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Optimal chunk size is 4 for high-stress environments.</p>
+</div>
+</div>
+</div>
+<!-- Principle 3: Hick's Law -->
+<div class="col-span-3 bg-surface-container-lowest flex flex-col relative group">
+<button class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity p-1.5 hover:bg-error-container hover:text-on-error-container rounded-lg">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+<div class="h-24 p-6 border-b border-surface-container">
+<div class="flex items-center gap-2 mb-1">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-[10px] font-bold text-error uppercase tracking-widest">High Complexity</span>
+</div>
+<h3 class="font-headline font-bold text-on-surface text-lg leading-tight">Hick's Law</h3>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-surface-variant leading-relaxed italic">States that decision time increases logarithmically with the number of choices.</p>
+</div>
+<div class="p-6 h-40 flex flex-col gap-2">
+<ul class="text-sm text-on-surface leading-relaxed list-none space-y-2">
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> CTA prioritization</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Pricing plan comparison</li>
+<li class="flex gap-2 items-start"><span class="text-primary mt-1 text-[16px] material-symbols-outlined">check_circle</span> Emergency shutdown UI</li>
+</ul>
+</div>
+<div class="p-6 h-32 flex flex-col justify-center bg-surface-container-low/20">
+<p class="text-sm text-on-error-container leading-relaxed flex gap-2">
+<span class="material-symbols-outlined text-error text-[18px]">warning</span>
+                                Oversimplification can remove necessary nuance for expert users.
+                            </p>
+</div>
+<div class="p-6 h-48 flex flex-col justify-center gap-3">
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Implementation</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Highlight "Recommended" choices to reduce analysis paralysis.</p>
+</div>
+<div class="p-3 bg-primary/5 rounded-lg border-l-4 border-primary">
+<p class="text-[13px] font-medium text-primary">Constraint</p>
+<p class="text-[12px] text-on-surface-variant mt-1">Avoid more than 5 critical options per viewport.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Style Insight Cards -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-200/50 hover:shadow-lg transition-all">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-tertiary/10 rounded-lg">
+<span class="material-symbols-outlined text-tertiary">balance</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface">Optimal Trade-off</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Combine <span class="font-semibold text-primary">Chunking</span> with <span class="font-semibold text-primary">Progressive Disclosure</span> for enterprise search tools to reduce time-to-action by 40%.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-200/50 hover:shadow-lg transition-all">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<h4 class="font-headline font-bold text-on-surface">Efficiency Gains</h4>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">Applying <span class="font-semibold text-primary">Hick's Law</span> to the checkout flow reduced cognitive strain index (CSI) from 0.7 to 0.4 in pilot testing.</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-slate-200/50 hover:shadow-lg transition-all flex flex-col justify-center items-center text-center group cursor-pointer border-dashed border-2 border-slate-300">
+<span class="material-symbols-outlined text-slate-400 text-4xl mb-2 group-hover:scale-110 transition-transform">add_circle</span>
+<p class="text-sm font-bold text-slate-500">Compare another Principle</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-6 mt-auto bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-4">
+<span class="font-['Inter'] text-xs text-slate-500 dark:text-slate-400">© 2024 Cognitive Load Intervention Engine</span>
+<div class="flex gap-6 font-['Inter'] text-xs">
+<a class="text-slate-500 dark:text-slate-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline-offset-4 hover:underline" href="#">Documentation</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline-offset-4 hover:underline" href="#">Support</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-cyan-700 dark:hover:text-cyan-300 underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

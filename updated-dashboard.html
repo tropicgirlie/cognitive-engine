@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cognitive Load Intervention Engine | Core Workflow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-variant": "#e1e3e4",
+                        "outline": "#6f7979",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed": "#a6eff3",
+                        "surface-container-low": "#f3f4f5",
+                        "inverse-surface": "#2e3132",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#002021",
+                        "on-primary-fixed-variant": "#004f53",
+                        "outline-variant": "#bec8c9",
+                        "on-secondary-fixed": "#071e27",
+                        "on-tertiary-fixed": "#002204",
+                        "tertiary-fixed-dim": "#88d982",
+                        "on-tertiary-container": "#8ddf87",
+                        "primary-container": "#006064",
+                        "on-surface": "#191c1d",
+                        "surface-bright": "#f8f9fa",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#cfe6f2",
+                        "on-secondary-container": "#526772",
+                        "on-tertiary-fixed-variant": "#005312",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "surface": "#f8f9fa",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#354a53",
+                        "tertiary-container": "#0f641c",
+                        "surface-container": "#edeeef",
+                        "secondary-container": "#cfe6f2",
+                        "secondary": "#4c616c",
+                        "tertiary": "#004a0f",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#3f4949",
+                        "primary-fixed-dim": "#8ad3d7",
+                        "surface-container-high": "#e7e8e9",
+                        "surface-dim": "#d9dadb",
+                        "tertiary-fixed": "#a3f69c",
+                        "inverse-primary": "#8ad3d7",
+                        "surface-tint": "#14696d",
+                        "on-primary-container": "#8fd8dc",
+                        "background": "#f8f9fa",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary-fixed-dim": "#b4cad6",
+                        "primary": "#00464a"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 pt-16 bg-slate-50 border-r border-slate-200 flex flex-col gap-2 p-4 z-40">
+<div class="mb-6 px-3">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-sm">psychology</span>
+</div>
+<div>
+<p class="text-sm font-black text-cyan-900 leading-tight">System Load</p>
+<p class="text-[10px] text-slate-500 font-medium">Optimal State</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 bg-cyan-100/50 text-cyan-900 px-3 py-2 rounded-lg transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-lg">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg">analytics</span>
+<span class="text-sm font-medium">Analysis</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg">psychology</span>
+<span class="text-sm font-medium">Interventions</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg">history</span>
+<span class="text-sm font-medium">History</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-4 border-t border-slate-200">
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg">description</span>
+<span class="text-sm font-medium">Docs</span>
+</a>
+<a class="flex items-center gap-3 text-slate-600 px-3 py-2 hover:bg-slate-200/50 transition-colors duration-150 rounded-lg" href="#">
+<span class="material-symbols-outlined text-lg">help</span>
+<span class="text-sm font-medium">Support</span>
+</a>
+<button class="w-full mt-4 bg-primary text-white py-2.5 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm">add</span>
+            New Analysis
+        </button>
+</div>
+</aside>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-white/80 backdrop-blur-xl border-b border-slate-200/20 z-50 flex justify-between items-center px-6">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-cyan-950 tracking-tight">Cognitive Engine</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-cyan-700 border-b-2 border-cyan-700 pb-1 font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Dashboard</a>
+<a class="text-slate-500 hover:text-cyan-600 transition-colors font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Full Library</a>
+<a class="text-slate-500 hover:text-cyan-600 transition-colors font-['Manrope'] font-semibold tracking-tight text-sm" href="#">Compare Mode</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="bg-slate-100 border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-primary/20" placeholder="Search principles..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-slate-200" data-alt="professional headshot of a UX designer with a neutral background, soft studio lighting, clean aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmCAyFYNCWTpuTy17zMylVKD_DplABOylA7qPAxkGY81Bq_a9cXBTu2xDxz277en9vsAbktzsMw-kyFsHbGyVqF7Msi6lqo2iQXxJWjdyXMtTzGCKrx2CsAln0fw3S83JmjabkWdGNYiDU1FVECK73POlV3GGNi-PGPzSTd9PwdIUuhRwrwjli8vduC091no-zbWB9Y8Gz1l8ELUL2NCmRJK38niCgpsOKjnfOZ4u1thS35Y_o1YCQg7J8ra1bOvgB1UntY_hgyIc"/>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 p-8 flex-1 flex flex-col gap-8 max-w-[1400px]">
+<!-- Workflow Header -->
+<section>
+<h1 class="text-3xl font-extrabold text-on-surface tracking-tight mb-2">Intervention Workflow</h1>
+<p class="text-on-surface-variant max-w-2xl font-body leading-relaxed">Systematically diagnose cognitive friction and apply evidence-based design principles to streamline high-stakes clinical and laboratory interfaces.</p>
+</section>
+<!-- Step 1 & 2 & 3 Input Section (Expanded Bento Grid) -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px]">
+<!-- Step 1 -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col gap-6 shadow-sm border border-slate-200/50">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-xs flex items-center justify-center font-bold">1</span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-on-surface-variant">Strategic Goal</h3>
+</div>
+<p class="text-xl font-bold text-cyan-950">What are you trying to improve?</p>
+<div class="grid grid-cols-1 gap-2.5 mt-2">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Reduce errors</button>
+<button class="px-4 py-2.5 rounded-lg bg-primary text-white text-xs font-semibold shadow-md text-left">Speed up decisions</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Reduce cognitive overload</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Improve findability</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Reduce error rates</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Increase user confidence</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Minimize training time</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Speed up expert workflows</button>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="lg:col-span-4 bg-surface-container-low rounded-xl p-8 flex flex-col gap-6 shadow-sm border border-slate-200/50">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-xs flex items-center justify-center font-bold">2</span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-on-surface-variant">Context Area</h3>
+</div>
+<p class="text-xl font-bold text-cyan-950">Where is this happening?</p>
+<div class="grid grid-cols-1 gap-2.5 mt-2">
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Data entry &amp; forms</button>
+<button class="px-4 py-2.5 rounded-lg bg-primary text-white text-xs font-semibold shadow-md text-left">Decision &amp; approvals</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Navigation &amp; search</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Monitoring &amp; alerts</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Complex dashboards</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Configuration flows</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Audit trails</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/30 text-xs font-semibold text-secondary hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors text-left">Multi-step wizards</button>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="lg:col-span-4 bg-surface-container-highest rounded-xl p-8 flex flex-col gap-6 shadow-md border border-primary/10">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-full bg-primary text-white text-xs flex items-center justify-center font-bold">3</span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-on-surface-variant">Specifics</h3>
+</div>
+<p class="text-xl font-bold text-cyan-950">Describe your UX problem</p>
+<div class="flex-1 flex flex-col gap-4">
+<textarea class="w-full flex-1 bg-surface-container-lowest border-none rounded-xl p-4 text-sm focus:ring-2 focus:ring-primary/20 placeholder:text-slate-400 resize-none" placeholder="e.g. Lab technicians are missing critical out-of-range values in high-throughput screening tables because the visualization doesn't contrast enough with standard data points..."></textarea>
+<button class="w-full py-3 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:opacity-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">search_sparkle</span>
+                    Generate Insights
+                </button>
+</div>
+</div>
+</section>
+<!-- Recommended Principles Section -->
+<section class="mt-4">
+<div class="flex justify-between items-end mb-6">
+<div>
+<h2 class="text-2xl font-extrabold text-cyan-950 tracking-tight">Recommended Principles</h2>
+<p class="text-on-surface-variant text-sm mt-1">Based on "Speed up decisions" in "Decision &amp; approvals"</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 text-sm font-semibold text-primary hover:bg-primary/5 px-4 py-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                    Filter
+                </button>
+<button class="flex items-center gap-2 text-sm font-semibold text-primary hover:bg-primary/5 px-4 py-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-lg">sort</span>
+                    Impact
+                </button>
+</div>
+</div>
+<!-- Principle Cards Stack -->
+<div class="space-y-4">
+<!-- Card 1 (Expanded) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10 shadow-sm transition-all">
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 cursor-pointer hover:bg-slate-50/50">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-xl font-bold text-cyan-950">Hick’s Law Optimization</h3>
+<div class="flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                High Reduction
+                            </div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Minimize the number of stimuli to reduce time and errors in decision-making processes.</p>
+<div class="flex gap-6">
+<div>
+<p class="text-[10px] font-bold uppercase text-slate-400 tracking-tighter mb-1">Why it applies</p>
+<p class="text-xs font-medium text-secondary">Decision nodes currently present 12+ parallel options without hierarchy.</p>
+</div>
+<div class="h-8 w-px bg-slate-200"></div>
+<div>
+<p class="text-[10px] font-bold uppercase text-slate-400 tracking-tighter mb-1">Impact Type</p>
+<p class="text-xs font-medium text-secondary">Latency Reduction</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300">keyboard_arrow_up</span>
+</div>
+<!-- Action Layer (Expanded State) -->
+<div class="bg-surface-container-low border-t border-slate-200/50 p-6">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="space-y-4">
+<h4 class="font-bold text-cyan-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">construction</span>
+                                Design Actions
+                            </h4>
+<ul class="space-y-2 text-sm text-on-surface-variant">
+<li class="flex gap-2"><span class="text-primary font-bold">•</span> Categorize primary vs secondary actions.</li>
+<li class="flex gap-2"><span class="text-primary font-bold">•</span> Implement progressive disclosure for 'Edge Case' data.</li>
+<li class="flex gap-2"><span class="text-primary font-bold">•</span> Group related laboratory variables under semantic headers.</li>
+</ul>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-cyan-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">info</span>
+                                Usage Rules
+                            </h4>
+<div class="bg-surface-container-lowest p-3 rounded-lg border border-outline-variant/10">
+<p class="text-xs font-bold text-tertiary mb-1">WHEN TO USE</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">During high-speed diagnostic triage where reaction time is critical.</p>
+</div>
+<div class="bg-error-container/30 p-3 rounded-lg border border-error/10">
+<p class="text-xs font-bold text-error mb-1">WHEN NOT TO USE</p>
+<p class="text-xs text-on-surface-variant leading-relaxed">In investigative deep-dives where data synthesis requires all raw points visible.</p>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-cyan-900 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">biotech</span>
+                                Life Sciences Example
+                            </h4>
+<div class="rounded-lg overflow-hidden border border-slate-200">
+<img alt="Interface Example" class="w-full h-24 object-cover" data-alt="abstract digital interface showing simplified medical data visualization, clean teal and white color scheme, high-tech laboratory dashboard" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY93MvT8wL2QghavleYCattk9g9xLx4DRd10OO01O_7589lb6SRo9Gbfb8FuzRaFvhvRhcAQ7NbhZAoLq_IhViuSTGwyDUpGitkIGfQH8d2NzI_usyC6atT-mAS0ccGqxvYEe17fTC7mSKShVm5vT7L25aS5gc5orRZfMhP8stSkMeBpcZNhrjjbjs-_nPE0JAbbsfV4pMdTYH-KCeKTNS8eGx9wHRr7gmcUJGSpdLWSLPw8cnmvoClMW44yWWecD_Yg336xb7Aco"/>
+<div class="p-3 bg-white">
+<p class="text-xs italic text-secondary leading-relaxed">Redesigned the Gene Sequencing analyzer to hide 'Low Confidence' alleles until explicitly requested by the pathologist.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 flex justify-end gap-3">
+<button class="px-4 py-2 text-xs font-bold text-secondary hover:bg-slate-200 rounded-lg transition-colors">Dismiss</button>
+<button class="px-6 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 hover:opacity-95">Apply Intervention</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/10 shadow-sm transition-all hover:border-primary/30">
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 cursor-pointer group">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-xl font-bold text-cyan-950">Von Restorff Effect</h3>
+<div class="flex items-center gap-1.5 bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+<div class="w-1.5 h-1.5 rounded-full bg-yellow-600"></div>
+                                Moderate Reduction
+                            </div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Predictably isolate the most important information to ensure it is the first thing noticed.</p>
+<div class="flex gap-6">
+<div>
+<p class="text-[10px] font-bold uppercase text-slate-400 tracking-tighter mb-1">Why it applies</p>
+<p class="text-xs font-medium text-secondary">Critical patient alerts are visually identical to routine status notifications.</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">keyboard_arrow_down</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/10 shadow-sm transition-all hover:border-primary/30">
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 cursor-pointer group">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-xl font-bold text-cyan-950">Miller’s Law Chunking</h3>
+<div class="flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                High Reduction
+                            </div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Break down complex datasets into smaller, digestible 'chunks' of 5–9 items.</p>
+<div class="flex gap-6">
+<div>
+<p class="text-[10px] font-bold uppercase text-slate-400 tracking-tighter mb-1">Why it applies</p>
+<p class="text-xs font-medium text-secondary">Form sections contain 40+ fields in a single vertical scrolling stack.</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">keyboard_arrow_down</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/10 shadow-sm transition-all hover:border-primary/30">
+<div class="p-6 flex flex-col md:flex-row md:items-center gap-6 cursor-pointer group">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-2">
+<h3 class="text-xl font-bold text-cyan-950">Recognition Over Recall</h3>
+<div class="flex items-center gap-1.5 bg-tertiary-fixed text-on-tertiary-fixed px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+<div class="w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+                                High Reduction
+                            </div>
+</div>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Minimize the user's memory load by making objects, actions, and options visible.</p>
+<div class="flex gap-6">
+<div>
+<p class="text-[10px] font-bold uppercase text-slate-400 tracking-tighter mb-1">Why it applies</p>
+<p class="text-xs font-medium text-secondary">System requires memorization of keyboard shortcuts for common actions.</p>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">keyboard_arrow_down</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="fixed bottom-0 left-64 right-0 bg-white border-t border-slate-200 py-4 z-40">
+<div class="flex flex-col md:flex-row justify-between items-center px-8 max-w-7xl mx-auto gap-4">
+<span class="text-slate-500 font-['Inter'] text-xs">© 2024 Cognitive Load Intervention Engine</span>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-cyan-700 transition-all font-['Inter'] text-xs underline-offset-4 hover:underline" href="#">Documentation</a>
+<a class="text-slate-500 hover:text-cyan-700 transition-all font-['Inter'] text-xs underline-offset-4 hover:underline" href="#">Support</a>
+<a class="text-slate-500 hover:text-cyan-700 transition-all font-['Inter'] text-xs underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>
