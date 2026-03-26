@@ -10,7 +10,7 @@ A visualization project for cognitive engine interfaces with multiple dashboard 
 
 ## Files
 
-- `full-library.html` - Main library visualization interface
+- `index.html` - Main landing page with full library visualization
 - `compare-mode.html` - Comparison mode for analyzing different datasets
 - `updated-dashboard.html` - Updated dashboard with enhanced UI
 
