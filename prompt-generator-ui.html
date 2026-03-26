@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Generator - Cognitive Load Intervention Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .tool-card {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .tool-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .tool-card.selected {
+            border-color: #0891b2;
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+        }
+        .prompt-section {
+            background: linear-gradient(135deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        .prompt-section:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .copy-button {
+            transition: all 0.2s ease;
+        }
+        .copy-button:hover {
+            transform: scale(1.05);
+        }
+        .copy-button.copied {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+        .principle-tag {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .anti-pattern {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            border-left: 4px solid #ef4444;
+        }
+        .success-criteria {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #22c55e;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            animation: slideIn 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-white">psychology</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-semibold text-gray-900">Prompt Generator</h1>
+                        <p class="text-sm text-gray-500">Transform principles into AI-ready design prompts</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a href="index.html" class="text-gray-500 hover:text-cyan-600 transition-colors">Principles</a>
+                    <a href="compare-mode.html" class="text-gray-500 hover:text-cyan-600 transition-colors">Compare</a>
+                    <a href="#" class="text-cyan-700 font-semibold">Prompt Generator</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Problem Input Section -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gray-900 mb-6">Describe Your Design Challenge</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">What problem are you trying to solve?</label>
+                    <textarea 
+                        id="problemInput" 
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none"
+                        rows="4"
+                        placeholder="e.g., Users are abandoning our multi-step checkout process, especially on mobile devices. The current design shows all payment options at once, causing decision paralysis.">Users are abandoning our multi-step checkout process, especially on mobile devices. The current design shows all payment options at once, causing decision paralysis.</textarea>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Where is this happening?</label>
+                    <select id="contextSelect" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                        <option value="">Select a context...</option>
+                        <option value="data-entry" selected>Data Entry & Forms</option>
+                        <option value="decision-approvals">Decision & Approvals</option>
+                        <option value="navigation-search">Navigation & Search</option>
+                        <option value="monitoring-alerts">Monitoring & Alerts</option>
+                        <option value="collaboration-handover">Collaboration & Handover</option>
+                    </select>
+                    
+                    <label class="block text-sm font-medium text-gray-700 mb-2 mt-4">Industry/Sector (optional)</label>
+                    <select id="sectorSelect" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
+                        <option value="">Select a sector...</option>
+                        <option value="commercial">Commercial workflows</option>
+                        <option value="document">Document workflows</option>
+                        <option value="quoting">Quoting & approvals</option>
+                        <option value="laboratory" selected>Laboratory operations</option>
+                        <option value="results">Results & reporting</option>
+                        <option value="compliance">Compliance workflows</option>
+                    </select>
+                </div>
+            </div>
+
+            <button onclick="generatePrompts()" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center gap-2">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                Generate Design Prompts
+            </button>
+        </div>
+
+        <!-- Design Tool Selection -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Choose Your Design Tool</h3>
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="tool-card bg-white rounded-xl p-4 cursor-pointer border-2 border-gray-200" onclick="selectTool('figma')">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <span class="material-symbols-outlined text-white">design_services</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900">Figma Make</h4>
+                        <p class="text-sm text-gray-600 mt-1">Visual design & components</p>
+                    </div>
+                </div>
+                
+                <div class="tool-card bg-white rounded-xl p-4 cursor-pointer border-2 border-gray-200" onclick="selectTool('windsurf')">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <span class="material-symbols-outlined text-white">code</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900">Windsurf Builder</h4>
+                        <p class="text-sm text-gray-600 mt-1">Code generation & web</p>
+                    </div>
+                </div>
+                
+                <div class="tool-card bg-white rounded-xl p-4 cursor-pointer border-2 border-gray-200" onclick="selectTool('chatgpt')">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <span class="material-symbols-outlined text-white">chat</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900">ChatGPT/Claude</h4>
+                        <p class="text-sm text-gray-600 mt-1">Strategy & planning</p>
+                    </div>
+                </div>
+                
+                <div class="tool-card bg-white rounded-xl p-4 cursor-pointer border-2 border-gray-200" onclick="selectTool('linear')">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-3">
+                            <span class="material-symbols-outlined text-white">linear_scale</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-900">Linear/Notion</h4>
+                        <p class="text-sm text-gray-600 mt-1">Workflows & teams</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generated Prompts Section -->
+        <div id="promptsSection" class="hidden animate-in">
+            <!-- Matched Principles -->
+            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Matched Principles</h3>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="principle-tag">Hick's Law (95% match)</span>
+                    <span class="principle-tag">Progressive Disclosure (88% match)</span>
+                    <span class="principle-tag">Recognition over Recall (82% match)</span>
+                </div>
+                <p class="text-sm text-gray-600">These principles directly address your decision paralysis problem in form completion contexts.</p>
+            </div>
+
+            <!-- Generated Prompts -->
+            <div class="space-y-6">
+                <!-- Figma Prompt -->
+                <div class="prompt-section rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-purple-600">design_services</span>
+                                Figma Make Prompt
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1">Generate components and visual design system</p>
+                        </div>
+                        <button onclick="copyPrompt('figma')" class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium">
+                            <span class="material-symbols-outlined">content_copy</span>
+                            Copy
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4 font-mono text-sm text-gray-800 mb-4">
+                        <pre id="figmaPrompt">Create a checkout flow component library that applies Hick's Law and Progressive Disclosure:
+
+## Components Required
+1. **Payment Method Selector**
+   - Show 3-4 primary payment options (Credit Card, PayPal, Apple Pay, Google Pay)
+   - Group "More Options" under dropdown (Bank Transfer, Cryptocurrency, etc.)
+   - Use visual cards with clear logos and trust indicators
+
+2. **Progressive Checkout Steps**
+   - Step 1: Shipping Info (pre-filled if logged in)
+   - Step 2: Payment Selection (limited options)
+   - Step 3: Review & Confirm (summary view)
+
+## Design System Integration
+- **Primary Actions**: 16px radius, cyan gradient, 48px min height
+- **Secondary Options**: 8px radius, gray background, 40px height
+- **Smart Defaults**: Pre-select user's last payment method
+- **Mobile Optimization**: Bottom sheet for payment selection
+
+## Component States
+- **Default**: Clear visual hierarchy
+- **Selected**: Cyan border, subtle background
+- **Disabled**: Gray opacity, clear labeling
+- **Loading**: Skeleton states with shimmer effect
+
+## Anti-Patterns to Avoid
+- ❌ Don't show all 10+ payment options at once
+- ❌ Don't use equal visual weight for all options
+- ❌ Don't hide payment security indicators
+
+Generate complete components with auto layout, component properties, and responsive variants.</pre>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="anti-pattern rounded-lg p-4">
+                            <h5 class="font-semibold text-red-800 mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-red-600">warning</span>
+                                Anti-Patterns
+                            </h5>
+                            <ul class="text-sm text-red-700 space-y-1">
+                                <li>• Showing all payment options simultaneously</li>
+                                <li>• Equal visual weight for primary/secondary actions</li>
+                                <li>• No clear default selection</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="success-criteria rounded-lg p-4">
+                            <h5 class="font-semibold text-green-800 mb-2 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-green-600">check_circle</span>
+                                Success Criteria
+                            </h5>
+                            <ul class="text-sm text-green-700 space-y-1">
+                                <li>• Decision time reduced by 60%</li>
+                                <li>• Form completion rate +40%</li>
+                                <li>• User confidence score +35%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Windsurf Prompt -->
+                <div class="prompt-section rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-blue-600">code</span>
+                                Windsurf Builder Prompt
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1">Generate responsive HTML/CSS/JS implementation</p>
+                        </div>
+                        <button onclick="copyPrompt('windsurf')" class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium">
+                            <span class="material-symbols-outlined">content_copy</span>
+                            Copy
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4 font-mono text-sm text-gray-800">
+                        <pre id="windsurfPrompt">Build a responsive checkout flow that implements cognitive load reduction:
+
+## HTML Structure
+```html
+<form class="checkout-flow">
+  <div class="progress-indicator" role="progressbar">
+    <div class="step active" data-step="1">Shipping</div>
+    <div class="step" data-step="2">Payment</div>
+    <div class="step" data-step="3">Review</div>
+  </div>
+  
+  <div class="step-content" id="step1">
+    <!-- Shipping form with smart defaults -->
+  </div>
+  
+  <div class="step-content hidden" id="step2">
+    <div class="payment-options">
+      <div class="primary-options">
+        <!-- 3-4 main payment methods -->
+      </div>
+      <details class="advanced-options">
+        <summary>More payment options</summary>
+        <!-- Additional methods -->
+      </details>
+    </div>
+  </div>
+</form>
+```
+
+## CSS Implementation
+```css
+.checkout-flow {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.payment-options {
+  display: grid;
+  gap: 1rem;
+}
+
+.primary-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.payment-method {
+  padding: 1.5rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-method:hover {
+  border-color: #0891b2;
+  transform: translateY(-2px);
+}
+
+.payment-method.selected {
+  border-color: #0891b2;
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+}
+
+.advanced-options {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+```
+
+## JavaScript Functionality
+```javascript
+class CheckoutFlow {
+  constructor() {
+    this.currentStep = 1;
+    this.userPreferences = this.loadUserPreferences();
+    this.initializePaymentOptions();
+  }
+
+  initializePaymentOptions() {
+    // Apply Hick's Law: limit primary options
+    const primaryMethods = this.getPrimaryPaymentMethods();
+    const secondaryMethods = this.getSecondaryPaymentMethods();
+    
+    this.renderPrimaryOptions(primaryMethods);
+    this.renderSecondaryOptions(secondaryMethods);
+  }
+
+  getPrimaryPaymentMethods() {
+    // Return 3-4 most common payment methods
+    return [
+      { id: 'card', name: 'Credit Card', icon: 'credit_card' },
+      { id: 'paypal', name: 'PayPal', icon: 'account_balance' },
+      { id: 'apple', name: 'Apple Pay', icon: 'apple' }
+    ];
+  }
+}
+```
+
+## Performance Requirements
+- **First Contentful Paint**: < 1.5s
+- **Interaction Response**: < 100ms
+- **Bundle Size**: < 45KB gzipped
+
+## Accessibility Standards
+- **Keyboard Navigation**: Full tab support
+- **Screen Readers**: ARIA labels and landmarks
+- **Focus Management**: Logical tab order
+- **Color Contrast**: WCAG 2.1 AA compliance
+
+Generate production-ready code with modern best practices and comprehensive testing.</pre>
+                    </div>
+                </div>
+
+                <!-- ChatGPT Prompt -->
+                <div class="prompt-section rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-green-600">chat</span>
+                                ChatGPT/Claude Prompt
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-1">Strategic design guidance and UX planning</p>
+                        </div>
+                        <button onclick="copyPrompt('chatgpt')" class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium">
+                            <span class="material-symbols-outlined">content_copy</span>
+                            Copy
+                        </button>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4 font-mono text-sm text-gray-800">
+                        <pre id="chatgptPrompt">You are a senior UX designer specializing in e-commerce cognitive load reduction.
+
+## Design Challenge
+I need to redesign a mobile checkout flow where users are abandoning due to decision paralysis from too many payment options. The current design shows all 10+ payment methods simultaneously, causing users to feel overwhelmed and exit.
+
+## Strategic Analysis Required
+
+### 1. Cognitive Load Assessment
+Analyze the current cognitive burden:
+- **Memory Load**: How much information must users remember?
+- **Decision Load**: How many choices are presented at once?
+- **Visual Load**: How complex is the visual hierarchy?
+- **Interaction Load**: How many steps/actions are required?
+
+### 2. Principle Application
+Apply these cognitive psychology principles:
+
+**Hick's Law**: Decision time increases with choice quantity
+- How can we reduce the number of visible options?
+- What's the optimal number of primary choices (3-4)?
+- How should secondary options be presented?
+
+**Progressive Disclosure**: Complex information revealed incrementally
+- How can we break the checkout into logical steps?
+- What information should be shown vs. hidden?
+- How can we maintain context while reducing complexity?
+
+**Recognition over Recall**: Leverage familiar patterns
+- What payment methods do users recognize immediately?
+- How can we use visual cues to reduce cognitive effort?
+- What defaults can we intelligently apply?
+
+### 3. Strategic Design Recommendations
+
+#### User Experience Strategy
+- **Onboarding**: How to guide users through the new flow
+- **Personalization**: How to adapt to user preferences/history
+- **Trust Building**: How to maintain confidence while simplifying
+
+#### Business Considerations
+- **Conversion Impact**: Balance simplicity with payment method diversity
+- **Mobile Optimization**: Touch targets, thumb reach, screen real estate
+- **Analytics Integration**: How to measure success and iterate
+
+#### Technical Implementation
+- **Progressive Enhancement**: Ensure functionality without JavaScript
+- **Performance**: Load times, interaction responsiveness
+- **Accessibility**: Screen readers, keyboard navigation, cognitive disabilities
+
+### 4. Deliverables Required
+
+1. **Design Strategy Document** (2-3 pages)
+   - Problem analysis with user research insights
+   - Strategic approach with rationale
+   - Success metrics and KPIs
+
+2. **User Flow Redesign** (wireframes + annotations)
+   - Step-by-step flow with cognitive load reductions
+   - Mobile-first responsive considerations
+   - Error states and edge cases
+
+3. **Component Design System** (specifications)
+   - Payment selector component design
+   - Progress indicator design
+   - Micro-interactions and animations
+
+4. **Implementation Guidelines** (technical specs)
+   - CSS/HTML structure recommendations
+   - JavaScript interaction patterns
+   - Testing methodology and success criteria
+
+### 5. Success Metrics
+Define measurable outcomes:
+- **Completion Rate**: Target 40% improvement
+- **Decision Time**: Reduce by 60%
+- **Error Rate**: Decrease by 50%
+- **User Satisfaction**: Improve to 4.5/5.0
+
+Provide comprehensive strategic recommendations that balance user experience excellence with business requirements and technical feasibility.</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTool = 'figma';
+
+        function selectTool(tool) {
+            selectedTool = tool;
+            
+            // Update UI
+            document.querySelectorAll('.tool-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+        }
+
+        function generatePrompts() {
+            const problem = document.getElementById('problemInput').value;
+            const context = document.getElementById('contextSelect').value;
+            const sector = document.getElementById('sectorSelect').value;
+
+            if (!problem || !context) {
+                alert('Please fill in the problem description and select a context.');
+                return;
+            }
+
+            // Show prompts section with animation
+            const promptsSection = document.getElementById('promptsSection');
+            promptsSection.classList.remove('hidden');
+            promptsSection.scrollIntoView({ behavior: 'smooth' });
+
+            // In a real implementation, this would call the backend API
+            console.log('Generating prompts for:', { problem, context, sector, tool: selectedTool });
+        }
+
+        function copyPrompt(type) {
+            const promptId = type + 'Prompt';
+            const promptText = document.getElementById(promptId).textContent;
+            
+            navigator.clipboard.writeText(promptText).then(() => {
+                // Update button state
+                const button = event.currentTarget;
+                button.classList.add('copied');
+                button.innerHTML = '<span class="material-symbols-outlined">check</span> Copied!';
+                
+                // Reset after 2 seconds
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = '<span class="material-symbols-outlined">content_copy</span> Copy';
+                }, 2000);
+            });
+        }
+
+        // Auto-select first tool
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('.tool-card').classList.add('selected');
+        });
+    </script>
+</body>
+</html>
