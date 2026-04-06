@@ -5,13 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Generator - Cognitive Load Intervention Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
     <style>
+        *,*::before,*::after { box-sizing:border-box; }
+        html,body { min-height:100%; margin:0; padding:0; }
         .material-symbols-outlined {
+            font-family:'Material Symbols Rounded';
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background:#F3F5FB; color:#3B4466; }
+        h1,h2,h3,h4 { font-family:'Manrope',sans-serif; }
+        .sidebar{background:#0E1624;width:240px;min-height:100vh;position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:50;}
+        .nav-link{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:13.5px;font-weight:500;color:#7A90B0;transition:all .15s;text-decoration:none;}
+        .nav-link:hover{background:rgba(255,255,255,.06);color:#C0D0E8;}
+        .nav-link.active{background:rgba(61,99,221,.20);color:#A8BFFF;}
+        .topnav{height:60px;background:rgba(255,255,255,.90);backdrop-filter:blur(16px);border-bottom:1px solid #E2E8F2;position:fixed;top:0;left:240px;right:0;z-index:40;display:flex;align-items:center;padding:0 24px;justify-content:space-between;}
+        .shell{margin-left:240px;min-height:100vh;display:flex;flex-direction:column;}
+        .app-card{background:white;border:1px solid #E2E8F2;border-radius:16px;box-shadow:0 8px 30px rgba(15,20,50,.04);}
+        .btn-primary{display:inline-flex;align-items:center;gap:8px;background:#3D63DD;color:white;padding:11px 20px;border-radius:10px;border:none;font-size:13.5px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;box-shadow:0 6px 16px rgba(61,99,221,.22);transition:all .15s;}
+        .btn-primary:hover{background:#2C4EC4;}
+        .btn-secondary{display:inline-flex;align-items:center;gap:8px;background:white;color:#3B4466;padding:10px 18px;border-radius:10px;border:1px solid #E2E8F2;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;}
+        .btn-secondary:hover{background:#F3F5FB;border-color:#C3D0F8;}
         .tool-card {
             transition: all 0.3s ease;
             border: 2px solid transparent;
@@ -67,33 +82,57 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- Header -->
-    <div class="bg-white border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-white">psychology</span>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-semibold text-gray-900">Prompt Generator</h1>
-                        <p class="text-sm text-gray-500">Transform principles into AI-ready design prompts</p>
-                    </div>
+<body>
+    <nav class="sidebar">
+        <div style="height:60px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;">
+            <div style="display:flex;align-items:center;gap:10px;">
+                <div style="width:32px;height:32px;border-radius:8px;background:rgba(61,99,221,0.25);display:flex;align-items:center;justify-content:center;">
+                    <span class="material-symbols-outlined" style="color:#7AA5FF;font-size:18px;">psychology</span>
                 </div>
-                <nav class="hidden md:flex items-center gap-6">
-                    <a href="index.html" class="text-gray-500 hover:text-cyan-600 transition-colors">Principles</a>
-                    <a href="compare-mode.html" class="text-gray-500 hover:text-cyan-600 transition-colors">Compare</a>
-                    <a href="#" class="text-cyan-700 font-semibold">Prompt Generator</a>
-                </nav>
+                <span style="font-family:Manrope,sans-serif;font-weight:800;color:white;font-size:14px;letter-spacing:-0.01em;">Cognitive Engine</span>
             </div>
         </div>
-    </div>
+        <div style="padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
+            <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(16,166,121,0.15);border-radius:7px;width:fit-content;">
+                <span style="width:6px;height:6px;border-radius:50%;background:#10A679;display:block;"></span>
+                <span style="font-size:10.5px;color:#5CC9A0;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;">Prompt Mode</span>
+            </div>
+        </div>
+        <div style="flex:1;padding:12px;display:flex;flex-direction:column;gap:2px;">
+            <a href="updated-dashboard.html" class="nav-link"><span class="material-symbols-outlined">dashboard</span><span>Overview</span></a>
+            <a href="index.html" class="nav-link"><span class="material-symbols-outlined">auto_stories</span><span>Library</span></a>
+            <a href="compare-mode.html" class="nav-link"><span class="material-symbols-outlined">analytics</span><span>Compare</span></a>
+            <a href="prompt-generator-ui.html" class="nav-link active"><span class="material-symbols-outlined">auto_awesome</span><span>Prompt Studio</span></a>
+        </div>
+    </nav>
 
-    <!-- Main Content -->
-    <div class="max-w-7xl mx-auto px-6 py-8">
+    <div class="shell">
+    <header class="topnav">
+        <nav style="display:flex;align-items:center;gap:2px;">
+            <a href="updated-dashboard.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:#6E7DA0;text-decoration:none;transition:all .15s;">Dashboard</a>
+            <a href="index.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:#6E7DA0;text-decoration:none;transition:all .15s;">Full Library</a>
+            <a href="compare-mode.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:#6E7DA0;text-decoration:none;transition:all .15s;">Compare Mode</a>
+            <a href="prompt-generator-ui.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:600;color:#3D63DD;background:#EEF2FD;text-decoration:none;">Prompt Studio</a>
+        </nav>
+        <div style="display:flex;align-items:center;gap:8px;">
+            <button style="padding:7px;border-radius:8px;background:transparent;border:none;color:#6E7DA0;display:flex;"><span class="material-symbols-outlined">notifications</span></button>
+            <img src="https://i.pravatar.cc/32?u=cog-ux" alt="User" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F2;object-fit:cover;"/>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-6 py-8" style="padding-top:88px;">
+        <div class="app-card p-3 mb-6" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+            <div>
+                <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 4px;">Prompt Studio</p>
+                <h1 style="font-size:22px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.02em;">Basic Prompt</h1>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <a href="prompt-generator-ui.html" class="btn-primary" style="text-decoration:none;">Basic Prompt</a>
+                <a href="advanced-prompt-generator.html" class="btn-secondary" style="text-decoration:none;">Advanced Prompt</a>
+            </div>
+        </div>
         <!-- Problem Input Section -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+        <div class="app-card p-6 mb-8">
             <h2 class="text-2xl font-semibold text-gray-900 mb-6">Describe Your Design Challenge</h2>
             
             <div class="grid md:grid-cols-2 gap-6 mb-6">
@@ -130,14 +169,14 @@
                 </div>
             </div>
 
-            <button onclick="generatePrompts()" class="bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:from-cyan-600 hover:to-blue-700 transition-all flex items-center gap-2">
+            <button onclick="generatePrompts()" class="btn-primary">
                 <span class="material-symbols-outlined">auto_awesome</span>
                 Generate Design Prompts
             </button>
         </div>
 
         <!-- Design Tool Selection -->
-        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+        <div class="app-card p-6 mb-8">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Choose Your Design Tool</h3>
             <div class="grid md:grid-cols-4 gap-4">
                 <div class="tool-card bg-white rounded-xl p-4 cursor-pointer border-2 border-gray-200" onclick="selectTool('figma')">
@@ -185,7 +224,7 @@
         <!-- Generated Prompts Section -->
         <div id="promptsSection" class="hidden animate-in">
             <!-- Matched Principles -->
-            <div class="bg-white rounded-xl border border-gray-200 p-6 mb-8">
+            <div class="app-card p-6 mb-8">
                 <h3 class="text-lg font-semibold text-gray-900 mb-4">Matched Principles</h3>
                 <div class="flex flex-wrap gap-2 mb-4">
                     <span class="principle-tag">Hick's Law (95% match)</span>
@@ -207,7 +246,7 @@
                             </h4>
                             <p class="text-sm text-gray-600 mt-1">Generate components and visual design system</p>
                         </div>
-                        <button onclick="copyPrompt('figma')" class="copy-button bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-medium">
+                        <button onclick="copyPrompt('figma')" class="btn-secondary copy-button">
                             <span class="material-symbols-outlined">content_copy</span>
                             Copy
                         </button>

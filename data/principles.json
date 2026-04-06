@@ -1,0 +1,447 @@
+{
+  "principles": [
+    {
+      "id": 1,
+      "number": "01",
+      "name": "Hick's Law",
+      "icon": "linear_scale",
+      "color": "#EEF2FD",
+      "iconColor": "#3D63DD",
+      "relevance": 92,
+      "categories": "Decision Speed · Information Density",
+      "description": "Decision time increases logarithmically with the number and complexity of choices. Reducing options and cognitive load speeds up user decisions.",
+      "actions": [
+        {
+          "title": "Reduce choice options",
+          "description": "Limit dropdown menus to 5-7 items max; use progressive disclosure for advanced options."
+        },
+        {
+          "title": "Create visual hierarchy",
+          "description": "Use size, color, and spacing to guide attention to primary vs. secondary actions."
+        },
+        {
+          "title": "Group related choices",
+          "description": "Organize options into logical categories (max 5 groups) to reduce scanning time."
+        }
+      ],
+      "antiPatterns": [
+        "Long dropdown menus (>10 items)",
+        "Side-by-side comparison of >5 options",
+        "Multi-level nested navigation"
+      ],
+      "uiPatterns": [
+        "Sticky header bar for primary action in long scrolling pages",
+        "Summary/confirmation anchored at bottom of multi-step forms"
+      ],
+      "disciplines": ["Cognitive Psychology"],
+      "contexts": ["Data entry & forms", "Navigation & search"]
+    },
+    {
+      "id": 2,
+      "number": "02",
+      "name": "Miller's Law",
+      "icon": "memory",
+      "color": "#FFF8E5",
+      "iconColor": "#C98B0A",
+      "relevance": 88,
+      "categories": "Memory · Chunking · Cognitive Load",
+      "description": "The average person can hold about 7 items (±2) in working memory. Organize information into chunks of 5-9 items for optimal recall.",
+      "actions": [
+        {
+          "title": "Chunk information",
+          "description": "Group related items into 5-9 item clusters with clear visual separation."
+        },
+        {
+          "title": "Use progressive disclosure",
+          "description": "Show primary information first; reveal secondary details on demand."
+        },
+        {
+          "title": "Provide memory aids",
+          "description": "Add tooltips, help text, and inline validation to reduce memory burden."
+        }
+      ],
+      "antiPatterns": [
+        "Forms with >7 fields visible at once",
+        "Navigation menus with >9 items",
+        "Tables with >7 columns"
+      ],
+      "uiPatterns": [
+        "Step-by-step wizards for complex forms",
+        "Collapsible sections for secondary information",
+        "Numbered lists for procedural content"
+      ],
+      "disciplines": ["Cognitive Psychology", "UX Design"],
+      "contexts": ["Data entry & forms", "Decision & approvals"]
+    },
+    {
+      "id": 3,
+      "number": "03",
+      "name": "Von Restorff Effect",
+      "icon": "visibility",
+      "color": "#E8FAF4",
+      "iconColor": "#10A679",
+      "relevance": 85,
+      "categories": "Attention · Memory · Distinction",
+      "description": "When multiple similar objects are present, the one that differs from the rest is most likely to be remembered.",
+      "actions": [
+        {
+          "title": "Highlight key elements",
+          "description": "Use color, size, or position to make critical actions and information stand out."
+        },
+        {
+          "title": "Create visual contrast",
+          "description": "Make primary CTA buttons distinctly different from secondary actions."
+        },
+        {
+          "title": "Isolate warnings",
+          "description": "Present error messages and alerts in visually distinct containers."
+        }
+      ],
+      "antiPatterns": [
+        "Monochromatic button designs",
+        "Flat UI without visual hierarchy",
+        "Homogeneous content lists"
+      ],
+      "uiPatterns": [
+        "Hero sections with contrasting colors",
+        "Floating action buttons",
+        "Toast notifications with distinct styling"
+      ],
+      "disciplines": ["Cognitive Psychology", "Visual Design"],
+      "contexts": ["Decision & approvals", "Monitoring & alerts"]
+    },
+    {
+      "id": 4,
+      "number": "04",
+      "name": "Fitts's Law",
+      "icon": "touch_app",
+      "color": "#EEF2FD",
+      "iconColor": "#3D63DD",
+      "relevance": 84,
+      "categories": "Motor Efficiency · Input Optimization",
+      "description": "Time to reach a target is a function of its size and distance. Make critical interactive elements large and proximate.",
+      "actions": [
+        {
+          "title": "Increase target size",
+          "description": "Make buttons and touch targets at least 44x44px for easy clicking/tapping."
+        },
+        {
+          "title": "Reduce distance",
+          "description": "Place related actions close together; anchor primary actions to screen edges."
+        },
+        {
+          "title": "Use corner placement",
+          "description": "Position important controls at screen corners where they have infinite width."
+        }
+      ],
+      "antiPatterns": [
+        "Small touch targets (<44px)",
+        "Far-spaced navigation elements",
+        "Centered primary actions on large screens"
+      ],
+      "uiPatterns": [
+        "Floating action buttons (FAB)",
+        "Sticky navigation bars",
+        "Bottom sheets for mobile actions"
+      ],
+      "disciplines": ["Human-Computer Interaction"],
+      "contexts": ["Data entry & forms", "Navigation & search"]
+    },
+    {
+      "id": 5,
+      "number": "05",
+      "name": "Serial Position Effect",
+      "icon": "format_list_numbered",
+      "color": "#FFF8E5",
+      "iconColor": "#C98B0A",
+      "relevance": 82,
+      "categories": "Memory · List Processing · Recall",
+      "description": "Users tend to remember the first (primacy) and last (recency) items in a list better than middle items.",
+      "actions": [
+        {
+          "title": "Position key items first",
+          "description": "Place the most important navigation items at the beginning of menus."
+        },
+        {
+          "title": "Use recency for CTAs",
+          "description": "Position critical calls-to-action at the end of forms and lists."
+        },
+        {
+          "title": "Limit list length",
+          "description": "Keep lists under 7 items or use categorization to break up longer lists."
+        }
+      ],
+      "antiPatterns": [
+        "Burying important items in middle of lists",
+        "Alphabetical ordering without considering importance",
+        "Unordered long dropdowns"
+      ],
+      "uiPatterns": [
+        "Step indicators at top of multi-step processes",
+        "Summary panels at the end of forms",
+        "Recently used items at top of lists"
+      ],
+      "disciplines": ["Cognitive Psychology"],
+      "contexts": ["Navigation & search", "Decision & approvals"]
+    },
+    {
+      "id": 6,
+      "number": "06",
+      "name": "Jakob's Law",
+      "icon": "language",
+      "color": "#EEF2FD",
+      "iconColor": "#3D63DD",
+      "relevance": 95,
+      "categories": "Familiarity · Usability · User Expectations",
+      "description": "Users spend most of their time on other sites. They prefer your site to work the same way as all the other sites they already know.",
+      "actions": [
+        {
+          "title": "Use standard patterns",
+          "description": "Follow established UI conventions: hamburger menu for navigation, magnifying glass for search."
+        },
+        {
+          "title": "Maintain consistency",
+          "description": "Keep navigation, layout, and interaction patterns consistent across your product."
+        },
+        {
+          "title": "Match user mental models",
+          "description": "Design based on how users expect things to work, not how you think they should work."
+        }
+      ],
+      "antiPatterns": [
+        "Custom navigation icons without labels",
+        "Non-standard form validation timing",
+        "Unique button placements"
+      ],
+      "uiPatterns": [
+        "Standard icon sets (Material, Font Awesome)",
+        "F-pattern and Z-pattern layouts",
+        "Card-based content organization"
+      ],
+      "disciplines": ["UX Design", "Cognitive Psychology"],
+      "contexts": ["Navigation & search", "Data entry & forms"]
+    },
+    {
+      "id": 7,
+      "number": "07",
+      "name": "Peak-End Rule",
+      "icon": "trending_up",
+      "color": "#E8FAF4",
+      "iconColor": "#10A679",
+      "relevance": 87,
+      "categories": "Experience Design · Memory · Satisfaction",
+      "description": "People judge an experience largely based on how they felt at its peak (most intense point) and at its end, rather than the total sum or average of every moment.",
+      "actions": [
+        {
+          "title": "Design for moments",
+          "description": "Create memorable positive peaks during key interactions (completion, discovery)."
+        },
+        {
+          "title": "End on a high note",
+          "description": "Ensure final steps (confirmation, success messages) are delightful and reassuring."
+        },
+        {
+          "title": "Minimize negative peaks",
+          "description": "Prevent intense frustration points; spread out necessary friction."
+        }
+      ],
+      "antiPatterns": [
+        "Abandoning users after form submission",
+        "Generic success messages",
+        "Anti-climactic task completions"
+      ],
+      "uiPatterns": [
+        "Celebration animations on completion",
+        "Clear success states with next steps",
+        "Progressive celebration in long processes"
+      ],
+      "disciplines": ["Behavioral Economics", "UX Design"],
+      "contexts": ["Decision & approvals", "Collaboration & handover"]
+    },
+    {
+      "id": 8,
+      "number": "08",
+      "name": "Progressive Disclosure",
+      "icon": "unfold_more",
+      "color": "#FFF0F5",
+      "iconColor": "#D73A8A",
+      "relevance": 90,
+      "categories": "Cognitive Load · Simplicity · Hierarchy",
+      "description": "Show only the essential information first and progressively reveal more complex options as users need them or demonstrate competence.",
+      "actions": [
+        {
+          "title": "Start simple",
+          "description": "Present only core functionality initially; hide advanced options behind expandable sections."
+        },
+        {
+          "title": "Use smart defaults",
+          "description": "Pre-fill forms with intelligent defaults that work for most users."
+        },
+        {
+          "title": "Reveal progressively",
+          "description": "Show additional fields/ options only when previous selections require them."
+        }
+      ],
+      "antiPatterns": [
+        "Showing all options at once",
+        "Complex forms without categorization",
+        "Advanced settings mixed with basic options"
+      ],
+      "uiPatterns": [
+        "Accordion panels for grouped settings",
+        "'More options' expandable sections",
+        "Multi-step wizards with summary steps"
+      ],
+      "disciplines": ["UX Design", "Cognitive Psychology"],
+      "contexts": ["Data entry & forms", "Decision & approvals"]
+    },
+    {
+      "id": 9,
+      "number": "09",
+      "name": "Aesthetic-Usability Effect",
+      "icon": "palette",
+      "color": "#EEF2FD",
+      "iconColor": "#3D63DD",
+      "relevance": 79,
+      "categories": "Perception · Trust · Aesthetics",
+      "description": "Users perceive more aesthetically pleasing designs as more usable and are more tolerant of minor usability issues when the design is beautiful.",
+      "actions": [
+        {
+          "title": "Invest in visual polish",
+          "description": "Use consistent spacing, typography, and color palettes to create a professional appearance."
+        },
+        {
+          "title": "Maintain consistency",
+          "description": "Ensure visual elements align with your brand and create harmony across the interface."
+        },
+        {
+          "title": "Use quality imagery",
+          "description": "High-quality photos and icons elevate perceived value and trustworthiness."
+        }
+      ],
+      "antiPatterns": [
+        "Inconsistent spacing and alignment",
+        "Low-resolution or mismatched imagery",
+        "Clashing color schemes"
+      ],
+      "uiPatterns": [
+        "Whitespace as a design element",
+        "Consistent icon sets throughout",
+        "Typography hierarchy with 2-3 font weights"
+      ],
+      "disciplines": ["Visual Design", "Psychology"],
+      "contexts": ["Decision & approvals", "Collaboration & handover"]
+    },
+    {
+      "id": 10,
+      "number": "10",
+      "name": "Doherty Threshold",
+      "icon": "timer",
+      "color": "#FFF8E5",
+      "iconColor": "#C98B0A",
+      "relevance": 86,
+      "categories": "Performance · Response Time · Flow",
+      "description": "Productivity soars when a computer and its users interact at a pace (<400ms) that ensures neither has to wait on the other.",
+      "actions": [
+        {
+          "title": "Optimize response times",
+          "description": "Aim for <400ms response time for all user interactions to maintain flow state."
+        },
+        {
+          "title": "Provide immediate feedback",
+          "description": "Show loading states, skeleton screens, or progress indicators during longer operations."
+        },
+        {
+          "title": "Preload content",
+          "description": "Anticipate user needs and prefetch data before it's requested."
+        }
+      ],
+      "antiPatterns": [
+        "Unacknowledged button clicks",
+        "Blank loading screens",
+        "Blocking operations without feedback"
+      ],
+      "uiPatterns": [
+        "Skeleton screens during data loading",
+        "Optimistic UI updates",
+        "Progressive image loading"
+      ],
+      "disciplines": ["Human-Computer Interaction"],
+      "contexts": ["Data entry & forms", "Navigation & search"]
+    },
+    {
+      "id": 11,
+      "number": "11",
+      "name": "Goal-Gradient Effect",
+      "icon": "flag",
+      "color": "#E8FAF4",
+      "iconColor": "#10A679",
+      "relevance": 83,
+      "categories": "Motivation · Progress · Completion",
+      "description": "The tendency to approach a goal increases with proximity to the goal. Users are more motivated as they get closer to completion.",
+      "actions": [
+        {
+          "title": "Show progress",
+          "description": "Display completion percentages and progress bars to motivate users to finish."
+        },
+        {
+          "title": "Break into stages",
+          "description": "Divide long processes into smaller milestones to create multiple goal gradients."
+        },
+        {
+          "title": "Celebrate progress",
+          "description": "Acknowledge achievements at intervals to maintain motivation."
+        }
+      ],
+      "antiPatterns": [
+        "Hidden progress in multi-step processes",
+        "Long forms without breaks or milestones",
+        "No acknowledgment of partial completion"
+      ],
+      "uiPatterns": [
+        "Step indicators with checkmarks",
+        "Progress bars in profile completion",
+        "Gamification elements (points, badges)"
+      ],
+      "disciplines": ["Behavioral Economics"],
+      "contexts": ["Decision & approvals", "Data entry & forms"]
+    },
+    {
+      "id": 12,
+      "number": "12",
+      "name": "Social Proof",
+      "icon": "groups",
+      "color": "#EEF2FD",
+      "iconColor": "#3D63DD",
+      "relevance": 81,
+      "categories": "Trust · Influence · Decision Making",
+      "description": "People look to others' behavior to guide their own, especially in uncertain situations. Displaying social validation reduces anxiety and increases confidence.",
+      "actions": [
+        {
+          "title": "Show user counts",
+          "description": "Display how many users have taken an action (downloads, purchases, signups)."
+        },
+        {
+          "title": "Include testimonials",
+          "description": "Feature reviews, ratings, and testimonials from satisfied users."
+        },
+        {
+          "title": "Highlight activity",
+          "description": "Show real-time activity (recent purchases, current viewers) to demonstrate popularity."
+        }
+      ],
+      "antiPatterns": [
+        "Fake testimonials or inflated numbers",
+        "Hidden user feedback",
+        "Isolated product pages without validation"
+      ],
+      "uiPatterns": [
+        "Star ratings and review counts",
+        "'X people bought this today' notifications",
+        "Trust badges and certification logos"
+      ],
+      "disciplines": ["Social Psychology", "Behavioral Economics"],
+      "contexts": ["Decision & approvals", "Collaboration & handover"]
+    }
+  ]
+}

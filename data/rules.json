@@ -1,0 +1,63 @@
+{
+  "goalRules": {
+    "reduce-errors": [
+      { "principleId": "fitts-law", "weight": 28, "reason": "Larger, closer targets reduce misclicks and input mistakes." },
+      { "principleId": "progressive-disclosure", "weight": 24, "reason": "Hiding secondary options reduces the chance of wrong choices." },
+      { "principleId": "millers-law", "weight": 18, "reason": "Lower memory burden prevents form and workflow mistakes." },
+      { "principleId": "jakobs-law", "weight": 16, "reason": "Familiar patterns reduce interpretation errors." },
+      { "principleId": "von-restorff-effect", "weight": 12, "reason": "Critical actions and warnings are easier to notice." }
+    ],
+    "speed-up-decisions": [
+      { "principleId": "hicks-law", "weight": 32, "reason": "Fewer choices reduce decision latency." },
+      { "principleId": "doherty-threshold", "weight": 20, "reason": "Fast system feedback preserves momentum." },
+      { "principleId": "serial-position-effect", "weight": 12, "reason": "Ordering important options first and last improves scanning." },
+      { "principleId": "fitts-law", "weight": 14, "reason": "Fast acquisition of targets increases throughput." }
+    ],
+    "reduce-overload": [
+      { "principleId": "millers-law", "weight": 28, "reason": "Chunking content lowers working-memory strain." },
+      { "principleId": "progressive-disclosure", "weight": 32, "reason": "Only showing what matters now keeps complexity manageable." },
+      { "principleId": "hicks-law", "weight": 14, "reason": "Reducing choices lowers cognitive burden." },
+      { "principleId": "aesthetic-usability-effect", "weight": 10, "reason": "Clear visual hierarchy improves perceived clarity." }
+    ],
+    "improve-findability": [
+      { "principleId": "jakobs-law", "weight": 28, "reason": "Familiar navigation conventions aid discovery." },
+      { "principleId": "serial-position-effect", "weight": 18, "reason": "Positioning key items strategically improves recall and scanning." },
+      { "principleId": "hicks-law", "weight": 12, "reason": "Reducing option clutter makes paths easier to find." }
+    ],
+    "improve-collaboration": [
+      { "principleId": "social-proof", "weight": 18, "reason": "Visible peer behavior and validation support alignment." },
+      { "principleId": "peak-end-rule", "weight": 16, "reason": "Good endings and handoffs shape team satisfaction." },
+      { "principleId": "goal-gradient-effect", "weight": 14, "reason": "Shared progress visibility supports completion." },
+      { "principleId": "jakobs-law", "weight": 10, "reason": "Consistent patterns reduce onboarding and handoff friction." }
+    ]
+  },
+  "contextRules": {
+    "data-entry-forms": [
+      { "principleId": "millers-law", "weight": 24, "reason": "Form tasks often fail when too much is shown at once." },
+      { "principleId": "progressive-disclosure", "weight": 22, "reason": "Forms benefit from staged complexity." },
+      { "principleId": "fitts-law", "weight": 20, "reason": "Input controls must be easy to target." },
+      { "principleId": "doherty-threshold", "weight": 14, "reason": "Validation and save feedback must be immediate." }
+    ],
+    "decision-approvals": [
+      { "principleId": "hicks-law", "weight": 20, "reason": "Approval flows should minimize competing choices." },
+      { "principleId": "von-restorff-effect", "weight": 16, "reason": "High-risk actions and warnings need strong salience." },
+      { "principleId": "peak-end-rule", "weight": 14, "reason": "Final approval states shape perceived confidence." },
+      { "principleId": "goal-gradient-effect", "weight": 10, "reason": "Visible progress supports completion in long review flows." }
+    ],
+    "navigation-search": [
+      { "principleId": "jakobs-law", "weight": 24, "reason": "Expected navigation patterns improve orientation." },
+      { "principleId": "serial-position-effect", "weight": 16, "reason": "List order affects what users notice first." },
+      { "principleId": "hicks-law", "weight": 16, "reason": "Too many options slow wayfinding." }
+    ],
+    "monitoring-alerts": [
+      { "principleId": "von-restorff-effect", "weight": 24, "reason": "Urgent states must stand out from routine information." },
+      { "principleId": "doherty-threshold", "weight": 18, "reason": "Fast feedback is critical in operational monitoring." },
+      { "principleId": "aesthetic-usability-effect", "weight": 8, "reason": "Clean visual hierarchy helps triage under pressure." }
+    ],
+    "collaboration-handover": [
+      { "principleId": "peak-end-rule", "weight": 20, "reason": "The end of a workflow strongly affects handoff quality." },
+      { "principleId": "social-proof", "weight": 16, "reason": "Shared context and visible team behavior support confidence." },
+      { "principleId": "goal-gradient-effect", "weight": 12, "reason": "Completion visibility helps distributed teams finish work." }
+    ]
+  }
+}

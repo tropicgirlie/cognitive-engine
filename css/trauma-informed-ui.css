@@ -1,0 +1,65 @@
+/* Trauma-Informed UI Design Tokens for Cognitive Engine */
+
+:root {
+  /* Warm, muted palette - no pure black or stark white */
+  --ti-bg: #F6F4F0; /* warm off-white background */
+  --ti-surface: #ECE7DF; /* card and panel surfaces */
+  --ti-primary: #3C7F8C; /* teal — primary actions */
+  --ti-primary-soft: #D1E5E8; /* light teal — chips, badges, selected */
+  --ti-secondary: #7C8F7A; /* sage — grounding accents */
+  --ti-accent: #8C7BAF; /* lavender — use sparingly */
+  --ti-danger: #B06565; /* desaturated rose — never alarm-red */
+  --ti-warning: #C39A4A; /* golden ochre — informational */
+  --ti-text: #2F3134; /* soft charcoal — no pure black */
+  --ti-border: #D7D2C8; /* low-noise dividers */
+  --ti-focus-ring: 0 0 0 3px rgba(60,127,140,0.4);
+  
+  /* Typography - Atkinson Hyperlegible for accessibility */
+  --ti-font-family: 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ti-font-size-sm: 0.875rem;
+  --ti-font-size-base: 1rem;
+  --ti-font-size-lg: 1.125rem;
+  --ti-line-height-relaxed: 1.6;
+  
+  /* Spacing - generous for breathing room */
+  --ti-space-xs: 0.5rem;
+  --ti-space-sm: 0.75rem;
+  --ti-space-md: 1rem;
+  --ti-space-lg: 1.5rem;
+  --ti-space-xl: 2rem;
+  
+  /* Border radius - soft, gentle corners */
+  --ti-radius-sm: 4px;
+  --ti-radius-md: 8px;
+  --ti-radius-lg: 12px;
+  --ti-radius-xl: 16px;
+  
+  /* Transitions - slow, predictable animations */
+  --ti-transition-slow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --ti-transition-gentle: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark mode - reduced stimulation */
+@media (prefers-color-scheme: dark), [data-ti-dark="true"] {
+  --ti-bg: #15191C;
+  --ti-surface: #1E2428;
+  --ti-primary: #6ABFCC;
+  --ti-primary-soft: #2A4549;
+  --ti-secondary: #6B7D68;
+  --ti-accent: #7A6B9D;
+  --ti-danger: #9B5656;
+  --ti-warning: #A68542;
+  --ti-text: #E6E6E6;
+  --ti-border: #3A4247;
+  --ti-focus-ring: 0 0 0 3px rgba(106,191,204,0.4);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

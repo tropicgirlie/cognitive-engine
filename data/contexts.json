@@ -1,0 +1,11 @@
+{
+  "contexts": [
+    { "id": "data-entry-forms", "label": "Data entry & forms", "icon": "edit_square", "description": "Form filling, validation, structured inputs, multi-step data capture." },
+    { "id": "decision-approvals", "label": "Decision & approvals", "icon": "gavel", "description": "High-stakes reviews, approvals, sign-off flows, and operational judgment." },
+    { "id": "navigation-search", "label": "Navigation & search", "icon": "explore", "description": "Information architecture, menus, search results, and findability tasks." },
+    { "id": "monitoring-alerts", "label": "Monitoring & alerts", "icon": "monitoring", "description": "Dashboards, system status, anomaly detection, and triage workflows." },
+    { "id": "collaboration-handover", "label": "Collaboration & handover", "icon": "handshake", "description": "Shared work, async communication, ownership transfer, and team context." },
+    { "id": "onboarding-learning", "label": "Onboarding & learning", "icon": "school", "description": "First-use flows, feature discovery, tutorials, progressive skill building." },
+    { "id": "risk-communication", "label": "Risk & consent", "icon": "policy", "description": "Consent flows, risk disclosure, warnings, high-stakes choice communication." }
+  ]
+}

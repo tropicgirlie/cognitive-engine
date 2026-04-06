@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trauma-Informed UI Demo - Cognitive Engine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/trauma-informed-ui.css">
+    <style>
+        body {
+            font-family: var(--ti-font-family);
+            background: var(--ti-bg);
+            color: var(--ti-text);
+            line-height: var(--ti-line-height-relaxed);
+            margin: 0;
+            padding: var(--ti-space-xl);
+        }
+        
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: var(--ti-space-xl);
+        }
+        
+        .demo-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ti-text);
+            margin-bottom: var(--ti-space-sm);
+        }
+        
+        .demo-subtitle {
+            font-size: var(--ti-font-size-lg);
+            opacity: 0.8;
+            margin: 0;
+        }
+        
+        .demo-section {
+            background: var(--ti-surface);
+            border: 1px solid var(--ti-border);
+            border-radius: var(--ti-radius-xl);
+            padding: var(--ti-space-xl);
+            margin-bottom: var(--ti-space-xl);
+        }
+        
+        .section-title {
+            font-size: var(--ti-font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--ti-space-md);
+            color: var(--ti-text);
+        }
+        
+        .section-description {
+            margin-bottom: var(--ti-space-lg);
+            opacity: 0.8;
+        }
+        
+        .button-demo {
+            display: flex;
+            gap: var(--ti-space-md);
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .event-log {
+            background: var(--ti-bg);
+            border: 1px solid var(--ti-border);
+            border-radius: var(--ti-radius-md);
+            padding: var(--ti-space-sm);
+            margin-top: var(--ti-space-md);
+            font-family: monospace;
+            font-size: 0.875rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .event-entry {
+            padding: 2px 0;
+            border-bottom: 1px solid var(--ti-border);
+        }
+        
+        .event-entry:last-child {
+            border-bottom: none;
+        }
+        
+        .timestamp {
+            color: var(--ti-secondary);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Safe Exit Component -->
+    <ti-safe-exit 
+        redirect-to="https://weather.com" 
+        clear-history
+        position="top-right"
+        message="Need a break?">
+    </ti-safe-exit>
+
+    <div class="demo-container">
+        <header class="demo-header">
+            <h1 class="demo-title">Trauma-Informed UI Components</h1>
+            <p class="demo-subtitle">Demonstrating psychological safety and autonomy in interface design</p>
+        </header>
+
+        <!-- Regret Button Demo -->
+        <section class="demo-section">
+            <h2 class="section-title">🔄 Regret Button</h2>
+            <p class="section-description">
+                Implements "Repair is always possible" - users have a window to undo actions, reducing shame and anxiety around mistakes.
+            </p>
+            
+            <div class="button-demo">
+                <ti-button 
+                    id="regretBtn1"
+                    label="Submit Response"
+                    window-ms="7000">
+                </ti-button>
+                
+                <ti-button 
+                    id="regretBtn2"
+                    label="Delete Data"
+                    variant="danger"
+                    window-ms="5000">
+                </ti-button>
+                
+                <ti-button 
+                    id="regretBtn3"
+                    label="Save Draft"
+                    variant="secondary"
+                    window-ms="3000">
+                </ti-button>
+            </div>
+            
+            <div class="event-log" id="buttonLog">
+                <div class="event-entry">
+                    <span class="timestamp">[Ready]</span> Button events will appear here...
+                </div>
+            </div>
+        </section>
+
+        <!-- Trigger Warning Demo -->
+        <section class="demo-section">
+            <h2 class="section-title">⚠️ Trigger Warning</h2>
+            <p class="section-description">
+                Implements "Progressive disclosure" - warns users before potentially difficult content and gives them control over exposure.
+            </p>
+            
+            <ti-trigger-warning 
+                type="medical-content"
+                severity="medium"
+                dismissable>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md);">
+                    <h3>Medical Procedure Information</h3>
+                    <p>This content contains detailed information about medical procedures that may be sensitive for some readers. The information includes clinical descriptions and potential outcomes.</p>
+                    <p>Please take care of yourself while reading. You can always return to this later if you need a break.</p>
+                </div>
+            </ti-trigger-warning>
+            
+            <div class="event-log" id="warningLog">
+                <div class="event-entry">
+                    <span class="timestamp">[Ready]</span> Warning events will appear here...
+                </div>
+            </div>
+        </section>
+
+        <!-- Consent Stepper Demo -->
+        <section class="demo-section">
+            <h2 class="section-title">📋 Consent Stepper</h2>
+            <p class="section-description">
+                Implements "Granular consent" - one decision per moment with genuine opt-out options, respecting user autonomy.
+            </p>
+            
+            <ti-consent-stepper id="consentStepper">
+            </ti-consent-stepper>
+            
+            <div class="event-log" id="consentLog">
+                <div class="event-entry">
+                    <span class="timestamp">[Ready]</span> Consent events will appear here...
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Principles Overview -->
+        <section class="demo-section">
+            <h2 class="section-title">🎯 Design Principles</h2>
+            <p class="section-description">
+                These components implement SAMHSA's six principles of trauma-informed care:
+            </p>
+            
+            <div style="display: grid; gap: var(--ti-space-md);">
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-primary);">
+                    <strong>1. Pacing over efficiency</strong> - Users move at their own speed through consent steppers and warnings
+                </div>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-secondary);">
+                    <strong>2. Repair is always possible</strong> - Regret buttons provide undo windows to reduce shame
+                </div>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-accent);">
+                    <strong>3. Granular consent</strong> - Each decision is separate with genuine opt-out options
+                </div>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-warning);">
+                    <strong>4. Progressive disclosure</strong> - Warnings prepare users before difficult content
+                </div>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-danger);">
+                    <strong>5. Exit is always visible</strong> - Safe exit button prevents trapped feelings
+                </div>
+                <div style="padding: var(--ti-space-md); background: var(--ti-bg); border-radius: var(--ti-radius-md); border-left: 4px solid var(--ti-primary);">
+                    <strong>6. Predictable calm</strong> - Consistent design tokens and gentle animations create safety
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Load Components -->
+    <script src="/js/ti-button.js"></script>
+    <script src="/js/ti-safe-exit.js"></script>
+    <script src="/js/ti-trigger-warning.js"></script>
+    <script src="/js/ti-consent-stepper.js"></script>
+    
+    <script>
+        // Event logging
+        function logEvent(containerId, message) {
+            const log = document.getElementById(containerId);
+            const timestamp = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'event-entry';
+            entry.innerHTML = `<span class="timestamp">[${timestamp}]</span> ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        // Button events
+        document.getElementById('regretBtn1').addEventListener('action', (e) => {
+            logEvent('buttonLog', `Action triggered: ${e.detail.label}`);
+        });
+        
+        document.getElementById('regretBtn1').addEventListener('undo', (e) => {
+            logEvent('buttonLog', `Action undone: ${e.detail.label}`);
+        });
+        
+        document.getElementById('regretBtn1').addEventListener('finalized', (e) => {
+            logEvent('buttonLog', `Action finalized: ${e.detail.label}`);
+        });
+
+        document.getElementById('regretBtn2').addEventListener('action', (e) => {
+            logEvent('buttonLog', `Danger action triggered: ${e.detail.label}`);
+        });
+        
+        document.getElementById('regretBtn2').addEventListener('undo', (e) => {
+            logEvent('buttonLog', `Danger action undone: ${e.detail.label}`);
+        });
+
+        // Warning events
+        document.querySelector('ti-trigger-warning').addEventListener('warning-accepted', (e) => {
+            logEvent('warningLog', `Warning accepted for ${e.detail.type} content`);
+        });
+        
+        document.querySelector('ti-trigger-warning').addEventListener('warning-previewed', (e) => {
+            logEvent('warningLog', `Warning previewed for ${e.detail.type} content`);
+        });
+        
+        document.querySelector('ti-trigger-warning').addEventListener('warning-dismissed', (e) => {
+            logEvent('warningLog', `Warning dismissed for ${e.detail.type} content`);
+        });
+
+        // Consent events
+        document.getElementById('consentStepper').addEventListener('consent-complete', (e) => {
+            logEvent('consentLog', 'Consent process completed');
+            Object.entries(e.detail.consents).forEach(([key, value]) => {
+                logEvent('consentLog', `  ${key}: ${value}`);
+            });
+        });
+
+        // Safe exit events
+        document.querySelector('ti-safe-exit').addEventListener('safe-exit', (e) => {
+            console.log('Safe exit triggered:', e.detail);
+        });
+    </script>
+</body>
+</html>

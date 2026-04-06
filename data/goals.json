@@ -1,0 +1,79 @@
+{
+  "goals": [
+    {
+      "id": "reduce-errors",
+      "label": "Reduce errors",
+      "summary": "Minimize user mistakes, misclicks, and risky actions.",
+      "promptDirectives": [
+        "Prioritize clarity, prevention, and explicit confirmation for risky decisions.",
+        "Reduce ambiguity in labels, controls, and system feedback.",
+        "Design flows that help users recover safely from mistakes."
+      ],
+      "successMetrics": [
+        "Lower task error rate",
+        "Lower misclick or incorrect submission rate",
+        "Higher task completion confidence"
+      ]
+    },
+    {
+      "id": "speed-up-decisions",
+      "label": "Speed up decisions",
+      "summary": "Help users choose faster with less hesitation.",
+      "promptDirectives": [
+        "Reduce the number of competing options on screen.",
+        "Use defaults, grouping, and hierarchy to accelerate choice.",
+        "Make the next best action obvious at every step."
+      ],
+      "successMetrics": [
+        "Lower decision time",
+        "Higher throughput for repeated tasks",
+        "Fewer abandoned decisions"
+      ]
+    },
+    {
+      "id": "reduce-overload",
+      "label": "Reduce overload",
+      "summary": "Lower cognitive burden and simplify comprehension.",
+      "promptDirectives": [
+        "Chunk information and reveal complexity progressively.",
+        "Reduce simultaneous demands on attention and memory.",
+        "Favor calm, digestible hierarchy over dense presentation."
+      ],
+      "successMetrics": [
+        "Lower subjective cognitive load",
+        "Faster comprehension of key information",
+        "Fewer support questions caused by confusion"
+      ]
+    },
+    {
+      "id": "improve-findability",
+      "label": "Improve findability",
+      "summary": "Help users discover the right feature or information quickly.",
+      "promptDirectives": [
+        "Use recognizable navigation and information scent.",
+        "Organize information around user mental models.",
+        "Reduce clutter that competes with wayfinding cues."
+      ],
+      "successMetrics": [
+        "Faster time to find target information",
+        "Fewer failed searches or dead-end navigations",
+        "Higher task success for discovery flows"
+      ]
+    },
+    {
+      "id": "improve-collaboration",
+      "label": "Improve collaboration",
+      "summary": "Support shared understanding, handoff, and team confidence.",
+      "promptDirectives": [
+        "Make ownership, status, and next steps explicit.",
+        "Show context that improves handoff quality and trust.",
+        "Reduce coordination friction across people and roles."
+      ],
+      "successMetrics": [
+        "Cleaner handoffs",
+        "Lower rework caused by missing context",
+        "Higher team confidence in workflow state"
+      ]
+    }
+  ]
+}

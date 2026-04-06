@@ -4,406 +4,505 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dashboard | Cognitive Engine</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-<script>
-tailwind.config = {
-  theme: { extend: { colors: { brand:'#3D63DD','brand-lt':'#EEF2FD','brand-bd':'#C3D0F8' }, fontFamily: { hl:['Manrope'],bd:['Inter'] } } }
-}
-</script>
 <style>
+/* ── MD3 Design Tokens ── */
+:root {
+  --pri: #3D63DD; --on-pri: #fff; --pri-con: #DBE1FF; --on-pri-con: #00105C;
+  --sec-con: #DFE0F9; --on-sec-con: #181A2C;
+  --err: #B3261E; --err-con: #F9DEDC;
+  --surf: #FEFBFF; --on-surf: #1C1B1F; --on-surf-var: #46464F;
+  --outline: #767680; --outline-var: #C7C5D0;
+  --surf-low: #F5F3FA; --surf-con: #EFEDF4; --surf-hi: #E9E7EE; --surf-white: #fff;
+  --green-con: #C3EFCD; --on-green: #146C2E;
+  --r-xs:4px; --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:28px; --r-full:9999px;
+  --el1: 0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
+  --el2: 0 1px 2px rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+  --el3: 0 4px 8px 3px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.3);
+}
 *,*::before,*::after{box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;margin:0;padding:0;}
-body{font-family:'Inter',sans-serif;background:#F3F5FB;color:#3B4466;}
-h1,h2,h3,h4{font-family:'Manrope',sans-serif;}
-.icon{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;vertical-align:middle;display:inline-block;user-select:none;flex-shrink:0;}
-/* Sidebar */
-.sidebar{background:#0E1624;width:240px;height:100vh;position:fixed;left:0;top:0;display:flex;flex-direction:column;z-index:50;}
-.nav-link{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:8px;font-size:13.5px;font-weight:500;color:#7A90B0;transition:all 0.15s;text-decoration:none;}
-.nav-link:hover{background:rgba(255,255,255,0.06);color:#C0D0E8;}
-.nav-link.active{background:rgba(61,99,221,0.20);color:#A8BFFF;}
-.nav-link.active .icon{color:#7AA5FF;}
-/* Scrollbar */
-.scr::-webkit-scrollbar{width:4px;}
-.scr::-webkit-scrollbar-thumb{background:#C3D0F8;border-radius:4px;}
-.scr::-webkit-scrollbar-track{background:transparent;}
-/* Top nav */
-.topnav{height:60px;background:rgba(255,255,255,0.90);backdrop-filter:blur(16px);border-bottom:1px solid #E2E8F2;position:fixed;top:0;left:240px;right:0;z-index:40;display:flex;align-items:center;padding:0 24px;justify-content:space-between;}
-/* Step cards */
-.step-card{background:white;border:1px solid #E2E8F2;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:16px;}
-.step-card.highlight{background:#F8FAFE;border-color:#C3D0F8;}
-/* Goal buttons */
-.gbtn{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:9px;border:1px solid #E2E8F2;background:white;color:#3B4466;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;font-family:Inter,sans-serif;text-align:left;width:100%;}
-.gbtn:hover{border-color:#A3BFFF;background:#F4F7FF;}
-.gbtn.on{border-color:#3D63DD;background:#EEF2FD;color:#3D63DD;font-weight:600;}
-/* Badges */
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;letter-spacing:0.05em;padding:3px 8px;border-radius:100px;text-transform:uppercase;border:1px solid;}
-.badge-hi{background:#E8FAF4;color:#0A6B4D;border-color:#9DE0C4;}
-.badge-mod{background:#FFF8E5;color:#7A5408;border-color:#F2D28A;}
-/* Principle card */
-.pcard{background:white;border:1px solid #E2E8F2;border-radius:12px;overflow:hidden;transition:all 0.2s;margin-bottom:10px;}
-.pcard:hover{border-color:#C3D0F8;box-shadow:0 4px 20px rgba(15,20,50,0.07);}
-.pcard.open{border-color:#A3BFFF;box-shadow:0 4px 24px rgba(61,99,221,0.10);}
-.card-body{display:none;border-top:1px solid #F0F3FA;padding:20px;}
+body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var(--on-surf);}
+/* ── Icons ── */
+.mi{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;user-select:none;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
+/* ── Top App Bar ── */
+.top-bar{height:64px;background:var(--surf-con);display:flex;align-items:center;padding:0 8px 0 16px;gap:4px;position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--outline-var);}
+.wordmark{font:700 16px/1 'Roboto Flex',sans-serif;color:var(--on-surf);letter-spacing:-.02em;}
+.wordmark b{color:var(--pri);}
+.logo-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--green-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--on-green);}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--on-green);flex-shrink:0;}
+/* ── Search ── */
+.search-wrap{display:flex;align-items:center;gap:8px;background:var(--surf-hi);border-radius:var(--r-full);padding:0 14px;height:40px;width:240px;}
+.search-wrap input{border:none;background:none;outline:none;font:400 14px/1 'Roboto';color:var(--on-surf);flex:1;}
+.search-wrap input::placeholder{color:var(--on-surf-var);}
+/* ── Icon buttons ── */
+.ibtn{width:48px;height:48px;border-radius:var(--r-full);border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-surf-var);transition:background .15s;position:relative;}
+.ibtn:hover{background:rgba(28,27,31,.08);}
+.notif-dot{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--err);border:2px solid var(--surf-con);}
+.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;margin:0 4px;cursor:pointer;border:2px solid var(--outline-var);}
+/* ── Nav Tabs ── */
+.nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 8px;}
+.ntab{display:flex;align-items:center;gap:8px;padding:0 20px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,background .15s;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
+.ntab:hover{background:rgba(61,99,221,.06);color:var(--on-surf);}
+.ntab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
+.ntab .mi{font-size:18px;}
+/* ── Layout ── */
+.main-wrap{margin-top:112px;height:calc(100vh - 112px);overflow-y:auto;}
+.main-wrap::-webkit-scrollbar{width:4px;}
+.main-wrap::-webkit-scrollbar-thumb{background:var(--outline-var);border-radius:4px;}
+.content{max-width:1280px;margin:0 auto;padding:28px 28px 24px;}
+/* ── Cards ── */
+.card{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-lg);padding:24px;}
+.card-tinted{background:var(--pri-con);border:none;border-radius:var(--r-lg);padding:24px;}
+/* ── Step header ── */
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--pri);color:#fff;font:700 12px/1 'Roboto Flex';display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-num-tinted{width:28px;height:28px;border-radius:50%;background:var(--on-pri-con);color:#fff;font:700 12px/1 'Roboto Flex';display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-lbl{font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--on-surf-var);margin-bottom:2px;}
+.step-lbl-tinted{font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--pri);margin-bottom:2px;}
+.step-title{font:600 16px/1.3 'Roboto Flex';color:var(--on-surf);margin:0;}
+/* ── Filter Chips ── */
+.fchip{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf);font:500 13px/1 'Roboto';cursor:pointer;transition:all .15s;width:100%;text-align:left;}
+.fchip:hover{background:var(--surf-low);border-color:var(--on-surf);}
+.fchip.sel{background:var(--sec-con);border-color:transparent;color:var(--on-sec-con);}
+.fchip .mi{font-size:16px;color:var(--on-surf-var);flex-shrink:0;}
+.fchip.sel .mi{color:var(--pri);}
+/* ── Buttons ── */
+.btn-fill{display:inline-flex;align-items:center;gap:8px;background:var(--pri);color:#fff;padding:11px 24px;border-radius:var(--r-full);border:none;font:600 14px/1 'Roboto';cursor:pointer;box-shadow:var(--el1);transition:all .15s;}
+.btn-fill:hover{box-shadow:var(--el2);filter:brightness(1.06);}
+.btn-tonal{display:inline-flex;align-items:center;gap:8px;background:var(--sec-con);color:var(--on-sec-con);padding:10px 20px;border-radius:var(--r-full);border:none;font:600 13px/1 'Roboto';cursor:pointer;transition:all .15s;}
+.btn-tonal:hover{box-shadow:var(--el1);}
+.btn-text{display:inline-flex;align-items:center;gap:6px;background:none;color:var(--pri);padding:10px 12px;border-radius:var(--r-full);border:none;font:600 13px/1 'Roboto';cursor:pointer;transition:background .15s;}
+.btn-text:hover{background:rgba(61,99,221,.08);}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:none;color:var(--pri);padding:9px 18px;border-radius:var(--r-full);border:1px solid var(--outline);font:600 13px/1 'Roboto';cursor:pointer;transition:all .15s;}
+.btn-outline:hover{background:rgba(61,99,221,.08);border-color:var(--pri);}
+/* ── Textarea ── */
+.problem-area{width:100%;background:rgba(255,255,255,.65);border:1px solid rgba(0,16,92,.2);border-bottom:2px solid var(--pri);border-radius:var(--r-md);padding:12px 14px;font:400 13px/1.65 'Roboto';color:var(--on-surf);outline:none;resize:none;transition:all .2s;}
+.problem-area:focus{background:rgba(255,255,255,.9);border-bottom-color:var(--on-pri-con);}
+/* ── Principle Cards ── */
+.pcard{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-lg);overflow:hidden;transition:all .2s;margin-bottom:8px;}
+.pcard:hover{box-shadow:var(--el1);border-color:var(--outline);}
+.pcard.open{border-color:var(--pri);box-shadow:var(--el2);}
+.card-hdr{padding:16px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;}
+.card-body{display:none;border-top:1px solid var(--outline-var);padding:20px;}
 .pcard.open .card-body{display:block;}
-.chevron{transition:transform 0.2s;}
+.chevron{transition:transform .2s;color:var(--on-surf-var);}
 .pcard.open .chevron{transform:rotate(180deg);}
-/* Buttons */
-.btn-primary{display:inline-flex;align-items:center;gap:6px;background:#3D63DD;color:white;padding:9px 20px;border-radius:9px;border:none;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;box-shadow:0 4px 12px rgba(61,99,221,0.28);transition:all 0.15s;}
-.btn-primary:hover{background:#2C4EC4;}
-.btn-ghost{display:inline-flex;align-items:center;gap:6px;background:white;color:#3B4466;padding:9px 20px;border-radius:9px;border:1px solid #E2E8F2;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;transition:all 0.15s;}
-.btn-ghost:hover{background:#F3F5FB;border-color:#C3D0F8;}
+.p-icon{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+/* ── Badges ── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;border-radius:var(--r-full);font:700 10px/16px 'Roboto';letter-spacing:.05em;text-transform:uppercase;}
+.b-hi{background:var(--green-con);color:var(--on-green);}
+.b-mod{background:#FFF8E5;color:#7A5408;}
+/* ── Section label ── */
+.slbl{font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--on-surf-var);margin-bottom:8px;}
+/* ── FAB ── */
+.fab{position:fixed;bottom:24px;right:24px;display:flex;align-items:center;gap:12px;background:var(--pri-con);color:var(--on-pri-con);padding:16px 20px;border-radius:var(--r-xl);border:none;cursor:pointer;font:600 14px/1 'Roboto';box-shadow:var(--el3);transition:all .2s;z-index:200;}
+.fab:hover{box-shadow:0 6px 14px 4px rgba(0,0,0,.15),0 2px 5px rgba(0,0,0,.3);}
+.fab .mi{font-size:24px;}
+/* ── Toast ── */
+#toast{position:fixed;bottom:88px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:300;box-shadow:var(--el3);max-width:360px;}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<nav class="sidebar">
-  <div style="height:60px;display:flex;align-items:center;padding:0 16px;border-bottom:1px solid rgba(255,255,255,0.07);flex-shrink:0;">
-    <div style="display:flex;align-items:center;gap:10px;">
-      <div style="width:32px;height:32px;border-radius:8px;background:rgba(61,99,221,0.25);display:flex;align-items:center;justify-content:center;">
-        <span class="icon" style="color:#7AA5FF;font-size:18px;">psychology</span>
-      </div>
-      <span style="font-family:Manrope,sans-serif;font-weight:800;color:white;font-size:14px;letter-spacing:-0.01em;">Cognitive Engine</span>
-    </div>
+<!-- ── TOP APP BAR ── -->
+<header class="top-bar">
+  <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
+  <span class="wordmark" style="margin-left:10px;">Cognitive <b>Engine</b></span>
+  <span class="status-pill" style="margin-left:12px;"><span class="status-dot"></span>Optimal — your cognitive load is balanced</span>
+  <div style="flex:1;"></div>
+  <div class="search-wrap">
+    <span class="mi" style="font-size:18px;color:var(--on-surf-var);">search</span>
+    <input type="text" id="dashboardSearch" placeholder="Search principles…" oninput="searchPrinciples(this.value)"/>
   </div>
-  <div style="padding:10px 16px;border-bottom:1px solid rgba(255,255,255,0.05);flex-shrink:0;">
-    <div style="display:flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(16,166,121,0.15);border-radius:7px;width:fit-content;">
-      <span style="width:6px;height:6px;border-radius:50%;background:#10A679;display:block;"></span>
-      <span style="font-size:10.5px;color:#5CC9A0;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;">Optimal Load</span>
-    </div>
-  </div>
-  <div style="flex:1;padding:12px 12px;display:flex;flex-direction:column;gap:2px;overflow-y:auto;" class="scr">
-    <a href="updated-dashboard.html" class="nav-link active">
-      <span class="icon">dashboard</span><span>Overview</span>
-    </a>
-    <a href="#" class="nav-link"><span class="icon">analytics</span><span>Analysis</span></a>
-    <a href="index.html" class="nav-link"><span class="icon">auto_stories</span><span>Library</span></a>
-    <a href="#" class="nav-link"><span class="icon">history</span><span>History</span></a>
-  </div>
-  <div style="padding:0 12px 12px;flex-shrink:0;">
-    <button onmouseover="this.style.background='#2C4EC4'" onmouseout="this.style.background='#3D63DD'" style="width:100%;display:flex;align-items:center;justify-content:center;gap:6px;background:#3D63DD;color:white;font-size:13.5px;font-weight:600;padding:10px 16px;border-radius:10px;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(61,99,221,0.30);font-family:Inter,sans-serif;">
-      <span class="icon" style="font-size:18px;">add</span>New Analysis
-    </button>
-  </div>
-  <div style="padding:10px 12px 16px;border-top:1px solid rgba(255,255,255,0.06);flex-shrink:0;display:flex;flex-direction:column;gap:2px;">
-    <a href="#" class="nav-link" style="font-size:12.5px;color:#4F6080;"><span class="icon" style="font-size:17px;">description</span><span>Docs</span></a>
-    <a href="#" class="nav-link" style="font-size:12.5px;color:#4F6080;"><span class="icon" style="font-size:17px;">help_outline</span><span>Support</span></a>
-  </div>
+  <button class="ibtn" title="Notifications"><span class="mi">notifications</span><span class="notif-dot"></span></button>
+  <button class="ibtn" title="Settings"><span class="mi">settings</span></button>
+  <img class="avatar" src="https://i.pravatar.cc/36?u=cog-ux" alt="User"/>
+</header>
+
+<!-- ── NAVIGATION TABS ── -->
+<nav class="nav-tabs">
+  <a href="updated-dashboard.html" class="ntab active"><span class="mi">dashboard</span>Dashboard</a>
+  <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
+  <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
+  <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
+  <a href="#" class="ntab" onclick="showToast('history','History coming soon');return false;"><span class="mi">history</span>History</a>
 </nav>
 
-<!-- MAIN WRAPPER -->
-<div style="margin-left:240px;height:100vh;display:flex;flex-direction:column;">
+<!-- ── MAIN CONTENT ── -->
+<main style="padding:24px;max-width:1400px;margin:0 auto;">
 
-  <!-- Top Nav -->
-  <header class="topnav">
-    <nav style="display:flex;align-items:center;gap:2px;">
-      <a href="updated-dashboard.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:600;color:#3D63DD;background:#EEF2FD;text-decoration:none;">Dashboard</a>
-      <a href="index.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:#6E7DA0;text-decoration:none;transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB';this.style.color='#0B1228'" onmouseout="this.style.background='transparent';this.style.color='#6E7DA0'">Full Library</a>
-      <a href="compare-mode.html" style="padding:6px 14px;border-radius:8px;font-size:13.5px;font-weight:500;color:#6E7DA0;text-decoration:none;transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB';this.style.color='#0B1228'" onmouseout="this.style.background='transparent';this.style.color='#6E7DA0'">Compare Mode</a>
-    </nav>
-    <div style="display:flex;align-items:center;gap:6px;">
-      <div style="position:relative;">
-        <span class="icon" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:16px;color:#9BAFC8;">search</span>
-        <input type="text" placeholder="Search principles…" onfocus="this.style.borderColor='#A3BFFF';this.style.boxShadow='0 0 0 3px rgba(61,99,221,0.10)'" onblur="this.style.borderColor='#E2E8F2';this.style.boxShadow='none'" style="background:#F3F5FB;border:1px solid #E2E8F2;border-radius:100px;padding:7px 14px 7px 32px;font-size:13px;width:220px;outline:none;font-family:Inter;color:#0B1228;transition:all 0.2s;"/>
+<!-- ── INTERVENTION WORKFLOW ── -->
+    <div style="margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+      <div>
+        <h1 style="font:700 26px/1.2 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 6px;letter-spacing:-.02em;">Intervention Workflow</h1>
+        <p style="font:400 14px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:560px;">Diagnose cognitive friction and surface evidence-based design principles to streamline high-stakes interfaces.</p>
       </div>
-      <button onmouseover="this.style.background='#F0F3FA'" onmouseout="this.style.background='transparent'" style="padding:7px;border-radius:8px;background:transparent;border:none;color:#6E7DA0;cursor:pointer;display:flex;transition:all 0.15s;"><span class="icon">notifications</span></button>
-      <button onmouseover="this.style.background='#F0F3FA'" onmouseout="this.style.background='transparent'" style="padding:7px;border-radius:8px;background:transparent;border:none;color:#6E7DA0;cursor:pointer;display:flex;transition:all 0.15s;"><span class="icon">settings</span></button>
-      <img src="https://i.pravatar.cc/32?u=cog-ux" alt="User" style="width:32px;height:32px;border-radius:50%;border:2px solid #E2E8F2;object-fit:cover;"/>
-    </div>
-  </header>
-
-  <!-- Scrollable Content -->
-  <main style="flex:1;overflow-y:auto;padding:28px 24px;" class="scr">
-
-    <!-- Page Header -->
-    <div style="margin-bottom:24px;">
-      <h1 style="font-size:26px;font-weight:800;color:#0B1228;margin:0 0 6px;letter-spacing:-0.02em;">Intervention Workflow</h1>
-      <p style="font-size:13.5px;color:#6E7DA0;margin:0;max-width:580px;line-height:1.65;">Systematically diagnose cognitive friction and apply evidence-based design principles to streamline high-stakes interfaces.</p>
     </div>
 
     <!-- 3-Step Grid -->
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;">
 
       <!-- Step 1 -->
-      <div class="step-card">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#3D63DD;color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:Manrope;">1</div>
-          <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:#9BAFC8;margin:0;">Strategic Goal</p>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div class="step-num">1</div>
+          <div><div class="step-lbl">Strategic Goal</div><p class="step-title">What to improve?</p></div>
         </div>
-        <p style="font-size:16px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">What are you trying to improve?</p>
-        <div id="goal-group" style="display:flex;flex-direction:column;gap:6px;">
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">error</span>Reduce errors</button>
-          <button class="gbtn on" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#3D63DD;">speed</span>Speed up decisions</button>
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">psychology</span>Reduce cognitive overload</button>
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">travel_explore</span>Improve findability</button>
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">verified_user</span>Increase user confidence</button>
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">school</span>Minimize training time</button>
-          <button class="gbtn" onclick="selectBtn(this,'goal-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">bolt</span>Speed up expert workflows</button>
+        <div style="display:flex;flex-direction:column;gap:6px;" id="goal-group">
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">error</span>Reduce errors</button>
+          <button class="fchip sel" onclick="selectChip(this,'goal-group')"><span class="mi">speed</span>Speed up decisions</button>
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">psychology</span>Reduce overload</button>
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">travel_explore</span>Improve findability</button>
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">verified_user</span>Increase confidence</button>
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">school</span>Minimise training</button>
+          <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">bolt</span>Expert workflows</button>
         </div>
       </div>
 
       <!-- Step 2 -->
-      <div class="step-card">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#3D63DD;color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:Manrope;">2</div>
-          <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:#9BAFC8;margin:0;">Context Area</p>
+      <div class="card">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div class="step-num">2</div>
+          <div><div class="step-lbl">Context Area</div><p class="step-title">Where is this happening?</p></div>
         </div>
-        <p style="font-size:16px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Where is this happening?</p>
-        <div id="ctx-group" style="display:flex;flex-direction:column;gap:6px;">
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">edit_square</span>Data entry &amp; forms</button>
-          <button class="gbtn on" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#3D63DD;">gavel</span>Decision &amp; approvals</button>
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">explore</span>Navigation &amp; search</button>
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">monitoring</span>Monitoring &amp; alerts</button>
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">dashboard_customize</span>Complex dashboards</button>
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">settings_applications</span>Configuration flows</button>
-          <button class="gbtn" onclick="selectBtn(this,'ctx-group')"><span class="icon" style="font-size:16px;color:#9BAFC8;">linear_scale</span>Multi-step wizards</button>
+        <div style="display:flex;flex-direction:column;gap:6px;" id="ctx-group">
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">edit_square</span>Data entry &amp; forms</button>
+          <button class="fchip sel" onclick="selectChip(this,'ctx-group')"><span class="mi">gavel</span>Decision &amp; approvals</button>
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">explore</span>Navigation &amp; search</button>
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">monitoring</span>Monitoring &amp; alerts</button>
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">dashboard_customize</span>Complex dashboards</button>
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">settings_applications</span>Configuration flows</button>
+          <button class="fchip" onclick="selectChip(this,'ctx-group')"><span class="mi">linear_scale</span>Multi-step wizards</button>
         </div>
       </div>
 
       <!-- Step 3 -->
-      <div class="step-card highlight">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <div style="width:28px;height:28px;border-radius:50%;background:#3D63DD;color:white;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:Manrope;">3</div>
-          <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.09em;color:#9BAFC8;margin:0;">Specifics</p>
+      <div class="card-tinted">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div class="step-num-tinted">3</div>
+          <div><div class="step-lbl-tinted">Specifics</div><p class="step-title" style="color:var(--on-pri-con);">Describe your UX problem</p></div>
         </div>
-        <p style="font-size:16px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Describe your UX problem</p>
-        <textarea onfocus="this.style.borderColor='#A3BFFF';this.style.boxShadow='0 0 0 3px rgba(61,99,221,0.08)'" onblur="this.style.borderColor='#E2E8F2';this.style.boxShadow='none'" placeholder="e.g. Lab technicians are missing critical out-of-range values in high-throughput screening tables because the visualization doesn't contrast enough with standard data points…" style="flex:1;min-height:160px;background:white;border:1px solid #E2E8F2;border-radius:10px;padding:12px 14px;font-size:13px;font-family:Inter;color:#0B1228;resize:none;outline:none;line-height:1.65;transition:all 0.2s;"></textarea>
-        <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;font-size:13.5px;border-radius:10px;">
-          <span class="icon" style="font-size:18px;">search</span>Generate Insights
+        <textarea id="problem-input" class="problem-area" rows="8" placeholder="e.g. Lab technicians are missing critical out-of-range values in high-throughput screening tables because the visualisation doesn't contrast enough with standard data points…"></textarea>
+        <button class="btn-fill" style="width:100%;justify-content:center;margin-top:14px;background:var(--on-pri-con);border-radius:var(--r-md);" onclick="generateInsights()">
+          <span class="mi">auto_awesome</span>Generate Insights
         </button>
       </div>
-
     </div>
 
     <!-- Recommended Principles -->
-    <div style="margin-bottom:28px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+    <div style="margin-bottom:32px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
         <div>
-          <h2 style="font-size:18px;font-weight:800;color:#0B1228;margin:0 0 3px;letter-spacing:-0.01em;">Recommended Principles</h2>
-          <p style="font-size:12.5px;color:#6E7DA0;margin:0;">Based on "Speed up decisions" in "Decision &amp; approvals"</p>
+          <h2 style="font:700 18px/1.3 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 4px;">Recommended Principles</h2>
+          <p id="prin-sub" style="font:400 13px/1 'Roboto';color:var(--on-surf-var);margin:0;">Based on "Speed up decisions" in "Decision &amp; approvals"</p>
         </div>
-        <div style="display:flex;gap:6px;">
-          <button style="display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;border:1px solid #E2E8F2;background:white;color:#3D63DD;font-size:12.5px;font-weight:600;cursor:pointer;font-family:Inter;transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'">
-            <span class="icon" style="font-size:15px;">filter_list</span>Filter
-          </button>
-          <button style="display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:8px;border:1px solid #E2E8F2;background:white;color:#3D63DD;font-size:12.5px;font-weight:600;cursor:pointer;font-family:Inter;transition:all 0.15s;" onmouseover="this.style.background='#F3F5FB'" onmouseout="this.style.background='white'">
-            <span class="icon" style="font-size:15px;">sort</span>Impact
-          </button>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-outline"><span class="mi" style="font-size:16px;">filter_list</span>Filter</button>
+          <button class="btn-outline"><span class="mi" style="font-size:16px;">sort</span>By Impact</button>
         </div>
       </div>
 
-      <!-- Card 1: Hick's Law (expanded) -->
+      <!-- Card 1: Hick's Law -->
       <div class="pcard open" id="d1">
-        <div onclick="toggleCard('d1')" style="padding:18px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;">
-          <div style="flex-shrink:0;width:42px;height:42px;border-radius:10px;background:#EEF2FD;display:flex;align-items:center;justify-content:center;">
-            <span class="icon" style="font-size:22px;color:#3D63DD;">linear_scale</span>
-          </div>
+        <div class="card-hdr" onclick="toggleCard('d1')">
+          <div class="p-icon" style="background:var(--pri-con);"><span class="mi" style="font-size:24px;color:var(--pri);">linear_scale</span></div>
           <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
-              <h4 style="font-size:15px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Hick's Law Optimization</h4>
-              <span class="badge badge-hi"><span style="width:5px;height:5px;border-radius:50%;background:#10A679;display:block;"></span>High Reduction</span>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+              <h4 style="font:700 15px/1 'Roboto Flex';color:var(--on-surf);margin:0;">Hick's Law Optimisation</h4>
+              <span class="badge b-hi">High Impact</span>
             </div>
-            <p style="font-size:13px;color:#6E7DA0;margin:0 0 10px;line-height:1.6;">Minimize the number of stimuli to reduce time and errors in decision-making processes.</p>
+            <p style="font:400 13px/1.6 'Roboto';color:var(--on-surf-var);margin:0 0 8px;">Minimise stimuli to reduce decision time and error rate.</p>
             <div style="display:flex;gap:20px;">
-              <div>
-                <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 3px;">Why it applies</p>
-                <p style="font-size:12px;color:#3B4466;margin:0;font-weight:500;">Decision nodes present 12+ parallel options without hierarchy.</p>
-              </div>
-              <div style="width:1px;background:#E2E8F2;flex-shrink:0;"></div>
-              <div>
-                <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 3px;">Impact Type</p>
-                <p style="font-size:12px;color:#3B4466;margin:0;font-weight:500;">Latency Reduction</p>
-              </div>
+              <div><div class="slbl">Why it applies</div><p style="font:500 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">Decision nodes present 12+ parallel options without hierarchy.</p></div>
+              <div style="width:1px;background:var(--outline-var);flex-shrink:0;"></div>
+              <div><div class="slbl">Impact type</div><p style="font:500 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">Latency Reduction</p></div>
             </div>
           </div>
-          <span class="icon chevron" style="color:#9BAFC8;flex-shrink:0;margin-top:2px;">expand_more</span>
+          <span class="mi chevron">expand_more</span>
         </div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;display:flex;align-items:center;gap:5px;"><span class="icon" style="font-size:14px;color:#3D63DD;">construction</span>Design Actions</p>
+              <div class="slbl" style="display:flex;align-items:center;gap:4px;"><span class="mi" style="font-size:13px;color:var(--pri);">construction</span>Design Actions</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Categorize primary vs secondary actions visually</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Apply progressive disclosure for edge-case data</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Group lab variables under semantic section headers</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Categorise primary vs secondary actions visually</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Apply progressive disclosure for edge-case data</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Group variables under semantic section headers</li>
               </ul>
             </div>
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;display:flex;align-items:center;gap:5px;"><span class="icon" style="font-size:14px;color:#3D63DD;">info</span>Usage Rules</p>
-              <div style="background:#F8FAFE;padding:10px 12px;border-radius:9px;border:1px solid #E2E8F2;margin-bottom:8px;">
-                <p style="font-size:10px;font-weight:800;color:#10A679;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.06em;">When to use</p>
-                <p style="font-size:12.5px;color:#3B4466;margin:0;line-height:1.5;">During high-speed diagnostic triage where reaction time is critical.</p>
+              <div class="slbl" style="display:flex;align-items:center;gap:4px;"><span class="mi" style="font-size:13px;color:var(--pri);">info</span>Usage Rules</div>
+              <div style="background:var(--green-con);padding:10px 12px;border-radius:var(--r-sm);margin-bottom:8px;">
+                <div style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.06em;color:var(--on-green);margin-bottom:4px;">When to use</div>
+                <p style="font:400 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">During high-speed diagnostic triage where reaction time is critical.</p>
               </div>
-              <div style="background:#FFEEED;padding:10px 12px;border-radius:9px;border:1px solid #F4B6B4;">
-                <p style="font-size:10px;font-weight:800;color:#8E2222;margin:0 0 4px;text-transform:uppercase;letter-spacing:0.06em;">When not to use</p>
-                <p style="font-size:12.5px;color:#3B4466;margin:0;line-height:1.5;">In investigative deep-dives requiring all raw data points visible.</p>
+              <div style="background:var(--err-con);padding:10px 12px;border-radius:var(--r-sm);">
+                <div style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.06em;color:var(--err);margin-bottom:4px;">When not to use</div>
+                <p style="font:400 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">In investigative deep-dives requiring all raw data visible.</p>
               </div>
             </div>
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;display:flex;align-items:center;gap:5px;"><span class="icon" style="font-size:14px;color:#3D63DD;">biotech</span>Life Sciences Example</p>
-              <div style="border-radius:9px;overflow:hidden;border:1px solid #E2E8F2;">
-                <img src="https://picsum.photos/300/96?grayscale&blur=1" alt="Interface example" style="width:100%;height:80px;object-fit:cover;display:block;"/>
-                <div style="padding:10px 12px;background:white;">
-                  <p style="font-size:12px;color:#3B4466;margin:0;line-height:1.5;font-style:italic;">Redesigned Gene Sequencing analyzer to hide low-confidence alleles until explicitly requested by the pathologist.</p>
-                </div>
+              <div class="slbl" style="display:flex;align-items:center;gap:4px;"><span class="mi" style="font-size:13px;color:var(--pri);">biotech</span>Example</div>
+              <div style="border-radius:var(--r-md);overflow:hidden;border:1px solid var(--outline-var);">
+                <img src="https://picsum.photos/300/96?grayscale&blur=1" alt="Example" style="width:100%;height:80px;object-fit:cover;display:block;"/>
+                <div style="padding:10px 12px;background:var(--surf-low);"><p style="font:400 12px/1.5 'Roboto';font-style:italic;color:var(--on-surf-var);margin:0;">Redesigned Gene Sequencing analyser to hide low-confidence alleles until explicitly requested.</p></div>
               </div>
             </div>
           </div>
-          <div style="display:flex;justify-content:flex-end;gap:8px;">
-            <button class="btn-ghost" style="font-size:12.5px;padding:8px 16px;">Dismiss</button>
-            <button class="btn-primary" style="font-size:12.5px;padding:8px 16px;"><span class="icon" style="font-size:15px;">play_arrow</span>Apply Intervention</button>
+          <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--outline-var);">
+            <button class="btn-text" onclick="dismissCard('d1')">Not relevant</button>
+            <button class="btn-tonal" onclick="applyIntervention('Hicks Law Optimisation')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
           </div>
         </div>
       </div>
 
-      <!-- Card 2: Von Restorff Effect -->
+      <!-- Card 2: Von Restorff -->
       <div class="pcard" id="d2">
-        <div onclick="toggleCard('d2')" style="padding:18px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;">
-          <div style="flex-shrink:0;width:42px;height:42px;border-radius:10px;background:#FFF8E5;display:flex;align-items:center;justify-content:center;">
-            <span class="icon" style="font-size:22px;color:#C98B0A;">visibility</span>
-          </div>
+        <div class="card-hdr" onclick="toggleCard('d2')">
+          <div class="p-icon" style="background:#FFF8E5;"><span class="mi" style="font-size:24px;color:#C98B0A;">visibility</span></div>
           <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
-              <h4 style="font-size:15px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Von Restorff Effect</h4>
-              <span class="badge badge-mod"><span style="width:5px;height:5px;border-radius:50%;background:#C98B0A;display:block;"></span>Moderate Reduction</span>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+              <h4 style="font:700 15px/1 'Roboto Flex';color:var(--on-surf);margin:0;">Von Restorff Effect</h4>
+              <span class="badge b-mod">Moderate Impact</span>
             </div>
-            <p style="font-size:13px;color:#6E7DA0;margin:0 0 8px;line-height:1.6;">Predictably isolate the most important information to ensure it is noticed first.</p>
-            <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 3px;">Why it applies</p>
-            <p style="font-size:12px;color:#3B4466;margin:0;font-weight:500;">Critical patient alerts are visually identical to routine status notifications.</p>
+            <p style="font:400 13px/1.6 'Roboto';color:var(--on-surf-var);margin:0 0 6px;">Predictably isolate the most important information to ensure it's noticed first.</p>
+            <div class="slbl" style="margin-bottom:2px;">Why it applies</div>
+            <p style="font:500 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">Critical patient alerts are visually identical to routine status notifications.</p>
           </div>
-          <span class="icon chevron" style="color:#9BAFC8;flex-shrink:0;margin-top:2px;">expand_more</span>
+          <span class="mi chevron">expand_more</span>
         </div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">Design Actions</p>
+              <div class="slbl">Design Actions</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Use contrasting color for critical alerts vs routine items</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Animate only high-priority status changes</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Use contrasting colour for critical alerts vs routine items</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Animate only high-priority status changes</li>
               </ul>
             </div>
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">UI Patterns</p>
+              <div class="slbl">UI Patterns</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Highlight badges for critical status table rows</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Pin urgent action items to the top of the list</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Highlight badges for critical status table rows</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Pin urgent action items to top of list</li>
               </ul>
             </div>
           </div>
-          <div style="display:flex;justify-content:flex-end;gap:8px;">
-            <button class="btn-ghost" style="font-size:12.5px;padding:8px 16px;">Dismiss</button>
-            <button class="btn-primary" style="font-size:12.5px;padding:8px 16px;"><span class="icon" style="font-size:15px;">play_arrow</span>Apply Intervention</button>
+          <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--outline-var);">
+            <button class="btn-text" onclick="dismissCard('d2')">Not relevant</button>
+            <button class="btn-tonal" onclick="applyIntervention('Von Restorff Effect')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
           </div>
         </div>
       </div>
 
       <!-- Card 3: Miller's Law -->
       <div class="pcard" id="d3">
-        <div onclick="toggleCard('d3')" style="padding:18px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;">
-          <div style="flex-shrink:0;width:42px;height:42px;border-radius:10px;background:#E8FAF4;display:flex;align-items:center;justify-content:center;">
-            <span class="icon" style="font-size:22px;color:#10A679;">memory</span>
-          </div>
+        <div class="card-hdr" onclick="toggleCard('d3')">
+          <div class="p-icon" style="background:var(--green-con);"><span class="mi" style="font-size:24px;color:var(--on-green);">memory</span></div>
           <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
-              <h4 style="font-size:15px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Miller's Law Chunking</h4>
-              <span class="badge badge-hi"><span style="width:5px;height:5px;border-radius:50%;background:#10A679;display:block;"></span>High Reduction</span>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+              <h4 style="font:700 15px/1 'Roboto Flex';color:var(--on-surf);margin:0;">Miller's Law Chunking</h4>
+              <span class="badge b-hi">High Impact</span>
             </div>
-            <p style="font-size:13px;color:#6E7DA0;margin:0 0 8px;line-height:1.6;">Break complex datasets into digestible chunks of 5–9 items to reduce working memory strain.</p>
-            <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 3px;">Why it applies</p>
-            <p style="font-size:12px;color:#3B4466;margin:0;font-weight:500;">Form sections contain 40+ fields in a single vertical scrolling stack.</p>
+            <p style="font:400 13px/1.6 'Roboto';color:var(--on-surf-var);margin:0 0 6px;">Break complex datasets into digestible chunks of 5–9 items to reduce working memory strain.</p>
+            <div class="slbl" style="margin-bottom:2px;">Why it applies</div>
+            <p style="font:500 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">Form sections contain 40+ fields in a single vertical scrolling stack.</p>
           </div>
-          <span class="icon chevron" style="color:#9BAFC8;flex-shrink:0;margin-top:2px;">expand_more</span>
+          <span class="mi chevron">expand_more</span>
         </div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">Design Actions</p>
+              <div class="slbl">Design Actions</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Break long forms into themed sections of ≤7 fields</li>
-                <li style="display:flex; align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Use whitespace and clear headers to delimit groups</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Break long forms into themed sections of ≤7 fields</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Use whitespace and clear headers to delimit groups</li>
               </ul>
             </div>
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">UI Patterns</p>
+              <div class="slbl">UI Patterns</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Multi-step wizard for complex workflows</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Accordion panels to hide secondary fields</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Multi-step wizard for complex workflows</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Accordion panels to hide secondary fields</li>
               </ul>
             </div>
           </div>
-          <div style="display:flex;justify-content:flex-end;gap:8px;">
-            <button class="btn-ghost" style="font-size:12.5px;padding:8px 16px;">Dismiss</button>
-            <button class="btn-primary" style="font-size:12.5px;padding:8px 16px;"><span class="icon" style="font-size:15px;">play_arrow</span>Apply Intervention</button>
+          <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--outline-var);">
+            <button class="btn-text" onclick="dismissCard('d3')">Not relevant</button>
+            <button class="btn-tonal" onclick="applyIntervention('Millers Law Chunking')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
           </div>
         </div>
       </div>
 
       <!-- Card 4: Recognition Over Recall -->
       <div class="pcard" id="d4">
-        <div onclick="toggleCard('d4')" style="padding:18px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;">
-          <div style="flex-shrink:0;width:42px;height:42px;border-radius:10px;background:#EEF2FD;display:flex;align-items:center;justify-content:center;">
-            <span class="icon" style="font-size:22px;color:#3D63DD;">lightbulb</span>
-          </div>
+        <div class="card-hdr" onclick="toggleCard('d4')">
+          <div class="p-icon" style="background:var(--pri-con);"><span class="mi" style="font-size:24px;color:var(--pri);">lightbulb</span></div>
           <div style="flex:1;min-width:0;">
-            <div style="display:flex;align-items:center;gap:8px;margin-bottom:5px;flex-wrap:wrap;">
-              <h4 style="font-size:15px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Recognition Over Recall</h4>
-              <span class="badge badge-hi"><span style="width:5px;height:5px;border-radius:50%;background:#10A679;display:block;"></span>High Reduction</span>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;">
+              <h4 style="font:700 15px/1 'Roboto Flex';color:var(--on-surf);margin:0;">Recognition Over Recall</h4>
+              <span class="badge b-hi">High Impact</span>
             </div>
-            <p style="font-size:13px;color:#6E7DA0;margin:0 0 8px;line-height:1.6;">Minimize memory load by making objects, actions, and options visible and contextual.</p>
-            <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 3px;">Why it applies</p>
-            <p style="font-size:12px;color:#3B4466;margin:0;font-weight:500;">System requires memorization of keyboard shortcuts for common actions.</p>
+            <p style="font:400 13px/1.6 'Roboto';color:var(--on-surf-var);margin:0 0 6px;">Minimise memory load by making objects, actions, and options visible and contextual.</p>
+            <div class="slbl" style="margin-bottom:2px;">Why it applies</div>
+            <p style="font:500 12px/1.5 'Roboto';color:var(--on-surf);margin:0;">System requires memorisation of keyboard shortcuts for common actions.</p>
           </div>
-          <span class="icon chevron" style="color:#9BAFC8;flex-shrink:0;margin-top:2px;">expand_more</span>
+          <span class="mi chevron">expand_more</span>
         </div>
         <div class="card-body">
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px;">
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">Design Actions</p>
+              <div class="slbl">Design Actions</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Show contextual tooltips with keyboard shortcut reminders</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#3D63DD;margin-top:1px;">check_circle</span>Surface recently used items in prominent positions</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Show contextual tooltips with keyboard shortcut reminders</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Surface recently used items in prominent positions</li>
               </ul>
             </div>
             <div>
-              <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#9BAFC8;margin:0 0 10px;">UI Patterns</p>
+              <div class="slbl">UI Patterns</div>
               <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Command palette with type-to-search for all actions</li>
-                <li style="display:flex;align-items:flex-start;gap:7px;font-size:13px;color:#3B4466;line-height:1.55;"><span class="icon" style="font-size:14px;color:#9BAFC8;margin-top:1px;">arrow_forward</span>Inline help text near form fields on focus</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Command palette with type-to-search for all actions</li>
+                <li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>Inline help text near form fields on focus</li>
               </ul>
             </div>
           </div>
-          <div style="display:flex;justify-content:flex-end;gap:8px;">
-            <button class="btn-ghost" style="font-size:12.5px;padding:8px 16px;">Dismiss</button>
-            <button class="btn-primary" style="font-size:12.5px;padding:8px 16px;"><span class="icon" style="font-size:15px;">play_arrow</span>Apply Intervention</button>
+          <div style="display:flex;justify-content:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--outline-var);">
+            <button class="btn-text" onclick="dismissCard('d4')">Not relevant</button>
+            <button class="btn-tonal" onclick="applyIntervention('Recognition Over Recall')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
           </div>
         </div>
       </div>
-
-    </div><!-- /recommended principles -->
-
-    <!-- Footer -->
-    <div style="border-top:1px solid #E2E8F2;padding-top:16px;padding-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
-      <p style="font-size:12px;color:#9BAFC8;margin:0;">© 2024 Cognitive Load Intervention Engine</p>
-      <div style="display:flex;gap:16px;">
-        <a href="#" style="font-size:12px;color:#9BAFC8;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#3D63DD'" onmouseout="this.style.color='#9BAFC8'">Documentation</a>
-        <a href="#" style="font-size:12px;color:#9BAFC8;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#3D63DD'" onmouseout="this.style.color='#9BAFC8'">Support</a>
-        <a href="#" style="font-size:12px;color:#9BAFC8;text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='#3D63DD'" onmouseout="this.style.color='#9BAFC8'">Privacy Policy</a>
-      </div>
     </div>
 
-  </main>
+    <!-- Footer -->
+    <div style="border-top:1px solid var(--outline-var);padding:16px 0 24px;display:flex;justify-content:space-between;align-items:center;">
+      <p style="font:400 12px/1 'Roboto';color:var(--on-surf-var);margin:0;">© 2026 Cognitive Engine</p>
+      <div style="display:flex;gap:20px;">
+        <a href="#" style="font:400 12px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Documentation</a>
+        <a href="#" style="font:400 12px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Support</a>
+        <a href="#" style="font:400 12px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Privacy</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<button class="fab" onclick="newAnalysis()">
+  <span class="mi">add</span>New Analysis
+</button>
+
+<!-- Toast -->
+<div id="toast">
+  <span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span>
+  <span id="t-msg"></span>
 </div>
 
 <script>
-function selectBtn(el, groupId) {
-  document.getElementById(groupId).querySelectorAll('.gbtn').forEach(function(b) { b.classList.remove('on'); });
-  el.classList.add('on');
+function selectChip(el, groupId) {
+  document.querySelectorAll('#' + groupId + ' .fchip').forEach(function(c){ c.classList.remove('sel'); });
+  el.classList.add('sel');
+  updateSubtitle();
+}
+function updateSubtitle() {
+  var g = document.querySelector('#goal-group .fchip.sel');
+  var c = document.querySelector('#ctx-group .fchip.sel');
+  if (g && c) document.getElementById('prin-sub').textContent = 'Based on "' + g.textContent.trim() + '" in "' + c.textContent.trim() + '"';
 }
 function toggleCard(id) {
-  document.getElementById(id).classList.toggle('open');
+  var card = document.getElementById(id);
+  var wasOpen = card.classList.contains('open');
+  document.querySelectorAll('.pcard').forEach(function(c){ c.classList.remove('open'); });
+  if (!wasOpen) card.classList.add('open');
+}
+function dismissCard(id) {
+  var card = document.getElementById(id);
+  card.style.transition = 'opacity .3s,transform .3s';
+  card.style.opacity = '0'; card.style.transform = 'translateX(16px)';
+  setTimeout(function(){ card.style.display = 'none'; }, 300);
+  showToast('check_circle', 'Removed from recommendations');
+}
+function generateInsights() {
+  var txt = document.getElementById('problem-input').value.trim();
+  if (!txt) { showToast('warning', 'Describe your UX problem first'); return; }
+  showToast('auto_awesome', 'Analysing problem — insights updated');
+}
+function applyIntervention(p) {
+  showToast('auto_awesome', '"' + p + '" queued — opening Prompt Generator…');
+  setTimeout(function(){ window.location.href = 'advanced-prompt-generator.html?p=' + encodeURIComponent(p); }, 1400);
+}
+function newAnalysis() {
+  // Clear selected chips
+  document.querySelectorAll('#goal-group .fchip, #ctx-group .fchip').forEach(function(c){ c.classList.remove('sel'); });
+  
+  // Clear problem input
+  const problemInput = document.getElementById('problem-input');
+  if (problemInput) problemInput.value = '';
+  
+  // Reset all principle cards
+  document.querySelectorAll('.pcard').forEach(function(c){ 
+    c.classList.remove('open'); 
+    c.style.display=''; 
+    c.style.opacity=''; 
+    c.style.transform=''; 
+  });
+  
+  // Scroll to top of page
+  window.scrollTo({ top:0, behavior:'smooth' });
+  
+  // Show success message
+  showToast('add_circle', 'New analysis started — select a goal to begin');
+}
+function searchPrinciples(query) {
+  const cards = document.querySelectorAll('.pcard');
+  const lowerQuery = query.toLowerCase();
+  
+  cards.forEach(card => {
+    const title = card.querySelector('h3').textContent.toLowerCase();
+    const description = card.querySelector('.pcard-body p').textContent.toLowerCase();
+    const visible = title.includes(lowerQuery) || description.includes(lowerQuery);
+    
+    card.style.display = visible ? 'block' : 'none';
+    card.style.opacity = visible ? '1' : '0';
+    
+    if (visible && query.length > 0) {
+      // Highlight matching text
+      const titleEl = card.querySelector('h3');
+      const descEl = card.querySelector('.pcard-body p');
+      titleEl.innerHTML = highlightText(titleEl.textContent, lowerQuery);
+      descEl.innerHTML = highlightText(descEl.textContent, lowerQuery);
+    } else if (!query) {
+      // Reset highlighting
+      const titleEl = card.querySelector('h3');
+      const descEl = card.querySelector('.pcard-body p');
+      titleEl.innerHTML = titleEl.textContent;
+      descEl.innerHTML = descEl.textContent;
+    }
+  });
+  
+  // Show results count
+  const visibleCount = Array.from(cards).filter(c => c.style.display !== 'none').length;
+  if (query.length > 0) {
+    showToast('search', `Found ${visibleCount} principle${visibleCount !== 1 ? 's' : ''}`);
+  }
+}
+
+function highlightText(text, query) {
+  if (!query) return text;
+  const regex = new RegExp(`(${query})`, 'gi');
+  return text.replace(regex, '<mark style="background:var(--pri);color:var(--on-pri);padding:1px 2px;border-radius:2px;">$1</mark>');
+}
+
+function showToast(icon, msg) {
+  var t = document.getElementById('toast');
+  document.getElementById('t-icon').textContent = icon;
+  document.getElementById('t-msg').textContent = msg;
+  t.style.display = 'flex'; t.style.opacity = '1';
+  clearTimeout(window._tt);
+  window._tt = setTimeout(function(){ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(function(){ t.style.display='none'; t.style.transition=''; },400); }, 3000);
 }
 </script>
+
 </body>
 </html>

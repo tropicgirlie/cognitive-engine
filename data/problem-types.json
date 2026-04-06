@@ -1,0 +1,12 @@
+{
+  "problemTypes": [
+    { "id": "choice-paralysis", "label": "Choice paralysis" },
+    { "id": "information-overload", "label": "Information overload" },
+    { "id": "navigation-fatigue", "label": "Navigation fatigue" },
+    { "id": "error-prone-input", "label": "Error-prone input" },
+    { "id": "slow-task-completion", "label": "Slow task completion" },
+    { "id": "low-trust", "label": "Low trust" },
+    { "id": "weak-collaboration", "label": "Weak collaboration" },
+    { "id": "alert-fatigue", "label": "Alert fatigue" }
+  ]
+}

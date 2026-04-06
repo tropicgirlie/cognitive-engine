@@ -1,0 +1,68 @@
+{
+  "tools": [
+    {
+      "id": "figma",
+      "label": "Figma Make",
+      "focus": "Visual design systems and component generation",
+      "promptDirectives": [
+        "Specify components, variants, hierarchy, and states clearly.",
+        "Describe layout behavior, spacing, and responsiveness.",
+        "Call out design system integration and accessibility expectations."
+      ],
+      "deliverables": [
+        "Component structure",
+        "Variants and states",
+        "Responsive layout guidance",
+        "Design system notes"
+      ]
+    },
+    {
+      "id": "windsurf",
+      "label": "Windsurf Builder",
+      "focus": "Code-oriented interface implementation",
+      "promptDirectives": [
+        "Describe semantic structure, interaction states, and responsive behavior.",
+        "Emphasize accessibility, performance, and implementation clarity.",
+        "Ask for production-ready patterns rather than conceptual sketches."
+      ],
+      "deliverables": [
+        "Semantic UI structure",
+        "State and interaction details",
+        "Responsive implementation guidance",
+        "Accessibility requirements"
+      ]
+    },
+    {
+      "id": "chatgpt",
+      "label": "ChatGPT/Claude",
+      "focus": "Strategy, rationale, and design planning",
+      "promptDirectives": [
+        "Ask for structured reasoning tied to the selected principles.",
+        "Request alternatives, tradeoffs, and prioritization.",
+        "Emphasize rationale, user impact, and validation steps."
+      ],
+      "deliverables": [
+        "Strategic design rationale",
+        "Recommended patterns",
+        "Tradeoff analysis",
+        "Validation checklist"
+      ]
+    },
+    {
+      "id": "linear",
+      "label": "Linear/Notion",
+      "focus": "Workflow definition and team alignment",
+      "promptDirectives": [
+        "Translate the UX issue into a structured implementation brief.",
+        "Make goals, requirements, and anti-patterns explicit for teams.",
+        "Ask for acceptance criteria and rollout guidance."
+      ],
+      "deliverables": [
+        "Implementation brief",
+        "Acceptance criteria",
+        "Anti-pattern list",
+        "Rollout and validation notes"
+      ]
+    }
+  ]
+}

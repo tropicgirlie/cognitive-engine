@@ -1,0 +1,18 @@
+{
+  "disciplines": [
+    { "id": "cognitive-psychology", "label": "Cognitive Psychology" },
+    { "id": "ux-design", "label": "UX Design" },
+    { "id": "visual-design", "label": "Visual Design" },
+    { "id": "behavioral-economics", "label": "Behavioral Economics" },
+    { "id": "social-psychology", "label": "Social Psychology" },
+    { "id": "human-computer-interaction", "label": "Human-Computer Interaction" },
+    { "id": "instructional-design", "label": "Instructional Design" },
+    { "id": "gestalt-psychology", "label": "Gestalt Psychology" },
+    { "id": "neuroscience", "label": "Neuroscience" },
+    { "id": "evolutionary-psychology", "label": "Evolutionary Psychology" },
+    { "id": "information-theory", "label": "Information Theory" },
+    { "id": "linguistics", "label": "Linguistics" },
+    { "id": "anthropology", "label": "Anthropology" },
+    { "id": "philosophy", "label": "Philosophy" }
+  ]
+}
