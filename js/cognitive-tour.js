@@ -1,6 +1,14 @@
 /**
- * Interactive Tour System for Cognitive Engine
- * Implements cognitive science principles for onboarding
+ * Cognitive Engine Tour — Figma-style Spotlight + Side Panel
+ * 
+ * Design rationale (from cognitive science perspective):
+ * - Spotlight pattern: Von Restorff effect — the highlighted element is the 
+ *   only bright thing on screen, making it impossible to miss
+ * - Side panel: Reduces cognitive load by separating explanation from action
+ * - Progressive disclosure: Each step reveals only what's needed right now
+ * - Emotional micro-rewards: Completion triggers a small dopamine response
+ * 
+ * Inspired by: Figma, Linear, Stripe onboarding (audited via Mobbin)
  */
 
 class CognitiveTour {
@@ -9,87 +17,105 @@ class CognitiveTour {
     this.isActive = false;
     this.tourSteps = [];
     this.overlay = null;
-    this.highlightBox = null;
-    this.tooltip = null;
+    this.spotlight = null;
+    this.sidePanel = null;
+    this.connector = null;
   }
 
-  // Define tour steps based on cognitive load principles
   defineTourSteps(page) {
     const tours = {
       dashboard: [
         {
           id: 'welcome',
-          title: 'Welcome to Cognitive Engine',
-          content: 'This tool helps you apply cognitive science principles to UX design. Let me show you around in 60 seconds.',
+          icon: '🧠',
+          title: 'I study how people think under pressure.',
+          body: 'This engine translates cognitive science research into design decisions. I\'ll show you how to use it in about 90 seconds — and why each step matters.',
+          detail: 'The principles here come from peer-reviewed research in cognitive load theory, attention, and behavioural economics — not guesswork.',
           target: null,
-          position: 'center',
-          action: () => {}
+          side: 'right'
         },
         {
-          id: 'workflow',
-          title: 'Start with Your Goal',
-          content: 'Begin by selecting what you want to improve. Each goal maps to specific cognitive principles.',
-          target: '#goal-group .fchip:first-child',
-          position: 'bottom',
-          action: () => this.highlightElement('#goal-group')
+          id: 'goal',
+          icon: '🎯',
+          title: 'Start with the outcome you want.',
+          body: 'Are you trying to reduce errors? Speed up decisions? Each goal activates a different set of principles from the research literature.',
+          detail: 'For example, "reduce errors" pulls from error prevention and defensive design. "Speed up decisions" draws on Hick\'s Law and recognition over recall.',
+          target: '#goal-group',
+          side: 'right'
         },
         {
           id: 'context',
-          title: 'Choose Your Context',
-          content: 'Where will this design be used? Different contexts need different approaches.',
-          target: '#ctx-group .fchip:first-child',
-          position: 'bottom',
-          action: () => this.highlightElement('#ctx-group')
+          icon: '📍',
+          title: 'Context matters more than most designers think.',
+          body: 'A form used under time pressure triggers different cognitive processes than one used at leisure. Choose where your interface lives.',
+          detail: 'A clinician making a triage decision operates in System 1 (fast, automatic). Someone filling an expense report is in System 2 (slow, deliberate). The principles that help are different.',
+          target: '#ctx-group',
+          side: 'right'
         },
         {
           id: 'problem',
-          title: 'Describe Your Problem',
-          content: 'Be specific about the user friction you\'re observing. The more detail, the better the match.',
+          icon: '🔍',
+          title: 'Describe what you observe — not what you think the solution is.',
+          body: '"Users miss the save button" tells us more than "make the button bigger". The engine matches principles to the actual behaviour.',
+          detail: 'This is the difference between a symptom and a diagnosis. Cognitive science gives us frameworks for understanding why a behaviour occurs — and that\'s what leads to better design.',
           target: '#problem-input',
-          position: 'top',
-          action: () => this.highlightElement('#problem-input')
+          side: 'right'
         },
         {
           id: 'principles',
-          title: 'Get Matched Principles',
-          content: 'We\'ll find principles that directly address your problem. Click any card to learn more.',
+          icon: '📖',
+          title: 'These aren\'t random suggestions.',
+          body: 'Each principle is backed by peer-reviewed research. The cards show you why it applies, what patterns to use, and what to avoid.',
+          detail: 'Click any card to expand it. You\'ll see the research basis, recommended UI patterns, and anti-patterns that contradict the principle. Think of it as an evidence file for your design decision.',
           target: '.pcard:first-child',
-          position: 'right',
-          action: () => this.highlightElement('.pcard')
+          side: 'right'
         },
         {
           id: 'generate',
-          title: 'Generate Your Prompt',
-          content: 'When you find a principle that fits, generate a structured prompt for your design work.',
+          icon: '✨',
+          title: 'One click gives you a research-backed design brief.',
+          body: 'The generated prompt includes the principle, rationale, design actions, anti-patterns, and validation criteria. Hand it to your team.',
+          detail: 'This isn\'t just a prompt — it\'s a structured argument for why a design decision should be made. It includes the evidence, the constraints, and how to validate that it worked.',
           target: '.btn-tonal',
-          position: 'top',
-          action: () => {}
+          side: 'right'
         }
       ],
       'prompt-generator': [
         {
           id: 'welcome-pg',
-          title: 'Prompt Generator',
-          content: 'Create detailed UX prompts based on cognitive science principles.',
+          icon: '🧠',
+          title: 'This is where cognitive science becomes a design brief.',
+          body: 'You\'ll get a prompt grounded in research, not guesswork. Let me walk you through it.',
+          detail: 'The prompt generator takes your specific UX problem and maps it to the most relevant cognitive principle — then structures a complete design brief around it.',
           target: null,
-          position: 'center',
-          action: () => {}
+          side: 'right'
         },
         {
           id: 'problem-pg',
-          title: 'Your UX Problem',
-          content: 'Describe the specific friction point users are experiencing.',
+          icon: '🔍',
+          title: 'Be specific about the friction.',
+          body: '"Nurses are overriding drug interaction alerts" tells us more than "alerts aren\'t working". Describe the behaviour you observe.',
+          detail: 'The more specific your problem description, the more precisely the engine can match a principle. Vague inputs lead to generic outputs — this is Garbage In, Garbage Out, but for cognitive science.',
           target: '#problemInput',
-          position: 'top',
-          action: () => {}
+          side: 'right'
+        },
+        {
+          id: 'selectors-pg',
+          icon: '📍',
+          title: 'These narrow the principle space.',
+          body: 'The context and goal selectors tell the engine which research domain to pull from. The more specific you are, the more targeted the output.',
+          detail: 'Think of it like a differential diagnosis in medicine. The same symptom (e.g. "users ignore warnings") has different causes depending on context — alarm fatigue in healthcare vs. banner blindness in e-commerce.',
+          target: '#contextSelect',
+          side: 'right'
         },
         {
           id: 'generate-pg',
-          title: 'Generate Your Prompt',
-          content: 'Click here to create a structured design prompt based on cognitive principles.',
+          icon: '✨',
+          title: 'Your prompt is a structured argument.',
+          body: 'It includes the principle, rationale, design actions, anti-patterns, and validation criteria. Copy it, download it, or hand it to your team.',
+          detail: 'Each generated prompt follows a consistent structure: Role → Problem → Principle → Actions → Constraints → Deliverables → Validation. This structure makes it actionable and testable.',
           target: '.btn-primary',
-          position: 'top',
-          action: () => {}
+          side: 'right'
         }
       ]
     };
@@ -104,204 +130,275 @@ class CognitiveTour {
     this.currentStep = 0;
     this.isActive = true;
     
-    this.createOverlay();
+    this.buildUI();
     this.showStep();
   }
 
-  createOverlay() {
-    // Remove existing overlay
-    this.endTour();
-    
+  buildUI() {
+    this.cleanup();
+
+    // Full-screen overlay with spotlight cutout
     this.overlay = document.createElement('div');
+    this.overlay.id = 'cog-tour-overlay';
     this.overlay.style.cssText = `
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 9998;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    `;
-    
-    this.highlightBox = document.createElement('div');
-    this.highlightBox.style.cssText = `
-      position: absolute;
-      border: 3px solid #3D63DD;
-      border-radius: 8px;
-      box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10000;
       pointer-events: none;
-    `;
-    
-    this.tooltip = document.createElement('div');
-    this.tooltip.style.cssText = `
-      position: absolute;
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 320px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-      z-index: 9999;
+      transition: opacity 0.4s ease;
       opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.3s ease;
     `;
-    
+
+    // Spotlight ring around target element
+    this.spotlight = document.createElement('div');
+    this.spotlight.id = 'cog-tour-spotlight';
+    this.spotlight.style.cssText = `
+      position: fixed;
+      border-radius: 8px;
+      box-shadow: 0 0 0 4px rgba(61,99,221,0.6), 0 0 0 9999px rgba(15,14,20,0.72);
+      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+      pointer-events: none;
+      z-index: 10001;
+      opacity: 0;
+    `;
+
+    // SVG connector line from spotlight to panel
+    this.connector = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    this.connector.id = 'cog-tour-connector';
+    this.connector.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 10001; pointer-events: none; opacity: 0;
+      transition: opacity 0.35s ease;
+    `;
+
+    // Side panel
+    this.sidePanel = document.createElement('div');
+    this.sidePanel.id = 'cog-tour-panel';
+    this.sidePanel.style.cssText = `
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: 420px;
+      background: #FFFFFF;
+      box-shadow: -8px 0 40px rgba(0,0,0,0.18);
+      z-index: 10002;
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      font-family: 'Roboto', -apple-system, sans-serif;
+    `;
+
     document.body.appendChild(this.overlay);
-    document.body.appendChild(this.highlightBox);
-    document.body.appendChild(this.tooltip);
-    
-    // Fade in
-    setTimeout(() => {
+    document.body.appendChild(this.spotlight);
+    document.body.appendChild(this.connector);
+    document.body.appendChild(this.sidePanel);
+
+    // Animate in
+    requestAnimationFrame(() => {
       this.overlay.style.opacity = '1';
-    }, 10);
+      this.spotlight.style.opacity = '1';
+      this.connector.style.opacity = '1';
+      this.sidePanel.style.transform = 'translateX(0)';
+    });
   }
 
   showStep() {
     if (this.currentStep >= this.tourSteps.length) {
-      this.endTour();
+      this.celebrateAndEnd();
       return;
     }
-    
+
     const step = this.tourSteps[this.currentStep];
-    
-    // Update tooltip content
-    this.tooltip.innerHTML = `
-      <div style="margin-bottom: 16px;">
-        <h3 style="margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #1C1B1F;">
-          ${step.title}
-        </h3>
-        <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #46464F;">
-          ${step.content}
-        </p>
+    const total = this.tourSteps.length;
+    const progress = ((this.currentStep + 1) / total) * 100;
+
+    // ── Side panel content ──
+    this.sidePanel.innerHTML = `
+      <!-- Progress bar -->
+      <div style="height:4px; background:#E9E7EE; border-radius:2px; margin:0;">
+        <div style="height:4px; width:${progress}%; background:linear-gradient(90deg,#3D63DD,#6B8FFF); border-radius:2px; transition:width 0.4s ease;"></div>
       </div>
-      <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px;">
-        <span style="font-size: 12px; color: #767680;">
-          ${this.currentStep + 1} of ${this.tourSteps.length}
-        </span>
-        <div style="display: flex; gap: 8px;">
+
+      <!-- Close button -->
+      <button id="cog-tour-close" style="
+        position:absolute; top:16px; right:16px;
+        width:36px; height:36px; border-radius:50%;
+        border:none; background:transparent; cursor:pointer;
+        display:flex; align-items:center; justify-content:center;
+        color:#767680; font-size:20px; transition:all 0.15s;
+      " onmouseover="this.style.background='#F5F3FA';this.style.color='#1C1B1F'" onmouseout="this.style.background='transparent';this.style.color='#767680'">
+        ✕
+      </button>
+
+      <!-- Panel body -->
+      <div style="padding:40px 32px 32px; flex:1; display:flex; flex-direction:column; justify-content:center;">
+        <!-- Step icon -->
+        <div style="
+          width:56px; height:56px; border-radius:16px;
+          background:linear-gradient(135deg,#DBE1FF,#DFE0F9);
+          display:flex; align-items:center; justify-content:center;
+          font-size:28px; margin-bottom:24px;
+        ">${step.icon}</div>
+
+        <!-- Title -->
+        <h2 style="
+          font-size:22px; font-weight:700; line-height:1.3;
+          color:#1C1B1F; margin:0 0 16px; letter-spacing:-0.01em;
+        ">${step.title}</h2>
+
+        <!-- Body -->
+        <p style="
+          font-size:16px; line-height:1.6; color:#46464F;
+          margin:0 0 20px;
+        ">${step.body}</p>
+
+        <!-- Detail (progressive disclosure — collapsible) -->
+        <button id="cog-tour-detail-toggle" style="
+          display:flex; align-items:center; gap:6px;
+          background:none; border:none; cursor:pointer;
+          font-size:14px; font-weight:500; color:#3D63DD;
+          padding:0; margin:0 0 8px; transition:color 0.15s;
+        " onmouseover="this.style.color='#4B73F7'" onmouseout="this.style.color='#3D63DD'">
+          <span style="font-size:18px; transition:transform 0.2s;" id="cog-tour-detail-arrow">▸</span>
+          Why this matters
+        </button>
+        <div id="cog-tour-detail-content" style="
+          max-height:0; overflow:hidden; transition:max-height 0.3s ease;
+        ">
+          <p style="
+            font-size:14px; line-height:1.65; color:#767680;
+            margin:0; padding:12px 16px; background:#F5F3FA;
+            border-radius:8px; border-left:3px solid #3D63DD;
+          ">${step.detail}</p>
+        </div>
+      </div>
+
+      <!-- Footer navigation -->
+      <div style="
+        padding:20px 32px 28px; border-top:1px solid #E9E7EE;
+        display:flex; align-items:center; justify-content:space-between;
+      ">
+        <!-- Progress dots -->
+        <div style="display:flex; gap:6px; align-items:center;">
+          ${this.tourSteps.map((_, i) => `
+            <div style="
+              width:${i === this.currentStep ? '20px' : '6px'};
+              height:6px; border-radius:3px;
+              background:${i === this.currentStep ? '#3D63DD' : i < this.currentStep ? '#6B8FFF' : '#C7C5D0'};
+              transition:all 0.3s ease;
+            "></div>
+          `).join('')}
+        </div>
+
+        <!-- Navigation buttons -->
+        <div style="display:flex; gap:8px; align-items:center;">
           ${this.currentStep > 0 ? `
-            <button onclick="cognitiveTour.previousStep()" style="
-              padding: 8px 16px;
-              border: 1px solid #C7C5D0;
-              background: white;
-              border-radius: 6px;
-              font-size: 14px;
-              cursor: pointer;
-            ">Back</button>
+            <button id="cog-tour-back" style="
+              padding:10px 18px; border-radius:8px;
+              border:1px solid #C7C5D0; background:white;
+              font-size:14px; font-weight:500; color:#46464F;
+              cursor:pointer; transition:all 0.15s;
+            " onmouseover="this.style.background='#F5F3FA'" onmouseout="this.style.background='white'">
+              Back
+            </button>
           ` : ''}
-          <button onclick="cognitiveTour.nextStep()" style="
-            padding: 8px 16px;
-            background: #3D63DD;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 14px;
-            cursor: pointer;
-          ">${this.currentStep === this.tourSteps.length - 1 ? 'Finish' : 'Next'}</button>
-          <button onclick="cognitiveTour.endTour()" style="
-            padding: 8px 16px;
-              background: transparent;
-              color: #767680;
-              border: none;
-              border-radius: 6px;
-              font-size: 14px;
-              cursor: pointer;
-              text-decoration: underline;
-          ">Skip</button>
+          <button id="cog-tour-next" style="
+            padding:10px 24px; border-radius:8px;
+            border:none; background:#3D63DD;
+            font-size:14px; font-weight:600; color:white;
+            cursor:pointer; transition:all 0.15s;
+            box-shadow:0 1px 3px rgba(61,99,221,0.3);
+          " onmouseover="this.style.background='#4B73F7'" onmouseout="this.style.background='#3D63DD'">
+            ${this.currentStep === total - 1 ? 'Finish' : 'Next'}
+          </button>
         </div>
       </div>
     `;
-    
-    // Position elements
-    this.positionElements(step);
-    
-    // Execute step action
-    if (step.action) {
-      step.action();
+
+    // Wire up panel interactions
+    this.sidePanel.querySelector('#cog-tour-close').addEventListener('click', () => this.endTour());
+    this.sidePanel.querySelector('#cog-tour-next').addEventListener('click', () => this.nextStep());
+    const backBtn = this.sidePanel.querySelector('#cog-tour-back');
+    if (backBtn) backBtn.addEventListener('click', () => this.previousStep());
+
+    // Progressive disclosure toggle
+    const toggleBtn = this.sidePanel.querySelector('#cog-tour-detail-toggle');
+    const detailContent = this.sidePanel.querySelector('#cog-tour-detail-content');
+    const detailArrow = this.sidePanel.querySelector('#cog-tour-detail-arrow');
+    if (toggleBtn && detailContent) {
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = detailContent.style.maxHeight !== '0px' && detailContent.style.maxHeight !== '';
+        if (isOpen) {
+          detailContent.style.maxHeight = '0px';
+          detailArrow.style.transform = 'rotate(0deg)';
+        } else {
+          detailContent.style.maxHeight = '200px';
+          detailArrow.style.transform = 'rotate(90deg)';
+        }
+      });
     }
-    
-    // Animate in
-    setTimeout(() => {
-      this.tooltip.style.opacity = '1';
-      this.tooltip.style.transform = 'scale(1)';
-    }, 10);
+
+    // Position spotlight on target
+    this.positionSpotlight(step);
+
+    // Draw connector line
+    this.drawConnector(step);
   }
 
-  positionElements(step) {
+  positionSpotlight(step) {
     if (!step.target) {
-      // Center screen
-      this.highlightBox.style.display = 'none';
-      this.tooltip.style.position = 'fixed';
-      this.tooltip.style.top = '50%';
-      this.tooltip.style.left = '50%';
-      this.tooltip.style.transform = 'translate(-50%, -50%)';
+      // No target — hide spotlight, full overlay
+      this.spotlight.style.opacity = '0';
+      this.spotlight.style.boxShadow = '0 0 0 9999px rgba(15,14,20,0.72)';
       return;
     }
-    
+
     const target = document.querySelector(step.target);
-    if (!target) return;
-    
-    const rect = target.getBoundingClientRect();
-    
-    // Position highlight box
-    this.highlightBox.style.display = 'block';
-    this.highlightBox.style.top = rect.top - 5 + 'px';
-    this.highlightBox.style.left = rect.left - 5 + 'px';
-    this.highlightBox.style.width = rect.width + 10 + 'px';
-    this.highlightBox.style.height = rect.height + 10 + 'px';
-    
-    // Position tooltip
-    this.tooltip.style.position = 'fixed';
-    
-    switch (step.position) {
-      case 'top':
-        this.tooltip.style.bottom = (window.innerHeight - rect.top + 15) + 'px';
-        this.tooltip.style.left = rect.left + (rect.width / 2) - 160 + 'px';
-        break;
-      case 'bottom':
-        this.tooltip.style.top = (rect.bottom + 15) + 'px';
-        this.tooltip.style.left = rect.left + (rect.width / 2) - 160 + 'px';
-        break;
-      case 'left':
-        this.tooltip.style.right = (window.innerWidth - rect.left + 15) + 'px';
-        this.tooltip.style.top = rect.top + (rect.height / 2) - 60 + 'px';
-        break;
-      case 'right':
-        this.tooltip.style.left = (rect.right + 15) + 'px';
-        this.tooltip.style.top = rect.top + (rect.height / 2) - 60 + 'px';
-        break;
-      default:
-        this.tooltip.style.top = rect.bottom + 15 + 'px';
-        this.tooltip.style.left = rect.left + 'px';
+    if (!target) {
+      this.spotlight.style.opacity = '0';
+      return;
     }
-    
-    // Adjust if tooltip goes off screen
-    const tooltipRect = this.tooltip.getBoundingClientRect();
-    if (tooltipRect.right > window.innerWidth - 20) {
-      this.tooltip.style.left = (window.innerWidth - tooltipRect.width - 20) + 'px';
-    }
-    if (tooltipRect.left < 20) {
-      this.tooltip.style.left = '20px';
-    }
+
+    // Scroll target into view first
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    setTimeout(() => {
+      const rect = target.getBoundingClientRect();
+      const pad = 6;
+
+      this.spotlight.style.opacity = '1';
+      this.spotlight.style.top = (rect.top - pad) + 'px';
+      this.spotlight.style.left = (rect.left - pad) + 'px';
+      this.spotlight.style.width = (rect.width + pad * 2) + 'px';
+      this.spotlight.style.height = (rect.height + pad * 2) + 'px';
+    }, 350);
   }
 
-  highlightElement(selector) {
-    const elements = document.querySelectorAll(selector);
-    elements.forEach(el => {
-      el.style.transition = 'all 0.3s ease';
-      el.style.transform = 'scale(1.02)';
-      el.style.boxShadow = '0 0 0 3px rgba(61, 99, 221, 0.3)';
-    });
-    
+  drawConnector(step) {
+    // Clear previous
+    this.connector.innerHTML = '';
+
+    if (!step.target) return;
+
+    const target = document.querySelector(step.target);
+    if (!target) return;
+
     setTimeout(() => {
-      elements.forEach(el => {
-        el.style.transform = '';
-        el.style.boxShadow = '';
-      });
-    }, 2000);
+      const rect = target.getBoundingClientRect();
+      const panelLeft = window.innerWidth - 420;
+
+      // Draw a subtle dashed line from spotlight right edge to panel
+      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      line.setAttribute('x1', rect.right + 6);
+      line.setAttribute('y1', rect.top + rect.height / 2);
+      line.setAttribute('x2', panelLeft);
+      line.setAttribute('y2', rect.top + rect.height / 2);
+      line.setAttribute('stroke', '#3D63DD');
+      line.setAttribute('stroke-width', '1.5');
+      line.setAttribute('stroke-dasharray', '6,4');
+      line.setAttribute('opacity', '0.5');
+
+      this.connector.appendChild(line);
+    }, 400);
   }
 
   nextStep() {
@@ -316,83 +413,112 @@ class CognitiveTour {
     }
   }
 
+  celebrateAndEnd() {
+    // Small celebration before closing
+    const celebration = document.createElement('div');
+    celebration.style.cssText = `
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 10003; display: flex; align-items: center; justify-content: center;
+      background: rgba(15,14,20,0.6); pointer-events: none;
+    `;
+    celebration.innerHTML = `
+      <div style="
+        background: white; border-radius: 20px; padding: 48px;
+        text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        animation: cogTourPopIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      ">
+        <div style="font-size:48px; margin-bottom:16px;">🧠</div>
+        <h2 style="font-size:24px; font-weight:700; color:#1C1B1F; margin:0 0 8px;">
+          You\'re ready.
+        </h2>
+        <p style="font-size:16px; color:#46464F; margin:0; max-width:300px; line-height:1.5;">
+          Go diagnose some cognitive friction. The principles are waiting.
+        </p>
+      </div>
+    `;
+
+    // Add pop-in animation
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes cogTourPopIn {
+        from { transform: scale(0.7); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(celebration);
+
+    setTimeout(() => {
+      celebration.remove();
+      style.remove();
+      this.endTour();
+    }, 2200);
+  }
+
   endTour() {
     this.isActive = false;
-    
-    if (this.overlay) {
-      this.overlay.remove();
-      this.overlay = null;
-    }
-    if (this.highlightBox) {
-      this.highlightBox.remove();
-      this.highlightBox = null;
-    }
-    if (this.tooltip) {
-      this.tooltip.remove();
-      this.tooltip = null;
-    }
+    this.cleanup();
+    localStorage.setItem('cognitiveEngineTourSeen', 'true');
+  }
+
+  cleanup() {
+    [this.overlay, this.spotlight, this.connector, this.sidePanel].forEach(el => {
+      if (el && el.parentNode) el.remove();
+    });
+    this.overlay = null;
+    this.spotlight = null;
+    this.connector = null;
+    this.sidePanel = null;
   }
 }
 
-// Global instance
+// ── Global instance ──
 const cognitiveTour = new CognitiveTour();
 
-// Auto-start tour for first-time visitors
+// ── Auto-start for first-time visitors ──
 document.addEventListener('DOMContentLoaded', function() {
   const hasSeenTour = localStorage.getItem('cognitiveEngineTourSeen');
   const page = window.location.pathname.includes('prompt-generator') ? 'prompt-generator' : 'dashboard';
-  
+
   if (!hasSeenTour) {
-    setTimeout(() => {
-      cognitiveTour.startTour(page);
-    }, 1000);
+    setTimeout(() => cognitiveTour.startTour(page), 800);
   }
 });
 
-// Add tour trigger buttons
+// ── Tour trigger button (bottom-right, always accessible) ──
 document.addEventListener('DOMContentLoaded', function() {
-  const tourBtn = document.createElement('button');
-  tourBtn.innerHTML = '<span class="mi" style="font-size: 18px;">help_outline</span> Tour';
-  tourBtn.style.cssText = `
-    position: fixed;
-    bottom: 80px;
-    right: 24px;
-    background: white;
-    border: 1px solid #C7C5D0;
-    border-radius: 20px;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font: 500 14px 'Roboto';
-    color: #1C1B1F;
-    cursor: pointer;
-    box-shadow: var(--el3);
-    transition: all 0.2s;
-    z-index: 1000;
+  const btn = document.createElement('button');
+  btn.id = 'cog-tour-trigger';
+  btn.innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3D63DD" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+      <line x1="12" y1="17" x2="12.01" y2="17"/>
+    </svg>
+    <span>Guide</span>
   `;
-  
-  tourBtn.addEventListener('click', () => {
+  btn.style.cssText = `
+    position: fixed; bottom: 24px; right: 24px;
+    display: flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid #C7C5D0;
+    border-radius: 24px; padding: 10px 18px;
+    font: 500 14px 'Roboto', sans-serif; color: #3D63DD;
+    cursor: pointer; z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+  `;
+  btn.addEventListener('mouseenter', () => {
+    btn.style.boxShadow = '0 4px 16px rgba(61,99,221,0.25)';
+    btn.style.borderColor = '#3D63DD';
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+    btn.style.borderColor = '#C7C5D0';
+  });
+  btn.addEventListener('click', () => {
     const page = window.location.pathname.includes('prompt-generator') ? 'prompt-generator' : 'dashboard';
     cognitiveTour.startTour(page);
   });
-  
-  tourBtn.addEventListener('mouseenter', () => {
-    tourBtn.style.transform = 'translateY(-2px)';
-    tourBtn.style.boxShadow = '0 6px 14px 4px rgba(0,0,0,0.15), 0 2px 5px rgba(0,0,0,0.3)';
-  });
-  
-  tourBtn.addEventListener('mouseleave', () => {
-    tourBtn.style.transform = '';
-    tourBtn.style.boxShadow = 'var(--el3)';
-  });
-  
-  document.body.appendChild(tourBtn);
-  
-  // Mark tour as seen when completed
-  const originalEndTour = cognitiveTour.endTour.bind(cognitiveTour);
-  cognitiveTour.endTour = function() {
-    originalEndTour();
-    localStorage.setItem('cognitiveEngineTourSeen', 'true');
-  };
+
+  document.body.appendChild(btn);
 });
