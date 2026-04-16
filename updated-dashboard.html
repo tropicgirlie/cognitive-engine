@@ -127,11 +127,12 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
   <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
   <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
   <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
+  <a href="examples.html" class="ntab"><span class="mi">lightbulb</span>Examples</a>
   <a href="#" class="ntab" onclick="showToast('history','History coming soon');return false;"><span class="mi">history</span>History</a>
 </nav>
 
 <!-- ── MAIN CONTENT ── -->
-<main style="padding:24px;max-width:1400px;margin:0 auto;">
+<main style="padding:32px;max-width:1200px;margin:0 auto;">
 
 <!-- ── INTERVENTION WORKFLOW ── -->
     <div style="margin-bottom:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
@@ -142,15 +143,15 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
     </div>
 
     <!-- 3-Step Grid -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:40px;">
 
       <!-- Step 1 -->
       <div class="card">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
           <div class="step-num">1</div>
           <div><div class="step-lbl">Strategic Goal</div><p class="step-title">What to improve?</p></div>
         </div>
-        <div style="display:flex;flex-direction:column;gap:6px;" id="goal-group">
+        <div style="display:flex;flex-direction:column;gap:8px;" id="goal-group">
           <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">error</span>Reduce errors</button>
           <button class="fchip sel" onclick="selectChip(this,'goal-group')"><span class="mi">speed</span>Speed up decisions</button>
           <button class="fchip" onclick="selectChip(this,'goal-group')"><span class="mi">psychology</span>Reduce overload</button>
@@ -503,6 +504,9 @@ function showToast(icon, msg) {
   window._tt = setTimeout(function(){ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(function(){ t.style.display='none'; t.style.transition=''; },400); }, 3000);
 }
 </script>
+
+<!-- Interactive Tour -->
+<script src="/js/cognitive-tour.js"></script>
 
 </body>
 </html>
