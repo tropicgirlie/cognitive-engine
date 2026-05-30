@@ -3,284 +3,257 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Library | Cognitive Engine</title>
+<title>Cognitive Engine | UX Intervention Library</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --pri:#3D63DD;--on-pri:#fff;--pri-con:#DBE1FF;--on-pri-con:#00105C;
-  --sec-con:#DFE0F9;--on-sec-con:#181A2C;
+  --pri:#2F5FD0;--on-pri:#fff;--pri-con:#E4EAFF;--on-pri-con:#071A57;
+  --accent:#176C5F;--accent-con:#D9F4EE;--warn:#8B5E00;--warn-con:#FFF4D8;
   --err:#B3261E;--err-con:#F9DEDC;
-  --surf:#FEFBFF;--on-surf:#1C1B1F;--on-surf-var:#46464F;
-  --outline:#767680;--outline-var:#C7C5D0;
-  --surf-low:#F5F3FA;--surf-con:#EFEDF4;--surf-hi:#E9E7EE;--surf-white:#fff;
-  --green-con:#C3EFCD;--on-green:#146C2E;
-  --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:28px;--r-full:9999px;
-  --el1:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
-  --el2:0 1px 2px rgba(0,0,0,.3),0 2px 6px 2px rgba(0,0,0,.15);
+  --surf:#FEFBFF;--on-surf:#1C1B1F;--on-surf-var:#4B4D59;
+  --outline:#767680;--outline-var:#D4D5DD;
+  --surf-low:#F6F7FB;--surf-con:#EEF1F8;--surf-hi:#E7EBF4;--surf-white:#fff;
+  --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:9999px;
+  --el1:0 1px 2px rgba(19,32,67,.12),0 4px 12px rgba(19,32,67,.08);
+  --el2:0 8px 24px rgba(19,32,67,.16);
 }
 *,*::before,*::after{box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;margin:0;padding:0;}
+html,body{min-height:100%;margin:0;padding:0;overflow-x:hidden;}
 body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var(--on-surf);}
+body.app-shell{height:100vh;overflow:hidden;}
+button,input,select,textarea{font:inherit;}
 .mi,.icon{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;user-select:none;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
-/* Top App Bar */
-.top-bar{height:64px;background:var(--surf-con);display:flex;align-items:center;padding:0 8px 0 16px;gap:4px;position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--outline-var);}
+.skip-link{position:absolute;left:12px;top:-48px;background:var(--on-surf);color:var(--surf);padding:10px 14px;border-radius:var(--r-sm);z-index:400;}
+.skip-link:focus{top:12px;}
+.top-bar{height:64px;background:rgba(254,251,255,.94);backdrop-filter:blur(14px);display:flex;align-items:center;padding:0 16px;gap:10px;position:fixed;top:0;left:0;right:0;width:100vw;max-width:100vw;overflow:hidden;z-index:100;border-bottom:1px solid var(--outline-var);}
 .logo-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.wordmark{font:700 16px/1 'Roboto Flex',sans-serif;color:var(--on-surf);letter-spacing:-.02em;margin-left:10px;}
+.wordmark{font:800 16px/1 'Roboto Flex',sans-serif;color:var(--on-surf);letter-spacing:0;margin-right:4px;}
 .wordmark b{color:var(--pri);}
-.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--green-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--on-green);margin-left:12px;}
-.status-dot{width:6px;height:6px;border-radius:50%;background:var(--on-green);flex-shrink:0;}
-.search-wrap{display:flex;align-items:center;gap:8px;background:var(--surf-hi);border-radius:var(--r-full);padding:0 14px;height:40px;width:300px;}
-.search-wrap input{border:none;background:none;outline:none;font:400 14px/1 'Roboto';color:var(--on-surf);flex:1;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:var(--accent-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--accent);white-space:nowrap;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.search-wrap{display:flex;align-items:center;gap:8px;background:var(--surf-con);border-radius:var(--r-full);padding:0 14px;height:40px;width:min(360px,32vw);min-width:0;border:1px solid transparent;}
+.search-wrap:focus-within{border-color:var(--pri);box-shadow:0 0 0 3px rgba(47,95,208,.12);}
+.search-wrap input{border:none;background:none;outline:none;color:var(--on-surf);flex:1;min-width:0;}
 .search-wrap input::placeholder{color:var(--on-surf-var);}
-.ibtn{width:48px;height:48px;border-radius:var(--r-full);border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-surf-var);transition:background .15s;position:relative;}
-.ibtn:hover{background:rgba(28,27,31,.08);}
-.notif-dot{position:absolute;top:10px;right:10px;width:8px;height:8px;border-radius:50%;background:var(--err);border:2px solid var(--surf-con);}
-.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;margin:0 4px;cursor:pointer;border:2px solid var(--outline-var);}
-/* Nav Tabs */
-.nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 8px;}
-.ntab{display:flex;align-items:center;gap:8px;padding:0 20px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,background .15s;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
-.ntab:hover{background:rgba(61,99,221,.06);color:var(--on-surf);}
+.ibtn{width:44px;height:44px;border-radius:var(--r-full);border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-surf-var);transition:background .15s;}
+.ibtn:hover,.ibtn:focus-visible{background:rgba(47,95,208,.08);outline:none;color:var(--pri);}
+.nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;width:100vw;max-width:100vw;z-index:99;padding:0 12px;overflow-x:auto;}
+.ntab{display:flex;align-items:center;gap:8px;padding:0 18px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
+.ntab:hover,.ntab:focus-visible{background:rgba(47,95,208,.07);color:var(--on-surf);outline:none;}
 .ntab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
-.ntab .mi{font-size:18px;}
-/* Scrollbar */
-.scr::-webkit-scrollbar{width:4px;}
-.scr::-webkit-scrollbar-thumb{background:var(--outline-var);border-radius:4px;}
-/* Goal chips (icon + label stacked) */
-.gchip{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 10px;border-radius:var(--r-md);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf);cursor:pointer;transition:all .15s;flex:1;text-align:center;font:600 12px/1.3 'Roboto';}
-.gchip:hover{border-color:var(--pri);background:var(--surf-low);}
-.gchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);}
-.gchip.on .mi{color:var(--pri);}
-.gchip .mi{font-size:22px;color:var(--on-surf-var);}
-/* Context chips */
-.cchip{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf-var);font:500 13px/1 'Roboto';cursor:pointer;transition:all .15s;}
-.cchip:hover{border-color:var(--pri);color:var(--on-surf);background:var(--surf-low);}
+.scr{scrollbar-width:thin;scrollbar-color:var(--outline-var) transparent;}
+.scr::-webkit-scrollbar{width:6px;height:6px;}
+.scr::-webkit-scrollbar-thumb{background:var(--outline-var);border-radius:6px;}
+.app-frame{margin-top:112px;height:calc(100vh - 112px);display:flex;overflow:hidden;}
+main{flex:1;overflow-y:auto;padding:24px clamp(16px,3vw,32px) 32px;}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:20px;align-items:stretch;margin-bottom:18px;}
+.hero-panel,.utility-panel,.decision-card,.filter-card,.insight-card{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);}
+.hero,.hero-panel,.utility-panel,.decision-card{min-width:0;}
+.hero-panel{padding:28px;}
+.eyebrow{font:800 11px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:var(--pri);margin:0 0 12px;}
+h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;color:var(--on-surf);letter-spacing:0;max-width:760px;overflow-wrap:break-word;}
+.hero-copy{font:400 16px/1.65 'Roboto';color:var(--on-surf-var);margin:0 0 20px;max-width:760px;}
+.workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px;}
+.workflow-step{background:var(--surf-low);border:1px solid var(--outline-var);border-radius:var(--r-sm);padding:12px;}
+.workflow-step strong{display:block;font:800 12px/1.2 'Roboto';color:var(--on-surf);margin-bottom:4px;}
+.workflow-step span{font:400 12px/1.45 'Roboto';color:var(--on-surf-var);}
+.utility-panel{padding:20px;display:flex;flex-direction:column;gap:14px;}
+.utility-panel h2{font:800 18px/1.25 'Roboto Flex',sans-serif;margin:0;color:var(--on-surf);}
+.sample-list{display:flex;flex-direction:column;gap:8px;}
+.sample-btn{border:1px solid var(--outline-var);background:var(--surf-low);border-radius:var(--r-sm);padding:10px 12px;text-align:left;cursor:pointer;color:var(--on-surf);line-height:1.4;}
+.sample-btn:hover,.sample-btn:focus-visible{border-color:var(--pri);background:var(--pri-con);outline:none;}
+.metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto;}
+.metric{background:var(--surf-low);border-radius:var(--r-sm);padding:10px;border:1px solid var(--outline-var);}
+.metric b{display:block;font:800 18px/1 'Roboto Flex';color:var(--pri);margin-bottom:5px;}
+.metric span{font:700 10px/1.2 'Roboto';text-transform:uppercase;letter-spacing:.05em;color:var(--on-surf-var);}
+.decision-card{padding:22px;margin-bottom:18px;}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px;}
+.section-head h2{font:800 20px/1.25 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 5px;}
+.section-head p{font:400 13.5px/1.5 'Roboto';color:var(--on-surf-var);margin:0;}
+.gchip{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:13px 12px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf);cursor:pointer;transition:all .15s;text-align:left;font:700 12px/1.3 'Roboto';min-height:76px;}
+.gchip:hover,.gchip:focus-visible{border-color:var(--pri);background:var(--surf-low);outline:none;}
+.gchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);box-shadow:inset 0 0 0 1px rgba(47,95,208,.18);}
+.gchip .mi{font-size:22px;color:var(--pri);}
+.chip-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:18px;}
+.cchip{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf-var);font:700 12px/1.2 'Roboto';cursor:pointer;transition:all .15s;}
+.cchip:hover,.cchip:focus-visible{border-color:var(--pri);color:var(--on-surf);background:var(--surf-low);outline:none;}
 .cchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);}
-.cchip .mi{font-size:15px;}
-/* Badges */
-.badge{display:inline-flex;align-items:center;gap:4px;font:700 10px/16px 'Roboto';letter-spacing:.05em;padding:2px 10px;border-radius:var(--r-full);text-transform:uppercase;}
-.badge-low{background:var(--green-con);color:var(--on-green);}
-.badge-mod{background:#FFF8E5;color:#7A5408;}
+.cchip .mi{font-size:16px;color:var(--pri);}
+.problem-field{position:relative;}
+.problem-field .mi{position:absolute;left:13px;top:15px;font-size:18px;color:var(--on-surf-var);}
+.problem-field textarea{width:100%;min-height:92px;resize:vertical;background:var(--surf-low);border:1px solid var(--outline-var);border-bottom:2px solid var(--pri);border-radius:var(--r-sm);padding:14px 16px 14px 42px;color:var(--on-surf);outline:none;transition:all .2s;line-height:1.55;}
+.problem-field textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(47,95,208,.1);background:var(--surf-white);}
+.filter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
+.filter-card{padding:10px 14px;}
+.filter-label{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:var(--on-surf-var);margin:0 0 5px;}
+.filter-select{width:100%;background:none;border:none;padding:0;font:700 13px/1.2 'Roboto';color:var(--pri);outline:none;cursor:pointer;}
+.results-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:12px;}
+.results-head h3{font:800 17px/1.25 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 5px;}
+.results-head p{font:400 13px/1.45 'Roboto';color:var(--on-surf-var);margin:0;}
+.btn-primary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:var(--r-full);font:700 13px/1 'Roboto';cursor:pointer;transition:all .15s;text-decoration:none;min-height:36px;}
+.btn-primary{background:var(--pri);color:#fff;padding:9px 18px;border:1px solid var(--pri);box-shadow:var(--el1);}
+.btn-primary:hover,.btn-primary:focus-visible{filter:brightness(1.06);box-shadow:var(--el2);outline:none;}
+.btn-ghost{background:var(--surf-white);color:var(--pri);padding:8px 14px;border:1px solid var(--outline-var);}
+.btn-ghost:hover,.btn-ghost:focus-visible{background:var(--pri-con);border-color:var(--pri);outline:none;}
+.badge{display:inline-flex;align-items:center;gap:4px;font:800 10px/16px 'Roboto';letter-spacing:.04em;padding:2px 10px;border-radius:var(--r-full);text-transform:uppercase;}
+.badge-low{background:#DDF3E4;color:#146C2E;}
+.badge-mod{background:var(--warn-con);color:var(--warn);}
 .badge-hi{background:var(--err-con);color:var(--err);}
-.badge-cond{background:var(--pri-con);color:var(--on-pri-con);}
-/* Principle cards */
-.pcard{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-lg);overflow:hidden;transition:all .2s;margin-bottom:8px;}
+.pcard{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);overflow:hidden;transition:all .2s;margin-bottom:8px;}
 .pcard:hover{box-shadow:var(--el1);border-color:var(--outline);}
-.pcard.open{border-color:var(--pri);box-shadow:var(--el2);}
+.pcard.open{border-color:var(--pri);box-shadow:var(--el1);}
 .card-body{display:none;border-top:1px solid var(--outline-var);padding:20px;}
 .pcard.open .card-body{display:block;}
 .chevron{transition:transform .2s;color:var(--on-surf-var);}
 .pcard.open .chevron{transform:rotate(180deg);}
-/* Buttons */
-.btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;padding:9px 20px;border-radius:var(--r-full);border:none;font:600 13px/1 'Roboto';cursor:pointer;box-shadow:var(--el1);transition:all .15s;}
-.btn-primary:hover{filter:brightness(1.07);box-shadow:var(--el2);}
-.btn-ghost{display:inline-flex;align-items:center;gap:6px;background:none;color:var(--pri);padding:8px 16px;border-radius:var(--r-full);border:1px solid var(--outline);font:600 13px/1 'Roboto';cursor:pointer;transition:all .15s;}
-.btn-ghost:hover{background:rgba(61,99,221,.08);border-color:var(--pri);}
-/* Filter dropdowns */
-.filter-card{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);padding:10px 14px;}
-.filter-label{font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--on-surf-var);margin:0 0 4px;}
-.filter-select{width:100%;background:none;border:none;padding:0;font:700 13px/1 'Roboto';color:var(--pri);outline:none;cursor:pointer;}
+#right-panel{width:330px;flex-shrink:0;border-left:1px solid var(--outline-var);background:var(--surf-white);overflow-y:auto;display:none;padding:24px;}
+#toast{position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:300;box-shadow:var(--el2);max-width:360px;}
+@media (min-width:1280px){#right-panel{display:block!important;}}
+@media (max-width:1100px){
+  body.app-shell{height:auto;overflow:auto;}
+  .app-frame{height:auto;display:block;overflow:visible;}
+  main{overflow:visible;}
+  .hero{grid-template-columns:1fr;}
+  .workflow{grid-template-columns:repeat(2,1fr);}
+  .chip-grid{grid-template-columns:repeat(3,1fr);}
+  .filter-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media (max-width:720px){
+  .top-bar{padding:0 10px;}
+  .status-pill,.top-bar .ibtn{display:none;}
+  .wordmark{font-size:15px;}
+  .search-wrap{width:auto;max-width:150px;flex:1;}
+  .nav-tabs{padding:0 4px;}
+  .ntab{padding:0 12px;}
+  main{padding:16px 12px 28px;}
+  .hero-panel,.decision-card,.utility-panel{padding:18px;}
+  .workflow,.metric-row,.chip-grid,.filter-grid{grid-template-columns:1fr;}
+  .app-frame,main,.hero,.hero-panel,.utility-panel,.decision-card{width:100%;max-width:100vw;}
+  .section-head,.results-head{display:block;}
+  .btn-ghost{margin-top:10px;}
+  .card-body{padding:16px;}
+}
 </style>
 </head>
-<body>
+<body class="app-shell">
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-<!-- ── TOP APP BAR ── -->
 <header class="top-bar">
   <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
   <span class="wordmark">Cognitive <b>Engine</b></span>
-  <span class="status-pill"><span class="status-dot"></span>Optimal — your cognitive load is balanced</span>
+  <span class="status-pill"><span class="status-dot"></span>Evidence-led UX interventions</span>
   <div style="flex:1;"></div>
-  <div class="search-wrap">
+  <label class="search-wrap" for="library-search">
     <span class="mi" style="font-size:18px;color:var(--on-surf-var);">search</span>
-    <input type="text" id="librarySearch" placeholder="Search principles…" oninput="searchPrinciples(this.value)"/>
-  </div>
-  <button class="ibtn" title="Notifications"><span class="mi">notifications</span><span class="notif-dot"></span></button>
-  <button class="ibtn" title="Settings"><span class="mi">settings</span></button>
-  <img class="avatar" src="https://i.pravatar.cc/36?u=cog-ux" alt="User"/>
+    <input type="search" id="library-search" placeholder="Search principles, patterns, risks"/>
+  </label>
+  <button class="ibtn" id="reset-filters" title="Reset analysis"><span class="mi">restart_alt</span></button>
 </header>
 
-<!-- ── NAVIGATION TABS ── -->
-<nav class="nav-tabs">
+<nav class="nav-tabs" aria-label="Primary">
   <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
-  <a href="index.html" class="ntab active"><span class="mi">auto_stories</span>Library</a>
+  <a href="index.html" class="ntab active" aria-current="page"><span class="mi">auto_stories</span>Library</a>
   <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
   <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
-  <a href="#" class="ntab"><span class="mi">history</span>History</a>
+  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
 </nav>
 
-<!-- ── MAIN WRAPPER ── -->
-<div style="margin-top:112px; height:calc(100vh - 112px); display:flex; overflow:hidden;">
-
-    <!-- Main scroll -->
-    <main style="flex:1; overflow-y:auto; padding:24px 24px 8px;" class="scr">
-
-      <!-- ── Decision Section ── -->
-      <div style="background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-lg);padding:24px;margin-bottom:18px;">
-        <div style="margin-bottom:18px;">
-          <h2 style="font:700 18px/1.3 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 4px;">What are you trying to improve?</h2>
-          <p style="font:400 13px/1 'Roboto';color:var(--on-surf-var);margin:0;">Select a goal and context to surface the most relevant cognitive principles.</p>
-        </div>
-
-        <!-- Goal chips -->
-        <div style="display:flex; gap:8px; margin-bottom:16px;" id="goal-group">
-          <button class="gchip" data-goal="reduce-errors">
-            <span class="mi" style="font-size:22px;">error</span>Reduce errors
-          </button>
-          <button class="gchip on" data-goal="speed-up-decisions">
-            <span class="mi" style="font-size:22px;">speed</span>Speed up decisions
-          </button>
-          <button class="gchip" data-goal="reduce-overload">
-            <span class="mi" style="font-size:22px;">psychology</span>Reduce overload
-          </button>
-          <button class="gchip" data-goal="improve-findability">
-            <span class="mi" style="font-size:22px;">travel_explore</span>Improve findability
-          </button>
-          <button class="gchip" data-goal="increase-confidence">
-            <span class="mi" style="font-size:22px;">verified_user</span>Increase confidence
-          </button>
-          <button class="gchip" data-goal="minimise-training">
-            <span class="mi" style="font-size:22px;">school</span>Minimise training
-          </button>
-          <button class="gchip" data-goal="expert-workflows">
-            <span class="mi" style="font-size:22px;">bolt</span>Expert workflows
-          </button>
-        </div>
-
-        <div style="border-top:1px solid var(--outline-var);margin-bottom:14px;"></div>
-        <p style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.09em;color:var(--on-surf-var);margin:0 0 10px;">Where is this happening?</p>
-
-        <!-- Context chips -->
-        <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px;" id="ctx-group">
-          <button class="cchip" data-context="data-entry-forms">
-            <span class="mi" style="font-size:15px;">edit_square</span>Data entry &amp; forms
-          </button>
-          <button class="cchip on" data-context="decision-approvals">
-            <span class="mi" style="font-size:15px;">gavel</span>Decision &amp; approvals
-          </button>
-          <button class="cchip" data-context="navigation-search">
-            <span class="mi" style="font-size:15px;">explore</span>Navigation &amp; search
-          </button>
-          <button class="cchip" data-context="monitoring-alerts">
-            <span class="mi" style="font-size:15px;">monitoring</span>Monitoring &amp; alerts
-          </button>
-          <button class="cchip" data-context="complex-dashboards">
-            <span class="mi" style="font-size:15px;">dashboard_customize</span>Complex dashboards
-          </button>
-          <button class="cchip" data-context="configuration-flows">
-            <span class="mi" style="font-size:15px;">settings_applications</span>Configuration flows
-          </button>
-          <button class="cchip" data-context="multi-step-wizards">
-            <span class="mi" style="font-size:15px;">linear_scale</span>Multi-step wizards
-          </button>
-        </div>
-
-        <!-- Free text -->
-        <div style="position:relative;">
-          <span class="mi" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:17px; color:var(--on-surf-var);">edit_note</span>
-          <input id="problem-description" type="text" placeholder="Describe the UX problem to refine recommendations…" onfocus="this.style.borderColor='var(--pri)';this.style.boxShadow='0 0 0 3px rgba(61,99,221,0.08)'" onblur="this.style.borderColor='var(--outline-var)';this.style.boxShadow='none'" style="width:100%;background:var(--surf-low);border:1px solid var(--outline-var);border-bottom:2px solid var(--pri);border-radius:var(--r-sm);padding:11px 16px 11px 38px;font:400 13px/1 'Roboto';color:var(--on-surf);outline:none;transition:all 0.2s;"/>
+<div class="app-frame">
+  <main id="main-content" class="scr">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-panel">
+        <p class="eyebrow">Behavioral science for product decisions</p>
+        <h1 id="hero-title">Turn a messy UX problem into a usable intervention.</h1>
+        <p class="hero-copy">Describe what users are struggling with. Cognitive Engine ranks relevant cognitive, behavioral, and HCI principles, explains why they match, and turns them into actions you can send to an AI design tool.</p>
+        <div class="workflow" aria-label="Product workflow">
+          <div class="workflow-step"><strong>1. Define</strong><span>Goal, context, and observed behavior.</span></div>
+          <div class="workflow-step"><strong>2. Diagnose</strong><span>Principles ranked by evidence and fit.</span></div>
+          <div class="workflow-step"><strong>3. Translate</strong><span>Actions, patterns, and anti-patterns.</span></div>
+          <div class="workflow-step"><strong>4. Generate</strong><span>Prompt-ready design instructions.</span></div>
         </div>
       </div>
+      <aside class="utility-panel" aria-labelledby="sample-title">
+        <h2 id="sample-title">Start with a real situation</h2>
+        <div class="sample-list">
+          <button class="sample-btn" data-sample="Clinicians are missing important lab alerts because the dashboard shows routine notifications with the same weight as urgent risks.">Clinicians miss urgent alerts in a noisy dashboard.</button>
+          <button class="sample-btn" data-sample="New users abandon account setup because the form asks for too much information before they understand the value.">New users abandon a long setup form.</button>
+          <button class="sample-btn" data-sample="Managers hesitate during approvals because risk, history, and recommended next actions are scattered across different panels.">Managers hesitate during high-stakes approvals.</button>
+        </div>
+        <div class="metric-row" aria-label="Expected product value">
+          <div class="metric"><b>30s</b><span>to first fit</span></div>
+          <div class="metric"><b>5</b><span>ranked actions</span></div>
+          <div class="metric"><b>1</b><span>prompt path</span></div>
+        </div>
+      </aside>
+    </section>
 
-      <!-- ── Filters ── -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;">
+    <section class="decision-card" aria-labelledby="decision-title">
+      <div class="section-head">
+        <div>
+          <h2 id="decision-title">What outcome should the interface change?</h2>
+          <p>Choose the behavior you want to improve first. This keeps the recommendations practical instead of turning the page into a theory catalogue.</p>
+        </div>
+        <button class="btn-ghost" id="reset-filters-inline" type="button"><span class="mi" style="font-size:16px;">restart_alt</span>Reset</button>
+      </div>
+
+      <div class="chip-grid" id="goal-group" role="group" aria-label="Improvement goal">
+        <button class="gchip on" data-goal="reduce-errors"><span class="mi">error</span>Reduce errors</button>
+        <button class="gchip" data-goal="speed-up-decisions"><span class="mi">speed</span>Speed up decisions</button>
+        <button class="gchip" data-goal="reduce-overload"><span class="mi">psychology</span>Reduce overload</button>
+        <button class="gchip" data-goal="improve-findability"><span class="mi">travel_explore</span>Improve findability</button>
+        <button class="gchip" data-goal="improve-collaboration"><span class="mi">handshake</span>Improve collaboration</button>
+      </div>
+
+      <p class="eyebrow" style="margin-top:2px;">Where is this happening?</p>
+      <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;" id="ctx-group" role="group" aria-label="UX context">
+        <button class="cchip on" data-context="all"><span class="mi">apps</span>All contexts</button>
+        <button class="cchip" data-context="data-entry-forms"><span class="mi">edit_square</span>Data entry &amp; forms</button>
+        <button class="cchip" data-context="decision-approvals"><span class="mi">gavel</span>Decision &amp; approvals</button>
+        <button class="cchip" data-context="navigation-search"><span class="mi">explore</span>Navigation &amp; search</button>
+        <button class="cchip" data-context="monitoring-alerts"><span class="mi">monitoring</span>Monitoring &amp; alerts</button>
+        <button class="cchip" data-context="collaboration-handover"><span class="mi">handshake</span>Collaboration &amp; handover</button>
+        <button class="cchip" data-context="risk-communication"><span class="mi">policy</span>Risk &amp; consent</button>
+      </div>
+
+      <div class="problem-field">
+        <span class="mi">edit_note</span>
+        <textarea id="problem-description" placeholder="Describe the observed behavior, friction, or failure. Example: Users abandon the checkout when payment methods, delivery dates, and promo codes compete for attention."></textarea>
+      </div>
+    </section>
+
+    <section aria-label="Refine recommendations">
+      <div class="filter-grid">
         <div class="filter-card"><div class="filter-label">Discipline</div><select id="discipline-filter" class="filter-select"></select></div>
         <div class="filter-card"><div class="filter-label">Problem Type</div><select id="problem-type-filter" class="filter-select"></select></div>
         <div class="filter-card"><div class="filter-label">Context</div><select id="context-filter" class="filter-select"></select></div>
         <div class="filter-card"><div class="filter-label">Impact Level</div><select id="impact-filter" class="filter-select"></select></div>
       </div>
+    </section>
 
-      <!-- ── Principles Header ── -->
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+    <section aria-labelledby="principles-header-title">
+      <div class="results-head">
         <div>
-          <h3 id="principles-header-title" style="font:700 16px/1.3 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 4px;">Top Principles for Your Context</h3>
-          <p id="principles-header-subtitle" style="font:400 13px/1 'Roboto';color:var(--on-surf-var);margin:0;">Loading recommendation rationale…</p>
+          <h3 id="principles-header-title">Recommended interventions</h3>
+          <p id="principles-header-subtitle">Loading recommendation rationale...</p>
         </div>
-        <div style="display:flex; gap:6px;">
-          <button class="btn-ghost" style="font-size:12.5px;padding:6px 14px;"><span class="mi" style="font-size:15px;">filter_list</span>Filter</button>
-          <button class="btn-ghost" style="font-size:12.5px;padding:6px 14px;"><span class="mi" style="font-size:15px;">sort</span>Sort by Impact</button>
-        </div>
+        <a class="btn-primary" href="advanced-prompt-generator.html"><span class="mi" style="font-size:16px;">auto_awesome</span>Open Prompt Generator</a>
       </div>
 
-      <!-- ── Principle Cards Container ── -->
-      <div id="principles-container">
-        <!-- Cards will be dynamically loaded here -->
-      </div>
+      <div id="principles-container"></div>
 
-      <!-- Pagination -->
-      <div id="pagination-container" style="display:flex;justify-content:space-between;align-items:center;padding:13px 18px;background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);margin-bottom:24px;">
+      <div id="pagination-container" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 18px;background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);margin-bottom:24px;flex-wrap:wrap;">
         <span id="pagination-info" style="font:400 12.5px/1 'Roboto';color:var(--on-surf-var);">Loading...</span>
-        <div id="pagination-buttons" style="display:flex; align-items:center; gap:4px;">
-          <!-- Pagination buttons will be dynamically generated -->
-        </div>
+        <div id="pagination-buttons" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;"></div>
       </div>
+    </section>
+  </main>
 
-    </main><!-- /main scroll -->
+  <aside id="right-panel" class="scr" aria-label="Selected principle details"></aside>
+</div>
 
-    <!-- ===== RIGHT PANEL ===== -->
-    <aside id="right-panel" style="width:310px;flex-shrink:0;border-left:1px solid var(--outline-var);background:var(--surf-white);overflow-y:auto;display:none;padding:24px;" class="scr">
-      <!-- populated by JS -->
-    </aside>
-
-  </div><!-- /content row -->
-</div><!-- /main wrapper -->
-
-<!-- Right panel content via JS -->
-<style>
-@media (min-width:1280px) { #right-panel { display:block !important; } }
-#toast{position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:300;box-shadow:0 4px 8px 3px rgba(0,0,0,.15),0 1px 3px rgba(0,0,0,.3);max-width:360px;}
-</style>
-<div id="toast"><span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span><span id="t-msg"></span></div>
+<div id="toast" role="status" aria-live="polite"><span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span><span id="t-msg"></span></div>
 
 <script type="module" src="js/app.js"></script>
-<script>
-function searchPrinciples(query) {
-  const cards = document.querySelectorAll('.pcard');
-  const lowerQuery = query.toLowerCase();
-  
-  cards.forEach(card => {
-    const title = card.querySelector('h3').textContent.toLowerCase();
-    const description = card.querySelector('.pcard-body p').textContent.toLowerCase();
-    const visible = title.includes(lowerQuery) || description.includes(lowerQuery);
-    
-    card.style.display = visible ? 'block' : 'none';
-    card.style.opacity = visible ? '1' : '0';
-    
-    if (visible && query.length > 0) {
-      // Highlight matching text
-      const titleEl = card.querySelector('h3');
-      const descEl = card.querySelector('.pcard-body p');
-      titleEl.innerHTML = highlightText(titleEl.textContent, lowerQuery);
-      descEl.innerHTML = highlightText(descEl.textContent, lowerQuery);
-    } else if (!query) {
-      // Reset highlighting
-      const titleEl = card.querySelector('h3');
-      const descEl = card.querySelector('.pcard-body p');
-      titleEl.innerHTML = titleEl.textContent;
-      descEl.innerHTML = descEl.textContent;
-    }
-  });
-  
-  // Show results count
-  const visibleCount = Array.from(cards).filter(c => c.style.display !== 'none').length;
-  if (query.length > 0) {
-    showToast('search', `Found ${visibleCount} principle${visibleCount !== 1 ? 's' : ''}`);
-  }
-}
-
-function highlightText(text, query) {
-  if (!query) return text;
-  const regex = new RegExp(`(${query})`, 'gi');
-  return text.replace(regex, '<mark style="background:var(--pri);color:var(--on-pri);padding:1px 2px;border-radius:2px;">$1</mark>');
-}
-
-function showToast(icon, msg) {
-  var t = document.getElementById('toast');
-  document.getElementById('t-icon').textContent = icon;
-  document.getElementById('t-msg').textContent = msg;
-  t.style.display = 'flex'; t.style.opacity = '1';
-  clearTimeout(window._tt);
-  window._tt = setTimeout(function(){ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(function(){ t.style.display='none'; t.style.transition=''; },400); }, 3000);
-}
-</script>
 </body>
 </html>

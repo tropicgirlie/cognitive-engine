@@ -1,6 +1,16 @@
 import { loadAppData } from './data-loader.js';
-import { buildIndexes, scorePrinciples, slugify } from './filter-engine.js';
+import { buildIndexes, scorePrinciples } from './filter-engine.js';
 import { renderPagination, renderPrinciples, renderRightPanel, renderSelectOptions } from './renderers.js';
+
+const DEFAULT_SELECTION = {
+  goal: 'reduce-errors',
+  context: 'all',
+  discipline: 'all',
+  problemType: 'all',
+  impactLevel: 'all',
+  search: '',
+  problemDescription: ''
+};
 
 const state = {
   appData: null,
@@ -10,15 +20,7 @@ const state = {
   selectedPrincipleId: null,
   currentPage: 1,
   itemsPerPage: 5,
-  selection: {
-    goal: 'reduce-errors',
-    context: 'all',
-    discipline: 'all',
-    problemType: 'all',
-    impactLevel: 'all',
-    search: '',
-    problemDescription: ''
-  }
+  selection: { ...DEFAULT_SELECTION }
 };
 
 const elements = {};
@@ -44,6 +46,11 @@ function cacheElements() {
   elements.rightPanel = document.getElementById('right-panel');
   elements.goalGroup = document.getElementById('goal-group');
   elements.contextGroup = document.getElementById('ctx-group');
+  elements.resetButtons = [
+    document.getElementById('reset-filters'),
+    document.getElementById('reset-filters-inline')
+  ].filter(Boolean);
+  elements.sampleButtons = Array.from(document.querySelectorAll('[data-sample]'));
 }
 
 async function initialize() {
@@ -51,11 +58,13 @@ async function initialize() {
     state.appData = await loadAppData();
     state.lookup = buildIndexes(state.appData);
     hydrateFilters();
+    syncGoalChips(state.selection.goal);
     syncContextSelect();
+    syncContextChips(state.selection.context);
     recompute();
   } catch (error) {
     console.error(error);
-    elements.principlesContainer.innerHTML = '<div style="padding:40px; text-align:center; color:#9BAFC8; background:white; border:1px solid #E2E8F2; border-radius:12px;">Failed to load the cognitive library.</div>';
+    elements.principlesContainer.innerHTML = '<div style="padding:40px;text-align:center;color:var(--on-surf-var);background:var(--surf-white);border:1px solid var(--outline-var);border-radius:12px;">Failed to load the cognitive library. Check that the local data files are available.</div>';
   }
 }
 
@@ -107,6 +116,23 @@ function bindStaticEvents() {
     state.selection.impactLevel = event.target.value;
     state.currentPage = 1;
     recompute();
+  });
+
+  elements.resetButtons?.forEach((button) => {
+    button.addEventListener('click', () => {
+      resetAnalysis();
+      showToast('restart_alt', 'Analysis reset');
+    });
+  });
+
+  elements.sampleButtons?.forEach((button) => {
+    button.addEventListener('click', () => {
+      state.selection.problemDescription = button.dataset.sample || '';
+      if (elements.problemInput) elements.problemInput.value = state.selection.problemDescription;
+      state.currentPage = 1;
+      recompute();
+      showToast('edit_note', 'Sample problem loaded');
+    });
   });
 
   elements.goalGroup?.addEventListener('click', (event) => {
@@ -178,9 +204,32 @@ function bindStaticEvents() {
   });
 }
 
+function resetAnalysis() {
+  state.selection = { ...DEFAULT_SELECTION };
+  state.currentPage = 1;
+  state.selectedPrincipleId = null;
+
+  if (elements.searchInput) elements.searchInput.value = '';
+  if (elements.problemInput) elements.problemInput.value = '';
+  if (elements.disciplineSelect) elements.disciplineSelect.value = state.selection.discipline;
+  if (elements.problemTypeSelect) elements.problemTypeSelect.value = state.selection.problemType;
+  if (elements.impactSelect) elements.impactSelect.value = state.selection.impactLevel;
+  syncGoalChips(state.selection.goal);
+  syncContextSelect();
+  syncContextChips(state.selection.context);
+  recompute();
+}
+
 function setChipSelection(group, selector, button) {
   group.querySelectorAll(selector).forEach((item) => item.classList.remove('on'));
   button.classList.add('on');
+}
+
+function syncGoalChips(goalId) {
+  if (!elements.goalGroup) return;
+  const target = elements.goalGroup.querySelector(`[data-goal="${goalId}"]`);
+  if (!target) return;
+  setChipSelection(elements.goalGroup, '.gchip', target);
 }
 
 function syncContextChips(contextId) {
@@ -223,11 +272,15 @@ function render() {
 function updateHeader(totalItems) {
   const goalLabel = document.querySelector('#goal-group .gchip.on')?.textContent.trim() || 'Current goal';
   const contextLabel = document.querySelector('#ctx-group .cchip.on')?.textContent.trim() || 'Current context';
+  const problemLabel = state.selection.problemDescription.trim();
   if (elements.headerTitle) {
-    elements.headerTitle.textContent = totalItems ? `Top ${Math.min(5, totalItems)} Principles for Your Context` : 'No matching principles';
+    elements.headerTitle.textContent = totalItems ? `${totalItems} ranked intervention${totalItems === 1 ? '' : 's'}` : 'No matching principles';
   }
   if (elements.headerSubtitle) {
-    elements.headerSubtitle.textContent = `Based on “${goalLabel}” in “${contextLabel}”`; 
+    const basis = `Based on ${goalLabel.toLowerCase()} in ${contextLabel.toLowerCase()}`;
+    elements.headerSubtitle.textContent = problemLabel
+      ? `${basis}, with your problem description used as matching evidence.`
+      : `${basis}. Add a problem description to sharpen the ranking.`;
   }
 }
 
@@ -259,8 +312,28 @@ function openPromptGenerator(principle) {
   window.location.href = `advanced-prompt-generator.html?${params.toString()}`;
 }
 
+function showToast(icon, msg) {
+  const toast = document.getElementById('toast');
+  const iconEl = document.getElementById('t-icon');
+  const msgEl = document.getElementById('t-msg');
+  if (!toast || !iconEl || !msgEl) return;
+
+  iconEl.textContent = icon;
+  msgEl.textContent = msg;
+  toast.style.display = 'flex';
+  toast.style.opacity = '1';
+  clearTimeout(window._cognitiveEngineToast);
+  window._cognitiveEngineToast = setTimeout(() => {
+    toast.style.transition = 'opacity .4s';
+    toast.style.opacity = '0';
+    setTimeout(() => {
+      toast.style.display = 'none';
+      toast.style.transition = '';
+    }, 400);
+  }, 2600);
+}
+
 window.selectChip = () => {};
 window.toggleCard = () => {};
 window.changePage = () => {};
 window.applyPrinciple = () => {};
-window.slugify = slugify;

@@ -78,7 +78,7 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
           <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">${antiPatterns}</ul>
         </div>
         <div style="display:flex; gap:10px;">
-          <button class="btn-primary" data-apply-principle="${principle.id}" onclick="window.location.href='advanced-prompt-generator.html?p='+encodeURIComponent('${principle.name}')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
+          <button class="btn-primary" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate AI Prompt</button>
           <button class="btn-ghost" data-select-principle="${principle.id}"><span class="mi" style="font-size:16px;">visibility</span>View Details</button>
         </div>
       </div>
@@ -138,7 +138,7 @@ export function renderRightPanel(panelEl, principle, lookup) {
       <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">${examples}</ul>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;">
-      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;border-radius:var(--r-full);" data-apply-principle="${principle.id}" onclick="window.location.href='advanced-prompt-generator.html?p='+encodeURIComponent('${principle.name}')"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate Prompt</button>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;border-radius:var(--r-full);" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate AI Prompt</button>
     </div>
   `;
 }
