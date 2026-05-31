@@ -31,7 +31,7 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
   const badge = getImpactBadge(principle.impactLevel);
   const confidence = getConfidenceBadge(principle.confidence);
   const isOpen = openByDefault || selectedPrincipleId === principle.id ? 'open' : '';
-  const reasons = principle.reasons.slice(0, 2).map((reason) => `<li style="font:400 12.5px/1.5 'Roboto';color:var(--on-surf);">${reason}</li>`).join('');
+  const reasons = principle.reasons.slice(0, 2).map((reason) => `<li class="evidence-item is-fresh" style="font:400 12.5px/1.5 'Roboto';color:var(--on-surf);">${reason}</li>`).join('');
   const evidenceChips = (principle.evidence || []).slice(0, 3).map((item) => `<span style="font:700 10.5px/1 'Roboto';color:var(--on-surf-var);background:var(--surf-low);border:1px solid var(--outline-var);border-radius:var(--r-full);padding:4px 10px;">${item.label}</span>`).join('');
   const actions = principle.actions.map((action) => `<li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';color:var(--on-surf);"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>${action.description}</li>`).join('');
   const patterns = principle.uiPatterns.map((item) => `<li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';color:var(--on-surf);"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>${item}</li>`).join('');
@@ -78,7 +78,7 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
           <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">${antiPatterns}</ul>
         </div>
         <div style="display:flex; gap:10px;">
-          <button class="btn-primary" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate AI Prompt</button>
+          <button class="btn-primary" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span><span data-button-label>Generate AI Prompt</span></button>
           <button class="btn-ghost" data-select-principle="${principle.id}"><span class="mi" style="font-size:16px;">visibility</span>View Details</button>
         </div>
       </div>
@@ -107,7 +107,7 @@ export function renderRightPanel(panelEl, principle, lookup) {
   const confidence = getConfidenceBadge(principle.confidence);
   const disciplines = principle.disciplines.map((id) => lookup.disciplinesById[id]?.label || id).join(' · ');
   const contexts = principle.contexts.map((id) => lookup.contextsById[id]?.label || id).join(' · ');
-  const evidence = (principle.evidence || []).slice(0, 4).map((item) => `<li style="font-size:12.5px;color:var(--on-surf);line-height:1.6;"><strong>${item.label}:</strong> ${item.reason}</li>`).join('');
+  const evidence = (principle.evidence || []).slice(0, 4).map((item) => `<li class="evidence-item is-fresh" style="font-size:12.5px;color:var(--on-surf);line-height:1.6;"><strong>${item.label}:</strong> ${item.reason}</li>`).join('');
   const examples = principle.examples.map((item) => `<li style="font-size:12.5px;color:var(--on-surf);line-height:1.6;">${item}</li>`).join('');
   panelEl.innerHTML = `
     <div style="margin-bottom:20px;">
@@ -138,7 +138,7 @@ export function renderRightPanel(panelEl, principle, lookup) {
       <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">${examples}</ul>
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;">
-      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;border-radius:var(--r-full);" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span>Generate AI Prompt</button>
+      <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;border-radius:var(--r-full);" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span><span data-button-label>Generate AI Prompt</span></button>
     </div>
   `;
 }

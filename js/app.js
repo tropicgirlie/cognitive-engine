@@ -12,6 +12,10 @@ const DEFAULT_SELECTION = {
   problemDescription: ''
 };
 
+const FLOW_STEPS = ['define', 'signals', 'rank', 'prompt'];
+
+const SAMPLE_TYPING_MS = 360;
+
 const state = {
   appData: null,
   lookup: null,
@@ -20,7 +24,8 @@ const state = {
   selectedPrincipleId: null,
   currentPage: 1,
   itemsPerPage: 5,
-  selection: { ...DEFAULT_SELECTION }
+  selection: { ...DEFAULT_SELECTION },
+  sampleToken: 0
 };
 
 const elements = {};
@@ -46,6 +51,11 @@ function cacheElements() {
   elements.rightPanel = document.getElementById('right-panel');
   elements.goalGroup = document.getElementById('goal-group');
   elements.contextGroup = document.getElementById('ctx-group');
+  elements.workflowSteps = Array.from(document.querySelectorAll('.workflow-step'));
+  elements.flowSteps = Array.from(document.querySelectorAll('[data-flow-step]'));
+  elements.liveExample = document.getElementById('live-example');
+  elements.liveExampleSubtitle = document.getElementById('live-example-subtitle');
+  elements.liveExampleBody = document.getElementById('live-example-body');
   elements.resetButtons = [
     document.getElementById('reset-filters'),
     document.getElementById('reset-filters-inline')
@@ -127,11 +137,7 @@ function bindStaticEvents() {
 
   elements.sampleButtons?.forEach((button) => {
     button.addEventListener('click', () => {
-      state.selection.problemDescription = button.dataset.sample || '';
-      if (elements.problemInput) elements.problemInput.value = state.selection.problemDescription;
-      state.currentPage = 1;
-      recompute();
-      showToast('edit_note', 'Sample problem loaded');
+      fillSampleProblem(button.dataset.sample || '');
     });
   });
 
@@ -189,7 +195,7 @@ function bindStaticEvents() {
       const principleId = applyButton.dataset.applyPrinciple;
       const principle = state.allRankedPrinciples.find((item) => item.id === principleId);
       if (principle) {
-        openPromptGenerator(principle);
+        openPromptGenerator(principle, applyButton);
       }
     }
   });
@@ -199,7 +205,7 @@ function bindStaticEvents() {
     if (!applyButton) return;
     const principle = state.allRankedPrinciples.find((item) => item.id === applyButton.dataset.applyPrinciple);
     if (principle) {
-      openPromptGenerator(principle);
+      openPromptGenerator(principle, applyButton);
     }
   });
 }
@@ -251,6 +257,7 @@ function recompute() {
     state.selectedPrincipleId = state.allRankedPrinciples[0]?.id || null;
   }
   render();
+  updateFlowState();
 }
 
 function render() {
@@ -266,25 +273,226 @@ function render() {
   const selected = state.allRankedPrinciples.find((item) => item.id === state.selectedPrincipleId) || state.pagedPrinciples[0];
   if (selected) {
     renderRightPanel(elements.rightPanel, selected, state.lookup);
+    renderLiveExample(selected);
   }
 }
 
 function updateHeader(totalItems) {
-  const goalLabel = document.querySelector('#goal-group .gchip.on')?.textContent.trim() || 'Current goal';
-  const contextLabel = document.querySelector('#ctx-group .cchip.on')?.textContent.trim() || 'Current context';
+  const goalLabel = state.lookup?.goalsById[state.selection.goal]?.label || 'current goal';
+  const contextLabel = state.selection.context === 'all'
+    ? 'all contexts'
+    : state.lookup?.contextsById[state.selection.context]?.label || 'current context';
   const problemLabel = state.selection.problemDescription.trim();
   if (elements.headerTitle) {
     elements.headerTitle.textContent = totalItems ? `${totalItems} ranked intervention${totalItems === 1 ? '' : 's'}` : 'No matching principles';
   }
   if (elements.headerSubtitle) {
-    const basis = `Based on ${goalLabel.toLowerCase()} in ${contextLabel.toLowerCase()}`;
+    const contextPhrase = state.selection.context === 'all'
+      ? 'across all contexts'
+      : `in ${contextLabel.toLowerCase()}`;
+    const basis = `Based on ${goalLabel.toLowerCase()} ${contextPhrase}`;
     elements.headerSubtitle.textContent = problemLabel
       ? `${basis}, with your problem description used as matching evidence.`
       : `${basis}. Add a problem description to sharpen the ranking.`;
   }
 }
 
-function openPromptGenerator(principle) {
+function renderLiveExample(principle) {
+  if (!elements.liveExampleBody || !principle) return;
+  const example = getLiveExample(principle);
+  if (elements.liveExampleSubtitle) {
+    elements.liveExampleSubtitle.textContent = `${principle.name}: ${example.summary}`;
+  }
+  elements.liveExampleBody.innerHTML = `
+    <div class="example-grid">
+      <div class="example-pane">
+        <p class="example-label">Before</p>
+        ${example.before}
+      </div>
+      <div class="example-pane after">
+        <p class="example-label">After applying ${escapeHtml(principle.name)}</p>
+        ${example.after}
+      </div>
+    </div>
+    <p class="demo-note">${example.takeaway}</p>
+  `;
+  elements.liveExample?.classList.remove('is-refreshing');
+  void elements.liveExample?.offsetWidth;
+  elements.liveExample?.classList.add('is-refreshing');
+}
+
+function getLiveExample(principle) {
+  const name = principle.name.toLowerCase();
+  const categories = (principle.categories || []).join(' ').toLowerCase();
+  const contexts = (principle.contexts || []).join(' ');
+
+  if (principle.id === 'hicks-law' || name.includes('hick')) {
+    return {
+      summary: 'reduce competing choices so the next action is obvious.',
+      before: demoStack([
+        ['Approve', 'Equal'],
+        ['Reject', 'Equal'],
+        ['Escalate', 'Equal'],
+        ['Assign', 'Equal'],
+        ['Export', 'Equal']
+      ]),
+      after: `${demoStack([
+        ['Approve', 'Primary', 'primary'],
+        ['Request changes', 'Secondary'],
+        ['More actions', 'Overflow', 'muted']
+      ])}<span class="demo-cta"><span class="mi" style="font-size:14px;">check</span>Recommended next action</span>`,
+      takeaway: 'The principle becomes a layout decision: one primary action, a small set of secondary choices, and the rest tucked away.'
+    };
+  }
+
+  if (principle.id === 'progressive-disclosure' || name.includes('progressive')) {
+    return {
+      summary: 'show what matters now and reveal complexity when it becomes relevant.',
+      before: demoStack([
+        ['Required fields', 'Visible'],
+        ['Advanced permissions', 'Visible'],
+        ['Audit settings', 'Visible'],
+        ['Optional metadata', 'Visible']
+      ]),
+      after: `${demoStack([
+        ['Required fields', 'Visible', 'primary'],
+        ['Advanced options', 'Collapsed'],
+        ['Audit settings', 'On demand', 'muted']
+      ])}<p class="demo-note">Secondary controls stay available without making first use feel heavy.</p>`,
+      takeaway: 'The design move is not hiding information forever. It is sequencing the burden so the user handles one layer at a time.'
+    };
+  }
+
+  if (principle.id === 'von-restorff-effect' || name.includes('restorff') || categories.includes('salience')) {
+    return {
+      summary: 'make the genuinely important item stand out from routine information.',
+      before: demoStack([
+        ['Routine sync complete', 'Info'],
+        ['Lab result critical', 'Info'],
+        ['Message received', 'Info']
+      ]),
+      after: `${demoStack([
+        ['Routine sync complete', 'Normal', 'muted'],
+        ['Lab result critical', 'High salience', 'primary'],
+        ['Message received', 'Normal', 'muted']
+      ])}<div class="demo-warning"><span class="mi" style="font-size:16px;">priority_high</span><span>Critical alert gets contrast, position, and wording that separate it from background noise.</span></div>`,
+      takeaway: 'Use salience sparingly. If everything shouts, nothing is actually salient.'
+    };
+  }
+
+  if (principle.id === 'millers-law' || name.includes('miller') || categories.includes('chunk')) {
+    return {
+      summary: 'chunk dense information into smaller groups users can hold in working memory.',
+      before: `<div class="demo-token-row">${['Name','Role','Team','Status','Risk','Owner','Date','Notes','History','Evidence'].map((item) => `<span class="demo-token">${item}</span>`).join('')}</div>`,
+      after: `<div class="demo-stack">
+        <div class="demo-row primary"><span>Identity</span><strong>Name, role, team</strong></div>
+        <div class="demo-row"><span>Decision context</span><strong>Status, risk, owner</strong></div>
+        <div class="demo-row"><span>Evidence</span><strong>Date, notes, history</strong></div>
+      </div>`,
+      takeaway: 'The principle becomes information architecture: users scan groups first, then details.'
+    };
+  }
+
+  if (principle.id === 'fitts-law' || name.includes('fitts')) {
+    return {
+      summary: 'make frequent or important targets larger, closer, and easier to hit.',
+      before: demoStack([
+        ['Save', 'Small'],
+        ['Submit approval', 'Small'],
+        ['Cancel', 'Small']
+      ]),
+      after: `${demoStack([
+        ['Submit approval', 'Large target', 'primary'],
+        ['Save draft', 'Secondary'],
+        ['Cancel', 'Text link', 'muted']
+      ])}<p class="demo-note">The highest-value action gets the easiest motor path.</p>`,
+      takeaway: 'A behavior science principle turns into target size, placement, and spacing choices.'
+    };
+  }
+
+  if (contexts.includes('navigation') || categories.includes('navigation') || name.includes('jakob')) {
+    return {
+      summary: 'use familiar patterns so users can rely on recognition instead of relearning.',
+      before: demoStack([
+        ['Mystery icon', 'No label'],
+        ['Custom menu name', 'Low scent'],
+        ['Hidden search', 'Hard to find']
+      ]),
+      after: demoStack([
+        ['Search', 'Visible', 'primary'],
+        ['Projects', 'Familiar label'],
+        ['Settings', 'Expected place']
+      ]),
+      takeaway: 'Useful design often feels unsurprising. Familiarity frees attention for the actual task.'
+    };
+  }
+
+  return {
+    summary: 'translate the principle into visible hierarchy, feedback, and constraints.',
+    before: demoStack([
+      ['Problem signal', 'Unclear'],
+      ['Recommended action', 'Hidden'],
+      ['Risk or cost', 'Unexplained']
+    ]),
+    after: demoStack([
+      ['Problem signal', 'Named', 'primary'],
+      ['Recommended action', 'Visible'],
+      ['Risk or cost', 'Explained']
+    ]),
+    takeaway: principle.designPrompt || 'Turn the principle into one concrete interface decision the user can see, test, and understand.'
+  };
+}
+
+function demoStack(rows) {
+  return `<div class="demo-stack">${rows.map(([label, meta, tone]) => `<div class="demo-row ${tone || ''}"><span>${escapeHtml(label)}</span><strong>${escapeHtml(meta)}</strong></div>`).join('')}</div>`;
+}
+
+async function fillSampleProblem(sample) {
+  state.sampleToken += 1;
+  const token = state.sampleToken;
+  const shouldAnimate = !prefersReducedMotion() && sample.length < 180;
+
+  if (!elements.problemInput || !shouldAnimate) {
+    state.selection.problemDescription = sample;
+    if (elements.problemInput) elements.problemInput.value = sample;
+    state.currentPage = 1;
+    recompute();
+    showToast('edit_note', 'Sample problem loaded');
+    return;
+  }
+
+  elements.problemInput.value = '';
+  state.selection.problemDescription = '';
+  updateFlowState();
+
+  const step = Math.max(1, Math.ceil(sample.length / 44));
+  const delay = Math.max(8, Math.floor(SAMPLE_TYPING_MS / Math.ceil(sample.length / step)));
+  for (let index = 0; index <= sample.length; index += step) {
+    if (token !== state.sampleToken) return;
+    elements.problemInput.value = sample.slice(0, index);
+    await wait(delay);
+  }
+  elements.problemInput.value = sample;
+  state.selection.problemDescription = sample;
+  state.currentPage = 1;
+  recompute();
+  showToast('edit_note', 'Sample problem analysed');
+}
+
+function updateFlowState() {
+  const hasProblem = Boolean(state.selection.problemDescription.trim());
+  const hasResults = state.allRankedPrinciples.length > 0;
+  const activeCount = hasProblem ? (hasResults ? 4 : 2) : 1;
+
+  elements.flowSteps?.forEach((step, index) => {
+    step.classList.toggle('is-active', index < activeCount);
+  });
+  elements.workflowSteps?.forEach((step, index) => {
+    step.classList.toggle('is-active', index < activeCount);
+  });
+}
+
+async function openPromptGenerator(principle, triggerButton) {
   const payload = {
     principleId: principle.id,
     principleName: principle.name,
@@ -309,7 +517,36 @@ function openPromptGenerator(principle) {
     source: 'library'
   });
 
+  if (triggerButton) {
+    triggerButton.classList.add('prompt-seeding');
+    triggerButton.disabled = true;
+    const label = triggerButton.querySelector('[data-button-label]');
+    if (label) label.textContent = 'Seeding prompt...';
+  }
+  showToast('auto_awesome', `Seeded with ${principle.name}`);
+
+  if (!prefersReducedMotion()) {
+    await wait(520);
+  }
+
   window.location.href = `advanced-prompt-generator.html?${params.toString()}`;
+}
+
+function escapeHtml(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function showToast(icon, msg) {
