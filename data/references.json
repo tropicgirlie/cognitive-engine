@@ -1,0 +1,380 @@
+{
+  "description": "Canonical, citable sources for each principle where a well-established reference exists. Principle IDs match data/principles-v2.json. Curated for researchers; absence of an entry means no single canonical source is asserted.",
+  "references": {
+    "hicks-law": [
+      { "a": "Hick, W. E.", "y": 1952, "t": "On the rate of gain of information", "v": "Quarterly Journal of Experimental Psychology, 4(1), 11–26" },
+      { "a": "Hyman, R.", "y": 1953, "t": "Stimulus information as a determinant of reaction time", "v": "Journal of Experimental Psychology, 45(3), 188–196" }
+    ],
+    "millers-law": [
+      { "a": "Miller, G. A.", "y": 1956, "t": "The magical number seven, plus or minus two: Some limits on our capacity for processing information", "v": "Psychological Review, 63(2), 81–97" }
+    ],
+    "von-restorff-effect": [
+      { "a": "von Restorff, H.", "y": 1933, "t": "Über die Wirkung von Bereichsbildungen im Spurenfeld", "v": "Psychologische Forschung, 18, 299–342" }
+    ],
+    "fitts-law": [
+      { "a": "Fitts, P. M.", "y": 1954, "t": "The information capacity of the human motor system in controlling the amplitude of movement", "v": "Journal of Experimental Psychology, 47(6), 381–391" },
+      { "a": "MacKenzie, I. S.", "y": 1992, "t": "Fitts' law as a research and design tool in human-computer interaction", "v": "Human–Computer Interaction, 7(1), 91–139" }
+    ],
+    "serial-position-effect": [
+      { "a": "Murdock, B. B.", "y": 1962, "t": "The serial position effect of free recall", "v": "Journal of Experimental Psychology, 64(5), 482–488" },
+      { "a": "Ebbinghaus, H.", "y": 1885, "t": "Über das Gedächtnis (Memory: A Contribution to Experimental Psychology)", "v": "Duncker & Humblot" }
+    ],
+    "jakobs-law": [
+      { "a": "Nielsen, J.", "y": 2000, "t": "Designing Web Usability: The Practice of Simplicity", "v": "New Riders Publishing" }
+    ],
+    "peak-end-rule": [
+      { "a": "Kahneman, D., Fredrickson, B. L., Schreiber, C. A., & Redelmeier, D. A.", "y": 1993, "t": "When more pain is preferred to less: Adding a better end", "v": "Psychological Science, 4(6), 401–405" }
+    ],
+    "progressive-disclosure": [
+      { "a": "Carroll, J. M., & Carrithers, C.", "y": 1984, "t": "Training wheels in a user interface", "v": "Communications of the ACM, 27(8), 800–806" },
+      { "a": "Nielsen, J.", "y": 2006, "t": "Progressive disclosure", "v": "Nielsen Norman Group" }
+    ],
+    "doherty-threshold": [
+      { "a": "Doherty, W. J., & Kelisky, R. P.", "y": 1979, "t": "Managing VM/CMS systems for user effectiveness", "v": "IBM Systems Journal, 18(1), 143–163" },
+      { "a": "Doherty, W. J., & Thadhani, A. J.", "y": 1982, "t": "The economic value of rapid response time", "v": "IBM Report GE20-0752-0" }
+    ],
+    "social-proof": [
+      { "a": "Cialdini, R. B.", "y": 1984, "t": "Influence: The Psychology of Persuasion", "v": "Harper Business" }
+    ],
+    "cognitive-load-theory": [
+      { "a": "Sweller, J.", "y": 1988, "t": "Cognitive load during problem solving: Effects on learning", "v": "Cognitive Science, 12(2), 257–285" }
+    ],
+    "inattentional-blindness": [
+      { "a": "Simons, D. J., & Chabris, C. F.", "y": 1999, "t": "Gorillas in our midst: Sustained inattentional blindness for dynamic events", "v": "Perception, 28(9), 1059–1074" }
+    ],
+    "change-blindness": [
+      { "a": "Rensink, R. A., O'Regan, J. K., & Clark, J. J.", "y": 1997, "t": "To see or not to see: The need for attention to perceive changes in scenes", "v": "Psychological Science, 8(5), 368–373" },
+      { "a": "Simons, D. J., & Levin, D. T.", "y": 1997, "t": "Change blindness", "v": "Trends in Cognitive Sciences, 1(7), 261–267" }
+    ],
+    "attentional-blink": [
+      { "a": "Raymond, J. E., Shapiro, K. L., & Arnell, K. M.", "y": 1992, "t": "Temporary suppression of visual processing in an RSVP task: An attentional blink?", "v": "Journal of Experimental Psychology: Human Perception and Performance, 18(3), 849–860" }
+    ],
+    "stroop-effect": [
+      { "a": "Stroop, J. R.", "y": 1935, "t": "Studies of interference in serial verbal reactions", "v": "Journal of Experimental Psychology, 18(6), 643–662" }
+    ],
+    "recognition-over-recall": [
+      { "a": "Nielsen, J.", "y": 1994, "t": "Usability Engineering", "v": "Morgan Kaufmann" }
+    ],
+    "zeigarnik-effect": [
+      { "a": "Zeigarnik, B.", "y": 1927, "t": "Über das Behalten von erledigten und unerledigten Handlungen", "v": "Psychologische Forschung, 9, 1–85" }
+    ],
+    "satisficing": [
+      { "a": "Simon, H. A.", "y": 1956, "t": "Rational choice and the structure of the environment", "v": "Psychological Review, 63(2), 129–138" }
+    ],
+    "confirmation-bias": [
+      { "a": "Wason, P. C.", "y": 1960, "t": "On the failure to eliminate hypotheses in a conceptual task", "v": "Quarterly Journal of Experimental Psychology, 12(3), 129–140" },
+      { "a": "Nickerson, R. S.", "y": 1998, "t": "Confirmation bias: A ubiquitous phenomenon in many guises", "v": "Review of General Psychology, 2(2), 175–220" }
+    ],
+    "cognitive-ease": [
+      { "a": "Kahneman, D.", "y": 2011, "t": "Thinking, Fast and Slow", "v": "Farrar, Straus and Giroux" }
+    ],
+    "spacing-effect": [
+      { "a": "Ebbinghaus, H.", "y": 1885, "t": "Über das Gedächtnis (Memory: A Contribution to Experimental Psychology)", "v": "Duncker & Humblot" },
+      { "a": "Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D.", "y": 2006, "t": "Distributed practice in verbal recall tasks: A review and quantitative synthesis", "v": "Psychological Bulletin, 132(3), 354–380" }
+    ],
+    "dual-coding-theory": [
+      { "a": "Paivio, A.", "y": 1971, "t": "Imagery and Verbal Processes", "v": "Holt, Rinehart and Winston" }
+    ],
+    "law-of-proximity": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "law-of-similarity": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "figure-ground": [
+      { "a": "Rubin, E.", "y": 1915, "t": "Synsoplevede Figurer (Visually experienced figures)", "v": "Gyldendal" }
+    ],
+    "law-of-praegnanz": [
+      { "a": "Koffka, K.", "y": 1935, "t": "Principles of Gestalt Psychology", "v": "Harcourt, Brace" }
+    ],
+    "law-of-closure": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "law-of-continuity": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "law-of-common-fate": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "law-of-symmetry": [
+      { "a": "Wertheimer, M.", "y": 1923, "t": "Untersuchungen zur Lehre von der Gestalt II (Laws of organization in perceptual forms)", "v": "Psychologische Forschung, 4, 301–350" }
+    ],
+    "loss-aversion": [
+      { "a": "Kahneman, D., & Tversky, A.", "y": 1979, "t": "Prospect theory: An analysis of decision under risk", "v": "Econometrica, 47(2), 263–291" }
+    ],
+    "default-effect": [
+      { "a": "Johnson, E. J., & Goldstein, D.", "y": 2003, "t": "Do defaults save lives?", "v": "Science, 302(5649), 1338–1339" }
+    ],
+    "anchoring-effect": [
+      { "a": "Tversky, A., & Kahneman, D.", "y": 1974, "t": "Judgment under uncertainty: Heuristics and biases", "v": "Science, 185(4157), 1124–1131" }
+    ],
+    "framing-effect": [
+      { "a": "Tversky, A., & Kahneman, D.", "y": 1981, "t": "The framing of decisions and the psychology of choice", "v": "Science, 211(4481), 453–458" }
+    ],
+    "status-quo-bias": [
+      { "a": "Samuelson, W., & Zeckhauser, R.", "y": 1988, "t": "Status quo bias in decision making", "v": "Journal of Risk and Uncertainty, 1(1), 7–59" }
+    ],
+    "availability-heuristic": [
+      { "a": "Tversky, A., & Kahneman, D.", "y": 1973, "t": "Availability: A heuristic for judging frequency and probability", "v": "Cognitive Psychology, 5(2), 207–232" }
+    ],
+    "representativeness-heuristic": [
+      { "a": "Kahneman, D., & Tversky, A.", "y": 1972, "t": "Subjective probability: A judgment of representativeness", "v": "Cognitive Psychology, 3(3), 430–454" }
+    ],
+    "decoy-effect": [
+      { "a": "Huber, J., Payne, J. W., & Puto, C.", "y": 1982, "t": "Adding asymmetrically dominated alternatives: Violations of regularity and the similarity hypothesis", "v": "Journal of Consumer Research, 9(1), 90–98" }
+    ],
+    "planning-fallacy": [
+      { "a": "Kahneman, D., & Tversky, A.", "y": 1979, "t": "Intuitive prediction: Biases and corrective procedures", "v": "TIMS Studies in Management Science, 12, 313–327" },
+      { "a": "Buehler, R., Griffin, D., & Ross, M.", "y": 1994, "t": "Exploring the 'planning fallacy'", "v": "Journal of Personality and Social Psychology, 67(3), 366–381" }
+    ],
+    "dual-process-theory": [
+      { "a": "Evans, J. St. B. T.", "y": 2008, "t": "Dual-processing accounts of reasoning, judgment, and social cognition", "v": "Annual Review of Psychology, 59, 255–278" },
+      { "a": "Kahneman, D.", "y": 2011, "t": "Thinking, Fast and Slow", "v": "Farrar, Straus and Giroux" }
+    ],
+    "neural-habituation": [
+      { "a": "Thompson, R. F., & Spencer, W. A.", "y": 1966, "t": "Habituation: A model phenomenon for the study of neuronal substrates of behavior", "v": "Psychological Review, 73(1), 16–43" }
+    ],
+    "attentional-spotlight": [
+      { "a": "Posner, M. I.", "y": 1980, "t": "Orienting of attention", "v": "Quarterly Journal of Experimental Psychology, 32(1), 3–25" }
+    ],
+    "emotional-memory-encoding": [
+      { "a": "McGaugh, J. L.", "y": 2004, "t": "The amygdala modulates the consolidation of memories of emotionally arousing experiences", "v": "Annual Review of Neuroscience, 27, 1–28" }
+    ],
+    "dopaminergic-reward-system": [
+      { "a": "Schultz, W.", "y": 1998, "t": "Predictive reward signal of dopamine neurons", "v": "Journal of Neurophysiology, 80(1), 1–27" }
+    ],
+    "embodied-cognition": [
+      { "a": "Varela, F. J., Thompson, E., & Rosch, E.", "y": 1991, "t": "The Embodied Mind: Cognitive Science and Human Experience", "v": "MIT Press" },
+      { "a": "Lakoff, G., & Johnson, M.", "y": 1999, "t": "Philosophy in the Flesh", "v": "Basic Books" }
+    ],
+    "colour-as-cognitive-shortcut": [
+      { "a": "Elliot, A. J., & Maier, M. A.", "y": 2014, "t": "Color psychology: Effects of perceiving color on psychological functioning in humans", "v": "Annual Review of Psychology, 65, 95–120" }
+    ],
+    "optimism-bias": [
+      { "a": "Weinstein, N. D.", "y": 1980, "t": "Unrealistic optimism about future life events", "v": "Journal of Personality and Social Psychology, 39(5), 806–820" },
+      { "a": "Sharot, T.", "y": 2011, "t": "The optimism bias", "v": "Current Biology, 21(23), R941–R945" }
+    ],
+    "anterior-cingulate-error-detection": [
+      { "a": "Gehring, W. J., Goss, B., Coles, M. G. H., Meyer, D. E., & Donchin, E.", "y": 1993, "t": "A neural system for error detection and compensation", "v": "Psychological Science, 4(6), 385–390" },
+      { "a": "Botvinick, M. M., Braver, T. S., Barch, D. M., Carter, C. S., & Cohen, J. D.", "y": 2001, "t": "Conflict monitoring and cognitive control", "v": "Psychological Review, 108(3), 624–652" }
+    ],
+    "cognitive-dissonance": [
+      { "a": "Festinger, L.", "y": 1957, "t": "A Theory of Cognitive Dissonance", "v": "Stanford University Press" }
+    ],
+    "authority-bias": [
+      { "a": "Milgram, S.", "y": 1963, "t": "Behavioral study of obedience", "v": "Journal of Abnormal and Social Psychology, 67(4), 371–378" }
+    ],
+    "reactance-theory": [
+      { "a": "Brehm, J. W.", "y": 1966, "t": "A Theory of Psychological Reactance", "v": "Academic Press" }
+    ],
+    "learned-helplessness": [
+      { "a": "Overmier, J. B., & Seligman, M. E. P.", "y": 1967, "t": "Effects of inescapable shock upon subsequent escape and avoidance responding", "v": "Journal of Comparative and Physiological Psychology, 63(1), 28–33" }
+    ],
+    "ikea-effect": [
+      { "a": "Norton, M. I., Mochon, D., & Ariely, D.", "y": 2012, "t": "The IKEA effect: When labor leads to love", "v": "Journal of Consumer Psychology, 22(3), 453–460" }
+    ],
+    "mere-exposure-effect": [
+      { "a": "Zajonc, R. B.", "y": 1968, "t": "Attitudinal effects of mere exposure", "v": "Journal of Personality and Social Psychology, 9(2, Pt. 2), 1–27" }
+    ],
+    "reciprocity-norm": [
+      { "a": "Gouldner, A. W.", "y": 1960, "t": "The norm of reciprocity: A preliminary statement", "v": "American Sociological Review, 25(2), 161–178" },
+      { "a": "Cialdini, R. B.", "y": 1984, "t": "Influence: The Psychology of Persuasion", "v": "Harper Business" }
+    ],
+    "self-determination-theory": [
+      { "a": "Deci, E. L., & Ryan, R. M.", "y": 2000, "t": "The 'what' and 'why' of goal pursuits: Human needs and the self-determination of behavior", "v": "Psychological Inquiry, 11(4), 227–268" }
+    ],
+    "negativity-bias": [
+      { "a": "Baumeister, R. F., Bratslavsky, E., Finkenauer, C., & Vohs, K. D.", "y": 2001, "t": "Bad is stronger than good", "v": "Review of General Psychology, 5(4), 323–370" }
+    ],
+    "threat-detection-bias": [
+      { "a": "Öhman, A., & Mineka, S.", "y": 2001, "t": "Fears, phobias, and preparedness: Toward an evolved module of fear and fear learning", "v": "Psychological Review, 108(3), 483–522" }
+    ],
+    "face-detection-bias": [
+      { "a": "Kanwisher, N., McDermott, J., & Chun, M. M.", "y": 1997, "t": "The fusiform face area: A module in human extrastriate cortex specialized for face perception", "v": "Journal of Neuroscience, 17(11), 4302–4311" }
+    ],
+    "effort-heuristic": [
+      { "a": "Kruger, J., Wirtz, D., Van Boven, L., & Altermatt, T. W.", "y": 2004, "t": "The effort heuristic", "v": "Journal of Experimental Social Psychology, 40(1), 91–98" }
+    ],
+    "in-group-bias": [
+      { "a": "Tajfel, H., & Turner, J. C.", "y": 1979, "t": "An integrative theory of intergroup conflict", "v": "In W. G. Austin & S. Worchel (Eds.), The Social Psychology of Intergroup Relations" }
+    ],
+    "biophilia-effect": [
+      { "a": "Wilson, E. O.", "y": 1984, "t": "Biophilia", "v": "Harvard University Press" }
+    ],
+    "signal-to-noise-ratio": [
+      { "a": "Tufte, E. R.", "y": 1983, "t": "The Visual Display of Quantitative Information", "v": "Graphics Press" },
+      { "a": "Shannon, C. E.", "y": 1948, "t": "A mathematical theory of communication", "v": "Bell System Technical Journal, 27(3), 379–423" }
+    ],
+    "information-hierarchy": [
+      { "a": "Tufte, E. R.", "y": 1990, "t": "Envisioning Information", "v": "Graphics Press" }
+    ],
+    "modality-effect": [
+      { "a": "Mayer, R. E.", "y": 2001, "t": "Multimedia Learning", "v": "Cambridge University Press" }
+    ],
+    "redundancy-principle": [
+      { "a": "Mayer, R. E.", "y": 2001, "t": "Multimedia Learning", "v": "Cambridge University Press" },
+      { "a": "Sweller, J.", "y": 2005, "t": "The redundancy principle in multimedia learning", "v": "In R. E. Mayer (Ed.), The Cambridge Handbook of Multimedia Learning" }
+    ],
+    "zipfs-law": [
+      { "a": "Zipf, G. K.", "y": 1949, "t": "Human Behavior and the Principle of Least Effort", "v": "Addison-Wesley" }
+    ],
+    "teslers-law": [
+      { "a": "Saffer, D.", "y": 2010, "t": "Designing for Interaction: Creating Innovative Applications and Devices (on Tesler's Law of the Conservation of Complexity)", "v": "New Riders" }
+    ],
+    "gricean-maxims": [
+      { "a": "Grice, H. P.", "y": 1975, "t": "Logic and conversation", "v": "In P. Cole & J. L. Morgan (Eds.), Syntax and Semantics, Vol. 3" }
+    ],
+    "processing-fluency": [
+      { "a": "Reber, R., Winkielman, P., & Schwarz, N.", "y": 1998, "t": "Effects of perceptual fluency on affective judgments", "v": "Journal of Personality and Social Psychology, 74(1), 45–57" }
+    ],
+    "speech-act-theory": [
+      { "a": "Austin, J. L.", "y": 1962, "t": "How to Do Things with Words", "v": "Oxford University Press" },
+      { "a": "Searle, J. R.", "y": 1969, "t": "Speech Acts: An Essay in the Philosophy of Language", "v": "Cambridge University Press" }
+    ],
+    "prototype-theory": [
+      { "a": "Rosch, E.", "y": 1978, "t": "Principles of categorization", "v": "In E. Rosch & B. B. Lloyd (Eds.), Cognition and Categorization" }
+    ],
+    "garden-path-effect": [
+      { "a": "Bever, T. G.", "y": 1970, "t": "The cognitive basis for linguistic structures", "v": "In J. R. Hayes (Ed.), Cognition and the Development of Language" },
+      { "a": "Frazier, L., & Fodor, J. D.", "y": 1978, "t": "The sausage machine: A new two-stage parsing model", "v": "Cognition, 6(4), 291–325" }
+    ],
+    "markedness-theory": [
+      { "a": "Greenberg, J. H.", "y": 1966, "t": "Language Universals, with Special Reference to Feature Hierarchies", "v": "Mouton" }
+    ],
+    "distributed-cognition": [
+      { "a": "Hutchins, E.", "y": 1995, "t": "Cognition in the Wild", "v": "MIT Press" }
+    ],
+    "situated-cognition": [
+      { "a": "Suchman, L. A.", "y": 1987, "t": "Plans and Situated Actions: The Problem of Human-Machine Communication", "v": "Cambridge University Press" },
+      { "a": "Lave, J., & Wenger, E.", "y": 1991, "t": "Situated Learning: Legitimate Peripheral Participation", "v": "Cambridge University Press" }
+    ],
+    "activity-theory": [
+      { "a": "Leontiev, A. N.", "y": 1978, "t": "Activity, Consciousness, and Personality", "v": "Prentice-Hall" },
+      { "a": "Kuutti, K.", "y": 1996, "t": "Activity theory as a potential framework for human-computer interaction research", "v": "In B. A. Nardi (Ed.), Context and Consciousness" }
+    ],
+    "proxemics": [
+      { "a": "Hall, E. T.", "y": 1966, "t": "The Hidden Dimension", "v": "Doubleday" }
+    ],
+    "phenomenology": [
+      { "a": "Merleau-Ponty, M.", "y": 1945, "t": "Phénoménologie de la perception (Phenomenology of Perception)", "v": "Gallimard" }
+    ],
+    "pragmatism": [
+      { "a": "James, W.", "y": 1907, "t": "Pragmatism: A New Name for Some Old Ways of Thinking", "v": "Longmans, Green" },
+      { "a": "Dewey, J.", "y": 1938, "t": "Logic: The Theory of Inquiry", "v": "Henry Holt" }
+    ],
+    "affordance-theory": [
+      { "a": "Gibson, J. J.", "y": 1979, "t": "The Ecological Approach to Visual Perception", "v": "Houghton Mifflin" },
+      { "a": "Norman, D. A.", "y": 1988, "t": "The Design of Everyday Things", "v": "Basic Books" }
+    ],
+    "chunking": [
+      { "a": "Miller, G. A.", "y": 1956, "t": "The magical number seven, plus or minus two", "v": "Psychological Review, 63(2), 81–97" }
+    ],
+    "sunk-cost-fallacy": [
+      { "a": "Arkes, H. R., & Blumer, C.", "y": 1985, "t": "The psychology of sunk cost", "v": "Organizational Behavior and Human Decision Processes, 35(1), 124–140" }
+    ],
+    "nudge-theory": [
+      { "a": "Thaler, R. H., & Sunstein, C. R.", "y": 2008, "t": "Nudge: Improving Decisions About Health, Wealth, and Happiness", "v": "Yale University Press" }
+    ],
+    "prospect-theory": [
+      { "a": "Kahneman, D., & Tversky, A.", "y": 1979, "t": "Prospect theory: An analysis of decision under risk", "v": "Econometrica, 47(2), 263–291" },
+      { "a": "Tversky, A., & Kahneman, D.", "y": 1992, "t": "Advances in prospect theory: Cumulative representation of uncertainty", "v": "Journal of Risk and Uncertainty, 5(4), 297–323" }
+    ],
+    "mental-accounting": [
+      { "a": "Thaler, R. H.", "y": 1985, "t": "Mental accounting and consumer choice", "v": "Marketing Science, 4(3), 199–214" }
+    ],
+    "endowment-effect": [
+      { "a": "Kahneman, D., Knetsch, J. L., & Thaler, R. H.", "y": 1990, "t": "Experimental tests of the endowment effect and the Coase theorem", "v": "Journal of Political Economy, 98(6), 1325–1348" }
+    ],
+    "present-bias": [
+      { "a": "Laibson, D.", "y": 1997, "t": "Golden eggs and hyperbolic discounting", "v": "Quarterly Journal of Economics, 112(2), 443–478" },
+      { "a": "O'Donoghue, T., & Rabin, M.", "y": 1999, "t": "Doing it now or later", "v": "American Economic Review, 89(1), 103–124" }
+    ],
+    "scarcity-heuristic": [
+      { "a": "Worchel, S., Lee, J., & Adewole, A.", "y": 1975, "t": "Effects of supply and demand on ratings of object value", "v": "Journal of Personality and Social Psychology, 32(5), 906–914" }
+    ],
+    "recency-bias": [
+      { "a": "Murdock, B. B.", "y": 1962, "t": "The serial position effect of free recall", "v": "Journal of Experimental Psychology, 64(5), 482–488" }
+    ],
+    "commitment-consistency-bias": [
+      { "a": "Freedman, J. L., & Fraser, S. C.", "y": 1966, "t": "Compliance without pressure: The foot-in-the-door technique", "v": "Journal of Personality and Social Psychology, 4(2), 195–202" },
+      { "a": "Cialdini, R. B.", "y": 1984, "t": "Influence: The Psychology of Persuasion", "v": "Harper Business" }
+    ],
+    "wysiati": [
+      { "a": "Kahneman, D.", "y": 2011, "t": "Thinking, Fast and Slow", "v": "Farrar, Straus and Giroux" }
+    ],
+    "schema-theory": [
+      { "a": "Bartlett, F. C.", "y": 1932, "t": "Remembering: A Study in Experimental and Social Psychology", "v": "Cambridge University Press" }
+    ],
+    "webers-law": [
+      { "a": "Fechner, G. T.", "y": 1860, "t": "Elemente der Psychophysik (Elements of Psychophysics)", "v": "Breitkopf & Härtel" }
+    ],
+    "interference-theory": [
+      { "a": "McGeoch, J. A.", "y": 1932, "t": "Forgetting and the law of disuse", "v": "Psychological Review, 39(4), 352–370" },
+      { "a": "Anderson, M. C., & Neely, J. H.", "y": 1996, "t": "Interference and inhibition in memory retrieval", "v": "In E. L. Bjork & R. A. Bjork (Eds.), Memory: Handbook of Perception and Cognition" }
+    ],
+    "disfluency-effect": [
+      { "a": "Alter, A. L., Oppenheimer, D. M., Epley, N., & Eyre, R. N.", "y": 2007, "t": "Overcoming intuition: Metacognitive difficulty activates analytic reasoning", "v": "Journal of Experimental Psychology: General, 136(4), 569–576" }
+    ],
+    "paradox-of-expertise": [
+      { "a": "Chi, M. T. H., Glaser, R., & Farr, M. J. (Eds.)", "y": 1988, "t": "The Nature of Expertise", "v": "Lawrence Erlbaum" }
+    ],
+    "context-effect": [
+      { "a": "Godden, D. R., & Baddeley, A. D.", "y": 1975, "t": "Context-dependent memory in two natural environments: On land and underwater", "v": "British Journal of Psychology, 66(3), 325–331" }
+    ],
+    "fluency-heuristic": [
+      { "a": "Jacoby, L. L., & Dallas, M.", "y": 1981, "t": "On the relationship between autobiographical memory and perceptual learning", "v": "Journal of Experimental Psychology: General, 110(3), 306–340" }
+    ],
+    "social-facilitation": [
+      { "a": "Triplett, N.", "y": 1898, "t": "The dynamogenic factors in pacemaking and competition", "v": "American Journal of Psychology, 9(4), 507–533" },
+      { "a": "Zajonc, R. B.", "y": 1965, "t": "Social facilitation", "v": "Science, 149(3681), 269–274" }
+    ],
+    "attribution-theory": [
+      { "a": "Heider, F.", "y": 1958, "t": "The Psychology of Interpersonal Relations", "v": "Wiley" },
+      { "a": "Kelley, H. H.", "y": 1967, "t": "Attribution theory in social psychology", "v": "Nebraska Symposium on Motivation, 15, 192–238" }
+    ],
+    "autonomy-bias": [
+      { "a": "Deci, E. L., & Ryan, R. M.", "y": 2000, "t": "The 'what' and 'why' of goal pursuits: Human needs and the self-determination of behavior", "v": "Psychological Inquiry, 11(4), 227–268" }
+    ],
+    "mirror-neurons-empathic-design": [
+      { "a": "Rizzolatti, G., & Craighero, L.", "y": 2004, "t": "The mirror-neuron system", "v": "Annual Review of Neuroscience, 27, 169–192" }
+    ],
+    "pattern-recognition-apophenia": [
+      { "a": "Conrad, K.", "y": 1958, "t": "Die beginnende Schizophrenie (coined 'apophenia')", "v": "Thieme" }
+    ],
+    "shannon-entropy": [
+      { "a": "Shannon, C. E.", "y": 1948, "t": "A mathematical theory of communication", "v": "Bell System Technical Journal, 27(3), 379–423" }
+    ],
+    "occams-razor": [
+      { "a": "William of Ockham", "y": 1323, "t": "Summa Logicae (attributed formulation of the principle of parsimony)", "v": "c. 1323" }
+    ],
+    "sapir-whorf-hypothesis": [
+      { "a": "Whorf, B. L.", "y": 1956, "t": "Language, Thought, and Reality", "v": "MIT Press" }
+    ],
+    "ritual-theory": [
+      { "a": "van Gennep, A.", "y": 1909, "t": "Les rites de passage (The Rites of Passage)", "v": "Émile Nourry" },
+      { "a": "Turner, V.", "y": 1969, "t": "The Ritual Process: Structure and Anti-Structure", "v": "Aldine" }
+    ],
+    "distributed-cognition-ext": [
+      { "a": "D'Andrade, R. G.", "y": 1995, "t": "The Development of Cognitive Anthropology", "v": "Cambridge University Press" }
+    ],
+    "gift-economy-reciprocity": [
+      { "a": "Mauss, M.", "y": 1925, "t": "Essai sur le don (The Gift)", "v": "L'Année Sociologique" }
+    ],
+    "signifiers-vs-affordances": [
+      { "a": "Norman, D. A.", "y": 2008, "t": "The way I see it: Signifiers, not affordances", "v": "interactions, 15(6), 18–19" },
+      { "a": "Norman, D. A.", "y": 2013, "t": "The Design of Everyday Things: Revised and Expanded Edition", "v": "Basic Books" }
+    ],
+    "wittgensteins-language-games": [
+      { "a": "Wittgenstein, L.", "y": 1953, "t": "Philosophical Investigations", "v": "Blackwell" }
+    ],
+    "heideggers-ready-to-hand": [
+      { "a": "Heidegger, M.", "y": 1927, "t": "Sein und Zeit (Being and Time)", "v": "Max Niemeyer" }
+    ],
+    "merleau-pontys-body-schema": [
+      { "a": "Merleau-Ponty, M.", "y": 1945, "t": "Phénoménologie de la perception (Phenomenology of Perception)", "v": "Gallimard" }
+    ],
+    "alan-kays-simplicity": [
+      { "a": "Kay, A.", "y": 1990, "t": "User interface: A personal view", "v": "In B. Laurel (Ed.), The Art of Human-Computer Interface Design" }
+    ]
+  }
+}

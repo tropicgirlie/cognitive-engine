@@ -13,7 +13,8 @@ export function buildIndexes(appData) {
     disciplinesById: Object.fromEntries(appData.disciplines.map((discipline) => [discipline.id, discipline])),
     problemTypesById: Object.fromEntries(appData.problemTypes.map((problemType) => [problemType.id, problemType])),
     goalsById: Object.fromEntries((appData.goals || []).map((goal) => [goal.id, goal])),
-    toolsById: Object.fromEntries((appData.tools || []).map((tool) => [tool.id, tool]))
+    toolsById: Object.fromEntries((appData.tools || []).map((tool) => [tool.id, tool])),
+    references: appData.references || {}
   };
 }
 
@@ -180,7 +181,13 @@ export function scorePrinciples(appData, selection) {
 
     const haystack = buildPrincipleHaystack(principle);
 
-    return haystack.includes(query);
+    // multi-word queries: every token must match somewhere in the record
+    // (was a single substring test, so "memory load" matched nothing)
+    const terms = tokenize(query);
+    if (!terms.length) {
+      return haystack.includes(query);
+    }
+    return terms.every((term) => haystack.includes(term));
   });
 
   filtered = filtered.sort((a, b) => b.score - a.score || a.name.localeCompare(b.name));

@@ -196,12 +196,14 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
     <span class="mi" style="font-size:18px;color:var(--on-surf-var);">search</span>
     <input type="search" id="library-search" placeholder="Search principles, patterns, risks"/>
   </label>
+  <button class="ibtn" data-tour-start title="Guided tour of the Library"><span class="mi">school</span></button>
   <button class="ibtn" id="reset-filters" title="Reset analysis"><span class="mi">restart_alt</span></button>
 </header>
 
 <nav class="nav-tabs" aria-label="Primary">
   <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
   <a href="index.html" class="ntab active" aria-current="page"><span class="mi">auto_stories</span>Library</a>
+  <a href="cognitive-atlas.html" class="ntab"><span class="mi">hub</span>Atlas</a>
   <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
   <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
   <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
@@ -322,6 +324,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 
 <div id="toast" role="status" aria-live="polite"><span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span><span id="t-msg"></span></div>
 
+<script src="js/cognitive-tour.js" defer></script>
 <script type="module" src="js/app.js"></script>
 </body>
 </html>

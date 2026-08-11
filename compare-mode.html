@@ -23,28 +23,24 @@
 html,body{height:100%;overflow:hidden;margin:0;padding:0;}
 body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var(--on-surf);}
 .mi{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;user-select:none;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
-.top-bar{height:64px;background:var(--surf-con);display:flex;align-items:center;padding:0 8px 0 16px;gap:4px;position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--outline-var);}
+.top-bar{height:64px;background:var(--surf-con);display:flex;align-items:center;padding:0 16px;gap:10px;position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--outline-var);}
 .logo-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.wordmark{font:700 16px/1 'Roboto Flex',sans-serif;color:var(--on-surf);letter-spacing:-.02em;margin-left:10px;}
+.wordmark{font:700 16px/1 'Roboto Flex',sans-serif;color:var(--on-surf);letter-spacing:-.02em;}
 .wordmark b{color:var(--pri);}
-.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--green-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--on-green);margin-left:12px;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--green-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--on-green);}
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--on-green);flex-shrink:0;}
-.search-wrap{display:flex;align-items:center;gap:8px;background:var(--surf-hi);border-radius:var(--r-full);padding:0 14px;height:40px;width:240px;}
-.search-wrap input{border:none;background:none;outline:none;font:400 14px/1 'Roboto';color:var(--on-surf);flex:1;}
-.search-wrap input::placeholder{color:var(--on-surf-var);}
-.ibtn{width:48px;height:48px;border-radius:var(--r-full);border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-surf-var);transition:background .15s;}
-.ibtn:hover{background:rgba(28,27,31,.08);}
-.avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;margin:0 4px;cursor:pointer;border:2px solid var(--outline-var);}
-.nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 8px;}
+.nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 8px;overflow-x:auto;}
 .ntab{display:flex;align-items:center;gap:8px;padding:0 20px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,background .15s;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
 .ntab:hover{background:rgba(61,99,221,.06);color:var(--on-surf);}
 .ntab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
 .ntab .mi{font-size:18px;}
 .scr::-webkit-scrollbar{width:4px;}
 .scr::-webkit-scrollbar-thumb{background:var(--outline-var);border-radius:4px;}
-.matrix-grid{display:grid;grid-template-columns:180px repeat(3,1fr) 120px;border:1px solid var(--outline-var);border-radius:var(--r-md);overflow:hidden;background:var(--outline-var);gap:1px;}
+.matrix-grid{display:grid;border:1px solid var(--outline-var);border-radius:var(--r-md);overflow:hidden;background:var(--outline-var);gap:1px;min-width:720px;}
 .matrix-cell{background:var(--surf-white);padding:16px 18px;}
-.matrix-header{background:var(--surf-low);padding:16px 18px;}
+.matrix-cell.alt{background:#FAFBFF;}
+.matrix-header{background:var(--surf-low);padding:16px 18px;position:relative;}
+.matrix-header:hover .remove-btn{opacity:1!important;}
 .matrix-label{background:var(--surf-con);padding:16px 18px;display:flex;align-items:flex-start;}
 .dot-low{width:7px;height:7px;border-radius:50%;background:#10A679;display:inline-block;margin-right:5px;}
 .dot-mod{width:7px;height:7px;border-radius:50%;background:#C98B0A;display:inline-block;margin-right:5px;}
@@ -55,6 +51,10 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 .btn-ghost:hover{background:rgba(61,99,221,.08);border-color:var(--pri);}
 .insight-card{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);padding:20px;transition:all .2s;}
 .insight-card:hover{box-shadow:var(--el1);border-color:var(--outline);}
+.mchip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-full);border:1px solid var(--outline-var);background:var(--surf-low);font:700 10.5px/1.4 'Roboto';color:var(--on-surf-var);margin:0 4px 4px 0;}
+.mchip .sw{width:7px;height:7px;border-radius:2px;flex-shrink:0;}
+.col-link{display:inline-flex;align-items:center;gap:3px;font:700 10.5px/1 'Roboto';color:var(--pri);text-decoration:none;margin-top:7px;}
+.col-link:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -63,24 +63,18 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 <header class="top-bar">
   <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
   <span class="wordmark">Cognitive <b>Engine</b></span>
-  <span class="status-pill"><span class="status-dot"></span>Optimal — your cognitive load is balanced</span>
+  <span class="status-pill"><span class="status-dot"></span>Side-by-side, source-backed analysis</span>
   <div style="flex:1;"></div>
-  <div class="search-wrap">
-    <span class="mi" style="font-size:18px;color:var(--on-surf-var);">search</span>
-    <input type="text" placeholder="Search principles…"/>
-  </div>
-  <button class="ibtn" title="Notifications"><span class="mi">notifications</span><span class="notif-dot"></span></button>
-  <button class="ibtn" title="Settings"><span class="mi">settings</span></button>
-  <img class="avatar" src="https://i.pravatar.cc/36?u=cog-ux" alt="User"/>
 </header>
 
 <!-- ── NAVIGATION TABS ── -->
 <nav class="nav-tabs">
   <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
   <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
+  <a href="cognitive-atlas.html" class="ntab"><span class="mi">hub</span>Atlas</a>
   <a href="compare-mode.html" class="ntab active"><span class="mi">compare_arrows</span>Compare</a>
   <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
-  <a href="#" class="ntab" onclick="showToast('history','History coming soon');return false;"><span class="mi">history</span>History</a>
+  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
 </nav>
 
 <!-- ── MAIN CONTENT ── -->
@@ -91,385 +85,409 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;">
       <div>
         <h1 style="font:700 24px/1.2 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 6px;">Compare Mode</h1>
-        <p style="font:400 13.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:520px;">Deconstruct and evaluate cognitive intervention strategies side-by-side to minimise friction and maximise user throughput.</p>
+        <p style="font:400 13.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:560px;">Evaluate cognitive principles side-by-side — mechanism, design actions, risks, and the primary sources behind each. Everything below is rendered live from the knowledge base.</p>
       </div>
       <div style="display:flex;gap:8px;flex-shrink:0;">
-        <button class="btn-ghost">
-          <span class="mi" style="font-size:16px;">save</span>Save Analysis
+        <button class="btn-ghost" id="share-btn">
+          <span class="mi" style="font-size:16px;">link</span>Copy share link
         </button>
-        <button class="btn-primary" onclick="showPrincipleSelector()">
+        <button class="btn-primary" id="add-btn">
           <span class="mi" style="font-size:16px;">add</span>Add Principle
         </button>
       </div>
     </div>
 
-    <!-- Comparison Matrix -->
+    <!-- Comparison Matrix (rendered from data) -->
     <div style="margin-bottom:24px;overflow-x:auto;">
-      <div class="matrix-grid">
-
-        <!-- ROW 1: Headers -->
-        <div class="matrix-header" style="display:flex;align-items:center;">
-          <p style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--on-surf-var);margin:0;">Core Attributes</p>
-        </div>
-
-        <!-- Principle 1 header -->
-        <div class="matrix-header" style="position:relative;">
-          <button onclick="removeColumn(this)" style="position:absolute;top:10px;right:10px;padding:4px;border-radius:6px;border:none;background:transparent;color:#C3D0F8;cursor:pointer;display:flex;opacity:0;transition:opacity 0.15s;" class="remove-btn">
-            <span class="mi" style="font-size:16px;">close</span>
-          </button>
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
-            <span class="dot-low"></span>
-            <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#10A679;">Low Load</span>
-          </div>
-          <h3 style="font-size:14px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Progressive Disclosure</h3>
-        </div>
-
-        <!-- Principle 2 header -->
-        <div class="matrix-header" style="position:relative;">
-          <button onclick="removeColumn(this)" style="position:absolute;top:10px;right:10px;padding:4px;border-radius:6px;border:none;background:transparent;color:#C3D0F8;cursor:pointer;display:flex;opacity:0;transition:opacity 0.15s;" class="remove-btn">
-            <span class="mi" style="font-size:16px;">close</span>
-          </button>
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
-            <span class="dot-mod"></span>
-            <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#C98B0A;">Moderate Load</span>
-          </div>
-          <h3 style="font-size:14px;font-weight:800;color:#0B1228;margin:0;letter-spacing:-0.01em;">Chunking (Miller's Law)</h3>
-        </div>
-
-        <!-- Principle 3 header -->
-        <div class="matrix-header" style="position:relative;">
-          <button onclick="removeColumn(this)" style="position:absolute;top:10px;right:10px;padding:4px;border-radius:6px;border:none;background:transparent;color:#C3D0F8;cursor:pointer;display:flex;opacity:0;transition:opacity 0.15s;" class="remove-btn">
-            <span class="mi" style="font-size:16px;">close</span>
-          </button>
-          <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
-            <span class="dot-hi"></span>
-            <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#D03535;">High Complexity</span>
-          </div>
-          <h3 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;letter-spacing:-0.01em;">Hick's Law</h3>
-        </div>
-
-        <!-- Add column -->
-        <div class="matrix-header" style="display:flex;align-items:center;justify-content:center;cursor:pointer;border:2px dashed var(--outline-var)!important;background:transparent;" onclick="showPrincipleSelector()" onmouseover="this.style.borderColor='var(--outline)';this.style.background='var(--surf-low)'" onmouseout="this.style.borderColor='var(--outline-var)';this.style.background='transparent'">
-          <div style="text-align:center;">
-            <span class="mi" style="font-size:28px;color:var(--outline-var);display:block;margin-bottom:4px;">add_circle</span>
-            <p style="font:600 11.5px/1 'Roboto';color:var(--on-surf-var);margin:0;">Add Principle</p>
-          </div>
-        </div>
-
-        <!-- ROW 2: Mechanism -->
-        <div class="matrix-label">
-          <p style="font-size:13px;font-weight:700;color:var(--on-surf);margin:0;">Mechanism</p>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.6;font-style:italic;">Defers complex features to secondary screens, maintaining initial clarity and reducing upfront cognitive cost.</p>
-        </div>
-        <div class="matrix-cell">
-          <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.6;font-style:italic;">Groups information into manageable units of 5–9 items aligned with working memory capacity.</p>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.6;font-style:italic;">Decision time increases logarithmically with the number of choices; reducing options reduces latency.</p>
-        </div>
-        <div class="matrix-cell" style="background:#F3F5FB;"></div>
-
-        <!-- ROW 3: Use Cases -->
-        <div class="matrix-label">
-          <p style="font-size:13px;font-weight:700;color:var(--on-surf);margin:0;">Use Cases</p>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Advanced filter systems</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Multi-step onboarding flows</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Admin &amp; settings dashboards</li>
-          </ul>
-        </div>
-        <div class="matrix-cell">
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Form field grouping</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Navigation menu structure</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Credit card input formatting</li>
-          </ul>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:7px;">
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>CTA prioritization</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Pricing plan comparison</li>
-            <li style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>Emergency shutdown UI</li>
-          </ul>
-        </div>
-        <div class="matrix-cell" style="background:#F3F5FB;"></div>
-
-        <!-- ROW 4: Cognitive Risks -->
-        <div class="matrix-label">
-          <p style="font-size:13px;font-weight:700;color:var(--err);margin:0;">Cognitive Risks</p>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <div style="display:flex;align-items:flex-start;gap:7px;">
-            <span class="mi" style="font-size:16px;color:var(--err);margin-top:1px;">warning</span>
-            <p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.55;">Discoverability issues; users may never find hidden power features.</p>
-          </div>
-        </div>
-        <div class="matrix-cell">
-          <div style="display:flex;align-items:flex-start;gap:7px;">
-            <span class="mi" style="font-size:16px;color:var(--err);margin-top:1px;">warning</span>
-            <p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.55;">Over-chunking can fragment UX and cause excessive scrolling.</p>
-          </div>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <div style="display:flex;align-items:flex-start;gap:7px;">
-            <span class="mi" style="font-size:16px;color:var(--err);margin-top:1px;">warning</span>
-            <p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.55;">Oversimplification can remove necessary nuance for expert users.</p>
-          </div>
-        </div>
-        <div class="matrix-cell" style="background:#F3F5FB;"></div>
-
-        <!-- ROW 5: Design Actions -->
-        <div class="matrix-label">
-          <p style="font-size:13px;font-weight:700;color:var(--on-surf);margin:0;">Design Actions</p>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="padding:10px 12px;background:var(--surf-hi);border-radius:8px;border-left:3px solid var(--pri);">
-              <p style="font-size:11px;font-weight:700;color:var(--pri);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Implementation</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Use "Show More" accordions and contextual tooltips for secondary content.</p>
-            </div>
-            <div style="padding:10px 12px;background:var(--surf-low);border-radius:8px;border-left:3px solid var(--outline);">
-              <p style="font-size:11px;font-weight:700;color:var(--on-surf-var);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Constraint</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Max 3 nesting layers before task abandonment peaks.</p>
-            </div>
-          </div>
-        </div>
-        <div class="matrix-cell">
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="padding:10px 12px;background:var(--surf-hi);border-radius:8px;border-left:3px solid var(--pri);">
-              <p style="font-size:11px;font-weight:700;color:var(--pri);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Implementation</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Use whitespace and clear section headers to divide data visually.</p>
-            </div>
-            <div style="padding:10px 12px;background:var(--surf-low);border-radius:8px;border-left:3px solid var(--outline);">
-              <p style="font-size:11px;font-weight:700;color:var(--on-surf-var);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Constraint</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Optimal chunk size is 4 for high-stress clinical environments.</p>
-            </div>
-          </div>
-        </div>
-        <div class="matrix-cell" style="background:#FAFBFF;">
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="padding:10px 12px;background:var(--surf-hi);border-radius:8px;border-left:3px solid var(--pri);">
-              <p style="font-size:11px;font-weight:700;color:var(--pri);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Implementation</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Highlight "Recommended" choices to reduce analysis paralysis.</p>
-            </div>
-            <div style="padding:10px 12px;background:var(--surf-low);border-radius:8px;border-left:3px solid var(--outline);">
-              <p style="font-size:11px;font-weight:700;color:var(--on-surf-var);margin:0 0 3px;text-transform:uppercase;letter-spacing:0.05em;">Constraint</p>
-              <p style="font-size:12px;color:var(--on-surf-var);margin:0;line-height:1.5;">Avoid more than 5 critical options per viewport.</p>
-            </div>
-          </div>
-        </div>
-        <div class="matrix-cell" style="background:#F3F5FB;"></div>
-
-      </div><!-- /matrix-grid -->
+      <div class="matrix-grid" id="matrix"></div>
     </div>
 
-    <!-- Insight Bento -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;">
-
-      <div class="insight-card">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <div style="width:36px;height:36px;border-radius:9px;background:var(--green-con);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <span class="mi" style="font-size:20px;color:var(--on-green);">balance</span>
-          </div>
-          <h4 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;letter-spacing:-0.01em;">Optimal Trade-off</h4>
-        </div>
-        <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">Combine <span style="font-weight:700;color:var(--pri);">Chunking</span> with <span style="font-weight:700;color:var(--pri);">Progressive Disclosure</span> for enterprise search tools to reduce time-to-action by 40%.</p>
-      </div>
-
-      <div class="insight-card">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
-          <div style="width:36px;height:36px;border-radius:9px;background:var(--surf-hi);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <span class="mi" style="font-size:20px;color:var(--pri);">bolt</span>
-          </div>
-          <h4 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;letter-spacing:-0.01em;">Efficiency Gains</h4>
-        </div>
-        <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">Applying <span style="font-weight:700;color:var(--pri);">Hick's Law</span> to a checkout flow reduced the cognitive strain index (CSI) from 0.7 to 0.4 in pilot testing.</p>
-      </div>
-
-      <div class="insight-card" style="border-style:dashed;border-color:var(--outline-var);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px;" onmouseover="this.style.background='var(--surf-low)'" onmouseout="this.style.background='var(--surf-white)'">
-        <span class="mi" style="font-size:36px;color:var(--outline-var);">add_circle</span>
-        <p style="font:700 13px/1 'Roboto';color:var(--on-surf-var);margin:0;">Compare another Principle</p>
-      </div>
-
-    </div>
+    <!-- Insight cards (computed from the selection) -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;" id="insights"></div>
 
     <!-- Footer -->
     <div style="border-top:1px solid var(--outline-var);padding-top:16px;padding-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
       <p style="font:400 12px/1 'Roboto';color:var(--on-surf-var);margin:0;">© 2026 Cognitive Engine</p>
-      <div style="display:flex;gap:16px;">
-        <a href="#" style="font-size:12px;color:var(--on-surf-var);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Documentation</a>
-        <a href="#" style="font-size:12px;color:var(--on-surf-var);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Support</a>
-        <a href="#" style="font-size:12px;color:var(--on-surf-var);text-decoration:none;transition:color 0.15s;" onmouseover="this.style.color='var(--pri)'" onmouseout="this.style.color='var(--on-surf-var)'">Privacy Policy</a>
-      </div>
+      <a href="cognitive-atlas.html" style="font-size:12px;color:var(--on-surf-var);text-decoration:none;">Explore all 115 principles in the Atlas →</a>
     </div>
 
   </main>
 </div>
 
-<div id="toast" style="position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:300;box-shadow:var(--el2);max-width:360px;">
+<div id="toast" style="position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:600;box-shadow:var(--el2);max-width:360px;">
   <span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span>
   <span id="t-msg"></span>
 </div>
+
 <!-- Principle Selector Modal -->
 <div id="principleModal" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:none;align-items:center;justify-content:center;z-index:500;">
-  <div style="background:var(--surf-white);border-radius:var(--r-lg);width:90%;max-width:600px;max-height:80vh;overflow-y:auto;box-shadow:var(--el3);">
+  <div role="dialog" aria-label="Add principle to compare" style="background:var(--surf-white);border-radius:var(--r-lg);width:90%;max-width:600px;max-height:80vh;overflow-y:auto;box-shadow:var(--el2);">
     <div style="padding:24px;border-bottom:1px solid var(--outline-var);display:flex;align-items:center;justify-content:space-between;">
       <h3 style="font:700 18px/1.2 'Roboto';color:var(--on-surf);margin:0;">Add Principle to Compare</h3>
-      <button onclick="closePrincipleSelector()" style="background:none;border:none;padding:8px;border-radius:50%;cursor:pointer;color:var(--on-surf-var);">
+      <button id="modal-close" style="background:none;border:none;padding:8px;border-radius:50%;cursor:pointer;color:var(--on-surf-var);display:flex;">
         <span class="mi">close</span>
       </button>
     </div>
     <div style="padding:24px;">
-      <input type="text" id="principleSearch" placeholder="Search principles..." style="width:100%;padding:12px;border:1px solid var(--outline);border-radius:var(--r-md);font:400 14px/1 'Roboto';outline:none;margin-bottom:16px;">
+      <input type="text" id="principleSearch" placeholder="Search 115 principles…" style="width:100%;padding:12px;border:1px solid var(--outline);border-radius:var(--r-md);font:400 14px/1 'Roboto';outline:none;margin-bottom:16px;box-sizing:border-box;">
       <div id="principleList" style="display:flex;flex-direction:column;gap:8px;"></div>
     </div>
   </div>
 </div>
 
 <script>
-let allPrinciples = [];
-let currentComparePrinciples = ['Progressive Disclosure', 'Chunking (Miller\'s Law)', 'Hick\'s Law'];
+'use strict';
+/* Compare Mode — fully data-driven.
+   State lives in the URL (?p=id1,id2,id3) so every comparison is shareable. */
 
-async function loadPrinciples() {
-  try {
-    const response = await fetch('data/principles-v2.json');
-    allPrinciples = await response.json();
-  } catch (error) {
-    console.error('Failed to load principles:', error);
-    showToast('error', 'Failed to load principles');
-  }
+const MAX_COLS = 4;
+const state = {
+  principles: [], byId: {},
+  disciplines: {}, contexts: {}, problemTypes: {},
+  references: {},
+  selected: []
+};
+
+const DISC_PROFESSIONS = {
+  'cognitive-psychology':       'UX researchers · cognitive scientists',
+  'gestalt-psychology':         'visual & UI designers',
+  'neuroscience':               'HCI researchers',
+  'behavioral-economics':       'product managers · growth designers',
+  'social-psychology':          'community & marketing designers',
+  'evolutionary-psychology':    'behavioural researchers',
+  'information-theory':         'information architects · data designers',
+  'linguistics':                'UX writers · content designers',
+  'ux-design':                  'product designers',
+  'human-computer-interaction': 'interaction designers · HCI researchers',
+  'instructional-design':       'learning experience designers',
+  'visual-design':              'visual & brand designers',
+  'anthropology':               'design researchers · ethnographers',
+  'philosophy':                 'design strategists · ethicists'
+};
+
+const DISC_DOT = {
+  'cognitive-psychology':'#5D80D9','ux-design':'#5DA8D9','visual-design':'#B087C7',
+  'behavioral-economics':'#CAA266','social-psychology':'#AABB87','human-computer-interaction':'#6FA8A0',
+  'instructional-design':'#7B9E5E','gestalt-psychology':'#D98E5D','neuroscience':'#C17C9B',
+  'evolutionary-psychology':'#C75D6E','information-theory':'#8A7CC7','linguistics':'#C7B45D',
+  'anthropology':'#5DB89A','philosophy':'#A889C7'
+};
+
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-function showPrincipleSelector() {
-  const modal = document.getElementById('principleModal');
-  modal.style.display = 'flex';
-  renderPrincipleList('');
+async function loadAll() {
+  const get = (f) => fetch(f).then((r) => { if (!r.ok) throw new Error(f); return r.json(); });
+  const [p, d, c, pt] = await Promise.all([
+    get('data/principles-v2.json'), get('data/disciplines.json'),
+    get('data/contexts.json'), get('data/problem-types.json')
+  ]);
+  const refs = await fetch('data/references.json')
+    .then((r) => (r.ok ? r.json() : { references: {} }))
+    .catch(() => ({ references: {} }));
+  state.principles = p.principles;
+  state.byId = Object.fromEntries(p.principles.map((x) => [x.id, x]));
+  state.disciplines = Object.fromEntries(d.disciplines.map((x) => [x.id, x]));
+  state.contexts = Object.fromEntries(c.contexts.map((x) => [x.id, x]));
+  state.problemTypes = Object.fromEntries(pt.problemTypes.map((x) => [x.id, x]));
+  state.references = refs.references || {};
 }
 
-function closePrincipleSelector() {
-  document.getElementById('principleModal').style.display = 'none';
-  document.getElementById('principleSearch').value = '';
+function hydrate() {
+  const fromUrl = (new URLSearchParams(location.search).get('p') || '')
+    .split(',').map((s) => s.trim()).filter((id) => state.byId[id]);
+  state.selected = fromUrl.length
+    ? fromUrl.slice(0, MAX_COLS)
+    : ['progressive-disclosure', 'millers-law', 'hicks-law'].filter((id) => state.byId[id]);
 }
 
-function renderPrincipleList(searchTerm) {
-  const list = document.getElementById('principleList');
-  const filtered = allPrinciples.filter(p => 
-    !currentComparePrinciples.includes(p.name) &&
-    (p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-     p.description.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-  
-  list.innerHTML = filtered.slice(0, 20).map(principle => `
-    <div onclick="addPrincipleToCompare('${principle.name}')" style="padding:12px;border:1px solid var(--outline-var);border-radius:var(--r-md);cursor:pointer;transition:all .15s;" onmouseover="this.style.background='var(--surf-low)';this.style.borderColor='var(--pri)'" onmouseout="this.style.background='var(--surf-white)';this.style.borderColor='var(--outline-var)'">
-      <div style="font:600 14px/1.2 'Roboto';color:var(--on-surf);margin-bottom:4px;">${principle.name}</div>
-      <div style="font:400 13px/1.4 'Roboto';color:var(--on-surf-var);">${principle.description.substring(0, 120)}...</div>
+function syncUrl() {
+  const params = new URLSearchParams(location.search);
+  params.set('p', state.selected.join(','));
+  history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
+}
+
+/* ---------- matrix rendering ---------- */
+
+const IMPACT = {
+  high:     { dot: 'dot-hi',  color: '#D03535', label: 'High impact' },
+  moderate: { dot: 'dot-mod', color: '#C98B0A', label: 'Moderate impact' },
+  low:      { dot: 'dot-low', color: '#10A679', label: 'Supporting' }
+};
+
+function headerCell(p) {
+  const im = IMPACT[p.impactLevel] || IMPACT.moderate;
+  return `
+    <div class="matrix-header">
+      <button class="remove-btn" data-remove="${p.id}" title="Remove ${esc(p.name)}" style="position:absolute;top:10px;right:10px;padding:4px;border-radius:6px;border:none;background:transparent;color:#8A93B8;cursor:pointer;display:flex;opacity:0;transition:opacity 0.15s;">
+        <span class="mi" style="font-size:16px;">close</span>
+      </button>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
+        <span class="${im.dot}"></span>
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:${im.color};">${im.label}</span>
+      </div>
+      <h3 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;letter-spacing:-0.01em;">${esc(p.name)}</h3>
+      <a class="col-link" href="index.html?q=${encodeURIComponent(p.name)}"><span class="mi" style="font-size:12px;">auto_stories</span>Open in Library</a>
+    </div>`;
+}
+
+const addHeaderCell = `
+  <div class="matrix-header" data-add style="display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;min-height:88px;">
+    <div style="text-align:center;">
+      <span class="mi" style="font-size:28px;color:var(--outline-var);display:block;margin-bottom:4px;">add_circle</span>
+      <p style="font:600 11.5px/1 'Roboto';color:var(--on-surf-var);margin:0;">Add Principle</p>
     </div>
-  `).join('');
-  
-  if (filtered.length === 0) {
-    list.innerHTML = '<p style="text-align:center;color:var(--on-surf-var);padding:20px;">No principles found</p>';
+  </div>`;
+
+const fillerCell = '<div class="matrix-cell" style="background:#F3F5FB;"></div>';
+
+const ROWS = [
+  {
+    label: 'Field',
+    render: (p) => p.disciplines.map((d) => {
+      const disc = state.disciplines[d];
+      return `<span class="mchip"><span class="sw" style="background:${DISC_DOT[d] || '#8A8A82'};"></span>${esc(disc ? disc.label : d)}</span>`;
+    }).join('')
+  },
+  {
+    label: 'Mechanism',
+    render: (p) => `<p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.6;font-style:italic;">${esc(p.summary)}</p>`
+  },
+  {
+    label: 'When to use',
+    render: (p) => `<p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.6;">${esc(p.whenToUse || '—')}</p>`
+  },
+  {
+    label: 'Design Actions',
+    render: (p) => (p.actions || []).slice(0, 3).map((a) => `
+      <div style="display:flex;align-items:flex-start;gap:6px;font-size:12.5px;color:var(--on-surf-var);line-height:1.5;margin-bottom:7px;">
+        <span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;flex-shrink:0;">check_circle</span>
+        <span><strong style="color:var(--on-surf);">${esc(a.title)}.</strong> ${esc(a.description)}</span>
+      </div>`).join('')
+  },
+  {
+    label: 'Watch out',
+    danger: true,
+    render: (p) => (p.antiPatterns || []).slice(0, 3).map((a) => `
+      <div style="display:flex;align-items:flex-start;gap:7px;margin-bottom:7px;">
+        <span class="mi" style="font-size:15px;color:var(--err);margin-top:1px;flex-shrink:0;">warning</span>
+        <p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.55;">${esc(a)}</p>
+      </div>`).join('')
+  },
+  {
+    label: 'Canonical sources',
+    render: (p) => {
+      const refs = state.references[p.id] || [];
+      if (!refs.length) return '<p style="font-size:12px;color:var(--on-surf-var);margin:0;">No single canonical source asserted.</p>';
+      return refs.map((r) => `
+        <p style="font-size:12px;color:var(--on-surf-var);margin:0 0 7px;line-height:1.55;">
+          <strong style="color:var(--on-surf);">${esc(r.a)} (${r.y}).</strong> ${esc(r.t)}. <em>${esc(r.v)}</em>
+        </p>`).join('');
+    }
   }
-}
+];
 
-function addPrincipleToCompare(principleName) {
-  const principle = allPrinciples.find(p => p.name === principleName);
-  if (!principle) return;
-  
-  currentComparePrinciples.push(principleName);
-  addPrincipleColumn(principle);
-  closePrincipleSelector();
-  showToast('add_circle', `${principleName} added to comparison`);
-}
+function renderMatrix() {
+  const cols = state.selected.map((id) => state.byId[id]).filter(Boolean);
+  const grid = document.getElementById('matrix');
+  grid.style.gridTemplateColumns = `150px repeat(${cols.length}, minmax(230px, 1fr)) 130px`;
 
-function addPrincipleColumn(principle) {
-  const grid = document.querySelector('.matrix-grid');
-  const addColumn = grid.querySelector('.matrix-header[onclick*="showPrincipleSelector"]');
-  
-  // Determine load level based on principle complexity
-  const loadLevel = principle.complexity || 'moderate';
-  const dotClass = loadLevel === 'low' ? 'dot-low' : loadLevel === 'high' ? 'dot-hi' : 'dot-mod';
-  const loadText = loadLevel === 'low' ? 'Low Load' : loadLevel === 'high' ? 'High Complexity' : 'Moderate Load';
-  const loadColor = loadLevel === 'low' ? '#10A679' : loadLevel === 'high' ? '#D03535' : '#C98B0A';
-  
-  // Insert new column before the add column
-  const newHeader = document.createElement('div');
-  newHeader.className = 'matrix-header';
-  newHeader.style.cssText = 'position:relative;';
-  newHeader.innerHTML = `
-    <button onclick="removeColumn(this)" style="position:absolute;top:10px;right:10px;padding:4px;border-radius:6px;border:none;background:transparent;color:#C3D0F8;cursor:pointer;display:flex;opacity:0;transition:opacity 0.15s;" class="remove-btn">
-      <span class="mi" style="font-size:16px;">close</span>
-    </button>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">
-      <span class="${dotClass}"></span>
-      <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:${loadColor};">${loadText}</span>
-    </div>
-    <h3 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;letter-spacing:-0.01em;">${principle.name}</h3>
-  `;
-  
-  grid.insertBefore(newHeader, addColumn);
-  
-  // Add corresponding cells for each row
-  const rows = [
-    { type: 'mechanism', content: principle.mechanism || 'Not specified' },
-    { type: 'use-cases', content: principle.useCases ? principle.useCases.join(', ') : 'Not specified' },
-    { type: 'cognitive-risks', content: principle.cognitiveRisks ? principle.cognitiveRisks.join(', ') : 'Not specified' },
-    { type: 'design-actions', content: principle.designActions ? principle.designActions.join(', ') : 'Not specified' }
-  ];
-  
-  rows.forEach(row => {
-    const newCell = document.createElement('div');
-    newCell.className = 'matrix-cell';
-    newCell.innerHTML = `<p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.5;">${row.content}</p>`;
-    grid.insertBefore(newCell, addColumn);
+  let html = `<div class="matrix-header" style="display:flex;align-items:center;position:static;">
+      <p style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--on-surf-var);margin:0;">Core Attributes</p>
+    </div>`;
+  html += cols.map(headerCell).join('');
+  html += addHeaderCell;
+
+  ROWS.forEach((row, ri) => {
+    html += `<div class="matrix-label"><p style="font-size:13px;font-weight:700;color:${row.danger ? 'var(--err)' : 'var(--on-surf)'};margin:0;">${row.label}</p></div>`;
+    cols.forEach((p) => {
+      html += `<div class="matrix-cell ${ri % 2 === 0 ? 'alt' : ''}">${row.render(p)}</div>`;
+    });
+    html += fillerCell;
   });
-  
-  // Setup hover for new remove button
-  const btn = newHeader.querySelector('.remove-btn');
-  newHeader.addEventListener('mouseenter', function() { btn.style.opacity = '1'; });
-  newHeader.addEventListener('mouseleave', function() { btn.style.opacity = '0'; });
+
+  grid.innerHTML = html;
+  renderInsights(cols);
 }
 
-// Search functionality
-document.getElementById('principleSearch').addEventListener('input', function(e) {
-  renderPrincipleList(e.target.value);
+/* ---------- computed insights ---------- */
+
+function renderInsights(cols) {
+  const box = document.getElementById('insights');
+  if (!cols.length) { box.innerHTML = ''; return; }
+
+  // shared ground: contexts & problem types every selected principle shares
+  const sharedCtx = intersect(cols.map((p) => p.contexts));
+  const sharedPT = intersect(cols.map((p) => p.problemTypes));
+  const sharedChips = [
+    ...sharedCtx.map((id) => state.contexts[id]?.label),
+    ...sharedPT.map((id) => state.problemTypes[id]?.label)
+  ].filter(Boolean);
+
+  // combined coverage: union of problem types & contexts
+  const unionPT = new Set(cols.flatMap((p) => p.problemTypes));
+  const unionCX = new Set(cols.flatMap((p) => p.contexts));
+
+  // professions: from the union of disciplines
+  const unionD = [...new Set(cols.flatMap((p) => p.disciplines))];
+  const professions = [...new Set(unionD.map((d) => DISC_PROFESSIONS[d]).filter(Boolean))];
+
+  box.innerHTML = `
+    <div class="insight-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--green-con);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span class="mi" style="font-size:20px;color:var(--on-green);">handshake</span>
+        </div>
+        <h4 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;">Shared ground</h4>
+      </div>
+      ${sharedChips.length
+        ? `<div>${sharedChips.map((c) => `<span class="mchip">${esc(c)}</span>`).join('')}</div>
+           <p style="font-size:12.5px;color:var(--on-surf-var);margin:8px 0 0;line-height:1.6;">Every selected principle speaks to these situations — combining them there is lowest-risk.</p>`
+        : `<p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">No shared context or problem type — these principles address different situations. Combine with care.</p>`}
+    </div>
+
+    <div class="insight-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--surf-hi);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span class="mi" style="font-size:20px;color:var(--pri);">bolt</span>
+        </div>
+        <h4 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;">Combined coverage</h4>
+      </div>
+      <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">Together, these ${cols.length} principles address <strong style="color:var(--pri);">${unionPT.size} of 8 problem types</strong> across <strong style="color:var(--pri);">${unionCX.size} of 7 contexts</strong>.</p>
+    </div>
+
+    <div class="insight-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--pri-con);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <span class="mi" style="font-size:20px;color:var(--pri);">groups</span>
+        </div>
+        <h4 style="font-size:14px;font-weight:800;color:var(--on-surf);margin:0;">Who reaches for these</h4>
+      </div>
+      <p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.75;">${professions.map(esc).join('<br>')}</p>
+    </div>`;
+}
+
+function intersect(arrays) {
+  if (!arrays.length) return [];
+  return arrays.reduce((a, b) => a.filter((x) => b.includes(x)));
+}
+
+/* ---------- selection actions ---------- */
+
+function addPrinciple(id) {
+  if (state.selected.includes(id)) return;
+  if (state.selected.length >= MAX_COLS) {
+    showToast('info', `Compare is limited to ${MAX_COLS} columns — remove one first`);
+    return;
+  }
+  state.selected.push(id);
+  syncUrl(); renderMatrix();
+  showToast('add_circle', `${state.byId[id].name} added to comparison`);
+}
+
+function removePrinciple(id) {
+  if (state.selected.length <= 1) {
+    showToast('info', 'Keep at least one principle to compare');
+    return;
+  }
+  state.selected = state.selected.filter((x) => x !== id);
+  syncUrl(); renderMatrix();
+  showToast('remove_circle', 'Principle removed from comparison');
+}
+
+/* ---------- modal ---------- */
+
+const modal = document.getElementById('principleModal');
+
+function openModal() {
+  modal.style.display = 'flex';
+  document.getElementById('principleSearch').value = '';
+  renderList('');
+  document.getElementById('principleSearch').focus();
+}
+function closeModal() { modal.style.display = 'none'; }
+
+function renderList(term) {
+  const q = term.trim().toLowerCase();
+  const filtered = state.principles.filter((p) =>
+    !state.selected.includes(p.id) &&
+    (!q || [p.name, p.summary, ...(p.tags || []), ...(p.aliases || [])].join(' ').toLowerCase().includes(q))
+  );
+  const list = document.getElementById('principleList');
+  if (!filtered.length) {
+    list.innerHTML = '<p style="text-align:center;color:var(--on-surf-var);padding:20px;">No principles found</p>';
+    return;
+  }
+  list.innerHTML = filtered.slice(0, 24).map((p) => {
+    const disc = state.disciplines[p.disciplines[0]];
+    return `
+    <div data-pick="${p.id}" role="button" tabindex="0" style="padding:12px;border:1px solid var(--outline-var);border-radius:var(--r-md);cursor:pointer;transition:all .15s;" onmouseover="this.style.background='var(--surf-low)';this.style.borderColor='var(--pri)'" onmouseout="this.style.background='var(--surf-white)';this.style.borderColor='var(--outline-var)'">
+      <div style="font:600 14px/1.2 'Roboto';color:var(--on-surf);margin-bottom:3px;">${esc(p.name)}</div>
+      <div style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.06em;color:var(--pri);margin-bottom:4px;">${esc(disc ? disc.label : '')}</div>
+      <div style="font:400 12.5px/1.45 'Roboto';color:var(--on-surf-var);">${esc((p.summary || '').substring(0, 120))}…</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- wiring ---------- */
+
+document.getElementById('matrix').addEventListener('click', (ev) => {
+  const rm = ev.target.closest('[data-remove]');
+  if (rm) { removePrinciple(rm.dataset.remove); return; }
+  if (ev.target.closest('[data-add]')) openModal();
+});
+document.getElementById('add-btn').addEventListener('click', openModal);
+document.getElementById('modal-close').addEventListener('click', closeModal);
+modal.addEventListener('click', (ev) => { if (ev.target === modal) closeModal(); });
+document.getElementById('principleSearch').addEventListener('input', (ev) => renderList(ev.target.value));
+document.getElementById('principleList').addEventListener('click', (ev) => {
+  const item = ev.target.closest('[data-pick]');
+  if (item) { addPrinciple(item.dataset.pick); closeModal(); }
+});
+document.getElementById('principleList').addEventListener('keydown', (ev) => {
+  const item = ev.target.closest('[data-pick]');
+  if (item && (ev.key === 'Enter' || ev.key === ' ')) { ev.preventDefault(); addPrinciple(item.dataset.pick); closeModal(); }
+});
+document.getElementById('share-btn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText(location.href);
+    showToast('link', 'Share link copied to clipboard');
+  } catch (e) {
+    showToast('link', 'Copy this URL: ' + location.href);
+  }
+});
+document.addEventListener('keydown', (ev) => {
+  if (ev.key === 'Escape' && modal.style.display === 'flex') closeModal();
 });
 
 function showToast(icon, msg) {
-  var t = document.getElementById('toast');
+  const t = document.getElementById('toast');
   document.getElementById('t-icon').textContent = icon;
   document.getElementById('t-msg').textContent = msg;
   t.style.display = 'flex'; t.style.opacity = '1';
   clearTimeout(window._tt);
-  window._tt = setTimeout(function(){ t.style.transition='opacity .4s'; t.style.opacity='0'; setTimeout(function(){ t.style.display='none'; t.style.transition=''; },400); }, 3000);
+  window._tt = setTimeout(() => {
+    t.style.transition = 'opacity .4s'; t.style.opacity = '0';
+    setTimeout(() => { t.style.display = 'none'; t.style.transition = ''; }, 400);
+  }, 3000);
 }
 
-function removeColumn(btn) {
-  var header = btn.closest('.matrix-header');
-  var principleName = header.querySelector('h3').textContent;
-  currentComparePrinciples = currentComparePrinciples.filter(p => p !== principleName);
-  
-  var idx = Array.from(header.parentElement.children).indexOf(header);
-  header.parentElement.querySelectorAll('.matrix-header, .matrix-cell, .matrix-label').forEach(function(cell) {
-    if (Array.from(cell.parentElement.children).indexOf(cell) === idx) {
-      cell.style.transition = 'opacity .3s'; cell.style.opacity = '0';
-      setTimeout(function(){ cell.style.display = 'none'; }, 300);
-    }
-  });
-  showToast('remove_circle', 'Principle removed from comparison');
-}
-
-// Initialize
-loadPrinciples();
-document.querySelectorAll('.matrix-header').forEach(function(h) {
-  var btn = h.querySelector('.remove-btn');
-  if (!btn) return;
-  h.addEventListener('mouseenter', function() { btn.style.opacity = '1'; });
-  h.addEventListener('mouseleave', function() { btn.style.opacity = '0'; });
-});
+/* ---------- init ---------- */
+(async () => {
+  try {
+    await loadAll();
+    hydrate();
+    syncUrl();
+    renderMatrix();
+  } catch (err) {
+    console.error(err);
+    document.getElementById('matrix').innerHTML =
+      '<div class="matrix-cell" style="padding:40px;text-align:center;color:var(--on-surf-var);">Failed to load the knowledge base. Serve this page over a local web server (npm run dev).</div>';
+  }
+})();
 </script>
 </body>
 </html>

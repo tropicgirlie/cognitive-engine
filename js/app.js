@@ -68,6 +68,7 @@ async function initialize() {
     state.appData = await loadAppData();
     state.lookup = buildIndexes(state.appData);
     hydrateFilters();
+    hydrateFromUrl();
     syncGoalChips(state.selection.goal);
     syncContextSelect();
     syncContextChips(state.selection.context);
@@ -251,6 +252,41 @@ function syncContextSelect() {
   }
 }
 
+function hydrateFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const query = params.get('q');
+  const goal = params.get('goal');
+  const context = params.get('context');
+  const problem = params.get('problem');
+
+  if (query) {
+    state.selection.search = query;
+    if (elements.searchInput) elements.searchInput.value = query;
+  }
+  if (goal && state.lookup.goalsById[goal]) {
+    state.selection.goal = goal;
+  }
+  if (context && (context === 'all' || state.lookup.contextsById[context])) {
+    state.selection.context = context;
+  }
+  if (problem) {
+    state.selection.problemDescription = problem;
+    if (elements.problemInput) elements.problemInput.value = problem;
+  }
+}
+
+function syncUrl() {
+  const params = new URLSearchParams();
+  const selection = state.selection;
+  if (selection.search.trim()) params.set('q', selection.search.trim());
+  if (selection.goal !== DEFAULT_SELECTION.goal) params.set('goal', selection.goal);
+  if (selection.context !== 'all') params.set('context', selection.context);
+  if (selection.problemDescription.trim()) params.set('problem', selection.problemDescription.trim());
+  const queryString = params.toString();
+  const url = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
+  window.history.replaceState(null, '', url);
+}
+
 function recompute() {
   state.allRankedPrinciples = scorePrinciples(state.appData, state.selection);
   if (!state.selectedPrincipleId || !state.allRankedPrinciples.some((item) => item.id === state.selectedPrincipleId)) {
@@ -258,6 +294,7 @@ function recompute() {
   }
   render();
   updateFlowState();
+  syncUrl();
 }
 
 function render() {

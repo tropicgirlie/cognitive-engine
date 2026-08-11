@@ -7,14 +7,16 @@ export async function loadJson(path) {
 }
 
 export async function loadAppData() {
-  const [principlesData, contextsData, disciplinesData, problemTypesData, rulesData, goalsData, toolsData] = await Promise.all([
+  const [principlesData, contextsData, disciplinesData, problemTypesData, rulesData, goalsData, toolsData, referencesData] = await Promise.all([
     loadJson('data/principles-v2.json'),
     loadJson('data/contexts.json'),
     loadJson('data/disciplines.json'),
     loadJson('data/problem-types.json'),
     loadJson('data/rules.json'),
     loadJson('data/goals.json'),
-    loadJson('data/tools.json')
+    loadJson('data/tools.json'),
+    // citations are additive: never let them break the library
+    loadJson('data/references.json').catch(() => ({ references: {} }))
   ]);
 
   return {
@@ -24,6 +26,7 @@ export async function loadAppData() {
     problemTypes: problemTypesData.problemTypes,
     rules: rulesData,
     goals: goalsData.goals,
-    tools: toolsData.tools
+    tools: toolsData.tools,
+    references: referencesData.references || {}
   };
 }

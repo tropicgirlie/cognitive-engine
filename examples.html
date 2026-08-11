@@ -1,519 +1,327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Examples & Use Cases | Cognitive Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
-    <style>
-        /* MD3 Design Tokens */
-        :root {
-            --pri: #3D63DD; --on-pri: #fff; --pri-con: #DBE1FF; --on-pri-con: #00105C;
-            --sec-con: #DFE0F9; --on-sec-con: #181A2C;
-            --err: #B3261E; --err-con: #F9DEDC;
-            --surf: #FEFBFF; --on-surf: #1C1B1F; --on-surf-var: #46464F;
-            --outline: #767680; --outline-var: #C7C5D0;
-            --surf-low: #F5F3FA; --surf-con: #EFEDF4; --surf-hi: #E9E7EE; --surf-white: #fff;
-            --green-con: #C3EFCD; --on-green: #146C2E;
-            --r-xs:4px; --r-sm:8px; --r-md:12px; --r-lg:16px; --r-xl:28px; --r-full:9999px;
-            --el1: 0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
-            --el3: 0 4px 8px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.08);
-        }
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Case Files | Cognitive Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --pri:#3D63DD;--on-pri:#fff;--pri-con:#DBE1FF;--on-pri-con:#00105C;
+  --err:#B3261E;--err-con:#F9DEDC;
+  --surf:#FEFBFF;--on-surf:#1C1B1F;--on-surf-var:#46464F;
+  --outline:#767680;--outline-var:#C7C5D0;
+  --surf-low:#F5F3FA;--surf-con:#EFEDF4;--surf-hi:#E9E7EE;--surf-white:#fff;
+  --r-sm:8px;--r-md:12px;--r-full:9999px;
+  --el1:0 1px 2px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
+}
+*,*::before,*::after{box-sizing:border-box;}
+body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf);color:var(--on-surf);margin:0;line-height:1.6;}
+.mi{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;user-select:none;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;}
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background: var(--surf);
-            color: var(--on-surf);
-            margin: 0;
-            line-height: 1.6;
-        }
+/* site chrome (shared) */
+.site-topbar{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid var(--outline-var);background:var(--surf-white);position:sticky;top:0;z-index:50;flex-wrap:wrap;}
+.site-logo{width:32px;height:32px;border-radius:8px;background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.site-wordmark{font:800 15px/1 'Roboto Flex',sans-serif;color:var(--on-surf);}
+.site-wordmark b{color:var(--pri);}
+.site-tabs{display:flex;gap:2px;margin-left:auto;flex-wrap:wrap;}
+.stab{display:flex;align-items:center;gap:6px;padding:9px 13px;font:500 13px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap;}
+.stab:hover{color:var(--on-surf);background:var(--surf-low);}
+.stab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
+.stab .mi{font-size:17px;}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 24px;
-        }
+.page{max-width:1080px;margin:0 auto;padding:40px 24px 64px;}
 
-        .header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
+/* header — left-aligned, ruled, no hero theatre */
+.eyebrow{font:800 11px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--pri);margin:0 0 10px;}
+h1{font:800 clamp(26px,3.4vw,38px)/1.1 'Roboto Flex',sans-serif;margin:0 0 12px;letter-spacing:-.01em;max-width:640px;}
+.lede{font:400 15.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0 0 8px;max-width:640px;}
+.honesty{display:flex;gap:8px;align-items:flex-start;font:400 12.5px/1.55 'Roboto';color:var(--on-surf-var);max-width:640px;margin:14px 0 0;padding:10px 14px;background:var(--surf-low);border-left:3px solid var(--outline-var);border-radius:0 var(--r-sm) var(--r-sm) 0;}
+.honesty .mi{font-size:16px;margin-top:1px;}
 
-        .title {
-            font: 700 32px/1.2 'Roboto Flex', sans-serif;
-            color: var(--on-surf);
-            margin-bottom: 16px;
-        }
+/* filter chips with counts */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:26px 0 8px;padding-bottom:18px;border-bottom:1px solid var(--outline-var);}
+.fchip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:var(--r-full);border:1px solid var(--outline-var);background:var(--surf-white);font:700 12.5px/1 'Roboto';color:var(--on-surf-var);cursor:pointer;transition:all .15s;}
+.fchip:hover{border-color:var(--pri);color:var(--on-surf);}
+.fchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);}
+.fchip .n{font-variant-numeric:tabular-nums;color:var(--outline);font-weight:500;}
+.fchip.on .n{color:var(--pri);}
+.result-count{font:500 12px/1 'Roboto';color:var(--on-surf-var);margin-left:auto;}
 
-        .subtitle {
-            font: 400 18px/1.5 'Roboto', sans-serif;
-            color: var(--on-surf-var);
-            max-width: 600px;
-            margin: 0 auto;
-        }
+/* case file */
+.case{border-top:2px solid var(--on-surf);padding:26px 0 34px;margin-top:22px;animation:caseIn .3s ease both;}
+@keyframes caseIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.case-meta{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:8px;}
+.case-no{font:800 12px/1 'Roboto';color:var(--on-surf);letter-spacing:.06em;font-variant-numeric:tabular-nums;}
+.case-domain{font:800 10.5px/1 'Roboto';text-transform:uppercase;letter-spacing:.09em;color:var(--pri);}
+.case-ctx{font:500 11px/1 'Roboto';color:var(--on-surf-var);text-transform:uppercase;letter-spacing:.07em;}
+.case-title{font:800 21px/1.25 'Roboto Flex',sans-serif;margin:0 0 4px;letter-spacing:-.01em;}
+.case-for{font:500 12.5px/1.5 'Roboto';color:var(--on-surf-var);margin:0 0 16px;}
+.observed{font:400 14.5px/1.65 'Roboto';color:var(--on-surf);margin:0 0 20px;max-width:720px;}
+.delta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--outline-var);border-radius:var(--r-md);overflow:hidden;background:var(--outline-var);margin-bottom:18px;}
+.delta>div{background:var(--surf-white);padding:16px 18px;}
+.delta .before{background:var(--surf-low);}
+.delta h5{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.09em;color:var(--on-surf-var);margin:0 0 10px;display:flex;align-items:center;gap:6px;}
+.delta .after h5{color:var(--pri);}
+.delta .why h5{color:var(--on-surf);}
+.delta ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;}
+.delta li{font:400 12.5px/1.55 'Roboto';color:var(--on-surf-var);padding-left:14px;position:relative;}
+.delta li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:1.5px;background:var(--outline);}
+.delta .after li::before{background:var(--pri);height:6px;width:6px;border-radius:50%;top:6px;}
+.delta .why p{font:400 12.5px/1.6 'Roboto';color:var(--on-surf-var);margin:0;}
+.case-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ptag{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:var(--r-full);border:1px solid var(--outline-var);background:var(--surf-white);font:700 11.5px/1 'Roboto';color:var(--on-surf);text-decoration:none;transition:all .15s;}
+.ptag:hover{border-color:var(--pri);color:var(--pri);}
+.ptag .mi{font-size:13px;color:var(--pri);}
+.case-actions{margin-left:auto;display:flex;gap:8px;}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;padding:9px 18px;border-radius:var(--r-full);font:700 12.5px/1 'Roboto';text-decoration:none;transition:filter .15s;white-space:nowrap;}
+.btn-primary:hover{filter:brightness(1.08);}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;background:none;color:var(--pri);padding:8px 15px;border-radius:var(--r-full);border:1px solid var(--outline-var);font:700 12.5px/1 'Roboto';text-decoration:none;transition:all .15s;white-space:nowrap;}
+.btn-ghost:hover{border-color:var(--pri);background:var(--pri-con);}
 
-        .example-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 24px;
-            margin-bottom: 48px;
-        }
+/* closing cta */
+.closing{margin-top:44px;border-top:1px solid var(--outline-var);padding-top:26px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.closing p{font:400 14px/1.6 'Roboto';color:var(--on-surf-var);margin:0;max-width:520px;}
+.closing strong{color:var(--on-surf);}
 
-        .example-card {
-            background: var(--surf-white);
-            border-radius: var(--r-lg);
-            padding: 24px;
-            box-shadow: var(--el1);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .example-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--el3);
-        }
-
-        .example-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .example-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--pri-con);
-            border-radius: var(--r-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .example-icon .mi {
-            font-size: 24px;
-            color: var(--pri);
-        }
-
-        .example-title {
-            font: 600 20px/1.2 'Roboto', sans-serif;
-            color: var(--on-surf);
-            margin: 0;
-        }
-
-        .example-context {
-            display: inline-block;
-            background: var(--sec-con);
-            color: var(--on-sec-con);
-            padding: 4px 8px;
-            border-radius: var(--r-sm);
-            font: 500 12px 'Roboto', sans-serif;
-            margin-bottom: 12px;
-        }
-
-        .problem {
-            background: var(--err-con);
-            border-left: 4px solid var(--err);
-            padding: 12px;
-            border-radius: var(--r-sm);
-            margin-bottom: 16px;
-        }
-
-        .problem-title {
-            font: 600 14px 'Roboto', sans-serif;
-            color: var(--err);
-            margin-bottom: 4px;
-        }
-
-        .problem-text {
-            font: 400 14px/1.4 'Roboto', sans-serif;
-            color: var(--on-surf);
-            margin: 0;
-        }
-
-        .solution {
-            background: var(--green-con);
-            border-left: 4px solid var(--on-green);
-            padding: 12px;
-            border-radius: var(--r-sm);
-            margin-bottom: 16px;
-        }
-
-        .solution-title {
-            font: 600 14px 'Roboto', sans-serif;
-            color: var(--on-green);
-            margin-bottom: 4px;
-        }
-
-        .solution-text {
-            font: 400 14px/1.4 'Roboto', sans-serif;
-            color: var(--on-surf);
-            margin: 0;
-        }
-
-        .principle-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: var(--surf-low);
-            padding: 4px 8px;
-            border-radius: var(--r-sm);
-            font: 500 12px 'Roboto', sans-serif;
-            color: var(--on-surf-var);
-            margin-right: 8px;
-            margin-bottom: 8px;
-        }
-
-        .try-it-btn {
-            background: var(--pri);
-            color: var(--on-pri);
-            border: none;
-            padding: 12px 24px;
-            border-radius: var(--r-sm);
-            font: 500 14px 'Roboto', sans-serif;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: background 0.2s;
-        }
-
-        .try-it-btn:hover {
-            background: #4B73F7;
-        }
-
-        .quick-start {
-            background: linear-gradient(135deg, var(--pri-con), var(--sec-con));
-            border-radius: var(--r-xl);
-            padding: 32px;
-            margin-bottom: 48px;
-            text-align: center;
-        }
-
-        .quick-start h2 {
-            font: 600 24px 'Roboto', sans-serif;
-            color: var(--on-surf);
-            margin-bottom: 16px;
-        }
-
-        .quick-steps {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-top: 24px;
-            flex-wrap: wrap;
-        }
-
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            max-width: 150px;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background: var(--pri);
-            color: var(--on-pri);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font: 600 16px 'Roboto', sans-serif;
-        }
-
-        .step-text {
-            font: 400 14px/1.3 'Roboto', sans-serif;
-            color: var(--on-surf);
-            text-align: center;
-        }
-
-        .nav-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 32px;
-            border-bottom: 1px solid var(--outline-var);
-            padding-bottom: 16px;
-        }
-
-        .nav-tab {
-            padding: 8px 16px;
-            background: transparent;
-            border: none;
-            border-radius: var(--r-sm) var(--r-sm) 0 0;
-            font: 500 14px 'Roboto', sans-serif;
-            color: var(--on-surf-var);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .nav-tab.active {
-            background: var(--surf-white);
-            color: var(--pri);
-        }
-
-        .nav-tab:hover {
-            background: var(--surf-low);
-        }
-    </style>
+@media (max-width:860px){
+  .delta{grid-template-columns:1fr;}
+  .case-actions{margin-left:0;width:100%;}
+  .result-count{margin-left:0;width:100%;}
+}
+@media (prefers-reduced-motion:reduce){
+  .case{animation:none;}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1 class="title">Cognitive Engine Examples</h1>
-            <p class="subtitle">See how cognitive science principles solve real UX problems. Each example shows the problem, principle applied, and solution.</p>
-        </header>
 
-        <div class="quick-start">
-            <h2>🚀 Quick Start: Try It Yourself</h2>
-            <p style="margin-bottom: 24px;">Follow these steps to apply cognitive principles to your design challenge:</p>
-            <div class="quick-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-text">Choose your goal (reduce errors, speed up decisions, etc.)</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-text">Select your context (forms, dashboard, mobile, etc.)</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-text">Describe your specific UX problem</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-text">Get matched principles and generate prompts</div>
-                </div>
-            </div>
-            <a href="updated-dashboard.html" class="try-it-btn">
-                <span class="mi">play_arrow</span>
-                Start Your Analysis
-            </a>
-        </div>
+<header class="site-topbar">
+  <span class="site-logo"><span class="mi" style="color:#fff;font-size:18px;">psychology</span></span>
+  <span class="site-wordmark">Cognitive <b>Engine</b></span>
+  <nav class="site-tabs" aria-label="Primary">
+    <a href="updated-dashboard.html" class="stab"><span class="mi">dashboard</span>Dashboard</a>
+    <a href="index.html" class="stab"><span class="mi">auto_stories</span>Library</a>
+    <a href="cognitive-atlas.html" class="stab"><span class="mi">hub</span>Atlas</a>
+    <a href="compare-mode.html" class="stab"><span class="mi">compare_arrows</span>Compare</a>
+    <a href="advanced-prompt-generator.html" class="stab"><span class="mi">auto_awesome</span>Prompt Generator</a>
+    <a href="examples.html" class="stab active" aria-current="page"><span class="mi">science</span>Examples</a>
+  </nav>
+</header>
 
-        <nav class="nav-tabs">
-            <button class="nav-tab active" onclick="filterExamples('all')">All Examples</button>
-            <button class="nav-tab" onclick="filterExamples('healthcare')">Healthcare</button>
-            <button class="nav-tab" onclick="filterExamples('finance')">Finance</button>
-            <button class="nav-tab" onclick="filterExamples('ecommerce')">E-commerce</button>
-            <button class="nav-tab" onclick="filterExamples('productivity')">Productivity</button>
-        </nav>
+<div class="page">
+  <p class="eyebrow">Scenario library</p>
+  <h1>Case files: behavioral science, applied.</h1>
+  <p class="lede">Each case file records an observed behavior, exactly what changed in the interface, and the principles that explain why it works — with links to run the same analysis yourself.</p>
+  <div class="honesty"><span class="mi">fact_check</span><span>These are composite teaching scenarios built from recurring patterns in usability practice. They illustrate how the engine reasons; they are not reported client data, and no figures are claimed from real studies here.</span></div>
 
-        <div class="example-grid">
-            <div class="example-card" data-category="healthcare">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">medical_services</span>
-                    </div>
-                    <h3 class="example-title">Medical Dashboard Overload</h3>
-                </div>
-                <span class="example-context">Healthcare • Decision-approvals</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">Doctors missing critical lab values in patient dashboards due to information overload. 40% of abnormal results were overlooked in a study.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Von Restorff Effect to make abnormal values visually distinct, and Progressive Disclosure to hide normal ranges.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">visibility</span> Von Restorff Effect</div>
-                    <div class="principle-tag"><span class="mi">layers</span> Progressive Disclosure</div>
-                    <div class="principle-tag"><span class="mi">priority_high</span> Cognitive Load Theory</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=reduce-errors&context=decision-approvals&problem=Doctors missing critical lab values in patient dashboards" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
+  <div class="filters" id="filters" role="group" aria-label="Filter cases by domain"></div>
 
-            <div class="example-card" data-category="finance">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">account_balance</span>
-                    </div>
-                    <h3 class="example-title">Investment Choice Paralysis</h3>
-                </div>
-                <span class="example-context">Finance • Decision-approvals</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">Users presented with 50+ investment options spent 12 minutes on average and often made no choice. High abandonment rate.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Hick's Law to limit initial options to 5, with "Explore More" for advanced users. Added Recognition over Recall for common choices.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">linear_scale</span> Hick's Law</div>
-                    <div class="principle-tag"><span class="mi">psychology</span> Cognitive Load Theory</div>
-                    <div class="principle-tag"><span class="mi">fact_check</span> Recognition over Recall</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=speed-up-decisions&context=decision-approvals&problem=Too many investment options causing choice paralysis" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
+  <div id="cases"></div>
 
-            <div class="example-card" data-category="ecommerce">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">shopping_cart</span>
-                    </div>
-                    <h3 class="example-title">Checkout Form Abandonment</h3>
-                </div>
-                <span class="example-context">E-commerce • Data-entry-forms</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">68% of users abandoned checkout due to long, intimidating forms. Users reported feeling overwhelmed by required fields.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Miller's Law to chunk form into 3 sections, Progressive Disclosure for optional fields, and Fitts's Law for larger touch targets.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">filter_7</span> Miller's Law</div>
-                    <div class="principle-tag"><span class="mi">layers</span> Progressive Disclosure</div>
-                    <div class="principle-tag"><span class="mi">touch_app</span> Fitts's Law</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=reduce-overload&context=data-entry-forms&problem=Long checkout forms causing abandonment" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
-
-            <div class="example-card" data-category="productivity">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">dashboard</span>
-                    </div>
-                    <h3 class="example-title">SaaS Feature Discovery</h3>
-                </div>
-                <span class="example-context">Productivity • Navigation-search</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">Users only using 20% of features because they couldn't find relevant tools. Support tickets for "how do I..." increased 300%.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Serial Position Effect for menu placement, Zeigarnik Effect for incomplete tasks, and added contextual search.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">format_list_numbered</span> Serial Position Effect</div>
-                    <div class="principle-tag"><span class="mi">pending</span> Zeigarnik Effect</div>
-                    <div class="principle-tag"><span class="mi">search</span> Findability</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=improve-findability&context=navigation-search&problem=Users can't find features in SaaS dashboard" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
-
-            <div class="example-card" data-category="healthcare">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">medication</span>
-                    </div>
-                    <h3 class="example-title">Medication App Errors</h3>
-                </div>
-                <span class="example-context">Healthcare • Data-entry-forms</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">Elderly users frequently made dosage errors due to small input fields and unclear labels. 15% error rate in medication logging.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Fitts's Law for larger targets, added Recognition over Recall with common dosages, and used clear error prevention.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">touch_app</span> Fitts's Law</div>
-                    <div class="principle-tag"><span class="mi">fact_check</span> Recognition over Recall</div>
-                    <div class="principle-tag"><span class="mi">error</span> Error Prevention</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=reduce-errors&context=data-entry-forms&problem=Elderly users making medication dosage errors" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
-
-            <div class="example-card" data-category="finance">
-                <div class="example-header">
-                    <div class="example-icon">
-                        <span class="mi">receipt_long</span>
-                    </div>
-                    <h3 class="example-title">Expense Report Complexity</h3>
-                </div>
-                <span class="example-context">Finance • Data-entry-forms</span>
-                
-                <div class="problem">
-                    <div class="problem-title">Problem</div>
-                    <p class="problem-text">Employees spent 45+ minutes on expense reports due to complex categorization. 25% submitted with errors.</p>
-                </div>
-                
-                <div class="solution">
-                    <div class="solution-title">Solution</div>
-                    <p class="solution-text">Applied Miller's Law to group expenses, added Recognition over Recall with smart categories, and used clear visual hierarchy.</p>
-                </div>
-                
-                <div style="margin-bottom: 16px;">
-                    <div class="principle-tag"><span class="mi">filter_7</span> Miller's Law</div>
-                    <div class="principle-tag"><span class="mi">fact_check</span> Recognition over Recall</div>
-                    <div class="principle-tag"><span class="mi">visibility</span> Visual Hierarchy</div>
-                </div>
-                
-                <a href="updated-dashboard.html?goal=reduce-overload&context=data-entry-forms&problem=Complex expense reports causing errors and time waste" class="try-it-btn">
-                    <span class="mi">auto_awesome</span>
-                    Try This Scenario
-                </a>
-            </div>
-        </div>
+  <div class="closing">
+    <p><strong>Your situation isn't listed?</strong> The engine ranks principles for any described problem — these cases are simply its reasoning made visible. Or explore the full territory in the Atlas.</p>
+    <div style="display:flex;gap:8px;">
+      <a class="btn-ghost" href="cognitive-atlas.html"><span class="mi" style="font-size:15px;">hub</span>Open the Atlas</a>
+      <a class="btn-primary" href="index.html"><span class="mi" style="font-size:15px;">edit_note</span>Describe your problem</a>
     </div>
+  </div>
+</div>
 
-    <script>
-        function filterExamples(category) {
-            const cards = document.querySelectorAll('.example-card');
-            const tabs = document.querySelectorAll('.nav-tab');
-            
-            // Update active tab
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.textContent.toLowerCase().includes(category) || 
-                    (category === 'all' && tab.textContent === 'All Examples')) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            // Filter cards
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
+<script>
+'use strict';
+/* Case files — content is bespoke teaching material; principle names and
+   links are resolved live from data/principles-v2.json so they can never
+   drift from the knowledge base. */
+
+const CASES = [
+  {
+    no: '01', domain: 'healthcare', domainLabel: 'Healthcare',
+    ctx: 'Monitoring & alerts', forWhom: 'For clinical product teams and patient-safety designers',
+    title: 'Critical lab values lost in a noisy patient dashboard',
+    observed: 'Clinicians scanning dense result grids overlook abnormal values, because critical findings are rendered with the same visual weight as routine rows.',
+    before: ['Every result row identical in size, weight and colour', 'Severity carried only by a text label in a column', 'Routine confirmations and critical alerts in one stream'],
+    after: ['Severity drives visual weight: abnormal values break the grid rhythm', 'Critical alerts get contrast, position and wording that isolate them', 'Routine noise recedes to a lower-contrast, collapsible tier'],
+    why: 'Attention is captured by what violates the pattern, not by what is marked "important". Salience only works when it is scarce — if everything shouts, nothing is salient.',
+    principles: ['von-restorff-effect', 'signal-to-noise-ratio', 'progressive-disclosure'],
+    seed: { goal: 'reduce-errors', context: 'monitoring-alerts', problem: 'Clinicians missing critical lab values in patient dashboards' }
+  },
+  {
+    no: '02', domain: 'finance', domainLabel: 'Finance',
+    ctx: 'Decision & approvals', forWhom: 'For fintech designers and product managers',
+    title: 'Fifty investment options, zero decisions',
+    observed: 'Given a long undifferentiated list of funds, users deliberate at length and frequently leave without choosing anything at all.',
+    before: ['All options presented in one scrollable table', 'No recommendation, no default, no starting point', 'Every fund described with equal detail'],
+    after: ['A small curated shortlist replaces the full catalogue as the entry point', 'One option is presented as the sensible default for the user\'s profile', 'The full list remains one tap away for confident explorers'],
+    why: 'Decision time grows with the number of options, and every additional option raises the fear of choosing wrong. A shortlist plus a default converts "compare everything" into "confirm or adjust".',
+    principles: ['hicks-law', 'default-effect', 'recognition-over-recall'],
+    seed: { goal: 'speed-up-decisions', context: 'decision-approvals', problem: 'Too many investment options causing choice paralysis' }
+  },
+  {
+    no: '03', domain: 'ecommerce', domainLabel: 'E-commerce',
+    ctx: 'Data entry & forms', forWhom: 'For checkout and conversion designers',
+    title: 'A checkout form that feels like an interrogation',
+    observed: 'Shoppers reach payment and abandon — not because the form is long in absolute terms, but because its full length is visible at once.',
+    before: ['All fields — shipping, billing, marketing opt-ins — on one screen', 'Optional and required fields visually indistinguishable', 'Primary action small and competing with secondary links'],
+    after: ['Fields grouped into a few named chunks with clear section headers', 'Optional fields tucked behind a deliberate reveal', 'The pay action is the largest, closest target on the screen'],
+    why: 'Working memory holds only a handful of items at once. Chunking shrinks the perceived task, disclosure defers optional burden, and target size decides whether the final step feels effortless.',
+    principles: ['millers-law', 'progressive-disclosure', 'fitts-law'],
+    seed: { goal: 'reduce-overload', context: 'data-entry-forms', problem: 'Long checkout forms causing abandonment' }
+  },
+  {
+    no: '04', domain: 'productivity', domainLabel: 'SaaS & productivity',
+    ctx: 'Navigation & search', forWhom: 'For product designers working on feature-rich tools',
+    title: 'Users find a fifth of the product',
+    observed: 'Long-term users stick to a narrow set of features; everything else effectively does not exist for them, and support absorbs the "how do I…" questions.',
+    before: ['Navigation organised around the company\'s internal structure', 'Search buried behind an icon', 'Key actions placed mid-menu where recall is weakest'],
+    after: ['Navigation renamed and reordered around user tasks, not org charts', 'Search permanently visible with familiar placement', 'Highest-value actions moved to the first and last menu positions'],
+    why: 'Users transfer expectations from every other product they use, and remember beginnings and endings of lists best. Fighting those patterns costs learnability; using them is free.',
+    principles: ['jakobs-law', 'serial-position-effect', 'zeigarnik-effect'],
+    seed: { goal: 'improve-findability', context: 'navigation-search', problem: "Users can't find features in a SaaS dashboard" }
+  },
+  {
+    no: '05', domain: 'healthcare', domainLabel: 'Healthcare',
+    ctx: 'Data entry & forms', forWhom: 'For digital-health teams designing for older adults',
+    title: 'Dosage logging errors in a medication app',
+    observed: 'Elderly users mistype or mis-tap dosages: small targets, tiny labels, and free-text entry turn a routine task into an error source.',
+    before: ['Small numeric input, free text, no confirmation', 'Labels in light grey at small sizes', 'Common dosages retyped from memory every time'],
+    after: ['Large stepper controls replace free-text entry', 'Common dosages offered as recognised choices, not recalled values', 'A plain-language confirmation step before saving'],
+    why: 'Motor precision declines with age and stress, and recognition is far more reliable than recall. Designing for bigger targets and recognised options removes the error before it can happen.',
+    principles: ['fitts-law', 'recognition-over-recall', 'chunking'],
+    seed: { goal: 'reduce-errors', context: 'data-entry-forms', problem: 'Elderly users making medication dosage errors' }
+  },
+  {
+    no: '06', domain: 'finance', domainLabel: 'Finance',
+    ctx: 'Data entry & forms', forWhom: 'For internal-tools and enterprise designers',
+    title: 'The expense report everyone postpones',
+    observed: 'Employees delay expense reports for weeks and then rush them, because categorisation is ambiguous and the form offers no foothold.',
+    before: ['One long table of line items to categorise from scratch', 'Category names written in finance-department jargon', 'No summary of progress or remaining effort'],
+    after: ['Expenses pre-grouped by likely category for confirmation, not creation', 'Categories renamed in the language employees actually use', 'A persistent progress summary makes the end visible'],
+    why: 'People avoid tasks whose scope and end state are unclear. Pre-grouped suggestions convert recall into recognition, and visible progress exploits our pull to complete unfinished tasks.',
+    principles: ['chunking', 'recognition-over-recall', 'information-hierarchy'],
+    seed: { goal: 'reduce-overload', context: 'data-entry-forms', problem: 'Complex expense reports causing errors and delays' }
+  },
+  {
+    no: '07', domain: 'productivity', domainLabel: 'SaaS & productivity',
+    ctx: 'Monitoring & alerts', forWhom: 'For ops, devtools and platform teams',
+    title: 'Alert fatigue in an operations channel',
+    observed: 'After weeks of low-value notifications, the team starts dismissing everything — including the alert that mattered.',
+    before: ['Every event notifies: info, warning and critical alike', 'Recurring known issues re-alert on every occurrence', 'No severity gradient in how alerts arrive'],
+    after: ['Only state changes and threshold breaches notify by default', 'Known issues are acknowledged once and suppressed until resolved', 'A strict severity gradient: critical interrupts, the rest digests'],
+    why: 'The nervous system habituates to repeated stimulation — an alarm that cries wolf trains people to ignore alarms. Signal-to-noise ratio is a safety property, not a nicety.',
+    principles: ['neural-habituation', 'signal-to-noise-ratio', 'cognitive-load-theory'],
+    seed: { goal: 'reduce-errors', context: 'monitoring-alerts', problem: 'Team ignores monitoring alerts after too many false alarms' }
+  },
+  {
+    no: '08', domain: 'productivity', domainLabel: 'SaaS & productivity',
+    ctx: 'Onboarding & learning', forWhom: 'For growth and onboarding designers',
+    title: 'Setup abandonment before first value',
+    observed: 'New users start setup in good faith and drop out partway — the product asks for twelve decisions before it has shown any value.',
+    before: ['Full configuration demanded up front', 'No visible progress or sense of remaining effort', 'Setup ends on a bare settings page, not a result'],
+    after: ['First value shown within one minute; configuration deferred', 'A short visible sequence: each step ends with something working', 'The flow closes on the user\'s first real outcome, not a form'],
+    why: 'People persist when reward is near and progress is visible, and they remember experiences by their peak and their end. Onboarding should be sequenced as motivation, not administration.',
+    principles: ['progressive-disclosure', 'dopaminergic-reward-system', 'peak-end-rule'],
+    seed: { goal: 'reduce-overload', context: 'onboarding-learning', problem: 'New users abandon a long setup form before seeing value' }
+  }
+];
+
+const DOMAINS = [
+  { id: 'all', label: 'All cases' },
+  { id: 'healthcare', label: 'Healthcare' },
+  { id: 'finance', label: 'Finance' },
+  { id: 'ecommerce', label: 'E-commerce' },
+  { id: 'productivity', label: 'SaaS & productivity' }
+];
+
+let byId = {};
+
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function principleName(id) {
+  return byId[id] ? byId[id].name : id;
+}
+
+function renderFilters(active) {
+  const box = document.getElementById('filters');
+  box.innerHTML = DOMAINS.map((d) => {
+    const n = d.id === 'all' ? CASES.length : CASES.filter((c) => c.domain === d.id).length;
+    return `<button class="fchip ${active === d.id ? 'on' : ''}" data-domain="${d.id}">${esc(d.label)} <span class="n">${n}</span></button>`;
+  }).join('') + `<span class="result-count" id="result-count"></span>`;
+}
+
+function renderCases(domain) {
+  const shown = CASES.filter((c) => domain === 'all' || c.domain === domain);
+  const count = document.getElementById('result-count');
+  if (count) count.textContent = `${shown.length} of ${CASES.length} cases`;
+
+  document.getElementById('cases').innerHTML = shown.map((c) => {
+    const tags = c.principles.map((id) =>
+      `<a class="ptag" href="index.html?q=${encodeURIComponent(principleName(id))}"><span class="mi">psychology</span>${esc(principleName(id))}</a>`
+    ).join('');
+    const seedUrl = `index.html?goal=${c.seed.goal}&context=${c.seed.context}&problem=${encodeURIComponent(c.seed.problem)}`;
+    const compareUrl = `compare-mode.html?p=${c.principles.join(',')}`;
+
+    return `
+    <article class="case">
+      <div class="case-meta">
+        <span class="case-no">Case ${c.no}</span>
+        <span class="case-domain">${esc(c.domainLabel)}</span>
+        <span class="case-ctx">${esc(c.ctx)}</span>
+      </div>
+      <h2 class="case-title">${esc(c.title)}</h2>
+      <p class="case-for">${esc(c.forWhom)}</p>
+      <p class="observed">${esc(c.observed)}</p>
+      <div class="delta">
+        <div class="before">
+          <h5><span class="mi" style="font-size:14px;">close</span>Before — what the interface did</h5>
+          <ul>${c.before.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+        </div>
+        <div class="after">
+          <h5><span class="mi" style="font-size:14px;">check</span>After — what changed</h5>
+          <ul>${c.after.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
+        </div>
+        <div class="why">
+          <h5><span class="mi" style="font-size:14px;">psychology</span>Why it works</h5>
+          <p>${esc(c.why)}</p>
+        </div>
+      </div>
+      <div class="case-foot">
+        ${tags}
+        <div class="case-actions">
+          <a class="btn-ghost" href="${compareUrl}"><span class="mi" style="font-size:15px;">compare_arrows</span>Compare these</a>
+          <a class="btn-primary" href="${seedUrl}"><span class="mi" style="font-size:15px;">play_arrow</span>Run this scenario</a>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+let activeDomain = 'all';
+document.getElementById('filters').addEventListener('click', (ev) => {
+  const chip = ev.target.closest('[data-domain]');
+  if (!chip) return;
+  activeDomain = chip.dataset.domain;
+  renderFilters(activeDomain);
+  renderCases(activeDomain);
+});
+
+/* resolve principle names from the live knowledge base */
+(async () => {
+  try {
+    const r = await fetch('data/principles-v2.json');
+    const data = await r.json();
+    byId = Object.fromEntries(data.principles.map((p) => [p.id, p]));
+  } catch (e) {
+    byId = {}; // fall back to ids as labels
+  }
+  renderFilters(activeDomain);
+  renderCases(activeDomain);
+})();
+</script>
 </body>
 </html>

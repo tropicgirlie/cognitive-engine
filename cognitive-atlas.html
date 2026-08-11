@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cognitive Atlas | Explore every principle and its connections</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --paper:#F5F6F2; --ink:#111111; --ink-2:#55554F; --ink-3:#8A8A82;
+  --card:#FFFFFF; --line:#E2E3DA; --line-2:#C9CAC0;
+  --accent:#FF5F1F; --accent-soft:#FFE9DE;
+  --pri:#2F5FD0; --on-pri:#fff;
+  --r-sm:8px; --r-md:12px; --r-full:9999px;
+  --el1:0 1px 2px rgba(30,32,24,.10),0 6px 18px rgba(30,32,24,.08);
+  --el2:0 12px 34px rgba(30,32,24,.16);
+  --ease:cubic-bezier(.2,0,0,1);
+}
+*,*::before,*::after{box-sizing:border-box;}
+html,body{height:100%;margin:0;padding:0;}
+body{font:400 14px/20px 'Roboto',sans-serif;background:var(--paper);color:var(--ink);overflow:hidden;}
+button,input,select,textarea{font:inherit;}
+.mi{font-family:'Material Symbols Rounded';font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px;line-height:1;user-select:none;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;}
+
+/* ---------- chrome (shared with the engine) ---------- */
+.top-bar{height:64px;background:rgba(245,246,242,.92);backdrop-filter:blur(14px);display:flex;align-items:center;padding:0 16px;gap:10px;position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid var(--line);}
+.logo-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.wordmark{font:800 16px/1 'Roboto Flex',sans-serif;letter-spacing:0;}
+.wordmark b{color:var(--pri);}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:#E4EAFF;border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--pri);white-space:nowrap;}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--pri);}
+.explored-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-full);font:700 11.5px/1 'Roboto';color:var(--ink-2);white-space:nowrap;cursor:default;}
+.explored-pill .ring{width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1turn),var(--line) 0);display:inline-block;position:relative;}
+.explored-pill .ring::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--card);}
+.ibtn{width:40px;height:40px;border-radius:var(--r-full);border:1px solid var(--line);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-2);transition:all .15s;}
+.ibtn:hover,.ibtn:focus-visible{border-color:var(--ink-3);color:var(--ink);outline:none;}
+.tour-btn{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff;border:1px solid var(--ink);border-radius:var(--r-full);padding:9px 16px;font:700 12.5px/1 'Roboto';cursor:pointer;transition:all .15s;white-space:nowrap;}
+.tour-btn:hover,.tour-btn:focus-visible{background:var(--accent);border-color:var(--accent);outline:none;}
+.nav-tabs{height:48px;background:var(--paper);display:flex;align-items:flex-end;border-bottom:1px solid var(--line);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 12px;overflow-x:auto;}
+.ntab{display:flex;align-items:center;gap:8px;padding:0 18px;height:48px;font:500 14px/1 'Roboto';color:var(--ink-2);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.ntab:hover,.ntab:focus-visible{color:var(--ink);outline:none;}
+.ntab.active{color:var(--ink);border-bottom-color:var(--accent);font-weight:700;}
+.ntab .mi{font-size:18px;}
+
+/* ---------- stage ---------- */
+#stage{position:fixed;top:112px;left:0;right:0;bottom:0;overflow:hidden;transform:translateX(6vw);opacity:0;transition:transform .9s var(--ease),opacity .9s var(--ease);}
+#stage.entered{transform:translateX(0);opacity:1;}
+#map{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:none;}
+#map.dragging{cursor:grabbing;}
+#map svg text{user-select:none;pointer-events:none;}
+
+.edge{fill:none;stroke:#B9BAAE;stroke-width:1;opacity:.34;transition:opacity .25s;}
+.edge.dim{opacity:.05;}
+.bridge{fill:none;stroke:#C9CAC0;opacity:.5;stroke-linecap:round;}
+.bridge.dim{opacity:.08;}
+#litLayer path{fill:none;stroke:var(--accent);stroke-width:1.8;opacity:.95;stroke-linecap:round;}
+
+.node{cursor:pointer;}
+.node .hit{fill:transparent;}
+.node .dot{transition:r .12s ease-in-out;}
+.node .halo{fill:none;stroke:var(--accent);stroke-width:1.5;opacity:0;transition:opacity .15s;}
+.node .visited-ring{fill:none;stroke:var(--ink-3);stroke-width:1;stroke-dasharray:2 2;opacity:0;}
+.node.visited .visited-ring{opacity:.85;}
+.node:hover .halo,.node.lit .halo,.node.selected .halo{opacity:1;}
+.node.selected .dot{stroke:var(--accent);stroke-width:2;}
+.node.dim{opacity:.1;}
+.node.visited.dim{opacity:.16;}
+.nlabel{font:700 12px/1 'Roboto';fill:var(--ink);paint-order:stroke;stroke:rgba(245,246,242,.92);stroke-width:3px;opacity:0;transition:opacity .2s;}
+.nlabel.show{opacity:1;}
+.nlabel.visited{fill:var(--ink-3);font-weight:500;}
+
+.hub{cursor:pointer;}
+.hub .hub-orbit{fill:none;stroke-width:1.2;stroke-dasharray:3 5;opacity:.55;animation:orbit 26s linear infinite;transform-origin:center;transform-box:fill-box;}
+.hub .hub-core{fill:var(--card);stroke-width:2;transition:stroke-width .15s;}
+.hub:hover .hub-core{stroke-width:3;}
+.hub .hub-count{font:800 13px/1 'Roboto Flex';fill:var(--ink);}
+.hub.dim{opacity:.18;}
+.hlabel{font:800 12px/1 'Roboto';letter-spacing:.09em;text-transform:uppercase;fill:var(--ink);paint-order:stroke;stroke:rgba(245,246,242,.95);stroke-width:4px;}
+.hsub{font:500 10.5px/1 'Roboto';fill:var(--ink-3);paint-order:stroke;stroke:rgba(245,246,242,.95);stroke-width:3px;}
+@keyframes orbit{to{transform:rotate(360deg);}}
+
+/* ---------- floating panel ---------- */
+#panel{position:absolute;top:18px;right:18px;width:min(370px,calc(100vw - 36px));max-height:calc(100% - 36px);background:var(--card);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--el1);display:flex;flex-direction:column;overflow:hidden;z-index:20;}
+#panel-head{padding:16px 18px 12px;border-bottom:1px dashed var(--line-2);flex-shrink:0;}
+#panel-body{overflow-y:auto;padding:14px 18px 18px;scrollbar-width:thin;}
+#panel-body::-webkit-scrollbar{width:6px;}
+#panel-body::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:6px;}
+.p-eyebrow{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin:0 0 7px;display:flex;align-items:center;gap:7px;}
+.p-eyebrow .swatch{width:9px;height:9px;border-radius:3px;flex-shrink:0;}
+.p-title{font:800 20px/1.15 'Roboto Flex';margin:0 0 6px;letter-spacing:-.01em;}
+.p-sub{font:400 12.5px/1.5 'Roboto';color:var(--ink-2);margin:0;}
+.p-for{display:flex;align-items:center;gap:6px;font:500 11.5px/1.5 'Roboto';color:var(--ink-3);margin:8px 0 0;}
+.p-for .mi{font-size:14px;flex-shrink:0;}
+.p-for b{font-weight:700;color:var(--ink-2);}
+.p-close{position:absolute;top:10px;right:10px;width:30px;height:30px;border:none;background:none;color:var(--ink-3);cursor:pointer;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.p-close:hover{background:var(--paper);color:var(--ink);}
+.p-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0 4px;}
+.p-stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 6px;text-align:center;}
+.p-stat b{display:block;font:800 16px/1 'Roboto Flex';color:var(--ink);}
+.p-stat span{font:700 8.5px/1.2 'Roboto';text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);}
+.disc-index{list-style:none;margin:10px 0 0;padding:0;}
+.disc-index li{display:flex;align-items:flex-start;gap:9px;padding:7px 8px;border-radius:var(--r-sm);cursor:pointer;transition:background .12s;}
+.disc-index li:hover{background:var(--paper);}
+.disc-index .swatch{width:10px;height:10px;border-radius:3px;flex-shrink:0;margin-top:3px;}
+.disc-index .col{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;}
+.disc-index .top{display:flex;align-items:center;gap:9px;}
+.disc-index .nm{flex:1;font:700 12.5px/1.2 'Roboto';}
+.disc-index .who{font:500 10.5px/1.35 'Roboto';color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.disc-index .ct{font:700 11px/1 'Roboto';color:var(--ink-3);font-variant-numeric:tabular-nums;}
+.chiprow{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0;}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:var(--r-full);border:1px solid var(--line);background:var(--paper);font:700 10.5px/1.3 'Roboto';color:var(--ink-2);cursor:pointer;transition:all .12s;}
+.chip:hover{border-color:var(--ink-3);color:var(--ink);}
+.chip.static{cursor:default;}
+.chip .swatch{width:7px;height:7px;border-radius:2px;}
+.p-sec{margin-top:14px;}
+.p-sec h4{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.09em;color:var(--ink-3);margin:0 0 7px;}
+.p-sec p{font:400 12.5px/1.55 'Roboto';color:var(--ink-2);margin:0 0 8px;}
+.do-item{display:flex;gap:8px;margin-bottom:7px;font:400 12.5px/1.45 'Roboto';color:var(--ink);}
+.do-item .mi{font-size:15px;color:#1E7B34;margin-top:1px;}
+.avoid-item{display:flex;gap:8px;margin-bottom:7px;font:400 12.5px/1.45 'Roboto';color:var(--ink-2);}
+.avoid-item .mi{font-size:15px;color:#B3261E;margin-top:1px;}
+.rel-row{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:var(--r-sm);cursor:pointer;transition:background .12s;}
+.rel-row:hover{background:var(--paper);}
+.rel-row .swatch{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.rel-row .nm{flex:1;font:700 12.5px/1.25 'Roboto';}
+.rel-row .why{font:400 10.5px/1.3 'Roboto';color:var(--ink-3);}
+.p-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--ink);color:#fff;padding:9px 15px;border-radius:var(--r-full);font:700 12px/1 'Roboto';text-decoration:none;border:1px solid var(--ink);cursor:pointer;transition:all .15s;}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);}
+.btn-ghost{display:inline-flex;align-items:center;gap:6px;background:var(--card);color:var(--ink);padding:8px 13px;border-radius:var(--r-full);font:700 12px/1 'Roboto';border:1px solid var(--line-2);cursor:pointer;text-decoration:none;transition:all .15s;}
+.btn-ghost:hover{border-color:var(--ink);}
+.impact-badge{display:inline-flex;align-items:center;gap:4px;font:800 9.5px/1 'Roboto';letter-spacing:.05em;padding:3px 9px;border-radius:var(--r-full);text-transform:uppercase;}
+.impact-high{background:#F9DEDC;color:#8C1D18;}
+.impact-moderate{background:#FFF4D8;color:#8B5E00;}
+.impact-low{background:#DDF3E4;color:#146C2E;}
+.tour-note{display:flex;gap:9px;background:var(--accent-soft);border:1px solid #F5C9B2;border-radius:var(--r-sm);padding:10px 12px;margin-top:12px;font:400 12px/1.5 'Roboto';color:#7A2D08;}
+.tour-note .mi{font-size:16px;flex-shrink:0;margin-top:1px;}
+.plist{list-style:none;margin:0;padding:0;}
+.plist li{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--r-sm);cursor:pointer;font:700 12.5px/1.3 'Roboto';}
+.plist li:hover{background:var(--paper);}
+.plist li .check{font-size:15px;color:#1E7B34;}
+.plist li .dotm{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.plist li .nm{flex:1;}
+.plist li.visited .nm{color:var(--ink-3);font-weight:500;}
+
+/* ---------- tour rail + controls ---------- */
+#tourRail{position:absolute;left:16px;top:50%;transform:translateY(-50%);display:none;flex-direction:column;gap:4px;z-index:15;}
+#tourRail.on{display:flex;}
+.rail-seg{width:3px;height:16px;border-radius:2px;background:var(--line-2);border:none;padding:0;cursor:pointer;transition:all .3s var(--ease);}
+.rail-seg.done{background:var(--ink-3);}
+.rail-seg.active{background:var(--accent);height:26px;}
+#tourControls{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);display:none;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-full);padding:6px 8px;box-shadow:var(--el1);z-index:20;}
+#tourControls.on{display:flex;}
+#tourControls .tcount{font:700 11px/1 'Roboto';color:var(--ink-3);padding:0 8px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+
+/* ---------- control bar ---------- */
+#controlBar{position:absolute;left:16px;bottom:16px;display:flex;gap:7px;align-items:center;z-index:15;flex-wrap:wrap;max-width:calc(100vw - 450px);}
+.cb-field{display:flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-full);padding:0 13px;height:38px;box-shadow:var(--el1);}
+.cb-field .mi{font-size:16px;color:var(--ink-3);}
+.cb-field input{border:none;background:none;outline:none;width:150px;font:500 12.5px/1 'Roboto';color:var(--ink);}
+.cb-field select{border:none;background:none;outline:none;font:700 12px/1 'Roboto';color:var(--ink);cursor:pointer;max-width:170px;}
+#zoomBar{position:absolute;right:18px;bottom:16px;display:flex;gap:6px;z-index:15;}
+#zoomBar .ibtn{box-shadow:var(--el1);}
+
+/* ---------- intro hint ---------- */
+#introHint{position:absolute;left:50%;top:22px;transform:translateX(-50%);background:var(--ink);color:#F5F6F2;border-radius:var(--r-full);padding:9px 18px;font:500 12px/1.4 'Roboto';display:flex;gap:9px;align-items:center;z-index:18;opacity:0;transition:opacity .5s;pointer-events:none;box-shadow:var(--el2);max-width:min(560px,90vw);text-align:center;}
+#introHint.show{opacity:1;}
+#introHint .mi{font-size:16px;color:#FFB59A;}
+
+@media (max-width:980px){
+  #controlBar{max-width:calc(100vw - 32px);bottom:auto;top:14px;}
+  #panel{top:auto;bottom:14px;right:14px;left:14px;width:auto;max-height:44%;}
+  #tourRail{display:none!important;}
+  #zoomBar{right:14px;top:14px;bottom:auto;}
+  .status-pill{display:none;}
+  #tourControls{bottom:calc(44% + 22px);}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+  #stage{transform:none;opacity:1;}
+}
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
+  <span class="wordmark">Cognitive <b>Engine</b></span>
+  <span class="status-pill"><span class="status-dot"></span>Knowledge atlas</span>
+  <div style="flex:1;"></div>
+  <span class="explored-pill" id="explored-pill" title="Principles you have opened in the atlas"><span class="ring" id="explored-ring" style="--p:0;"></span><span id="explored-label">0 / 115 explored</span></span>
+  <button class="ibtn" id="fit-btn" title="Fit whole map"><span class="mi">center_focus_strong</span></button>
+  <button class="tour-btn" id="tour-start"><span class="mi" style="font-size:16px;">rocket_launch</span>Grand Tour — all 14 fields</button>
+</header>
+
+<nav class="nav-tabs" aria-label="Primary">
+  <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
+  <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
+  <a href="cognitive-atlas.html" class="ntab active" aria-current="page"><span class="mi">hub</span>Atlas</a>
+  <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
+  <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
+  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
+</nav>
+
+<div id="stage">
+  <svg id="map" role="img" aria-label="Interactive map of 115 cognitive and behavioural principles grouped into 14 disciplines">
+    <g id="bridgeLayer"></g>
+    <g id="edgeLayer"></g>
+    <g id="litLayer"></g>
+    <g id="nodeLayer"></g>
+    <g id="hubLayer"></g>
+    <g id="labelLayer"></g>
+  </svg>
+
+  <div id="tourRail" aria-label="Tour progress"></div>
+
+  <div id="panel" aria-live="polite">
+    <div id="panel-head"></div>
+    <div id="panel-body"></div>
+  </div>
+
+  <div id="controlBar">
+    <label class="cb-field"><span class="mi">search</span><input id="q" type="search" placeholder="Find a principle…" autocomplete="off"/></label>
+    <label class="cb-field"><span class="mi">explore</span><select id="f-context"><option value="all">All contexts</option></select></label>
+    <label class="cb-field"><span class="mi">bug_report</span><select id="f-problem"><option value="all">All problem types</option></select></label>
+    <button class="ibtn" id="clear-filters" title="Clear filters" style="display:none;"><span class="mi">filter_alt_off</span></button>
+  </div>
+
+  <div id="zoomBar">
+    <button class="ibtn" id="zoom-in" title="Zoom in"><span class="mi">add</span></button>
+    <button class="ibtn" id="zoom-out" title="Zoom out"><span class="mi">remove</span></button>
+  </div>
+
+  <div id="tourControls">
+    <button class="ibtn" id="tour-prev" title="Previous stop"><span class="mi">chevron_left</span></button>
+    <button class="ibtn" id="tour-play" title="Pause / resume"><span class="mi" id="tour-play-icon">pause</span></button>
+    <button class="ibtn" id="tour-next" title="Next stop"><span class="mi">chevron_right</span></button>
+    <span class="tcount" id="tour-count">1 / 16</span>
+    <button class="ibtn" id="tour-exit" title="Exit tour"><span class="mi">close</span></button>
+  </div>
+
+  <div id="introHint"><span class="mi">drag_pan</span><span>Drag to pan · scroll to zoom · hover a node to see its connections · click to open it</span></div>
+</div>
+
+<script>
+'use strict';
+/* ============================================================
+   COGNITIVE ATLAS
+   A spatial learning layer over the engine's knowledge base.
+   - 115 principle nodes orbiting 14 discipline hubs
+   - edges = shared problem types / contexts (real data joins)
+   - Grand Tour: a guided camera flight through every field
+   - exploration progress persisted locally (Zeigarnik loop)
+   ============================================================ */
+
+const WORLD = { w: 2600, h: 1700 };
+const STORE_KEY = 'ce-atlas-visited-v1';
+
+const DISC_COLORS = {
+  'cognitive-psychology':      '#5D80D9',
+  'ux-design':                 '#5DA8D9',
+  'visual-design':             '#B087C7',
+  'behavioral-economics':      '#CAA266',
+  'social-psychology':         '#AABB87',
+  'human-computer-interaction':'#6FA8A0',
+  'instructional-design':      '#7B9E5E',
+  'gestalt-psychology':        '#D98E5D',
+  'neuroscience':              '#C17C9B',
+  'evolutionary-psychology':   '#C75D6E',
+  'information-theory':        '#8A7CC7',
+  'linguistics':               '#C7B45D',
+  'anthropology':              '#5DB89A',
+  'philosophy':                '#A889C7'
+};
+
+const DISC_NARRATIVE = {
+  'cognitive-psychology':      'How attention, memory and mental load actually work — the physics of the mind your interface must respect.',
+  'gestalt-psychology':        'How the eye groups what it sees before the mind reads a single word — proximity, similarity, closure, common fate.',
+  'neuroscience':              'What the brain rewards, detects and ignores — dopamine loops, error signals, habituation.',
+  'behavioral-economics':      'Why people do not optimise — defaults, anchors, losses and the shortcuts hiding in every decision.',
+  'social-psychology':         'Why people follow, trust, resist and reciprocate — the social forces living inside every product.',
+  'evolutionary-psychology':   'Ancient biases in modern interfaces — threat detection, face detection, in-group instincts.',
+  'information-theory':        'Signal versus noise — how much information a screen can carry before meaning collapses.',
+  'linguistics':               'How wording shapes thought — conversational maxims, prototypes, garden paths and language games.',
+  'ux-design':                 'Field-tested laws of interaction — Jakob’s familiarity, Tesler’s conserved complexity, Kay’s simplicity.',
+  'human-computer-interaction':'Where cognition meets the machine — affordances, signifiers, distributed and situated thinking.',
+  'instructional-design':      'How people learn — spacing, chunking and sequencing knowledge so it actually sticks.',
+  'visual-design':             'Hierarchy, contrast and colour as cognitive shortcuts — making the important thing findable.',
+  'anthropology':              'Ritual, culture and gift economies — the human meaning systems every product inherits.',
+  'philosophy':                'The deep assumptions — embodiment, ready-to-hand tools, and what simplicity really means.'
+};
+
+const DISC_PROFESSIONS = {
+  'cognitive-psychology':      'UX researchers, product designers, learning designers',
+  'gestalt-psychology':        'visual and data-visualisation designers, brand designers',
+  'neuroscience':              'product and game designers, growth and marketing teams',
+  'behavioral-economics':      'pricing, growth and fintech teams, policy and nudge designers',
+  'social-psychology':         'community and social-product designers, marketers, people teams',
+  'evolutionary-psychology':   'safety-critical and brand designers, trust & safety teams',
+  'information-theory':        'data-visualisation and dashboard designers, technical writers',
+  'linguistics':               'UX writers, content and conversation designers',
+  'ux-design':                 'product designers, front-end engineers, product managers',
+  'human-computer-interaction':'interaction designers, HCI researchers, accessibility specialists',
+  'instructional-design':      'onboarding designers, learning & development teams, educators',
+  'visual-design':             'UI and visual designers, design-system teams',
+  'anthropology':              'design researchers, service designers, internationalisation teams',
+  'philosophy':                'design leads, ethicists, AI and product strategists'
+};
+
+const TOUR_ORDER = [
+  'cognitive-psychology','gestalt-psychology','neuroscience','behavioral-economics',
+  'social-psychology','evolutionary-psychology','information-theory','linguistics',
+  'ux-design','human-computer-interaction','visual-design','instructional-design',
+  'anthropology','philosophy'
+];
+
+
+/* ---------------- state ---------------- */
+const S = {
+  data: null,
+  hubs: [], nodes: [], edges: [], bridges: [],
+  byId: {}, hubById: {}, adj: new Map(),
+  cam:  { x: -100, y: -100, w: WORLD.w + 200 },
+  camT: { x: -100, y: -100, w: WORLD.w + 200 },
+  hoverId: null, selId: null, selDisc: null,
+  visited: new Set(),
+  tour: { active: false, idx: 0, playing: false, timer: null },
+  filter: { q: '', context: 'all', problem: 'all' },
+  filtersActive: false,
+  interacted: false,
+  reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+};
+
+const svg = document.getElementById('map');
+const stage = document.getElementById('stage');
+const NS = 'http://www.w3.org/2000/svg';
+
+function el(tag, attrs, parent) {
+  const n = document.createElementNS(NS, tag);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(n);
+  return n;
+}
+function esc(v) {
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+/* ---------------- data ---------------- */
+async function loadData() {
+  const files = ['data/principles-v2.json', 'data/disciplines.json', 'data/contexts.json', 'data/problem-types.json'];
+  const [principles, disciplines, contexts, problemTypes] = await Promise.all(
+    files.map((f) => fetch(f).then((r) => { if (!r.ok) throw new Error(f); return r.json(); }))
+  );
+  // citations are additive: never let them break the map
+  const refs = await fetch('data/references.json')
+    .then((r) => (r.ok ? r.json() : { references: {} }))
+    .catch(() => ({ references: {} }));
+  return {
+    principles: principles.principles,
+    disciplines: disciplines.disciplines,
+    contexts: contexts.contexts,
+    problemTypes: problemTypes.problemTypes,
+    references: refs.references || {}
+  };
+}
+
+function buildGraph(data) {
+  const discById = Object.fromEntries(data.disciplines.map((d) => [d.id, d]));
+  const ctxById = Object.fromEntries(data.contexts.map((c) => [c.id, c]));
+  const ptById = Object.fromEntries(data.problemTypes.map((p) => [p.id, p]));
+
+  // hubs on an ellipse, ordered by the narrative tour
+  const order = TOUR_ORDER.filter((id) => discById[id]);
+  const cx = WORLD.w / 2, cy = WORLD.h / 2, rx = 1020, ry = 620;
+  order.forEach((id, i) => {
+    const a = (-90 + (360 / order.length) * i) * Math.PI / 180;
+    const hub = {
+      id, label: discById[id].label,
+      color: DISC_COLORS[id] || '#8A8A82',
+      narrative: DISC_NARRATIVE[id] || '',
+      professions: DISC_PROFESSIONS[id] || '',
+      x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a),
+      members: [], angle: a
+    };
+    S.hubs.push(hub); S.hubById[id] = hub;
+  });
+
+  // nodes orbit a discipline hub on a golden-angle spiral.
+  // each principle joins its least-populated discipline so every
+  // field on the map is inhabited (no empty islands).
+  const groups = new Map();
+  data.principles.forEach((p) => {
+    let target = p.disciplines[0];
+    let min = Infinity;
+    p.disciplines.forEach((d) => {
+      const size = (groups.get(d) || []).length;
+      if (size < min) { min = size; target = d; }
+    });
+    if (!groups.has(target)) groups.set(target, []);
+    groups.get(target).push(p);
+  });
+  S.hubs.forEach((hub, hi) => {
+    const members = (groups.get(hub.id) || []).sort((a, b) => b.baseRelevance - a.baseRelevance);
+    members.forEach((p, i) => {
+      const r = 46 + 30 * Math.sqrt(i);
+      const a = i * 2.399963 + hi * 0.7;
+      const node = {
+        p, id: p.id, hub,
+        x: hub.x + r * Math.cos(a),
+        y: hub.y + r * Math.sin(a) * 0.86
+      };
+      S.nodes.push(node); S.byId[p.id] = node; hub.members.push(node);
+    });
+  });
+
+  // edges: real joins — shared problem types weigh double, shared contexts single
+  const cand = new Map();
+  for (let i = 0; i < S.nodes.length; i++) {
+    const scored = [];
+    for (let j = 0; j < S.nodes.length; j++) {
+      if (i === j) continue;
+      const A = S.nodes[i].p, B = S.nodes[j].p;
+      const sharedPT = A.problemTypes.filter((t) => B.problemTypes.includes(t));
+      const sharedCX = A.contexts.filter((c) => B.contexts.includes(c));
+      const w = sharedPT.length * 2 + sharedCX.length;
+      if (w >= 3) scored.push({ j, w, sharedPT, sharedCX });
+    }
+    scored.sort((a, b) => b.w - a.w);
+    scored.slice(0, 2).forEach(({ j, w, sharedPT, sharedCX }) => {
+      const key = i < j ? i + '-' + j : j + '-' + i;
+      if (!cand.has(key)) {
+        cand.set(key, {
+          a: S.nodes[Math.min(i, j)], b: S.nodes[Math.max(i, j)], w,
+          shared: sharedPT.map((t) => (ptById[t] || {}).label).filter(Boolean)
+        });
+      }
+    });
+  }
+  S.edges = [...cand.values()];
+  S.edges.forEach((e) => {
+    const mx = (e.a.x + e.b.x) / 2, my = (e.a.y + e.b.y) / 2;
+    const dx = e.b.x - e.a.x, dy = e.b.y - e.a.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const bend = (len * 0.09) * ((e.a.id < e.b.id) ? 1 : -1);
+    e.d = `M ${e.a.x} ${e.a.y} Q ${mx - dy / len * bend} ${my + dx / len * bend} ${e.b.x} ${e.b.y}`;
+    if (!S.adj.has(e.a.id)) S.adj.set(e.a.id, []);
+    if (!S.adj.has(e.b.id)) S.adj.set(e.b.id, []);
+    S.adj.get(e.a.id).push({ id: e.b.id, w: e.w, shared: e.shared });
+    S.adj.get(e.b.id).push({ id: e.a.id, w: e.w, shared: e.shared });
+  });
+  S.adj.forEach((list) => list.sort((a, b) => b.w - a.w));
+
+  // bridges between discipline hubs that share principles
+  for (let i = 0; i < S.hubs.length; i++) {
+    for (let j = i + 1; j < S.hubs.length; j++) {
+      const A = S.hubs[i], B = S.hubs[j];
+      const n = data.principles.filter((p) => p.disciplines.includes(A.id) && p.disciplines.includes(B.id)).length;
+      if (n >= 2) {
+        const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2;
+        const pull = 0.16;
+        S.bridges.push({
+          a: A, b: B, n,
+          d: `M ${A.x} ${A.y} Q ${mx + (cx - mx) * pull} ${my + (cy - my) * pull} ${B.x} ${B.y}`,
+          width: Math.min(6, 1 + n * 0.55)
+        });
+      }
+    }
+  }
+  S.ctxById = ctxById; S.ptById = ptById; S.discById = discById;
+}
+
+/* ---------------- render ---------------- */
+function renderMap() {
+  const bridgeLayer = document.getElementById('bridgeLayer');
+  const edgeLayer = document.getElementById('edgeLayer');
+  const nodeLayer = document.getElementById('nodeLayer');
+  const hubLayer = document.getElementById('hubLayer');
+  const labelLayer = document.getElementById('labelLayer');
+
+  S.bridges.forEach((b) => {
+    b.el = el('path', { d: b.d, class: 'bridge', 'stroke-width': b.width }, bridgeLayer);
+  });
+  S.edges.forEach((e) => {
+    e.el = el('path', { d: e.d, class: 'edge' }, edgeLayer);
+  });
+  S.nodes.forEach((n) => {
+    const g = el('g', { class: 'node', 'data-id': n.id, tabindex: '0', role: 'button', 'aria-label': n.p.name }, nodeLayer);
+    el('circle', { class: 'hit', r: 16, cx: 0, cy: 0 }, g);
+    el('circle', { class: 'halo', r: 9.5, cx: 0, cy: 0 }, g);
+    el('circle', { class: 'visited-ring', r: 7.6, cx: 0, cy: 0 }, g);
+    el('circle', { class: 'dot', r: 4.6, cx: 0, cy: 0, fill: n.hub.color }, g);
+    g.style.transform = `translate(${n.x}px,${n.y}px)`;
+    n.el = g;
+    n.labelEl = el('text', { class: 'nlabel', x: n.x, y: n.y - 13, 'text-anchor': 'middle' }, labelLayer);
+    n.labelEl.textContent = n.p.name;
+    if (S.visited.has(n.id)) { g.classList.add('visited'); n.labelEl.classList.add('visited'); }
+
+    g.addEventListener('pointerenter', () => hoverNode(n.id));
+    g.addEventListener('pointerleave', () => unhoverNode());
+    g.addEventListener('click', (ev) => { ev.stopPropagation(); selectNode(n.id, true); });
+    g.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectNode(n.id, true); } });
+  });
+  S.hubs.forEach((h) => {
+    const g = el('g', { class: 'hub', 'data-id': h.id, tabindex: '0', role: 'button', 'aria-label': h.label }, hubLayer);
+    el('circle', { class: 'hub-orbit', r: 31, cx: 0, cy: 0, stroke: h.color }, g);
+    el('circle', { class: 'hub-core', r: 22, cx: 0, cy: 0, stroke: h.color }, g);
+    const t = el('text', { class: 'hub-count', x: 0, y: 4.5, 'text-anchor': 'middle' }, g);
+    t.textContent = h.members.length;
+    g.style.transform = `translate(${h.x}px,${h.y}px)`;
+    h.el = g;
+    const ly = h.y + 46;
+    h.labelEl = el('text', { class: 'hlabel', x: h.x, y: ly, 'text-anchor': 'middle' }, labelLayer);
+    h.labelEl.textContent = h.label;
+    h.subEl = el('text', { class: 'hsub', x: h.x, y: ly + 14, 'text-anchor': 'middle' }, labelLayer);
+    h.subEl.textContent = h.members.length + ' principles';
+    g.addEventListener('click', (ev) => { ev.stopPropagation(); selectDiscipline(h.id, true); });
+    g.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); selectDiscipline(h.id, true); } });
+  });
+}
+
+/* ---------------- camera ---------------- */
+function aspect() { return stage.clientWidth / Math.max(1, stage.clientHeight); }
+function applyCam() {
+  const w = S.cam.w, h = w / aspect();
+  svg.setAttribute('viewBox', `${S.cam.x} ${S.cam.y} ${w} ${h}`);
+}
+function fitBounds(b, pad) {
+  const bw = (b.maxX - b.minX) + pad * 2, bh = (b.maxY - b.minY) + pad * 2;
+  const a = aspect();
+  let w = Math.max(bw, bh * a);
+  w = clamp(w, 340, 3800);
+  const cxm = (b.minX + b.maxX) / 2, cym = (b.minY + b.maxY) / 2;
+  S.camT = { x: cxm - w / 2, y: cym - (w / a) / 2, w };
+  clampCam();
+}
+function fitAll() { fitBounds({ minX: -80, minY: -60, maxX: WORLD.w + 80, maxY: WORLD.h + 60 }, 40); }
+function clampCam() {
+  const a = aspect();
+  S.camT.w = clamp(S.camT.w, 300, 3800);
+  S.camT.x = clamp(S.camT.x, -400, WORLD.w + 400 - S.camT.w);
+  S.camT.y = clamp(S.camT.y, -400, WORLD.h + 400 - S.camT.w / a);
+}
+function tickCam() {
+  const k = S.reduced ? 1 : 0.16;
+  const dx = S.camT.x - S.cam.x, dy = S.camT.y - S.cam.y, dw = S.camT.w - S.cam.w;
+  if (Math.abs(dx) < 0.4 && Math.abs(dy) < 0.4 && Math.abs(dw) < 0.4) {
+    S.cam = { ...S.camT };
+  } else {
+    S.cam.x += dx * k; S.cam.y += dy * k; S.cam.w += dw * k;
+  }
+  applyCam();
+  requestAnimationFrame(tickCam);
+}
+function screenToWorld(clientX, clientY) {
+  const r = svg.getBoundingClientRect();
+  const w = S.cam.w, h = w / aspect();
+  return { x: S.cam.x + (clientX - r.left) / r.width * w, y: S.cam.y + (clientY - r.top) / r.height * h };
+}
+
+/* ---------------- hover / selection ---------------- */
+function hoverNode(id) {
+  if (S.hoverId === id) return;
+  unhoverNode();
+  S.hoverId = id;
+  const conn = new Set([id, ...(S.adj.get(id) || []).map((x) => x.id)]);
+  const litLayer = document.getElementById('litLayer');
+  S.edges.forEach((e) => {
+    const incident = e.a.id === id || e.b.id === id;
+    e.el.classList.toggle('dim', !incident);
+    if (incident) el('path', { d: e.d }, litLayer);
+  });
+  S.nodes.forEach((n) => {
+    const on = conn.has(n.id);
+    n.el.classList.toggle('dim', !on);
+    n.el.classList.toggle('lit', on && n.id !== id);
+    n.labelEl.classList.toggle('show', on);
+  });
+  S.bridges.forEach((b) => b.el.classList.add('dim'));
+}
+function unhoverNode() {
+  if (!S.hoverId) return;
+  S.hoverId = null;
+  document.getElementById('litLayer').innerHTML = '';
+  S.edges.forEach((e) => e.el.classList.remove('dim'));
+  S.bridges.forEach((b) => b.el.classList.remove('dim'));
+  S.nodes.forEach((n) => {
+    n.el.classList.remove('lit');
+    n.labelEl.classList.toggle('show', n.id === S.selId);
+    if (!S.filtersActive) n.el.classList.remove('dim');
+  });
+  if (S.filtersActive) applyFilters();
+}
+
+function clusterBounds(hub) {
+  const xs = [hub.x], ys = [hub.y];
+  hub.members.forEach((m) => { xs.push(m.x); ys.push(m.y); });
+  return { minX: Math.min(...xs), minY: Math.min(...ys), maxX: Math.max(...xs), maxY: Math.max(...ys) };
+}
+
+function selectNode(id, zoom) {
+  unhoverNode();
+  S.selId = id;
+  S.selDisc = null;
+  if (S.tour.active && S.tour.playing) {
+    S.tour.playing = false;
+    clearTimeout(S.tour.timer);
+    document.getElementById('tour-play-icon').textContent = 'play_arrow';
+  }
+  const n = S.byId[id];
+  if (!n) return;
+  S.nodes.forEach((m) => {
+    m.el.classList.toggle('selected', m.id === id);
+    m.labelEl.classList.toggle('show', m.id === id);
+  });
+  if (!S.visited.has(id)) {
+    S.visited.add(id);
+    saveVisited();
+    n.el.classList.add('visited');
+    n.labelEl.classList.add('visited');
+    updateExploredPill();
+  }
+  if (zoom) {
+    const conn = (S.adj.get(id) || []).slice(0, 4).map((x) => S.byId[x.id]).filter(Boolean);
+    const xs = [n.x, ...conn.map((c) => c.x)], ys = [n.y, ...conn.map((c) => c.y)];
+    fitBounds({ minX: Math.min(...xs), minY: Math.min(...ys), maxX: Math.max(...xs), maxY: Math.max(...ys) }, 150);
+  }
+  renderPrinciplePanel(n);
+  syncUrl();
+}
+
+function selectDiscipline(hubId, zoom) {
+  unhoverNode();
+  S.selId = null;
+  S.nodes.forEach((m) => { m.el.classList.remove('selected'); m.labelEl.classList.remove('show'); });
+  const hub = S.hubById[hubId];
+  if (!hub) return;
+  S.selDisc = hubId;
+  if (zoom) fitBounds(clusterBounds(hub), 150);
+  renderDisciplinePanel(hub, false);
+  syncUrl();
+}
+
+function clearSelection() {
+  S.selId = null;
+  S.selDisc = null;
+  S.nodes.forEach((m) => { m.el.classList.remove('selected'); m.labelEl.classList.remove('show'); });
+  renderWelcomePanel();
+  fitAll();
+  syncUrl();
+}
+
+/* shareable state: ?p=<principle-id> or ?disc=<field-id> */
+function syncUrl() {
+  try {
+    const params = new URLSearchParams();
+    if (S.selId) params.set('p', S.selId);
+    else if (S.selDisc) params.set('disc', S.selDisc);
+    const qs = params.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
+  } catch (e) { /* file:// or restricted context — skip silently */ }
+}
+
+/* ---------------- panels ---------------- */
+const panelHead = document.getElementById('panel-head');
+const panelBody = document.getElementById('panel-body');
+
+function impactBadge(level) {
+  const map = { high: ['impact-high', 'High impact'], moderate: ['impact-moderate', 'Moderate'], low: ['impact-low', 'Supporting'] };
+  const [cls, label] = map[level] || map.moderate;
+  return `<span class="impact-badge ${cls}">${label}</span>`;
+}
+
+function renderWelcomePanel() {
+  panelHead.innerHTML = `
+    <p class="p-eyebrow"><span class="mi" style="font-size:15px;">hub</span>The whole map</p>
+    <h2 class="p-title">Every principle. Every connection.</h2>
+    <p class="p-sub">This is the engine's full knowledge base laid out as a landscape. Each island is a field of study; each dot is a principle; each line is a real connection — two principles that solve the same class of problem.</p>`;
+  const stats = `
+    <div class="p-stats">
+      <div class="p-stat"><b>${S.nodes.length}</b><span>Principles</span></div>
+      <div class="p-stat"><b>${S.hubs.length}</b><span>Fields</span></div>
+      <div class="p-stat"><b>${S.edges.length}</b><span>Connections</span></div>
+      <div class="p-stat"><b>${S.visited.size}</b><span>Explored</span></div>
+    </div>`;
+  const index = S.hubs.map((h) => `
+      <li data-disc="${h.id}"><span class="swatch" style="background:${h.color};"></span><span class="col"><span class="top"><span class="nm">${esc(h.label)}</span><span class="ct">${h.members.length}</span></span>${h.professions ? `<span class="who">For: ${esc(h.professions)}</span>` : ''}</span></li>`).join('');
+  panelBody.innerHTML = `
+    ${stats}
+    <div class="p-sec"><h4>All ${S.hubs.length} fields of study</h4><ul class="disc-index">${index}</ul></div>
+    <div class="p-actions">
+      <button class="btn-primary" data-tour="start"><span class="mi" style="font-size:15px;">rocket_launch</span>Take the Grand Tour</button>
+      <button class="btn-ghost" data-reset-progress><span class="mi" style="font-size:15px;">restart_alt</span>Reset progress</button>
+    </div>
+    <div class="tour-note"><span class="mi">school</span><span>The tour flies you through every field in about 90 seconds and explains what each one teaches a designer. Dots you open stay marked as explored.</span></div>`;
+}
+
+function renderDisciplinePanel(hub, forTour) {
+  const topCtx = topTags(hub.members, 'contexts', S.ctxById, 3);
+  const topPT = topTags(hub.members, 'problemTypes', S.ptById, 3);
+  const connected = S.bridges
+    .filter((b) => b.a.id === hub.id || b.b.id === hub.id)
+    .map((b) => ({ other: b.a.id === hub.id ? b.b : b.a, n: b.n }))
+    .sort((a, b) => b.n - a.n).slice(0, 5);
+
+  panelHead.innerHTML = `
+    <button class="p-close" data-panel-close title="Back to overview"><span class="mi" style="font-size:17px;">close</span></button>
+    <p class="p-eyebrow"><span class="swatch" style="background:${hub.color};"></span>Field of study · ${hub.members.length} principles</p>
+    <h2 class="p-title">${esc(hub.label)}</h2>
+    <p class="p-sub">${esc(hub.narrative)}</p>
+    ${hub.professions ? `<p class="p-for"><span class="mi">groups</span><span><b>For:</b> ${esc(hub.professions)}</span></p>` : ''}`;
+
+  const list = hub.members.map((m) => `
+      <li data-node="${m.id}" class="${S.visited.has(m.id) ? 'visited' : ''}">
+        <span class="dotm" style="background:${hub.color};"></span><span class="nm">${esc(m.p.name)}</span>
+        ${S.visited.has(m.id) ? '<span class="mi check">check_circle</span>' : ''}
+      </li>`).join('');
+
+  panelBody.innerHTML = `
+    <div class="p-sec"><h4>Most active contexts</h4><div class="chiprow">${topCtx.map((c) => `<span class="chip static">${esc(c)}</span>`).join('')}</div></div>
+    <div class="p-sec"><h4>Problems it solves</h4><div class="chiprow">${topPT.map((c) => `<span class="chip static">${esc(c)}</span>`).join('')}</div></div>
+    <div class="p-sec"><h4>Connected fields</h4><div class="chiprow">${connected.length ? connected.map((c) => `<span class="chip" data-disc="${c.other.id}"><span class="swatch" style="background:${c.other.color};"></span>${esc(c.other.label)} · ${c.n}</span>`).join('') : '<span class="chip static">Mostly self-contained</span>'}</div></div>
+    <div class="p-sec"><h4>Every principle in this field</h4><ul class="plist">${list}</ul></div>
+    ${forTour
+      ? `<div class="tour-note"><span class="mi">flight</span><span>Tour stop ${S.tour.idx + 1} of ${TOUR_ORDER.length + 2}. Open any principle — the tour waits for you.</span></div>`
+      : `<div class="p-actions"><button class="btn-ghost" data-tour="start"><span class="mi" style="font-size:15px;">rocket_launch</span>See it in the Grand Tour</button></div>`}`;
+}
+
+function topTags(members, key, lookup, n) {
+  const count = {};
+  members.forEach((m) => m.p[key].forEach((t) => { count[t] = (count[t] || 0) + 1; }));
+  return Object.entries(count).sort((a, b) => b[1] - a[1]).slice(0, n)
+    .map(([id]) => (lookup[id] || {}).label).filter(Boolean);
+}
+
+function renderPrinciplePanel(node) {
+  const p = node.p;
+  const rel = (S.adj.get(node.id) || []).slice(0, 5);
+  panelHead.innerHTML = `
+    <button class="p-close" data-panel-close title="Back to overview"><span class="mi" style="font-size:17px;">close</span></button>
+    <p class="p-eyebrow"><span class="swatch" style="background:${node.hub.color};"></span>${esc(node.hub.label)} · № ${esc(p.number)}</p>
+    <h2 class="p-title">${esc(p.name)}</h2>
+    <p class="p-sub">${esc(p.summary || p.description || '')}</p>
+    <div style="margin-top:9px;">${impactBadge(p.impactLevel)}</div>`;
+
+  const discs = p.disciplines.map((d) => {
+    const hub = S.hubById[d];
+    return hub ? `<span class="chip" data-disc="${d}"><span class="swatch" style="background:${hub.color};"></span>${esc(hub.label)}</span>` : '';
+  }).join('');
+  const ctxs = p.contexts.map((c) => `<span class="chip static">${esc((S.ctxById[c] || {}).label || c)}</span>`).join('');
+  const pts = p.problemTypes.map((c) => `<span class="chip static">${esc((S.ptById[c] || {}).label || c)}</span>`).join('');
+  const dos = (p.actions || []).slice(0, 2).map((a) => `
+    <div class="do-item"><span class="mi">check_circle</span><span><strong>${esc(a.title)}.</strong> ${esc(a.description)}</span></div>`).join('');
+  const avoids = (p.antiPatterns || []).slice(0, 2).map((a) => `
+    <div class="avoid-item"><span class="mi">cancel</span><span>${esc(a)}</span></div>`).join('');
+  const relRows = rel.map((r) => {
+    const m = S.byId[r.id];
+    if (!m) return '';
+    const why = r.shared.length ? `shares: ${esc(r.shared.slice(0, 2).join(' · '))}` : 'related pattern';
+    return `<div class="rel-row" data-node="${m.id}"><span class="swatch" style="background:${m.hub.color};"></span><span class="nm">${esc(m.p.name)}<br><span class="why">${why}</span></span><span class="mi" style="font-size:15px;color:var(--ink-3);">arrow_outward</span></div>`;
+  }).join('');
+
+  panelBody.innerHTML = `
+    ${p.whenToUse ? `<div class="p-sec"><h4>When to reach for it</h4><p>${esc(p.whenToUse)}</p></div>` : ''}
+    <div class="p-sec"><h4>Fields</h4><div class="chiprow">${discs}</div></div>
+    <div class="p-sec"><h4>Contexts</h4><div class="chiprow">${ctxs}</div></div>
+    <div class="p-sec"><h4>Problems it solves</h4><div class="chiprow">${pts}</div></div>
+    ${dos ? `<div class="p-sec"><h4>Do</h4>${dos}</div>` : ''}
+    ${avoids ? `<div class="p-sec"><h4>Avoid</h4>${avoids}</div>` : ''}
+    ${relRows ? `<div class="p-sec"><h4>Connected principles</h4>${relRows}</div>` : ''}
+    ${(() => {
+      const refs = (S.refs || {})[p.id] || [];
+      if (!refs.length) return '';
+      const items = refs.map((r) => `<p style="font:400 12px/1.55 'Roboto';color:var(--ink-2);margin:0 0 7px;"><strong style="color:var(--ink);">${esc(r.a)} (${r.y}).</strong> ${esc(r.t)}. <em>${esc(r.v)}</em></p>`).join('');
+      return `<div class="p-sec"><h4>Canonical sources</h4>${items}</div>`;
+    })()}
+    <div class="p-actions">
+      <a class="btn-primary" href="advanced-prompt-generator.html?principle=${encodeURIComponent(p.id)}&source=atlas"><span class="mi" style="font-size:15px;">auto_awesome</span>Seed a prompt</a>
+      <a class="btn-ghost" href="index.html?q=${encodeURIComponent(p.name)}"><span class="mi" style="font-size:15px;">auto_stories</span>Open in Library</a>
+    </div>`;
+}
+
+function renderTourIntroPanel() {
+  panelHead.innerHTML = `
+    <p class="p-eyebrow"><span class="mi" style="font-size:15px;">flight_takeoff</span>Grand Tour · stop 1 of ${TOUR_ORDER.length + 2}</p>
+    <h2 class="p-title">The whole territory, first.</h2>
+    <p class="p-sub">${S.nodes.length} principles from ${S.hubs.length} fields — cognitive psychology to philosophy — connected by ${S.edges.length} shared-problem lines. Next stops fly into each field, largest to most surprising.</p>`;
+  panelBody.innerHTML = `
+    <div class="tour-note"><span class="mi">touch_app</span><span>You stay in control: pause below, jump with the rail on the left, or open any dot. The tour resumes when you are ready.</span></div>`;
+}
+
+function renderTourOutroPanel() {
+  panelHead.innerHTML = `
+    <p class="p-eyebrow"><span class="mi" style="font-size:15px;">flag</span>Grand Tour · final stop</p>
+    <h2 class="p-title">Now make it work for you.</h2>
+    <p class="p-sub">You have seen every field. The engine turns any of these principles into a ranked intervention and a ready-to-use design prompt.</p>`;
+  panelBody.innerHTML = `
+    <div class="p-actions">
+      <a class="btn-primary" href="index.html"><span class="mi" style="font-size:15px;">auto_stories</span>Open the Library</a>
+      <button class="btn-ghost" data-tour="start"><span class="mi" style="font-size:15px;">replay</span>Restart tour</button>
+    </div>
+    <div class="tour-note"><span class="mi">school</span><span>Tip: principles you open are marked as explored — ${S.visited.size} of ${S.nodes.length} so far. Hover any dot to trace what it connects to.</span></div>`;
+}
+
+/* panel event delegation */
+document.getElementById('panel').addEventListener('click', (ev) => {
+  const nodeRow = ev.target.closest('[data-node]');
+  if (nodeRow) { selectNode(nodeRow.dataset.node, true); return; }
+  const discRow = ev.target.closest('[data-disc]');
+  if (discRow) { selectDiscipline(discRow.dataset.disc, true); return; }
+  if (ev.target.closest('[data-tour="start"]')) { enterTour(); return; }
+  if (ev.target.closest('[data-reset-progress]')) {
+    S.visited.clear(); saveVisited(); updateExploredPill();
+    S.nodes.forEach((n) => { n.el.classList.remove('visited'); n.labelEl.classList.remove('visited'); });
+    renderWelcomePanel(); return;
+  }
+  if (ev.target.closest('[data-panel-close]')) { clearSelection(); return; }
+});
+
+/* ---------------- filters ---------------- */
+function nodeMatches(n) {
+  const f = S.filter;
+  if (f.context !== 'all' && !n.p.contexts.includes(f.context)) return false;
+  if (f.problem !== 'all' && !n.p.problemTypes.includes(f.problem)) return false;
+  if (f.q) {
+    const hay = [n.p.name, n.p.summary, ...(n.p.tags || []), ...(n.p.aliases || []), ...(n.p.categories || [])].join(' ').toLowerCase();
+    if (!hay.includes(f.q)) return false;
+  }
+  return true;
+}
+function applyFilters() {
+  const f = S.filter;
+  S.filtersActive = Boolean(f.q || f.context !== 'all' || f.problem !== 'all');
+  document.getElementById('clear-filters').style.display = S.filtersActive ? 'flex' : 'none';
+  S.nodes.forEach((n) => {
+    const match = !S.filtersActive || nodeMatches(n);
+    n.el.classList.toggle('dim', !match);
+    n.labelEl.classList.toggle('show', S.filtersActive && match && f.q && n.labelEl.textContent.toLowerCase().includes(f.q));
+  });
+  S.edges.forEach((e) => {
+    const both = !S.filtersActive || (nodeMatches(e.a) && nodeMatches(e.b));
+    e.el.classList.toggle('dim', !both);
+  });
+  S.hubs.forEach((h) => {
+    h.el.classList.toggle('dim', S.filtersActive && !h.members.some((m) => nodeMatches(m)));
+  });
+}
+
+/* ---------------- grand tour ---------------- */
+const STOPS = [{ type: 'intro' }, ...TOUR_ORDER.map((id) => ({ type: 'disc', id })), { type: 'outro' }];
+
+function enterTour() {
+  exitTour(false);
+  S.tour.active = true; S.tour.playing = true;
+  document.getElementById('tourControls').classList.add('on');
+  document.getElementById('tour-play-icon').textContent = 'pause';
+  const rail = document.getElementById('tourRail');
+  rail.classList.add('on');
+  rail.innerHTML = STOPS.map((_, i) => `<button class="rail-seg" data-stop="${i}" title="Stop ${i + 1}"></button>`).join('');
+  goToStop(0);
+}
+function exitTour(refit = true) {
+  S.tour.active = false; S.tour.playing = false;
+  clearTimeout(S.tour.timer);
+  document.getElementById('tourControls').classList.remove('on');
+  document.getElementById('tourRail').classList.remove('on');
+  if (refit) { renderWelcomePanel(); fitAll(); }
+}
+function goToStop(i) {
+  if (!S.tour.active) return;
+  S.tour.idx = clamp(i, 0, STOPS.length - 1);
+  clearTimeout(S.tour.timer);
+  document.getElementById('tour-count').textContent = `${S.tour.idx + 1} / ${STOPS.length}`;
+  document.querySelectorAll('.rail-seg').forEach((seg, j) => {
+    seg.classList.toggle('done', j < S.tour.idx);
+    seg.classList.toggle('active', j === S.tour.idx);
+  });
+  const stop = STOPS[S.tour.idx];
+  if (stop.type === 'intro') { fitAll(); renderTourIntroPanel(); }
+  else if (stop.type === 'outro') { fitAll(); renderTourOutroPanel(); }
+  else {
+    const hub = S.hubById[stop.id];
+    if (hub) { fitBounds(clusterBounds(hub), 150); renderDisciplinePanel(hub, true); }
+  }
+  if (S.tour.playing) {
+    S.tour.timer = setTimeout(() => {
+      if (S.tour.idx >= STOPS.length - 1) exitTour(true);
+      else goToStop(S.tour.idx + 1);
+    }, S.reduced ? 9000 : 6500);
+  }
+}
+document.getElementById('tourRail').addEventListener('click', (ev) => {
+  const seg = ev.target.closest('[data-stop]');
+  if (seg) goToStop(Number(seg.dataset.stop));
+});
+document.getElementById('tour-prev').addEventListener('click', () => goToStop(S.tour.idx - 1));
+document.getElementById('tour-next').addEventListener('click', () => goToStop(S.tour.idx + 1));
+document.getElementById('tour-exit').addEventListener('click', () => exitTour(true));
+document.getElementById('tour-play').addEventListener('click', () => {
+  S.tour.playing = !S.tour.playing;
+  document.getElementById('tour-play-icon').textContent = S.tour.playing ? 'pause' : 'play_arrow';
+  if (S.tour.playing) goToStop(S.tour.idx); else clearTimeout(S.tour.timer);
+});
+document.getElementById('tour-start').addEventListener('click', enterTour);
+
+/* ---------------- visited persistence ---------------- */
+function saveVisited() {
+  try { localStorage.setItem(STORE_KEY, JSON.stringify([...S.visited])); } catch (e) { /* private mode */ }
+}
+function loadVisited() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) JSON.parse(raw).forEach((id) => S.visited.add(id));
+  } catch (e) { /* ignore */ }
+}
+function updateExploredPill() {
+  const total = S.nodes.length || 115;
+  document.getElementById('explored-label').textContent = `${S.visited.size} / ${total} explored`;
+  document.getElementById('explored-ring').style.setProperty('--p', (S.visited.size / total).toFixed(3));
+}
+
+/* ---------------- pan / zoom / keys ---------------- */
+function bindStage() {
+  let drag = null;
+  svg.addEventListener('pointerdown', (ev) => {
+    if (ev.target.closest('.node') || ev.target.closest('.hub')) return;
+    drag = { x: ev.clientX, y: ev.clientY, cam: { ...S.camT } };
+    svg.classList.add('dragging');
+    svg.setPointerCapture(ev.pointerId);
+    S.interacted = true; hideHint();
+    if (S.tour.active) exitTour(false);
+  });
+  svg.addEventListener('pointermove', (ev) => {
+    if (!drag) return;
+    const scale = S.cam.w / svg.getBoundingClientRect().width;
+    S.camT.x = drag.cam.x - (ev.clientX - drag.x) * scale;
+    S.camT.y = drag.cam.y - (ev.clientY - drag.y) * scale;
+    clampCam();
+  });
+  const endDrag = () => { drag = null; svg.classList.remove('dragging'); };
+  svg.addEventListener('pointerup', endDrag);
+  svg.addEventListener('pointercancel', endDrag);
+  svg.addEventListener('click', (ev) => {
+    if (ev.target === svg || ev.target.closest('#edgeLayer') || ev.target.closest('#bridgeLayer')) {
+      if (!S.tour.active) clearSelection();
+    }
+  });
+  svg.addEventListener('wheel', (ev) => {
+    ev.preventDefault();
+    S.interacted = true; hideHint();
+    if (S.tour.active) exitTour(false);
+    const pt = screenToWorld(ev.clientX, ev.clientY);
+    const factor = ev.deltaY > 0 ? 1.16 : 0.862;
+    const newW = clamp(S.camT.w * factor, 300, 3800);
+    const k = newW / S.camT.w;
+    S.camT.x = pt.x - (pt.x - S.camT.x) * k;
+    S.camT.y = pt.y - (pt.y - S.camT.y) * k;
+    S.camT.w = newW;
+    clampCam();
+  }, { passive: false });
+
+  document.getElementById('zoom-in').addEventListener('click', () => { S.camT.w = clamp(S.camT.w * 0.7, 300, 3800); clampCam(); });
+  document.getElementById('zoom-out').addEventListener('click', () => { S.camT.w = clamp(S.camT.w * 1.4, 300, 3800); clampCam(); });
+  document.getElementById('fit-btn').addEventListener('click', () => { if (S.tour.active) exitTour(false); clearSelection(); });
+  window.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') { if (S.tour.active) exitTour(true); else clearSelection(); }
+    if (S.tour.active && ev.key === 'ArrowRight') goToStop(S.tour.idx + 1);
+    if (S.tour.active && ev.key === 'ArrowLeft') goToStop(S.tour.idx - 1);
+  });
+  window.addEventListener('resize', applyCam);
+}
+
+let hintShown = false;
+function showHint() {
+  if (hintShown) return; hintShown = true;
+  const h = document.getElementById('introHint');
+  h.classList.add('show');
+  setTimeout(hideHint, 7000);
+}
+function hideHint() { document.getElementById('introHint').classList.remove('show'); }
+
+/* ---------------- intro animation ---------------- */
+function playIntro() {
+  stage.classList.add('entered');
+  if (S.reduced) { fitAll(); S.cam = { ...S.camT }; applyCam(); showHint(); return; }
+
+  S.cam = { x: WORLD.w / 2 - 1700, y: WORLD.h / 2 - 1700 / aspect(), w: 3400 };
+  applyCam();
+
+  const ease = 'cubic-bezier(.16,1,.3,1)';
+  S.nodes.forEach((n) => {
+    const hubIdx = S.hubs.indexOf(n.hub);
+    const memberIdx = n.hub.members.indexOf(n);
+    const delay = 300 + hubIdx * 110 + memberIdx * 16;
+    const from = `translate(${n.hub.x}px,${n.hub.y}px) scale(.2)`;
+    const to = `translate(${n.x}px,${n.y}px) scale(1)`;
+    n.el.style.transform = from;
+    n.el.style.opacity = '0';
+    n.el.animate(
+      [{ transform: from, opacity: 0 }, { transform: to, opacity: 1 }],
+      { duration: 780, delay, easing: ease, fill: 'forwards' }
+    ).onfinish = () => { n.el.style.transform = to; n.el.style.opacity = '1'; };
+  });
+
+  S.edges.forEach((e, i) => {
+    const len = e.el.getTotalLength();
+    e.el.style.strokeDasharray = String(len);
+    e.el.style.strokeDashoffset = String(len);
+    e.el.animate(
+      [{ strokeDashoffset: len }, { strokeDashoffset: 0 }],
+      { duration: 850, delay: 1900 + (i % 40) * 14, easing: 'ease-out', fill: 'forwards' }
+    ).onfinish = () => { e.el.style.strokeDasharray = 'none'; e.el.style.strokeDashoffset = '0'; };
+  });
+
+  S.bridges.forEach((b, i) => {
+    b.el.style.opacity = '0';
+    b.el.animate([{ opacity: 0 }, { opacity: 0.5 }], { duration: 700, delay: 2300 + i * 40, fill: 'forwards' });
+  });
+
+  S.hubs.forEach((h, i) => {
+    h.el.style.opacity = '0';
+    h.labelEl.style.opacity = '0';
+    h.subEl.style.opacity = '0';
+    const delay = 120 + i * 90;
+    h.el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay, fill: 'forwards' })
+      .onfinish = () => { h.el.style.opacity = '1'; };
+    [h.labelEl, h.subEl].forEach((t) => {
+      t.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 500, delay: delay + 250, fill: 'forwards' })
+        .onfinish = () => { t.style.opacity = '1'; };
+    });
+  });
+
+  setTimeout(() => { fitAll(); }, 500);
+  setTimeout(showHint, 2400);
+
+  // hard fallback: if any animation callback is dropped (background tab,
+  // headless render), force the final settled state
+  setTimeout(() => {
+    S.nodes.forEach((n) => { n.el.style.transform = `translate(${n.x}px,${n.y}px)`; n.el.style.opacity = '1'; });
+    S.edges.forEach((e) => { e.el.style.strokeDasharray = 'none'; e.el.style.strokeDashoffset = '0'; });
+    S.bridges.forEach((b) => { b.el.style.opacity = ''; });
+    S.hubs.forEach((h) => { h.el.style.opacity = '1'; h.labelEl.style.opacity = '1'; h.subEl.style.opacity = '1'; });
+  }, 3800);
+}
+
+/* ---------------- boot ---------------- */
+document.addEventListener('DOMContentLoaded', async () => {
+  loadVisited();
+  bindStage();
+  const ctxSel = document.getElementById('f-context');
+  const ptSel = document.getElementById('f-problem');
+
+  try {
+    S.data = await loadData();
+  } catch (err) {
+    panelHead.innerHTML = '<h2 class="p-title">Atlas could not load its data</h2>';
+    panelBody.innerHTML = '<p class="p-sub">This page reads the JSON files in <code>data/</code> — open it through a local web server (for example <code>npm run dev</code>) rather than directly from the file system.</p>';
+    return;
+  }
+
+  buildGraph(S.data);
+  S.refs = S.data.references || {};
+  S.data.contexts.forEach((c) => ctxSel.insertAdjacentHTML('beforeend', `<option value="${c.id}">${esc(c.label)}</option>`));
+  S.data.problemTypes.forEach((p) => ptSel.insertAdjacentHTML('beforeend', `<option value="${p.id}">${esc(p.label)}</option>`));
+
+  document.getElementById('q').addEventListener('input', (ev) => { S.filter.q = ev.target.value.trim().toLowerCase(); applyFilters(); });
+  ctxSel.addEventListener('change', (ev) => { S.filter.context = ev.target.value; applyFilters(); });
+  ptSel.addEventListener('change', (ev) => { S.filter.problem = ev.target.value; applyFilters(); });
+  document.getElementById('clear-filters').addEventListener('click', () => {
+    S.filter = { q: '', context: 'all', problem: 'all' };
+    document.getElementById('q').value = ''; ctxSel.value = 'all'; ptSel.value = 'all';
+    applyFilters();
+  });
+
+  renderMap();
+  updateExploredPill();
+  renderWelcomePanel();
+  requestAnimationFrame(tickCam);
+  playIntro();
+
+  // deep links: ?p=<principle-id> or ?disc=<field-id>
+  const deep = new URLSearchParams(location.search);
+  const deepP = deep.get('p'), deepDisc = deep.get('disc');
+  if (deepP && S.byId[deepP]) setTimeout(() => selectNode(deepP, true), 700);
+  else if (deepDisc && S.hubById[deepDisc]) setTimeout(() => selectDiscipline(deepDisc, true), 700);
+});
+</script>
+</body>
+</html>

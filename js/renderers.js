@@ -109,6 +109,12 @@ export function renderRightPanel(panelEl, principle, lookup) {
   const contexts = principle.contexts.map((id) => lookup.contextsById[id]?.label || id).join(' · ');
   const evidence = (principle.evidence || []).slice(0, 4).map((item) => `<li class="evidence-item is-fresh" style="font-size:12.5px;color:var(--on-surf);line-height:1.6;"><strong>${item.label}:</strong> ${item.reason}</li>`).join('');
   const examples = principle.examples.map((item) => `<li style="font-size:12.5px;color:var(--on-surf);line-height:1.6;">${item}</li>`).join('');
+  const references = (lookup.references || {})[principle.id] || [];
+  const referencesHtml = references.length ? `
+    <div style="margin-bottom:20px;">
+      <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--on-surf-var);margin:0 0 10px;display:flex;align-items:center;gap:5px;"><span class="mi" style="font-size:13px;color:var(--pri);">menu_book</span>Canonical sources</p>
+      <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">${references.map((ref) => `<li style="font-size:12.5px;color:var(--on-surf-var);line-height:1.6;"><strong style="color:var(--on-surf);">${ref.a} (${ref.y}).</strong> ${ref.t}. <em>${ref.v}</em></li>`).join('')}</ul>
+    </div>` : '';
   panelEl.innerHTML = `
     <div style="margin-bottom:20px;">
       <span style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--pri);background:var(--pri-con);padding:3px 10px;border-radius:var(--r-full);">Selected Principle</span>
@@ -137,6 +143,7 @@ export function renderRightPanel(panelEl, principle, lookup) {
       <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--on-surf-var);margin:0 0 10px;">Examples</p>
       <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">${examples}</ul>
     </div>
+    ${referencesHtml}
     <div style="display:flex;flex-direction:column;gap:8px;">
       <button class="btn-primary" style="width:100%;justify-content:center;padding:11px 20px;border-radius:var(--r-full);" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span><span data-button-label>Generate AI Prompt</span></button>
     </div>
