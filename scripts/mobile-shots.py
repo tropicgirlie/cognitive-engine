@@ -6,8 +6,9 @@ silently crops a 500px layout. This script drives Chrome over the DevTools
 protocol and uses Emulation.setDeviceMetricsOverride for a real 390px
 mobile viewport.
 
-Usage: python3 scripts/mobile-shots.py <base-url> <out-dir> <page1> [page2...]
+Usage: python3 scripts/mobile-shots.py <base-url> <out-dir> [--width=N] [--height=N] [--noframe] <page1> [page2...]
 Requires: Chrome already running with --remote-debugging-port=9222.
+Default viewport is 390x844 @2x mobile; use --width=768 --height=1024 for tablet.
 """
 import base64
 import hashlib
@@ -123,7 +124,18 @@ class CDP:
 
 def main():
     base, out_dir = sys.argv[1], sys.argv[2]
-    pages = sys.argv[3:]
+    width, height = 390, 844
+    suppress_tour = False
+    pages = []
+    for arg in sys.argv[3:]:
+        if arg.startswith("--width="):
+            width = int(arg.split("=", 1)[1])
+        elif arg.startswith("--height="):
+            height = int(arg.split("=", 1)[1])
+        elif arg == "--notour":
+            suppress_tour = True
+        else:
+            pages.append(arg)
     os.makedirs(out_dir, exist_ok=True)
 
     targets = json.load(urllib.request.urlopen(f"http://localhost:{DEBUG_PORT}/json/list"))
@@ -132,8 +144,12 @@ def main():
 
     cdp.cmd("Page.enable")
     cdp.cmd("Emulation.setDeviceMetricsOverride",
-            {"width": 390, "height": 844, "deviceScaleFactor": 2, "mobile": True})
+            {"width": width, "height": height, "deviceScaleFactor": 2, "mobile": True})
     cdp.cmd("Emulation.setTouchEmulationEnabled", {"enabled": True})
+
+    if suppress_tour:
+        cdp.cmd("Page.addScriptToEvaluateOnNewDocument",
+                {"source": "try{localStorage.setItem('cognitiveEngineTourSeen','1');}catch(e){}"})
 
     for p in pages:
         cdp.cmd("Page.navigate", {"url": f"{base}/{p}"})
