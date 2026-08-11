@@ -176,6 +176,13 @@ button,input,select,textarea{font:inherit;}
   .status-pill{display:none;}
   #tourControls{bottom:calc(44% + 22px);}
 }
+@media (max-width:640px){
+  .top-bar{gap:6px;padding:0 10px;}
+  .wordmark{font-size:14px;}
+  .explored-pill{padding:6px 9px;font-size:10.5px;gap:5px;}
+  .tour-btn{padding:9px 11px;}
+  .tour-btn .tour-label{display:none;}
+}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
   #stage{transform:none;opacity:1;}
@@ -191,7 +198,7 @@ button,input,select,textarea{font:inherit;}
   <div style="flex:1;"></div>
   <span class="explored-pill" id="explored-pill" title="Principles you have opened in the atlas"><span class="ring" id="explored-ring" style="--p:0;"></span><span id="explored-label">0 / 115 explored</span></span>
   <button class="ibtn" id="fit-btn" title="Fit whole map"><span class="mi">center_focus_strong</span></button>
-  <button class="tour-btn" id="tour-start"><span class="mi" style="font-size:16px;">rocket_launch</span>Grand Tour — all 14 fields</button>
+  <button class="tour-btn" id="tour-start"><span class="mi" style="font-size:16px;">rocket_launch</span><span class="tour-label">Grand Tour — all 14 fields</span></button>
 </header>
 
 <nav class="nav-tabs" aria-label="Primary">
