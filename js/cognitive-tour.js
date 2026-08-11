@@ -202,6 +202,7 @@ class CognitiveTour {
     this.tourSteps = this.defineTourSteps(page || this.detectPage());
     this.currentStep = 0;
     this.isActive = true;
+    this.returnFocusTo = document.activeElement;
 
     this.buildUI();
     this.showStep();
@@ -248,6 +249,7 @@ class CognitiveTour {
     this.sidePanel.id = 'cog-tour-panel';
     this.sidePanel.setAttribute('role', 'dialog');
     this.sidePanel.setAttribute('aria-label', 'Guided tour');
+    this.sidePanel.tabIndex = -1;
     this.sidePanel.style.cssText = `
       position: fixed;
       top: 0; right: 0; bottom: 0;
@@ -259,6 +261,7 @@ class CognitiveTour {
       transform: translateX(100%);
       transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
       overflow-y: auto;
+      outline: none;
       font-family: 'Roboto', -apple-system, sans-serif;
     `;
 
@@ -272,6 +275,7 @@ class CognitiveTour {
       this.spotlight.style.opacity = '1';
       this.connector.style.opacity = '1';
       this.sidePanel.style.transform = 'translateX(0)';
+      this.sidePanel.focus({ preventScroll: true });
     });
   }
 
@@ -533,6 +537,10 @@ class CognitiveTour {
   endTour() {
     this.isActive = false;
     this.cleanup();
+    if (this.returnFocusTo && this.returnFocusTo.focus) {
+      this.returnFocusTo.focus({ preventScroll: true });
+    }
+    this.returnFocusTo = null;
     try { localStorage.setItem('cognitiveEngineTourSeen', 'true'); } catch (e) { /* private mode */ }
   }
 
