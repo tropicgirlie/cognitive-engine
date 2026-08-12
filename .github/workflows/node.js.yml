@@ -1,5 +1,8 @@
-# CI for this dependency-free static site: JSON validity and JS syntax
-# (including inline <script> blocks) across every page.
+# CI for this dependency-free static site.
+# 1. JSON validity and JS syntax (incl. inline <script> blocks)
+# 2. Keyboard accessibility over CDP (runs first: it expects the
+#    onboarding tour to auto-open; the journey test suppresses it)
+# 3. End-to-end user journey over CDP
 
 name: Static site checks
 
@@ -18,4 +21,23 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: 22.x
-    - run: node scripts/ci-check.mjs
+
+    - name: Static checks (JSON + JS syntax)
+      run: node scripts/ci-check.mjs
+
+    - name: Start dev server and headless Chrome
+      run: |
+        node scripts/dev-server.mjs --port 7100 &
+        google-chrome --headless=new --disable-gpu --no-sandbox \
+          --disable-dev-shm-usage --user-data-dir=/tmp/ce-ci-profile \
+          --remote-debugging-port=9222 about:blank &
+        for i in $(seq 1 40); do
+          curl -sf http://localhost:9222/json/list > /dev/null && break
+          sleep 0.5
+        done
+
+    - name: Keyboard accessibility test
+      run: python3 scripts/kbd-test.py http://localhost:7100
+
+    - name: End-to-end user journey test
+      run: python3 scripts/e2e-journey.py http://localhost:7100

@@ -23,6 +23,22 @@ import urllib.request
 DEBUG_PORT = 9222
 
 
+def get_page_ws_url(timeout=40):
+    """Poll the DevTools HTTP endpoint until a page target is available."""
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        try:
+            targets = json.load(
+                urllib.request.urlopen(f"http://localhost:{DEBUG_PORT}/json/list", timeout=3))
+            page = next((t for t in targets if t.get("type") == "page"), None)
+            if page:
+                return page["webSocketDebuggerUrl"]
+        except Exception:
+            pass
+        time.sleep(0.5)
+    raise RuntimeError(f"Chrome DevTools endpoint not ready after {timeout}s")
+
+
 def ws_connect(url):
     assert url.startswith("ws://")
     rest = url[5:]
@@ -138,9 +154,8 @@ def main():
             pages.append(arg)
     os.makedirs(out_dir, exist_ok=True)
 
-    targets = json.load(urllib.request.urlopen(f"http://localhost:{DEBUG_PORT}/json/list"))
-    page = next(t for t in targets if t["type"] == "page")
-    cdp = CDP(page["webSocketDebuggerUrl"])
+    targets_url = get_page_ws_url()
+    cdp = CDP(targets_url)
 
     cdp.cmd("Page.enable")
     cdp.cmd("Emulation.setDeviceMetricsOverride",

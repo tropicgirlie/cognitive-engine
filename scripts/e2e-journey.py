@@ -46,9 +46,7 @@ def wait_js(cdp, expr, timeout=10):
 
 def main():
     base = sys.argv[1]
-    targets = json.load(urllib.request.urlopen("http://localhost:9222/json/list"))
-    page = next(t for t in targets if t["type"] == "page")
-    cdp = _shots.CDP(page["webSocketDebuggerUrl"])
+    cdp = _shots.CDP(_shots.get_page_ws_url())
     cdp.cmd("Page.enable")
     # keep the onboarding tour out of the way
     cdp.cmd("Page.addScriptToEvaluateOnNewDocument",
