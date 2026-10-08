@@ -5,9 +5,9 @@ export function getImpactBadge(impactLevel) {
 }
 
 export function getConfidenceBadge(confidence) {
-  if (confidence === 'high') return { label: 'High confidence', bg: '#E8FAF4', color: '#0F7B58' };
-  if (confidence === 'medium') return { label: 'Medium confidence', bg: '#FFF8E5', color: '#8A5A00' };
-  return { label: 'Low confidence', bg: '#F3F5FB', color: '#5B6480' };
+  if (confidence === 'high') return { label: 'Strong match', bg: '#E8FAF4', color: '#0F7B58' };
+  if (confidence === 'medium') return { label: 'Possible match', bg: '#FFF8E5', color: '#8A5A00' };
+  return { label: 'Broad match', bg: '#F3F5FB', color: '#5B6480' };
 }
 
 export function renderSelectOptions(selectEl, items, includeAllLabel) {
@@ -24,10 +24,10 @@ export function renderPrinciples(container, principles, state) {
     return;
   }
 
-  container.innerHTML = principles.map((principle, index) => createCard(principle, index === 0, state.selectedPrincipleId)).join('');
+  container.innerHTML = principles.map((principle, index) => createCard(principle, index === 0, state.selectedPrincipleId, state.selection)).join('');
 }
 
-function createCard(principle, openByDefault, selectedPrincipleId) {
+function createCard(principle, openByDefault, selectedPrincipleId, selection) {
   const badge = getImpactBadge(principle.impactLevel);
   const confidence = getConfidenceBadge(principle.confidence);
   const isOpen = openByDefault || selectedPrincipleId === principle.id ? 'open' : '';
@@ -36,6 +36,11 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
   const actions = principle.actions.map((action) => `<li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';color:var(--on-surf);"><span class="mi" style="font-size:14px;color:var(--pri);margin-top:1px;">check_circle</span>${action.description}</li>`).join('');
   const patterns = principle.uiPatterns.map((item) => `<li style="display:flex;align-items:flex-start;gap:7px;font:400 13px/1.55 'Roboto';color:var(--on-surf);"><span class="mi" style="font-size:14px;color:var(--on-surf-var);margin-top:1px;">arrow_forward</span>${item}</li>`).join('');
   const antiPatterns = principle.antiPatterns.map((item) => `<li style="font:400 12.5px/1.5 'Roboto';color:#7A5408;">• ${item}</li>`).join('');
+  const guideParams = new URLSearchParams({ goal: selection.goal, context: selection.context });
+  if (selection.problemDescription.trim()) guideParams.set('problem', selection.problemDescription.trim());
+  const guideLink = principle.id === 'progressive-disclosure'
+    ? `<a class="btn-ghost" href="learn/progressive-disclosure.html?${guideParams}" style="white-space:nowrap;">Read field guide <span aria-hidden="true">↗</span></a>`
+    : '';
 
   return `
     <div class="pcard ${isOpen}" id="card-${principle.id}" data-principle-id="${principle.id}">
@@ -49,7 +54,6 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
             <h4 style="font:700 15px/1.3 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0;">${principle.name}</h4>
             <span class="badge ${badge.className}">${badge.label}</span>
             <span style="font:700 10.5px/1 'Roboto';color:${confidence.color};background:${confidence.bg};padding:3px 9px;border-radius:var(--r-full);border:1px solid rgba(0,0,0,0.06);">${confidence.label}</span>
-            <span style="font:700 11px/1 'Roboto';color:var(--pri);background:var(--pri-con);padding:2px 9px;border-radius:var(--r-full);border:1px solid rgba(61,99,221,.15);">${Math.round(principle.score)} score</span>
           </div>
           <p style="font:700 11px/1.4 'Roboto';color:var(--on-surf-var);text-transform:uppercase;letter-spacing:.05em;margin:0 0 5px;">${principle.categories.join(' · ')}</p>
           <p style="font:400 13px/1.6 'Roboto';color:var(--on-surf-var);margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${principle.summary}</p>
@@ -77,9 +81,10 @@ function createCard(principle, openByDefault, selectedPrincipleId) {
           <p style="font:700 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:#7A5408;margin:0 0 8px;display:flex;align-items:center;gap:4px;"><span class="mi" style="font-size:13px;color:#C98B0A;">warning</span>Anti-Patterns to Avoid</p>
           <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px;">${antiPatterns}</ul>
         </div>
-        <div style="display:flex; gap:10px;">
+        <div style="display:flex; flex-wrap:wrap; gap:10px;">
           <button class="btn-primary" data-apply-principle="${principle.id}"><span class="mi" style="font-size:16px;">auto_awesome</span><span data-button-label>Generate AI Prompt</span></button>
           <button class="btn-ghost" data-select-principle="${principle.id}"><span class="mi" style="font-size:16px;">visibility</span>View Details</button>
+          ${guideLink}
         </div>
       </div>
     </div>
@@ -122,7 +127,6 @@ export function renderRightPanel(panelEl, principle, lookup) {
       <p style="font:400 12.5px/1.7 'Roboto';color:var(--on-surf-var);margin:0;font-style:italic;">${principle.summary}</p>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;">
         <span style="font:700 10.5px/1 'Roboto';color:${confidence.color};background:${confidence.bg};padding:3px 9px;border-radius:var(--r-full);">${confidence.label}</span>
-        <span style="font:700 10.5px/1 'Roboto';color:var(--pri);background:var(--pri-con);padding:3px 9px;border-radius:var(--r-full);">${Math.round(principle.score)} score</span>
       </div>
     </div>
     <div style="border-top:1px solid var(--outline-var);padding-top:18px;margin-bottom:18px;">
@@ -135,7 +139,8 @@ export function renderRightPanel(panelEl, principle, lookup) {
       <p style="font-size:11px;color:var(--on-surf-var);margin:0;"><strong>Disciplines:</strong> ${disciplines}<br/><strong>Contexts:</strong> ${contexts}</p>
     </div>
     <div style="margin-bottom:20px;">
-      <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--on-surf-var);margin:0 0 10px;">Evidence</p>
+      <p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--on-surf-var);margin:0 0 10px;">Why this matched</p>
+      <p style="font-size:12px;color:var(--on-surf-var);line-height:1.5;margin:0 0 10px;">The match uses your goal, context, and problem wording. Sources below support the principle itself.</p>
       <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;">${evidence}</ul>
     </div>
     ${principle.designPrompt ? `<div style="background:var(--pri-con);border:1px solid rgba(61,99,221,.18);border-radius:var(--r-sm);padding:14px;margin-bottom:16px;"><p style="font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--pri);margin:0 0 8px;display:flex;align-items:center;gap:5px;"><span class="mi" style="font-size:13px;">edit</span>Design Prompt</p><p style="font-size:13px;color:var(--on-surf);margin:0;line-height:1.65;font-style:italic;">${principle.designPrompt}</p></div>` : ''}

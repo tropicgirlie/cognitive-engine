@@ -4,16 +4,15 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Cognitive Engine | UX Intervention Library</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --pri:#2F5FD0;--on-pri:#fff;--pri-con:#E4EAFF;--on-pri-con:#071A57;
+  --pri:#174B40;--on-pri:#fff;--pri-con:#D8E9D8;--on-pri-con:#10392F;
   --accent:#176C5F;--accent-con:#D9F4EE;--warn:#8B5E00;--warn-con:#FFF4D8;
   --err:#B3261E;--err-con:#F9DEDC;
-  --surf:#FEFBFF;--on-surf:#1C1B1F;--on-surf-var:#4B4D59;
-  --outline:#767680;--outline-var:#D4D5DD;
-  --surf-low:#F6F7FB;--surf-con:#EEF1F8;--surf-hi:#E7EBF4;--surf-white:#fff;
+  --surf:#F7F3EA;--on-surf:#172824;--on-surf-var:#52605B;
+  --outline:#819389;--outline-var:#C9CEC4;
+  --surf-low:#F7F3EA;--surf-con:#EEEAE0;--surf-hi:#E7E9DE;--surf-white:#fff;
   --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-full:9999px;
   --el1:0 1px 2px rgba(19,32,67,.12),0 4px 12px rgba(19,32,67,.08);
   --el2:0 8px 24px rgba(19,32,67,.16);
@@ -34,14 +33,14 @@ button,input,select,textarea{font:inherit;}
 .status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:var(--accent-con);border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--accent);white-space:nowrap;}
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
 .search-wrap{display:flex;align-items:center;gap:8px;background:var(--surf-con);border-radius:var(--r-full);padding:0 14px;height:40px;width:min(360px,32vw);min-width:0;border:1px solid transparent;}
-.search-wrap:focus-within{border-color:var(--pri);box-shadow:0 0 0 3px rgba(47,95,208,.12);}
+.search-wrap:focus-within{border-color:var(--pri);box-shadow:0 0 0 3px rgba(23,75,64,.12);}
 .search-wrap input{border:none;background:none;outline:none;color:var(--on-surf);flex:1;min-width:0;}
 .search-wrap input::placeholder{color:var(--on-surf-var);}
 .ibtn{width:44px;height:44px;border-radius:var(--r-full);border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--on-surf-var);transition:background .15s;}
-.ibtn:hover,.ibtn:focus-visible{background:rgba(47,95,208,.08);outline:none;color:var(--pri);}
+.ibtn:hover,.ibtn:focus-visible{background:rgba(23,75,64,.08);outline:none;color:var(--pri);}
 .nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;width:100vw;max-width:100vw;z-index:99;padding:0 12px;overflow-x:auto;}
 .ntab{display:flex;align-items:center;gap:8px;padding:0 18px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
-.ntab:hover,.ntab:focus-visible{background:rgba(47,95,208,.07);color:var(--on-surf);outline:none;}
+.ntab:hover,.ntab:focus-visible{background:rgba(23,75,64,.07);color:var(--on-surf);outline:none;}
 .ntab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
 .scr{scrollbar-width:thin;scrollbar-color:var(--outline-var) transparent;}
 .scr::-webkit-scrollbar{width:6px;height:6px;}
@@ -55,9 +54,12 @@ main{flex:1;overflow-y:auto;padding:24px clamp(16px,3vw,32px) 32px;}
 .eyebrow{font:800 11px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:var(--pri);margin:0 0 12px;}
 h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;color:var(--on-surf);letter-spacing:0;max-width:760px;overflow-wrap:break-word;}
 .hero-copy{font:400 16px/1.65 'Roboto';color:var(--on-surf-var);margin:0 0 20px;max-width:760px;}
+.field-guide-link{display:inline-flex;align-items:center;gap:12px;color:#174b40;font:700 13px/1.35 'Roboto',sans-serif;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:5px;margin-bottom:6px;}
+.field-guide-link:hover,.field-guide-link:focus-visible{color:#ba5538;border-bottom-width:2px;}
+.field-guide-link:focus-visible{outline:3px solid var(--pri);outline-offset:4px;}
 .workflow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:22px;}
 .workflow-step{background:var(--surf-low);border:1px solid var(--outline-var);border-radius:var(--r-sm);padding:12px;transition:transform .18s var(--ease),border-color .18s var(--ease),background .18s var(--ease);}
-.workflow-step.is-active{background:var(--pri-con);border-color:rgba(47,95,208,.45);transform:translateY(-2px);}
+.workflow-step.is-active{background:var(--pri-con);border-color:rgba(23,75,64,.45);transform:translateY(-2px);}
 .workflow-step strong{display:block;font:800 12px/1.2 'Roboto';color:var(--on-surf);margin-bottom:4px;}
 .workflow-step span{font:400 12px/1.45 'Roboto';color:var(--on-surf-var);}
 .utility-panel{padding:20px;display:flex;flex-direction:column;gap:14px;}
@@ -77,7 +79,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 .flow-step::before{content:"";position:absolute;left:8px;right:8px;top:7px;height:3px;border-radius:var(--r-full);background:var(--outline-var);transform:scaleX(.25);transform-origin:left;transition:transform .3s var(--ease),background .2s var(--ease);}
 .flow-step b{display:block;font:800 10px/1.2 'Roboto';text-transform:uppercase;letter-spacing:.04em;color:var(--on-surf);margin-top:9px;}
 .flow-step span{font:400 11px/1.35 'Roboto';color:var(--on-surf-var);}
-.flow-step.is-active{border-color:rgba(47,95,208,.45);background:var(--pri-con);transform:translateY(-2px);}
+.flow-step.is-active{border-color:rgba(23,75,64,.45);background:var(--pri-con);transform:translateY(-2px);}
 .flow-step.is-active::before{background:var(--pri);transform:scaleX(1);}
 .decision-card{padding:22px;margin-bottom:18px;}
 .section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px;}
@@ -85,7 +87,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 .section-head p{font:400 13.5px/1.5 'Roboto';color:var(--on-surf-var);margin:0;}
 .gchip{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:13px 12px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf);cursor:pointer;transition:transform .16s var(--ease),border-color .16s var(--ease),background .16s var(--ease),box-shadow .16s var(--ease);text-align:left;font:700 12px/1.3 'Roboto';min-height:76px;}
 .gchip:hover,.gchip:focus-visible{border-color:var(--pri);background:var(--surf-low);outline:none;}
-.gchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);box-shadow:inset 0 0 0 1px rgba(47,95,208,.18);}
+.gchip.on{border-color:var(--pri);background:var(--pri-con);color:var(--on-pri-con);box-shadow:inset 0 0 0 1px rgba(23,75,64,.18);}
 .gchip .mi{font-size:22px;color:var(--pri);}
 .chip-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-bottom:18px;}
 .cchip{display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:var(--r-sm);border:1px solid var(--outline-var);background:var(--surf-white);color:var(--on-surf-var);font:700 12px/1.2 'Roboto';cursor:pointer;transition:transform .16s var(--ease),border-color .16s var(--ease),background .16s var(--ease),color .16s var(--ease);}
@@ -95,7 +97,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 .problem-field{position:relative;}
 .problem-field .mi{position:absolute;left:13px;top:15px;font-size:18px;color:var(--on-surf-var);}
 .problem-field textarea{width:100%;min-height:92px;resize:vertical;background:var(--surf-low);border:1px solid var(--outline-var);border-bottom:2px solid var(--pri);border-radius:var(--r-sm);padding:14px 16px 14px 42px;color:var(--on-surf);outline:none;transition:all .2s;line-height:1.55;}
-.problem-field textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(47,95,208,.1);background:var(--surf-white);}
+.problem-field textarea:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(23,75,64,.1);background:var(--surf-white);}
 .filter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
 .filter-card{padding:10px 14px;}
 .filter-label{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:var(--on-surf-var);margin:0 0 5px;}
@@ -107,19 +109,19 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 .live-example.is-refreshing{animation:softRefresh .32s var(--ease);}
 .example-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;}
 .example-pane{background:var(--surf-low);border:1px solid var(--outline-var);border-radius:var(--r-sm);padding:14px;min-height:178px;}
-.example-pane.after{background:linear-gradient(180deg,#F8FAFF 0%,#FFFFFF 100%);border-color:rgba(47,95,208,.35);}
+.example-pane.after{background:linear-gradient(180deg,#FFFCF5 0%,#FFFFFF 100%);border-color:rgba(23,75,64,.35);}
 .example-label{font:800 10px/1 'Roboto';text-transform:uppercase;letter-spacing:.08em;color:var(--on-surf-var);margin:0 0 10px;}
 .example-pane.after .example-label{color:var(--pri);}
 .demo-stack{display:flex;flex-direction:column;gap:8px;}
 .demo-row{display:flex;align-items:center;justify-content:space-between;gap:10px;border:1px solid var(--outline-var);background:var(--surf-white);border-radius:var(--r-sm);padding:9px 10px;font-size:12.5px;color:var(--on-surf);}
-.demo-row.primary{border-color:rgba(47,95,208,.45);background:var(--pri-con);font-weight:700;}
+.demo-row.primary{border-color:rgba(23,75,64,.45);background:var(--pri-con);font-weight:700;}
 .demo-row.muted{opacity:.62;}
 .demo-warning{display:flex;align-items:flex-start;gap:8px;background:var(--warn-con);border:1px solid #F2D28A;border-radius:var(--r-sm);padding:10px;font-size:12.5px;color:var(--warn);line-height:1.45;}
 .demo-cta{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;border-radius:var(--r-full);padding:8px 13px;font:800 12px/1 'Roboto';margin-top:10px;box-shadow:var(--el1);}
 .demo-note{font:400 12.5px/1.55 'Roboto';color:var(--on-surf-var);margin:10px 0 0;}
 .demo-token-row{display:flex;flex-wrap:wrap;gap:6px;}
 .demo-token{border:1px solid var(--outline-var);border-radius:var(--r-full);padding:6px 9px;background:var(--surf-white);font:700 11px/1 'Roboto';color:var(--on-surf-var);}
-.demo-token.on{background:var(--pri-con);border-color:rgba(47,95,208,.4);color:var(--pri);}
+.demo-token.on{background:var(--pri-con);border-color:rgba(23,75,64,.4);color:var(--pri);}
 .btn-primary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:var(--r-full);font:700 13px/1 'Roboto';cursor:pointer;transition:all .15s;text-decoration:none;min-height:36px;}
 .btn-primary{background:var(--pri);color:#fff;padding:9px 18px;border:1px solid var(--pri);box-shadow:var(--el1);}
 .btn-primary:hover,.btn-primary:focus-visible{filter:brightness(1.06);box-shadow:var(--el2);outline:none;}
@@ -144,7 +146,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
 #toast{position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:300;box-shadow:var(--el2);max-width:360px;}
 @keyframes cardIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes panelReveal{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
-@keyframes evidencePulse{0%{background:var(--pri-con);box-shadow:0 0 0 0 rgba(47,95,208,.24)}100%{background:transparent;box-shadow:0 0 0 10px rgba(47,95,208,0)}}
+@keyframes evidencePulse{0%{background:var(--pri-con);box-shadow:0 0 0 0 rgba(23,75,64,.24)}100%{background:transparent;box-shadow:0 0 0 10px rgba(23,75,64,0)}}
 @keyframes softRefresh{from{opacity:.72;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spinSoft{to{transform:rotate(360deg)}}
 @media (min-width:1280px){#right-panel{display:block!important;}}
@@ -183,31 +185,32 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important;}
 }
 </style>
+<link rel="stylesheet" href="css/illustration-system.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site-system.css">
 </head>
 <body class="app-shell">
 <a class="skip-link" href="#main-content">Skip to content</a>
 
-<header class="top-bar">
-  <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
-  <span class="wordmark">Cognitive <b>Engine</b></span>
-  <span class="status-pill"><span class="status-dot"></span>Evidence-led UX interventions</span>
-  <div style="flex:1;"></div>
-  <label class="search-wrap" for="library-search">
-    <span class="mi" style="font-size:18px;color:var(--on-surf-var);">search</span>
-    <input type="search" id="library-search" placeholder="Search principles, patterns, risks"/>
-  </label>
-  <button class="ibtn" data-tour-start title="Guided tour of the Library"><span class="mi">school</span></button>
-  <button class="ibtn" id="reset-filters" title="Reset analysis"><span class="mi">restart_alt</span></button>
+<header class="unified-header">
+  <a class="unified-brand" href="index.html"><span class="unified-mark" aria-hidden="true">C<span>·</span></span><span>Cognitive Engine</span></a>
+  <nav class="unified-nav" aria-label="Primary">
+    <a href="index.html" aria-current="page">Library</a>
+    <a href="cognitive-atlas.html">Atlas</a>
+    <a href="compare-mode.html">Compare</a>
+    <a href="advanced-prompt-generator.html">Prompt Generator</a>
+    <a href="examples.html">Examples</a>
+  </nav>
 </header>
 
-<nav class="nav-tabs" aria-label="Primary">
-  <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
-  <a href="index.html" class="ntab active" aria-current="page"><span class="mi">auto_stories</span>Library</a>
-  <a href="cognitive-atlas.html" class="ntab"><span class="mi">hub</span>Atlas</a>
-  <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
-  <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
-  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
-</nav>
+<div class="page-tool-bar">
+  <span class="status-pill"><span class="status-dot"></span>Library</span>
+  <span class="toolbar-spacer"></span>
+  <label class="search-wrap" for="library-search"><span class="mi" aria-hidden="true">search</span><input type="search" id="library-search" placeholder="Search principles, patterns, risks"></label>
+  <button class="ibtn" data-tour-start title="Guided tour of the Library" aria-label="Guided tour of the Library"><span class="mi">school</span></button>
+  <button class="ibtn" id="reset-filters" title="Reset analysis" aria-label="Reset analysis"><span class="mi">restart_alt</span></button>
+</div>
 
 <div class="app-frame">
   <main id="main-content" class="scr">
@@ -216,33 +219,24 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
         <p class="eyebrow">Behavioral science for product decisions</p>
         <h1 id="hero-title">Turn a messy UX problem into a usable intervention.</h1>
         <p class="hero-copy">Describe what users are struggling with. Cognitive Engine ranks relevant cognitive, behavioral, and HCI principles, explains why they match, and turns them into actions you can send to an AI design tool.</p>
+        <a class="field-guide-link" id="featured-guide-link" href="learn/progressive-disclosure.html">New: learn Progressive Disclosure through an interactive field guide <span aria-hidden="true">↗</span></a>
         <div class="workflow" aria-label="Product workflow">
           <div class="workflow-step"><strong>1. Define</strong><span>Goal, context, and observed behavior.</span></div>
-          <div class="workflow-step"><strong>2. Diagnose</strong><span>Principles ranked by evidence and fit.</span></div>
+          <div class="workflow-step"><strong>2. Diagnose</strong><span>Principles ranked by relevance signals.</span></div>
           <div class="workflow-step"><strong>3. Translate</strong><span>Actions, patterns, and anti-patterns.</span></div>
           <div class="workflow-step"><strong>4. Generate</strong><span>Prompt-ready design instructions.</span></div>
         </div>
       </div>
       <aside class="utility-panel" aria-labelledby="sample-title">
         <h2 id="sample-title">Start with a real situation</h2>
+        <figure class="ce-art ce-art--library">
+          <img src="assets/illustrations/library-path.svg" width="480" height="320" alt="A tangled problem resolves into three clear design steps"/>
+          <figcaption>From observed friction to a design path</figcaption>
+        </figure>
         <div class="sample-list">
           <button class="sample-btn" data-sample="Clinicians are missing important lab alerts because the dashboard shows routine notifications with the same weight as urgent risks.">Clinicians miss urgent alerts in a noisy dashboard.</button>
           <button class="sample-btn" data-sample="New users abandon account setup because the form asks for too much information before they understand the value.">New users abandon a long setup form.</button>
           <button class="sample-btn" data-sample="Managers hesitate during approvals because risk, history, and recommended next actions are scattered across different panels.">Managers hesitate during high-stakes approvals.</button>
-        </div>
-        <div class="motion-flow" aria-label="Recommendation trace">
-          <h3>What the engine is doing</h3>
-          <div class="flow-rail" id="analysis-flow">
-            <div class="flow-step is-active" data-flow-step="define"><b>Problem</b><span>Capture friction</span></div>
-            <div class="flow-step" data-flow-step="signals"><b>Signals</b><span>Detect clues</span></div>
-            <div class="flow-step" data-flow-step="rank"><b>Rank</b><span>Score principles</span></div>
-            <div class="flow-step" data-flow-step="prompt"><b>Prompt</b><span>Ready to use</span></div>
-          </div>
-        </div>
-        <div class="metric-row" aria-label="Expected product value">
-          <div class="metric"><b>30s</b><span>to first fit</span></div>
-          <div class="metric"><b>5</b><span>ranked actions</span></div>
-          <div class="metric"><b>1</b><span>prompt path</span></div>
         </div>
       </aside>
     </section>
@@ -251,18 +245,20 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
       <div class="section-head">
         <div>
           <h2 id="decision-title">What outcome should the interface change?</h2>
-          <p>Choose the behavior you want to improve first. This keeps the recommendations practical instead of turning the page into a theory catalogue.</p>
+          <p>Describe the observed behavior below. We will suggest an outcome; you can change it here.</p>
         </div>
         <button class="btn-ghost" id="reset-filters-inline" type="button"><span class="mi" style="font-size:16px;">restart_alt</span>Reset</button>
       </div>
 
       <div class="chip-grid" id="goal-group" role="group" aria-label="Improvement goal">
+        <button class="gchip" data-goal="improve-completion" aria-pressed="false"><span class="mi">task_alt</span>Improve completion</button>
         <button class="gchip on" data-goal="reduce-errors"><span class="mi">error</span>Reduce errors</button>
         <button class="gchip" data-goal="speed-up-decisions"><span class="mi">speed</span>Speed up decisions</button>
         <button class="gchip" data-goal="reduce-overload"><span class="mi">psychology</span>Reduce overload</button>
         <button class="gchip" data-goal="improve-findability"><span class="mi">travel_explore</span>Improve findability</button>
         <button class="gchip" data-goal="improve-collaboration"><span class="mi">handshake</span>Improve collaboration</button>
       </div>
+      <p id="goal-hint" aria-live="polite" style="margin:2px 0 16px;color:var(--on-surf-var);font-size:13px;">Choose an outcome, or describe a problem for a suggestion.</p>
 
       <p class="eyebrow" style="margin-top:2px;">Where is this happening?</p>
       <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;" id="ctx-group" role="group" aria-label="UX context">
@@ -307,7 +303,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
           <h3 id="principles-header-title">Recommended interventions</h3>
           <p id="principles-header-subtitle">Loading recommendation rationale...</p>
         </div>
-        <a class="btn-primary" href="advanced-prompt-generator.html"><span class="mi" style="font-size:16px;">auto_awesome</span>Open Prompt Generator</a>
+        <a class="btn-primary" id="open-prompt-generator" href="advanced-prompt-generator.html"><span class="mi" style="font-size:16px;">auto_awesome</span>Open Prompt Generator</a>
       </div>
 
       <div id="principles-container"></div>
@@ -322,7 +318,7 @@ h1{font:800 clamp(28px,4vw,46px)/1.04 'Roboto Flex',sans-serif;margin:0 0 12px;c
   <aside id="right-panel" class="scr" aria-label="Selected principle details"></aside>
 </div>
 
-<div id="toast" role="status" aria-live="polite"><span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span><span id="t-msg"></span></div>
+<div id="toast" role="status" aria-live="polite"><span class="mi" id="t-icon" style="font-size:18px;color:#D8E9D8;flex-shrink:0;">check_circle</span><span id="t-msg"></span></div>
 
 <script src="js/cognitive-tour.js" defer></script>
 <script type="module" src="js/app.js"></script>

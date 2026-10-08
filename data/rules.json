@@ -1,5 +1,11 @@
 {
   "goalRules": {
+    "improve-completion": [
+      { "principleId": "progressive-disclosure", "weight": 32, "reason": "Deferring optional fields lowers the effort required to finish." },
+      { "principleId": "goal-gradient-effect", "weight": 24, "reason": "Visible progress helps users continue toward completion." },
+      { "principleId": "cognitive-load-theory", "weight": 20, "reason": "Reducing unnecessary demands makes a flow easier to complete." },
+      { "principleId": "doherty-threshold", "weight": 14, "reason": "Timely feedback reassures users that their work is progressing." }
+    ],
     "reduce-errors": [
       { "principleId": "fitts-law", "weight": 28, "reason": "Larger, closer targets reduce misclicks and input mistakes." },
       { "principleId": "progressive-disclosure", "weight": 24, "reason": "Hiding secondary options reduces the chance of wrong choices." },

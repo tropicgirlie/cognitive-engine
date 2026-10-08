@@ -6,6 +6,7 @@
     <title>Trauma-Informed UI Demo - Cognitive Engine</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/trauma-informed-ui.css">
     <style>
@@ -94,25 +95,46 @@
             font-weight: 600;
         }
     </style>
+    <link rel="stylesheet" href="css/illustration-system.css">
+    <link rel="stylesheet" href="css/template-system.css">
 </head>
-<body>
+<body class="template-page trauma-page">
+    <a class="template-skip" href="#main-content">Skip to content</a>
+    <header class="template-site-header">
+        <a class="template-brand" href="index.html"><span class="template-brand-mark" aria-hidden="true">C<span>·</span></span>Cognitive Engine</a>
+        <nav class="template-nav" aria-label="Primary">
+            <a href="index.html">Library</a>
+            <a href="cognitive-atlas.html">Atlas</a>
+            <a href="compare-mode.html">Compare</a>
+            <a href="advanced-prompt-generator.html">Prompt Generator</a>
+            <a href="examples.html" aria-current="page">Examples</a>
+        </nav>
+    </header>
+    <section class="template-hero" aria-labelledby="page-title">
+        <div>
+            <p class="template-eyebrow">Template 03 / Choice and control</p>
+            <h1 id="page-title">Give people a clear way forward and back.</h1>
+            <p>Try interface patterns that make consent, undo, and leaving visible choices. Each example includes a live event log.</p>
+        </div>
+        <figure class="ce-art">
+            <img src="assets/illustrations/safe-choice.svg" width="480" height="320" alt="A path divides into two choices with an open route back">
+            <figcaption>Choice remains reversible</figcaption>
+        </figure>
+    </section>
+    <hr class="template-rule">
     <!-- Safe Exit Component -->
     <ti-safe-exit 
         redirect-to="https://weather.com" 
         clear-history
-        position="top-right"
+        position="bottom-right"
         message="Need a break?">
     </ti-safe-exit>
 
-    <div class="demo-container">
-        <header class="demo-header">
-            <h1 class="demo-title">Trauma-Informed UI Components</h1>
-            <p class="demo-subtitle">Demonstrating psychological safety and autonomy in interface design</p>
-        </header>
+    <main class="demo-container" id="main-content">
 
         <!-- Regret Button Demo -->
         <section class="demo-section">
-            <h2 class="section-title">🔄 Regret Button</h2>
+            <h2 class="section-title">01 / Regret button</h2>
             <p class="section-description">
                 Implements "Repair is always possible" - users have a window to undo actions, reducing shame and anxiety around mistakes.
             </p>
@@ -148,7 +170,7 @@
 
         <!-- Trigger Warning Demo -->
         <section class="demo-section">
-            <h2 class="section-title">⚠️ Trigger Warning</h2>
+            <h2 class="section-title">02 / Content warning</h2>
             <p class="section-description">
                 Implements "Progressive disclosure" - warns users before potentially difficult content and gives them control over exposure.
             </p>
@@ -173,7 +195,7 @@
 
         <!-- Consent Stepper Demo -->
         <section class="demo-section">
-            <h2 class="section-title">📋 Consent Stepper</h2>
+            <h2 class="section-title">03 / Consent stepper</h2>
             <p class="section-description">
                 Implements "Granular consent" - one decision per moment with genuine opt-out options, respecting user autonomy.
             </p>
@@ -190,7 +212,7 @@
 
         <!-- Design Principles Overview -->
         <section class="demo-section">
-            <h2 class="section-title">🎯 Design Principles</h2>
+            <h2 class="section-title">04 / Design principles</h2>
             <p class="section-description">
                 These components implement SAMHSA's six principles of trauma-informed care:
             </p>
@@ -216,7 +238,7 @@
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
     <!-- Load Components -->
     <script src="js/ti-button.js"></script>

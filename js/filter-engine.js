@@ -46,12 +46,27 @@ const CONTEXT_KEYWORDS = {
 };
 
 const GOAL_KEYWORDS = {
+  'improve-completion': ['abandon', 'drop off', 'drop-off', 'complete', 'completion', 'finish', 'conversion', 'sign up', 'signup'],
   'reduce-errors': ['error', 'mistake', 'misclick', 'wrong', 'miss', 'invalid', 'safe'],
   'speed-up-decisions': ['slow', 'hesitate', 'decision', 'choose', 'approval', 'faster'],
   'reduce-overload': ['overload', 'confusing', 'complex', 'clutter', 'dense', 'too much'],
   'improve-findability': ['find', 'search', 'lost', 'locate', 'discover', 'navigation'],
   'improve-collaboration': ['handover', 'team', 'owner', 'status', 'collaboration', 'shared']
 };
+
+// Suggest an outcome from observed behavior. Explicit user selections take precedence.
+export function inferGoal(description) {
+  const text = String(description || '').toLowerCase();
+  const signals = [
+    ['improve-completion', /\b(abandon(?:ed|ment|ing)?|drop[ -]?off|complete|completion|finish|conversion|sign[ -]?up)\b/],
+    ['reduce-errors', /\b(error|mistake|misclick|wrong|invalid|miss(?:ed|ing)?|unsafe|critical alert)\b/],
+    ['speed-up-decisions', /\b(hesitat(?:e|es|ion)|slow decisions?|approval delays?|decid(?:e|ing)|choose faster)\b/],
+    ['improve-findability', /\b(find|search|lost|locate|discover|navigation)\b/],
+    ['improve-collaboration', /\b(handover|handoff|collaborat(?:e|ion)|ownership|team)\b/],
+    ['reduce-overload', /\b(overload|overwhelm(?:ed|ing)?|confus(?:e|ed|ing)|complex|clutter|dense|too much|noisy)\b/]
+  ];
+  return signals.find(([, pattern]) => pattern.test(text))?.[0] || null;
+}
 
 export function scorePrinciples(appData, selection) {
   const { principles, rules } = appData;

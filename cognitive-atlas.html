@@ -4,14 +4,13 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Cognitive Atlas | Explore every principle and its connections</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
 <style>
 :root{
   --paper:#F5F6F2; --ink:#111111; --ink-2:#55554F; --ink-3:#6F6F67;
   --card:#FFFFFF; --line:#E2E3DA; --line-2:#C9CAC0;
-  --accent:#FF5F1F; --accent-soft:#FFE9DE;
-  --pri:#2F5FD0; --on-pri:#fff;
+  --accent:#BA5538; --accent-soft:#F4DDCC;
+  --pri:#174B40; --on-pri:#fff;
   --r-sm:8px; --r-md:12px; --r-full:9999px;
   --el1:0 1px 2px rgba(30,32,24,.10),0 6px 18px rgba(30,32,24,.08);
   --el2:0 12px 34px rgba(30,32,24,.16);
@@ -28,7 +27,7 @@ button,input,select,textarea{font:inherit;}
 .logo-box{width:36px;height:36px;border-radius:var(--r-sm);background:var(--pri);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .wordmark{font:800 16px/1 'Roboto Flex',sans-serif;letter-spacing:0;}
 .wordmark b{color:var(--pri);}
-.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:#E4EAFF;border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--pri);white-space:nowrap;}
+.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;background:#D8E9D8;border-radius:var(--r-full);font:700 11px/1 'Roboto';color:var(--pri);white-space:nowrap;}
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--pri);}
 .explored-pill{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-full);font:700 11.5px/1 'Roboto';color:var(--ink-2);white-space:nowrap;cursor:default;}
 .explored-pill .ring{width:14px;height:14px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1turn),var(--line) 0);display:inline-block;position:relative;}
@@ -189,27 +188,31 @@ button,input,select,textarea{font:inherit;}
   #stage{transform:none;opacity:1;}
 }
 </style>
+<link rel="stylesheet" href="css/illustration-system.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site-system.css">
 </head>
 <body>
 
-<header class="top-bar">
-  <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
-  <span class="wordmark">Cognitive <b>Engine</b></span>
-  <span class="status-pill"><span class="status-dot"></span>Knowledge atlas</span>
-  <div style="flex:1;"></div>
-  <span class="explored-pill" id="explored-pill" title="Principles you have opened in the atlas"><span class="ring" id="explored-ring" style="--p:0;"></span><span id="explored-label">0 / 115 explored</span></span>
-  <button class="ibtn" id="fit-btn" title="Fit whole map"><span class="mi">center_focus_strong</span></button>
-  <button class="tour-btn" id="tour-start"><span class="mi" style="font-size:16px;">rocket_launch</span><span class="tour-label">Grand Tour — all 14 fields</span></button>
+<header class="unified-header">
+  <a class="unified-brand" href="index.html"><span class="unified-mark" aria-hidden="true">C<span>·</span></span><span>Cognitive Engine</span></a>
+  <nav class="unified-nav" aria-label="Primary">
+    <a href="index.html">Library</a>
+    <a href="cognitive-atlas.html" aria-current="page">Atlas</a>
+    <a href="compare-mode.html">Compare</a>
+    <a href="advanced-prompt-generator.html">Prompt Generator</a>
+    <a href="examples.html">Examples</a>
+  </nav>
 </header>
 
-<nav class="nav-tabs" aria-label="Primary">
-  <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
-  <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
-  <a href="cognitive-atlas.html" class="ntab active" aria-current="page"><span class="mi">hub</span>Atlas</a>
-  <a href="compare-mode.html" class="ntab"><span class="mi">compare_arrows</span>Compare</a>
-  <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
-  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
-</nav>
+<div class="page-tool-bar">
+  <span class="status-pill"><span class="status-dot"></span>Knowledge atlas</span>
+  <span class="toolbar-spacer"></span>
+  <span class="explored-pill" id="explored-pill" title="Principles you have opened in the atlas"><span class="ring" id="explored-ring" style="--p:0;"></span><span id="explored-label">0 / 115 explored</span></span>
+  <button class="ibtn" id="fit-btn" title="Fit whole map" aria-label="Fit whole map"><span class="mi">center_focus_strong</span></button>
+  <button class="tour-btn" id="tour-start"><span class="mi" aria-hidden="true">rocket_launch</span><span class="tour-label">Grand Tour — all 14 fields</span></button>
+</div>
 
 <div id="stage">
   <svg id="map" role="img" aria-label="Interactive map of 115 cognitive and behavioural principles grouped into 14 disciplines">
@@ -700,6 +703,10 @@ function renderWelcomePanel() {
   const index = S.hubs.map((h) => `
       <li data-disc="${h.id}" tabindex="0" role="button"><span class="swatch" style="background:${h.color};"></span><span class="col"><span class="top"><span class="nm">${esc(h.label)}</span><span class="ct">${h.members.length}</span></span>${h.professions ? `<span class="who">For: ${esc(h.professions)}</span>` : ''}</span></li>`).join('');
   panelBody.innerHTML = `
+    <figure class="ce-art ce-art--atlas">
+      <img src="assets/illustrations/atlas-connections.svg" width="480" height="320" alt="Islands of ideas connected by shared problems"/>
+      <figcaption>Fields connect through shared questions</figcaption>
+    </figure>
     ${stats}
     <div class="p-sec"><h4>All ${S.hubs.length} fields of study</h4><ul class="disc-index">${index}</ul></div>
     <div class="p-actions">

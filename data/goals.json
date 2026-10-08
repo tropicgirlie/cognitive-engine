@@ -1,6 +1,21 @@
 {
   "goals": [
     {
+      "id": "improve-completion",
+      "label": "Improve completion",
+      "summary": "Help users finish important flows instead of abandoning them.",
+      "promptDirectives": [
+        "Show the value and next step before asking for extensive input.",
+        "Remove or defer fields that are not needed to complete the current step.",
+        "Make progress, effort, and recovery paths clear throughout the flow."
+      ],
+      "successMetrics": [
+        "Higher flow completion rate",
+        "Lower abandonment at each step",
+        "Shorter time to first useful outcome"
+      ]
+    },
+    {
       "id": "reduce-errors",
       "label": "Reduce errors",
       "summary": "Minimize user mistakes, misclicks, and risky actions.",

@@ -15,6 +15,7 @@
 
 - **Compare Mode** — put two principles side by side: evidence, strength, when to use each, and how they interact. Shareable via `?p=` deep links.
 - **Case Files** — worked examples showing principles applied to real product problems.
+- **Field Guide pilot** — an editorial, interactive lesson on Progressive Disclosure at `learn/progressive-disclosure.html`. Readers can compare two form presentations, check a design decision, and carry the principle into Prompt Studio.
 - **Prompt Studio** — turn selected principles into a ready-to-use prompt for your design or AI workflow.
 - **Guided tours** — first-run onboarding plus per-page tours.
 

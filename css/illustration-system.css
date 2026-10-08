@@ -1,0 +1,25 @@
+/* Cognitive Engine field-guide illustrations: paper, ink, one rust accent. */
+.ce-art{margin:0;background:#f7f3ea;border:1px solid #c9cec4;overflow:hidden;flex-shrink:0}
+.ce-art img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain}
+.ce-art figcaption{border-top:1px solid #c9cec4;padding:8px 12px;color:#425b50;font:700 10px/1.35 'Roboto',Arial,sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.ce-art--library{margin:0 0 4px}
+.ce-art--compare{width:min(250px,100%)}
+.ce-art--prompt{width:min(230px,100%)}
+.ce-art--examples{width:min(310px,100%)}
+.ce-art--atlas{width:100%;margin-bottom:14px}
+.ce-art--atlas img{aspect-ratio:2/1;object-fit:cover;object-position:center 50%}
+.examples-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:24px}
+.examples-intro-copy{min-width:0}
+.template-entry{display:flex;align-items:center;flex-wrap:wrap;gap:10px 22px;margin:0 0 26px;padding:16px 0;border-top:1px solid #c9cec4;border-bottom:1px solid #c9cec4;font:700 12px/1.4 'Roboto',Arial,sans-serif}
+.template-entry>span{color:#ba5538;text-transform:uppercase;letter-spacing:.11em;margin-right:8px}
+.template-entry a{color:#174b40;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px}
+.template-entry a:hover,.template-entry a:focus-visible{color:#ba5538}
+@media(max-width:860px){
+  .ce-art--compare,.ce-art--prompt{width:min(250px,100%)}
+  .ce-art--examples{width:min(250px,42vw)}
+}
+@media(max-width:620px){
+  .ce-art--compare,.ce-art--prompt,.ce-art--examples{width:100%;max-width:360px}
+  .examples-intro{display:block}
+  .ce-art--examples{margin:22px 0 0}
+}

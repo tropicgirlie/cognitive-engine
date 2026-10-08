@@ -1,5 +1,5 @@
 import { loadAppData } from './data-loader.js';
-import { buildIndexes, scorePrinciples } from './filter-engine.js';
+import { buildIndexes, inferGoal, scorePrinciples } from './filter-engine.js';
 import { renderPagination, renderPrinciples, renderRightPanel, renderSelectOptions } from './renderers.js';
 
 const DEFAULT_SELECTION = {
@@ -25,6 +25,7 @@ const state = {
   currentPage: 1,
   itemsPerPage: 5,
   selection: { ...DEFAULT_SELECTION },
+  goalSource: 'default',
   sampleToken: 0
 };
 
@@ -48,8 +49,11 @@ function cacheElements() {
   elements.paginationButtons = document.getElementById('pagination-buttons');
   elements.headerTitle = document.getElementById('principles-header-title');
   elements.headerSubtitle = document.getElementById('principles-header-subtitle');
+  elements.openPromptLink = document.getElementById('open-prompt-generator');
+  elements.featuredGuideLink = document.getElementById('featured-guide-link');
   elements.rightPanel = document.getElementById('right-panel');
   elements.goalGroup = document.getElementById('goal-group');
+  elements.goalHint = document.getElementById('goal-hint');
   elements.contextGroup = document.getElementById('ctx-group');
   elements.workflowSteps = Array.from(document.querySelectorAll('.workflow-step'));
   elements.flowSteps = Array.from(document.querySelectorAll('[data-flow-step]'));
@@ -69,6 +73,7 @@ async function initialize() {
     state.lookup = buildIndexes(state.appData);
     hydrateFilters();
     hydrateFromUrl();
+    suggestGoal();
     syncGoalChips(state.selection.goal);
     syncContextSelect();
     syncContextChips(state.selection.context);
@@ -100,6 +105,7 @@ function bindStaticEvents() {
 
   elements.problemInput?.addEventListener('input', (event) => {
     state.selection.problemDescription = event.target.value;
+    suggestGoal();
     state.currentPage = 1;
     recompute();
   });
@@ -136,6 +142,13 @@ function bindStaticEvents() {
     });
   });
 
+  elements.openPromptLink?.addEventListener('click', (event) => {
+    const principle = state.allRankedPrinciples.find((item) => item.id === state.selectedPrincipleId);
+    if (!principle) return;
+    event.preventDefault();
+    openPromptGenerator(principle);
+  });
+
   elements.sampleButtons?.forEach((button) => {
     button.addEventListener('click', () => {
       fillSampleProblem(button.dataset.sample || '');
@@ -147,6 +160,8 @@ function bindStaticEvents() {
     if (!button) return;
     setChipSelection(elements.goalGroup, '.gchip', button);
     state.selection.goal = button.dataset.goal;
+    state.goalSource = 'manual';
+    syncGoalChips(state.selection.goal);
     state.currentPage = 1;
     recompute();
   });
@@ -213,6 +228,7 @@ function bindStaticEvents() {
 
 function resetAnalysis() {
   state.selection = { ...DEFAULT_SELECTION };
+  state.goalSource = 'default';
   state.currentPage = 1;
   state.selectedPrincipleId = null;
 
@@ -237,6 +253,23 @@ function syncGoalChips(goalId) {
   const target = elements.goalGroup.querySelector(`[data-goal="${goalId}"]`);
   if (!target) return;
   setChipSelection(elements.goalGroup, '.gchip', target);
+  elements.goalGroup.querySelectorAll('.gchip').forEach((button) => {
+    button.setAttribute('aria-pressed', String(button === target));
+  });
+  if (elements.goalHint) {
+    elements.goalHint.textContent = state.goalSource === 'inferred'
+      ? 'Suggested from your description. Choose another outcome if needed.'
+      : state.goalSource === 'manual' ? 'Outcome selected by you.' : 'Choose an outcome, or describe a problem for a suggestion.';
+  }
+}
+
+function suggestGoal() {
+  if (state.goalSource === 'manual') return;
+  const suggested = inferGoal(state.selection.problemDescription);
+  state.selection.goal = suggested && state.lookup.goalsById[suggested]
+    ? suggested : DEFAULT_SELECTION.goal;
+  state.goalSource = suggested ? 'inferred' : 'default';
+  syncGoalChips(state.selection.goal);
 }
 
 function syncContextChips(contextId) {
@@ -265,6 +298,7 @@ function hydrateFromUrl() {
   }
   if (goal && state.lookup.goalsById[goal]) {
     state.selection.goal = goal;
+    state.goalSource = 'manual';
   }
   if (context && (context === 'all' || state.lookup.contextsById[context])) {
     state.selection.context = context;
@@ -279,19 +313,24 @@ function syncUrl() {
   const params = new URLSearchParams();
   const selection = state.selection;
   if (selection.search.trim()) params.set('q', selection.search.trim());
-  if (selection.goal !== DEFAULT_SELECTION.goal) params.set('goal', selection.goal);
+  if (selection.goal !== DEFAULT_SELECTION.goal || state.goalSource === 'manual') params.set('goal', selection.goal);
   if (selection.context !== 'all') params.set('context', selection.context);
   if (selection.problemDescription.trim()) params.set('problem', selection.problemDescription.trim());
   const queryString = params.toString();
   const url = queryString ? `${window.location.pathname}?${queryString}` : window.location.pathname;
   window.history.replaceState(null, '', url);
+  if (elements.featuredGuideLink) {
+    const guideParams = new URLSearchParams();
+    for (const key of ['goal', 'context', 'problem']) {
+      if (params.get(key)) guideParams.set(key, params.get(key));
+    }
+    elements.featuredGuideLink.href = `learn/progressive-disclosure.html${guideParams.size ? `?${guideParams}` : ''}`;
+  }
 }
 
 function recompute() {
   state.allRankedPrinciples = scorePrinciples(state.appData, state.selection);
-  if (!state.selectedPrincipleId || !state.allRankedPrinciples.some((item) => item.id === state.selectedPrincipleId)) {
-    state.selectedPrincipleId = state.allRankedPrinciples[0]?.id || null;
-  }
+  state.selectedPrincipleId = state.allRankedPrinciples[0]?.id || null;
   render();
   updateFlowState();
   syncUrl();
@@ -491,6 +530,8 @@ async function fillSampleProblem(sample) {
 
   if (!elements.problemInput || !shouldAnimate) {
     state.selection.problemDescription = sample;
+    state.goalSource = 'default';
+    suggestGoal();
     if (elements.problemInput) elements.problemInput.value = sample;
     state.currentPage = 1;
     recompute();
@@ -511,6 +552,8 @@ async function fillSampleProblem(sample) {
   }
   elements.problemInput.value = sample;
   state.selection.problemDescription = sample;
+  state.goalSource = 'default';
+  suggestGoal();
   state.currentPage = 1;
   recompute();
   showToast('edit_note', 'Sample problem analysed');

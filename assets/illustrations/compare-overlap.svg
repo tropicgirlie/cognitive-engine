@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="t d">
+  <title id="t">Two ideas compared side by side</title><desc id="d">Two annotated pages overlap around a shared insight while retaining their own distinct marks.</desc>
+  <rect width="480" height="320" fill="#F7F3EA"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M29 32h63m-63 8h25M387 32h64" stroke="#B8C5B6" stroke-width="1.5"/>
+    <path d="M49 74l146-9 13 189-146 10z" fill="#FFFCF5" stroke="#174B40" stroke-width="2.5"/>
+    <path d="M272 65l151 11-13 188-151-11z" fill="#FFFCF5" stroke="#174B40" stroke-width="2.5"/>
+    <path d="M75 104l73-4m-71 24l99-6m-95 26l79-5m-77 27l96-6m-93 27l66-4" stroke="#9AAF9D" stroke-width="2.5"/>
+    <path d="M294 100l87 6m-89 21l64 5m-65 22l95 7m-97 18l73 5m-75 19l93 6" stroke="#9AAF9D" stroke-width="2.5"/>
+    <path d="M75 216l85-6m127 16l81 6" stroke="#174B40" stroke-width="3"/>
+    <circle cx="237" cy="162" r="59" fill="#F4DDCC" fill-opacity=".8" stroke="#BA5538" stroke-width="2.5"/>
+    <path d="M211 160c16-21 33-21 49 0-16 22-33 22-49 0z" fill="#FFFCF5" stroke="#174B40" stroke-width="2.2"/>
+    <circle cx="235" cy="160" r="7" fill="#BA5538"/>
+    <path d="M188 264c27 16 60 22 95 11" stroke="#BA5538" stroke-width="2" stroke-dasharray="2 7"/>
+  </g>
+  <circle cx="135" cy="214" r="6" fill="#BA5538"/><circle cx="338" cy="229" r="6" fill="#BA5538"/>
+  <path d="M225 53v16m-8-8h16m-13-10l10 21m0-21l-10 21" stroke="#BA5538" stroke-width="2" stroke-linecap="round"/>
+</svg>

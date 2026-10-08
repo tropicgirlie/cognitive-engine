@@ -4,16 +4,15 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Compare Mode | Cognitive Engine</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,700;8..144,800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --pri:#3D63DD;--on-pri:#fff;--pri-con:#DBE1FF;--on-pri-con:#00105C;
+  --pri:#174B40;--on-pri:#fff;--pri-con:#D8E9D8;--on-pri-con:#10392F;
   --sec-con:#DFE0F9;--on-sec-con:#181A2C;
   --err:#B3261E;--err-con:#F9DEDC;
-  --surf:#FEFBFF;--on-surf:#1C1B1F;--on-surf-var:#46464F;
-  --outline:#767680;--outline-var:#C7C5D0;
-  --surf-low:#F5F3FA;--surf-con:#EFEDF4;--surf-hi:#E9E7EE;--surf-white:#fff;
+  --surf:#F7F3EA;--on-surf:#172824;--on-surf-var:#52605B;
+  --outline:#819389;--outline-var:#C9CEC4;
+  --surf-low:#F7F3EA;--surf-con:#EEEAE0;--surf-hi:#E7E9DE;--surf-white:#fff;
   --green-con:#C3EFCD;--on-green:#146C2E;
   --r-xs:4px;--r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:28px;--r-full:9999px;
   --el1:0 1px 2px rgba(0,0,0,.3),0 1px 3px 1px rgba(0,0,0,.15);
@@ -31,7 +30,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 .status-dot{width:6px;height:6px;border-radius:50%;background:var(--on-green);flex-shrink:0;}
 .nav-tabs{height:48px;background:var(--surf-white);display:flex;align-items:flex-end;border-bottom:1px solid var(--outline-var);position:fixed;top:64px;left:0;right:0;z-index:99;padding:0 8px;overflow-x:auto;}
 .ntab{display:flex;align-items:center;gap:8px;padding:0 20px;height:48px;font:500 14px/1 'Roboto';color:var(--on-surf-var);text-decoration:none;border:none;background:none;cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,background .15s;border-radius:var(--r-sm) var(--r-sm) 0 0;white-space:nowrap;}
-.ntab:hover{background:rgba(61,99,221,.06);color:var(--on-surf);}
+.ntab:hover{background:rgba(23,75,64,.06);color:var(--on-surf);}
 .ntab.active{color:var(--pri);border-bottom-color:var(--pri);font-weight:700;}
 .ntab .mi{font-size:18px;}
 .scr::-webkit-scrollbar{width:4px;}
@@ -48,7 +47,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 .btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--pri);color:#fff;padding:9px 20px;border-radius:var(--r-full);border:none;font:600 13px/1 'Roboto';cursor:pointer;box-shadow:var(--el1);transition:all .15s;}
 .btn-primary:hover{filter:brightness(1.07);box-shadow:var(--el2);}
 .btn-ghost{display:inline-flex;align-items:center;gap:6px;background:none;color:var(--pri);padding:9px 18px;border-radius:var(--r-full);border:1px solid var(--outline);font:600 13px/1 'Roboto';cursor:pointer;transition:all .15s;}
-.btn-ghost:hover{background:rgba(61,99,221,.08);border-color:var(--pri);}
+.btn-ghost:hover{background:rgba(23,75,64,.08);border-color:var(--pri);}
 .insight-card{background:var(--surf-white);border:1px solid var(--outline-var);border-radius:var(--r-md);padding:20px;transition:all .2s;}
 .insight-card:hover{box-shadow:var(--el1);border-color:var(--outline);}
 .mchip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-full);border:1px solid var(--outline-var);background:var(--surf-low);font:700 10.5px/1.4 'Roboto';color:var(--on-surf-var);margin:0 4px 4px 0;}
@@ -56,29 +55,27 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 .col-link{display:inline-flex;align-items:center;gap:3px;font:700 10.5px/1 'Roboto';color:var(--pri);text-decoration:none;margin-top:7px;}
 .col-link:hover{text-decoration:underline;}
 </style>
+<link rel="stylesheet" href="css/illustration-system.css"/>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site-system.css">
 </head>
-<body>
+<body class="core-compare">
 
 <!-- ── TOP APP BAR ── -->
-<header class="top-bar">
-  <div class="logo-box"><span class="mi" style="color:#fff;font-size:20px;">psychology</span></div>
-  <span class="wordmark">Cognitive <b>Engine</b></span>
-  <span class="status-pill"><span class="status-dot"></span>Side-by-side, source-backed analysis</span>
-  <div style="flex:1;"></div>
+<header class="unified-header">
+  <a class="unified-brand" href="index.html"><span class="unified-mark" aria-hidden="true">C<span>·</span></span><span>Cognitive Engine</span></a>
+  <nav class="unified-nav" aria-label="Primary">
+    <a href="index.html">Library</a>
+    <a href="cognitive-atlas.html">Atlas</a>
+    <a href="compare-mode.html" aria-current="page">Compare</a>
+    <a href="advanced-prompt-generator.html">Prompt Generator</a>
+    <a href="examples.html">Examples</a>
+  </nav>
 </header>
 
-<!-- ── NAVIGATION TABS ── -->
-<nav class="nav-tabs">
-  <a href="updated-dashboard.html" class="ntab"><span class="mi">dashboard</span>Dashboard</a>
-  <a href="index.html" class="ntab"><span class="mi">auto_stories</span>Library</a>
-  <a href="cognitive-atlas.html" class="ntab"><span class="mi">hub</span>Atlas</a>
-  <a href="compare-mode.html" class="ntab active"><span class="mi">compare_arrows</span>Compare</a>
-  <a href="advanced-prompt-generator.html" class="ntab"><span class="mi">auto_awesome</span>Prompt Generator</a>
-  <a href="examples.html" class="ntab"><span class="mi">science</span>Examples</a>
-</nav>
-
 <!-- ── MAIN CONTENT ── -->
-<div style="margin-top:112px;height:calc(100vh - 112px);overflow-y:auto;" class="scr">
+<div style="margin-top:64px;height:calc(100vh - 64px);overflow-y:auto;" class="scr">
   <main style="padding:28px 24px;">
 
     <!-- Page Header -->
@@ -87,6 +84,10 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
         <h1 style="font:700 24px/1.2 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 6px;">Compare Mode</h1>
         <p style="font:400 13.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:560px;">Evaluate cognitive principles side-by-side — mechanism, design actions, risks, and the primary sources behind each. Everything below is rendered live from the knowledge base.</p>
       </div>
+      <figure class="ce-art ce-art--compare">
+        <img src="assets/illustrations/compare-overlap.svg" width="480" height="320" alt="Two annotated ideas overlap around a shared insight"/>
+        <figcaption>See the common ground and the difference</figcaption>
+      </figure>
       <div style="display:flex;gap:8px;flex-shrink:0;">
         <button class="btn-ghost" id="share-btn">
           <span class="mi" style="font-size:16px;">link</span>Copy share link
@@ -115,7 +116,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 </div>
 
 <div id="toast" style="position:fixed;bottom:24px;right:24px;background:var(--on-surf);color:var(--surf-low);padding:12px 20px;border-radius:var(--r-sm);font:400 14px/1.4 'Roboto';display:none;align-items:center;gap:10px;z-index:600;box-shadow:var(--el2);max-width:360px;">
-  <span class="mi" id="t-icon" style="font-size:18px;color:#DBE1FF;flex-shrink:0;">check_circle</span>
+  <span class="mi" id="t-icon" style="font-size:18px;color:#D8E9D8;flex-shrink:0;">check_circle</span>
   <span id="t-msg"></span>
 </div>
 

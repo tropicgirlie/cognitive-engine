@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="t d">
+  <title id="t">Design instructions assembled into a prompt</title><desc id="d">Small cards carrying a problem, principle, and action move along a line into one finished document.</desc>
+  <rect width="480" height="320" fill="#F7F3EA"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 32h62m-62 8h24M388 32h64" stroke="#B8C5B6" stroke-width="1.5"/>
+    <path d="M42 78h118v51H42zm0 59h118v51H42zm0 59h118v51H42z" fill="#FFFCF5" stroke="#174B40" stroke-width="2.2"/>
+    <path d="M68 95h64m-64 15h48m-48 44h64m-64 15h48m-48 44h64m-64 15h48" stroke="#9AAF9D" stroke-width="2.4"/>
+    <path d="M160 103c38 0 55 8 79 43m-79 16h70m-70 60c37 0 57-8 79-43" stroke="#BA5538" stroke-width="2.2" stroke-dasharray="2 7"/>
+    <path d="M228 151l11-5-2 12m-10-1l10 5-10 5m1 15l10-5-2 12" stroke="#BA5538" stroke-width="2.2"/>
+    <path d="M260 53l172 10-13 204-172-10z" fill="#FFFCF5" stroke="#174B40" stroke-width="2.8"/>
+    <path d="M276 88l93 6m-95 17l126 9m-128 18l112 8m-115 18l126 9m-128 18l105 7m-107 17l124 9m-127 17l90 6" stroke="#9AAF9D" stroke-width="2.5"/>
+    <path d="M277 87l56 4m-63 100l73 6" stroke="#174B40" stroke-width="3"/>
+    <path d="M28 280c130 10 267 7 423-4" stroke="#B8C5B6" stroke-width="1.5"/>
+  </g>
+  <circle cx="55" cy="103" r="6" fill="#BA5538"/><circle cx="55" cy="162" r="6" fill="#BA5538"/><circle cx="55" cy="221" r="6" fill="#BA5538"/>
+  <path d="M415 31v18m-9-9h18m-14-15l10 30m0-30l-10 30" stroke="#BA5538" stroke-width="2" stroke-linecap="round"/>
+</svg>

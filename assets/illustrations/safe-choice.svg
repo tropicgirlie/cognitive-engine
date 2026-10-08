@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" role="img" aria-labelledby="t d">
+  <title id="t">A choice with an open way back</title><desc id="d">A calm path splits into two choices. Both remain connected to an open return path.</desc>
+  <rect width="480" height="320" fill="#F7F3EA"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M28 31h65m-65 8h26m335-8h62" stroke="#B8C5B6" stroke-width="1.5"/>
+    <path d="M31 253c77-14 133-44 180-91" stroke="#174B40" stroke-width="3"/>
+    <path d="M211 162c45-50 104-65 188-63m-188 63c49 32 104 50 188 54" stroke="#174B40" stroke-width="3"/>
+    <path d="M399 99c25 28 26 85 0 117" stroke="#9AAF9D" stroke-width="2" stroke-dasharray="3 8"/>
+    <path d="M78 252c54 27 114 23 159-3" stroke="#B8C5B6" stroke-width="1.5"/>
+    <path d="M238 249l-8 2 3-8" stroke="#B8C5B6" stroke-width="1.5"/>
+    <path d="M267 83c8-8 17-12 27-11m-21 91c9-8 18-12 28-11" stroke="#9AAF9D" stroke-width="1.5"/>
+  </g>
+  <circle cx="211" cy="162" r="9" fill="#BA5538"/>
+  <circle cx="399" cy="99" r="13" fill="#D8E9D8" stroke="#174B40" stroke-width="2.5"/>
+  <circle cx="399" cy="216" r="13" fill="#D8E9D8" stroke="#174B40" stroke-width="2.5"/>
+  <path d="M390 99l6 6 12-14m-18 125l6 6 12-14" fill="none" stroke="#174B40" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M302 255v17m-8-9h16m-13-10l10 20m0-20l-10 20" fill="none" stroke="#BA5538" stroke-width="2" stroke-linecap="round"/>
+</svg>

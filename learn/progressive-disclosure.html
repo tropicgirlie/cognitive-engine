@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn progressive disclosure through a short, interactive UX field guide.">
+  <title>Progressive Disclosure — Cognitive Engine Field Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/field-guide.css">
+  <script src="../js/progressive-disclosure-lesson.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to lesson</a>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Cognitive Engine Library">
+      <span class="brand-mark" aria-hidden="true">C<span>·</span></span>
+      <span>Cognitive Engine</span>
+    </a>
+    <nav class="global-nav" aria-label="Primary">
+      <a href="../index.html">Library</a>
+      <a href="../cognitive-atlas.html">Atlas</a>
+      <a href="../compare-mode.html">Compare</a>
+      <a href="../advanced-prompt-generator.html">Prompt Generator</a>
+      <a href="../examples.html">Examples</a>
+    </nav>
+    <span class="header-label">Field guide <span class="header-number">/ 01</span></span>
+    <a class="header-return" id="return-link" href="../index.html">Back to the Library <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="article">
+    <article>
+      <header class="article-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">The interface, explained <span aria-hidden="true">·</span> 01 / 05</p>
+          <h1>Show less.<br><em>Help people do more.</em></h1>
+          <p class="standfirst">A new user opens account setup. Before they can see any value, the form asks for permissions, preferences, and details they do not yet understand. What should appear first?</p>
+          <div class="hero-meta"><span>Progressive disclosure</span><span aria-hidden="true">•</span><span>Forms &amp; onboarding</span></div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <div class="illustration-caption">THE FIRST SCREEN</div>
+          <div class="illustration-sheet">
+            <div class="illustration-line long"></div>
+            <div class="illustration-line medium"></div>
+            <div class="illustration-line short"></div>
+            <div class="illustration-rule"></div>
+            <div class="illustration-line medium"></div>
+            <div class="illustration-line long"></div>
+            <div class="illustration-line short"></div>
+            <div class="illustration-rule"></div>
+            <div class="illustration-line long"></div>
+            <div class="illustration-line medium"></div>
+          </div>
+          <span class="illustration-note">Everything at once?</span>
+        </div>
+      </header>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="On this page">
+          <p>IN THIS GUIDE</p>
+          <a href="#situation">01 &nbsp; The situation</a>
+          <a href="#try-it">02 &nbsp; Try the change</a>
+          <a href="#principle">03 &nbsp; The principle</a>
+          <a href="#decision">04 &nbsp; Make the call</a>
+          <a href="#apply">05 &nbsp; Use it</a>
+        </nav>
+
+        <div class="story">
+          <section class="story-section" id="situation" aria-labelledby="situation-title">
+            <p class="section-index">01 / The situation</p>
+            <h2 id="situation-title">The form is asking for commitment before it earns it.</h2>
+            <p>Imagine an account setup flow with two fields needed to start and five optional decisions about a future workflow. Every field has a reason to exist. They do not all need an answer <em>now</em>.</p>
+            <p>That distinction matters: the user’s first job is to create an account. The product’s first job is to make that step understandable.</p>
+            <aside class="margin-note"><span>DESIGN QUESTION</span><p>Which information is needed for this step, and which is needed only if the user takes a later path?</p></aside>
+          </section>
+
+          <section class="story-section" id="try-it" aria-labelledby="try-title">
+            <p class="section-index">02 / Try the change</p>
+            <h2 id="try-title">Change the order of the burden.</h2>
+            <p>Switch between the two versions. The task and the available options stay the same; only their timing changes.</p>
+
+            <div class="lab" aria-label="Interactive account setup example">
+              <div class="lab-topline"><span>INTERACTIVE EXAMPLE</span><span class="lab-case">Case 01 / account setup</span></div>
+              <div class="lab-controls" role="group" aria-label="Choose form presentation">
+                <button class="mode-button is-active" id="all-mode" type="button" aria-pressed="true">All at once</button>
+                <button class="mode-button" id="staged-mode" type="button" aria-pressed="false">Stage the form</button>
+              </div>
+              <div class="lab-grid">
+                <div class="sample-form" id="sample-form">
+                  <div class="form-head"><span class="form-kicker">NORTH / SETUP</span><span class="form-step" id="form-step">01 — Account details</span></div>
+                  <h3>Set up your workspace</h3>
+                  <p class="form-intro">Get started in a few steps.</p>
+                  <div class="field-row"><span>Work email</span><span class="field-placeholder">name@company.com</span></div>
+                  <div class="field-row"><span>Workspace name</span><span class="field-placeholder">Your team or project</span></div>
+                  <div class="optional-fields" id="optional-fields">
+                    <div class="field-row"><span>Team size</span><span class="field-placeholder">Choose a range</span></div>
+                    <div class="field-row"><span>Approval policy</span><span class="field-placeholder">Choose a rule</span></div>
+                    <div class="field-row"><span>Default roles</span><span class="field-placeholder">Choose roles</span></div>
+                    <div class="field-row"><span>Notification cadence</span><span class="field-placeholder">Choose frequency</span></div>
+                    <div class="field-row"><span>Data retention</span><span class="field-placeholder">Choose a period</span></div>
+                  </div>
+                  <button class="advanced-button" id="advanced-button" type="button" aria-expanded="false" aria-controls="optional-fields" hidden>Advanced setup <span aria-hidden="true">+</span></button>
+                  <div class="form-submit" aria-hidden="true">Create workspace <span>↗</span></div>
+                </div>
+                <div class="lab-reading" aria-live="polite" aria-atomic="true">
+                  <span class="reading-label">WHAT CHANGED</span>
+                  <strong id="field-count">7 decisions before the first action</strong>
+                  <p id="lab-explanation">The form presents every choice before the user can start. Scan the optional fields: each creates another question the user must answer or skip.</p>
+                  <p class="reading-caveat">This is an illustrative interface, not a measured completion result.</p>
+                </div>
+              </div>
+            </div>
+            <p class="caption">The advanced choices remain available. They move behind a clear control until they become relevant.</p>
+          </section>
+
+          <section class="story-section" id="principle" aria-labelledby="principle-title">
+            <p class="section-index">03 / The principle</p>
+            <h2 id="principle-title">Progressive disclosure is about sequence, not concealment.</h2>
+            <p>Show the information and controls needed for the current decision. Reveal specialized choices when the user asks for them or when a previous answer makes them relevant. This gives a new user a simpler first pass while keeping depth available. <a href="https://www.nngroup.com/articles/progressive-disclosure/">Nielsen Norman Group describes this pattern</a> as a way to defer advanced or rarely used features.</p>
+            <div class="three-moves" aria-label="Three design moves">
+              <div><span>01</span><h3>Start with the task</h3><p>Keep the fields required for the immediate goal in view.</p></div>
+              <div><span>02</span><h3>Reveal at the right time</h3><p>Bring in dependent choices after the user makes the choice that needs them.</p></div>
+              <div><span>03</span><h3>Keep a visible door</h3><p>Label advanced options so experienced users can find them without hunting.</p></div>
+            </div>
+          </section>
+
+          <section class="story-section" id="decision" aria-labelledby="decision-title">
+            <p class="section-index">04 / Make the call</p>
+            <h2 id="decision-title">What should <em>not</em> be deferred?</h2>
+            <p>Choose the item that should remain visible while someone completes a high-stakes form.</p>
+            <div class="decision-options" role="group" aria-label="Choose what should stay visible">
+              <button type="button" data-answer="wrong">An optional export format</button>
+              <button type="button" data-answer="correct">A warning that changes whether it is safe to submit</button>
+              <button type="button" data-answer="wrong">A rarely used display preference</button>
+            </div>
+            <div class="decision-feedback" id="decision-feedback" role="status" hidden></div>
+            <p class="decision-limit">The rule: defer secondary complexity, but keep information needed for a safe, informed decision in view.</p>
+          </section>
+
+          <section class="story-section apply-section" id="apply" aria-labelledby="apply-title">
+            <p class="section-index">05 / Use it</p>
+            <h2 id="apply-title">Take the principle into your own design.</h2>
+            <p>Start with a real behavior you have observed. The prompt generator will carry this principle forward as a design constraint, along with actions and ways to check the result.</p>
+            <a class="apply-link" id="apply-link" href="../advanced-prompt-generator.html?principle=progressive-disclosure&amp;goal=improve-completion&amp;context=data-entry-forms">Apply this principle <span aria-hidden="true">↗</span></a>
+          </section>
+
+          <section class="source-section" aria-labelledby="sources-title">
+            <h2 id="sources-title">Evidence &amp; limits</h2>
+            <p>Progressive disclosure can make an interface easier to learn, but the right timing depends on the task. Test whether people can still find deferred controls and whether critical information remains visible.</p>
+            <ol>
+              <li>Jakob Nielsen, <a href="https://www.nngroup.com/articles/progressive-disclosure/">“Progressive Disclosure”</a>, Nielsen Norman Group, 2006.</li>
+              <li>John M. Carroll and Caroline Carrithers, <a href="https://doi.org/10.1145/358198.358218">“Training Wheels in a User Interface”</a>, <em>Communications of the ACM</em>, 1984. The study concerns a training interface; it supports staged complexity, not a universal completion-rate claim.</li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer"><span>Cognitive Engine / Field guide 01</span><a href="../index.html">Explore the Library ↗</a></footer>
+</body>
+</html>
