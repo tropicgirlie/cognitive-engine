@@ -311,7 +311,7 @@ class CognitiveTour {
       detailContent.hidden = open;
     });
 
-    this.sidePanel.querySelector('#cog-tour-title').focus({ preventScroll: true });
+    this.sidePanel.focus({ preventScroll: true });
     this.positionSpotlight(step);
     this.drawConnector(step);
   }
