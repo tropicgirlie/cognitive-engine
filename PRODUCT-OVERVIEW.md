@@ -231,7 +231,7 @@ GENERATED PROMPT (Figma Make):
 "Transform UX Problems into AI-Ready Design Solutions"
 
 ### Value Proposition
-"We turn your design challenges into specific, actionable prompts that tell AI tools exactly what to build—no interpretation required."
+"We turn your design challenges into specific, actionable prompts that tell AI tools exactly what to build, with no interpretation required."
 
 ### Target Audience
 - **Product Designers**: Seeking faster, more reliable design solutions

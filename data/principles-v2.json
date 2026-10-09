@@ -720,7 +720,7 @@
         "mental effort"
       ],
       "summary": "Task performance degrades when interface demands exceed working memory capacity.",
-      "description": "Every UI element imposes either necessary task complexity or unnecessary interface friction. Reduce extraneous load — caused by poor layout, redundant steps, and split information — without stripping domain meaning.",
+      "description": "Every UI element imposes either necessary task complexity or unnecessary interface friction. Reduce extraneous load (caused by poor layout, redundant steps, and split information) without stripping domain meaning.",
       "whenToUse": "Use as the core diagnostic framework whenever users make errors, slow down, or abandon tasks that should be within their competence.",
       "whyItMatches": "This is the root cause behind most cognitive overload failures and the framework that distinguishes what to remove from what must stay.",
       "actions": [
@@ -789,9 +789,9 @@
         "salience"
       ],
       "summary": "Users often fail to notice critical information when their attention is focused elsewhere.",
-      "description": "Even prominent UI elements go unseen if they fall outside the user's current attentional focus. The fix is not making things bigger — it is placing critical cues in the direct path of the primary task gaze.",
+      "description": "Even prominent UI elements go unseen if they fall outside the user's current attentional focus. The fix is not making things bigger; it is placing critical cues in the direct path of the primary task gaze.",
       "whenToUse": "Use when important information is being missed despite being visually present, or when designing warning systems in task-dense interfaces.",
-      "whyItMatches": "This principle explains why 'the warning was right there' is not a defence — attentional blindness is a feature of normal cognition.",
+      "whyItMatches": "This principle explains why 'the warning was right there' is not a defence; attentional blindness is a feature of normal cognition.",
       "actions": [
         {
           "title": "Place critical cues on the task path",
@@ -991,12 +991,12 @@
       ],
       "summary": "When visual presentation conflicts with meaning, processing slows and errors increase.",
       "description": "A green button labelled 'Delete' or a red badge meaning 'healthy' forces users to override automatic interpretation, consuming attentional resources and increasing errors.",
-      "whenToUse": "Use when auditing colour use, iconography, and label conventions — especially for status indicators and action buttons.",
+      "whenToUse": "Use when auditing colour use, iconography, and label conventions, especially for status indicators and action buttons.",
       "whyItMatches": "Semantic/visual mismatches cause real errors, not just aesthetic complaints.",
       "actions": [
         {
           "title": "Align colour with universal semantics",
-          "description": "Use red exclusively for danger or error, green for safe or success — never swap these conventions."
+          "description": "Use red exclusively for danger or error, green for safe or success; never swap these conventions."
         },
         {
           "title": "Make icon meaning consistent",
@@ -1202,7 +1202,7 @@
       "summary": "Users stop searching and choose the first option that is good enough, not the optimal one.",
       "description": "Users take the first path that meets a minimum threshold rather than evaluating all options. If the first visible path is also the safest and most appropriate one, satisficing works in everyone's favour.",
       "whenToUse": "Use when the order and prominence of options have safety or quality implications.",
-      "whyItMatches": "Satisficing is a fundamental property of decision-making under cognitive constraint — designing against it causes preventable errors.",
+      "whyItMatches": "Satisficing is a fundamental property of decision-making under cognitive constraint; designing against it causes preventable errors.",
       "actions": [
         {
           "title": "Make the first option the right option",
@@ -1275,7 +1275,7 @@
       "actions": [
         {
           "title": "Use task-based usability testing",
-          "description": "Observe behaviour rather than asking users to rate ease — people rationalise their experience after the fact."
+          "description": "Observe behaviour rather than asking users to rate ease; people rationalise their experience after the fact."
         },
         {
           "title": "Design disconfirming signals to be unmissable",
@@ -1300,7 +1300,7 @@
         "Consent form presenting benefits and side effects with equivalent visual weight.",
         "Usability test measuring time-on-task and error count rather than subjective ease scores."
       ],
-      "designPrompt": "Never ask users \"did you find that easy?\" Watch behaviour — don't ask."
+      "designPrompt": "Never ask users \"did you find that easy?\" Watch behaviour; don't ask."
     },
     {
       "id": "cognitive-ease",
@@ -1353,7 +1353,7 @@
         },
         {
           "title": "Use familiar visual conventions",
-          "description": "Match interface patterns to tools your users already know — novelty adds cognitive cost."
+          "description": "Match interface patterns to tools your users already know; novelty adds cognitive cost."
         }
       ],
       "antiPatterns": [
@@ -1408,7 +1408,7 @@
         "feature discovery"
       ],
       "summary": "Information learned across spaced intervals is retained far better than information massed into one session.",
-      "description": "Onboarding flows that introduce all features in a single tutorial waste most of that instruction — users retain only a fraction. Distributing feature discovery across first-use sessions and contextual in-app guidance dramatically improves long-term retention.",
+      "description": "Onboarding flows that introduce all features in a single tutorial waste most of that instruction; users retain only a fraction. Distributing feature discovery across first-use sessions and contextual in-app guidance dramatically improves long-term retention.",
       "whenToUse": "Use in onboarding, feature introduction, compliance training, and any scenario where users must retain procedural knowledge.",
       "whyItMatches": "Most enterprise onboarding fails because it is designed for immediate completeness rather than long-term retention.",
       "actions": [
@@ -1477,7 +1477,7 @@
         "redundancy"
       ],
       "summary": "The brain processes verbal and visual information through separate channels; pairing both improves retention.",
-      "description": "When icons are paired with labels, or diagrams with explanations, the complementary channels reinforce each other in memory. The key is complementing — not duplicating — the same message across both channels.",
+      "description": "When icons are paired with labels, or diagrams with explanations, the complementary channels reinforce each other in memory. The key is complementing (not duplicating) the same message across both channels.",
       "whenToUse": "Use when designing navigation, status indicators, and instructional content where comprehension and recall matter.",
       "whyItMatches": "Icon-only navigation and diagram-only instructions both underuse this principle; pairing channels costs little and improves comprehension significantly.",
       "actions": [
@@ -1491,7 +1491,7 @@
         },
         {
           "title": "Avoid redundant duplication",
-          "description": "Do not repeat the exact same content in both channels — each should add something the other cannot."
+          "description": "Do not repeat the exact same content in both channels; each should add something the other cannot."
         }
       ],
       "antiPatterns": [
@@ -1547,7 +1547,7 @@
         "visual hierarchy"
       ],
       "summary": "Elements placed close together are perceived as belonging to the same group.",
-      "description": "Spacing is the primary tool for communicating grouping — not borders or labels. Fields, labels, and actions that belong together must be close; those that are distinct must be spaced apart. Incorrect proximity creates wrong mental models of form structure.",
+      "description": "Spacing is the primary tool for communicating grouping, not borders or labels. Fields, labels, and actions that belong together must be close; those that are distinct must be spaced apart. Incorrect proximity creates wrong mental models of form structure.",
       "whenToUse": "Use in every form layout, navigation structure, and information panel. Proximity misuse is one of the most common silent causes of user errors.",
       "whyItMatches": "Proximity violations are often invisible to designers who know the intended grouping, but cause immediate confusion in testing.",
       "actions": [
@@ -1617,7 +1617,7 @@
         "styling"
       ],
       "summary": "Items that look alike are perceived as belonging to the same category or function.",
-      "description": "Visual similarity — colour, shape, size, weight — communicates membership. When read-only and editable fields look identical, or primary and secondary actions share the same visual weight, users misread the interface.",
+      "description": "Visual similarity (colour, shape, size, weight) communicates membership. When read-only and editable fields look identical, or primary and secondary actions share the same visual weight, users misread the interface.",
       "whenToUse": "Use when defining the visual language for interactive states, field types, action hierarchies, and status indicators.",
       "whyItMatches": "Similarity violations cause confusion users experience as wrong actions or missed affordances, rarely tracing it back to visual inconsistency.",
       "actions": [
@@ -1641,7 +1641,7 @@
       ],
       "uiPatterns": [
         "Design token system with distinct role-based component styles",
-        "Input field variants: filled, outlined, read-only — clearly differentiated",
+        "Input field variants: filled, outlined, read-only; clearly differentiated",
         "Button hierarchy: primary, secondary, ghost, destructive"
       ],
       "examples": [
@@ -1687,9 +1687,9 @@
         "data tables"
       ],
       "summary": "The brain automatically separates visual scenes into a subject and its background.",
-      "description": "In UI, the figure is the content users must act on; the ground is structural scaffolding — grids, containers, chrome. When the ground is too prominent, users must work to extract the figure. Heavy grid lines and coloured backgrounds risk becoming figure, competing with content.",
+      "description": "In UI, the figure is the content users must act on; the ground is structural scaffolding; grids, containers, chrome. When the ground is too prominent, users must work to extract the figure. Heavy grid lines and coloured backgrounds risk becoming figure, competing with content.",
       "whenToUse": "Use when designing data tables, dashboards, and any content-dense surface where content competes with structure.",
-      "whyItMatches": "This explains why removing grid lines from tables often improves readability — it restores data as figure and demotes structure to ground.",
+      "whyItMatches": "This explains why removing grid lines from tables often improves readability; it restores data as figure and demotes structure to ground.",
       "actions": [
         {
           "title": "Make content the visual foreground",
@@ -1756,9 +1756,9 @@
         "parsimony"
       ],
       "summary": "The brain interprets ambiguous stimuli in the simplest, most regular way possible.",
-      "description": "When layouts are irregular or complex without reason, the brain expends effort resolving the ambiguity. Simple, regular, symmetric compositions are processed faster and with less effort. This is not a mandate for monotony — it is a principle of purposeful complexity.",
+      "description": "When layouts are irregular or complex without reason, the brain expends effort resolving the ambiguity. Simple, regular, symmetric compositions are processed faster and with less effort. This is not a mandate for monotony; it is a principle of purposeful complexity.",
       "whenToUse": "Use when reviewing layout decisions, component shapes, and icon design for unnecessary complexity.",
-      "whyItMatches": "Prägnanz explains why 'clean' interfaces feel easier to use — regularity and simplicity reduce the perceptual work of parsing structure.",
+      "whyItMatches": "Prägnanz explains why 'clean' interfaces feel easier to use; regularity and simplicity reduce the perceptual work of parsing structure.",
       "actions": [
         {
           "title": "Default to regular, symmetric layouts",
@@ -1766,7 +1766,7 @@
         },
         {
           "title": "Reduce shape complexity in icons",
-          "description": "Use the simplest geometric form that communicates the concept — avoid decorative detail that adds no meaning."
+          "description": "Use the simplest geometric form that communicates the concept; avoid decorative detail that adds no meaning."
         },
         {
           "title": "Eliminate non-functional visual variation",
@@ -1825,12 +1825,12 @@
       ],
       "summary": "The brain fills in missing information to complete familiar shapes and patterns.",
       "description": "Users understand truncated text, incomplete borders, and clipped elements without needing to see the complete form. This means designers can imply boundaries without drawing them and trust users to complete partial patterns.",
-      "whenToUse": "Use when deciding whether to draw explicit borders, truncate content, or indicate overflow — closure often allows lighter-weight solutions.",
+      "whenToUse": "Use when deciding whether to draw explicit borders, truncate content, or indicate overflow; closure often allows lighter-weight solutions.",
       "whyItMatches": "Closure enables removal of redundant visual structure, supporting Prägnanz through lighter, cleaner layouts.",
       "actions": [
         {
           "title": "Use truncation to signal overflow",
-          "description": "Use ellipsis or fading text edges to indicate more content — users understand without full visibility."
+          "description": "Use ellipsis or fading text edges to indicate more content; users understand without full visibility."
         },
         {
           "title": "Imply containers without full borders",
@@ -1960,7 +1960,7 @@
         "transitions"
       ],
       "summary": "Elements that move together are perceived as belonging to the same group.",
-      "description": "Shared motion communicates grouping more powerfully than static proximity or similarity. When related items animate in synchrony — collapsing, fading, or highlighting together — motion performs grouping work without adding visual structure.",
+      "description": "Shared motion communicates grouping more powerfully than static proximity or similarity. When related items animate in synchrony (collapsing, fading, or highlighting together) motion performs grouping work without adding visual structure.",
       "whenToUse": "Use when designing interactive states, animations, and transitions where grouping needs to be communicated dynamically.",
       "whyItMatches": "Motion-based grouping communicates relationships that would otherwise require additional structural elements.",
       "actions": [
@@ -2028,7 +2028,7 @@
         "visual stability"
       ],
       "summary": "Symmetric compositions are perceived as unified, stable, and easier to process.",
-      "description": "Symmetric layouts — balanced columns, consistent card sizes, mirrored panel layouts — are processed with less perceptual effort. Asymmetry is a tool for communicating hierarchy; used without purpose it simply increases cognitive cost.",
+      "description": "Symmetric layouts (balanced columns, consistent card sizes, mirrored panel layouts) are processed with less perceptual effort. Asymmetry is a tool for communicating hierarchy; used without purpose it simply increases cognitive cost.",
       "whenToUse": "Use in card grids, comparison layouts, and any surface where visual balance supports equal-weight content.",
       "whyItMatches": "Symmetric structures allow the brain to process layout as a single unit rather than resolving individual element relationships.",
       "actions": [
@@ -2099,7 +2099,7 @@
       "summary": "Losses feel approximately twice as painful as equivalent gains feel good.",
       "description": "Loss aversion explains why users over-attend to the risks of acting and underattend to the costs of not acting. Irreversible actions cause anxiety, deletion warnings are highly effective, and loss-framed messages carry disproportionate weight in decisions.",
       "whenToUse": "Use in consent flows, destructive action confirmations, cancellation flows, and risk communication.",
-      "whyItMatches": "Loss framing often doubles the weight users give to objective information — misuse causes unnecessary anxiety; correct use improves informed decision-making.",
+      "whyItMatches": "Loss framing often doubles the weight users give to objective information; misuse causes unnecessary anxiety; correct use improves informed decision-making.",
       "actions": [
         {
           "title": "Make destructive actions reversible",
@@ -2169,7 +2169,7 @@
         "pre-selection"
       ],
       "summary": "Most users accept the pre-selected default option rather than actively changing it.",
-      "description": "Defaults are the most powerful nudge in choice architecture — they set the outcome for the majority of users who do not actively change them. In regulated and high-stakes contexts, defaults must be safety-defensible, transparent, and easy to override.",
+      "description": "Defaults are the most powerful nudge in choice architecture; they set the outcome for the majority of users who do not actively change them. In regulated and high-stakes contexts, defaults must be safety-defensible, transparent, and easy to override.",
       "whenToUse": "Use in any form, settings panel, or workflow where a pre-selected state exists.",
       "whyItMatches": "The gap between the rate of default acceptance and active choice is almost always larger than designers expect.",
       "actions": [
@@ -2183,7 +2183,7 @@
         },
         {
           "title": "Make changing defaults frictionless",
-          "description": "Defaults must be easy to override — friction in changing a default is an ethical concern."
+          "description": "Defaults must be easy to override; friction in changing a default is an ethical concern."
         }
       ],
       "antiPatterns": [
@@ -2240,7 +2240,7 @@
       "summary": "People give disproportionate weight to the first number or reference they encounter.",
       "description": "The first number, price, or estimate users see becomes their reference point for all subsequent judgements. Anchoring improves decision quality when reference points are appropriate (evidence-based benchmarks), or impairs it when they are arbitrary.",
       "whenToUse": "Use in pricing displays, numerical input fields, risk communication, and any context where reference values are shown.",
-      "whyItMatches": "Anchoring is highly reliable and difficult to overcome consciously — designers control anchors more than users can resist them.",
+      "whyItMatches": "Anchoring is highly reliable and difficult to overcome consciously; designers control anchors more than users can resist them.",
       "actions": [
         {
           "title": "Use evidence-based reference points",
@@ -2306,9 +2306,9 @@
         "consent"
       ],
       "summary": "Identical information presented differently leads to different choices.",
-      "description": "A 90% survival rate and a 10% mortality rate contain the same information but produce meaningfully different responses. Balanced framing — presenting both gain and loss frames — produces better-informed decisions.",
+      "description": "A 90% survival rate and a 10% mortality rate contain the same information but produce meaningfully different responses. Balanced framing (presenting both gain and loss frames) produces better-informed decisions.",
       "whenToUse": "Use in consent flows, risk communication, treatment comparison, and any context where framing could bias an important decision.",
-      "whyItMatches": "Small wording changes produce large differences in decision outcomes — framing is one of the most reliably demonstrated effects in behavioural science.",
+      "whyItMatches": "Small wording changes produce large differences in decision outcomes; framing is one of the most reliably demonstrated effects in behavioural science.",
       "actions": [
         {
           "title": "Present both gain and loss frames",
@@ -2376,9 +2376,9 @@
         "migration"
       ],
       "summary": "People prefer the current state and disproportionately resist changing it.",
-      "description": "Users perceive any deviation from the current state as a potential loss. This explains resistance to UI migrations, settings changes, and workflow updates — even when the change is objectively beneficial.",
+      "description": "Users perceive any deviation from the current state as a potential loss. This explains resistance to UI migrations, settings changes, and workflow updates, even when the change is objectively beneficial.",
       "whenToUse": "Use when planning migrations, introducing new workflows, or designing settings changes that affect established user behaviour.",
-      "whyItMatches": "Status quo bias explains why even clearly better UX can face adoption resistance — change itself is the barrier, not the quality of the change.",
+      "whyItMatches": "Status quo bias explains why even clearly better UX can face adoption resistance; change itself is the barrier, not the quality of the change.",
       "actions": [
         {
           "title": "Provide graceful migration paths",
@@ -2515,7 +2515,7 @@
       "summary": "People judge probability by how well something matches a typical prototype.",
       "description": "Users rapidly classify interface states, records, and alerts based on superficial resemblance to familiar patterns. This can be harnessed by making correct classifications obvious through visual prototypes, or it can mislead when atypical cases look like typical ones.",
       "whenToUse": "Use when designing status indicators, case classification, alert triage, and any UI requiring rapid categorisation.",
-      "whyItMatches": "This heuristic explains why atypical presentations of serious conditions are missed — they don't look like the prototype users have learned to recognise.",
+      "whyItMatches": "This heuristic explains why atypical presentations of serious conditions are missed; they don't look like the prototype users have learned to recognise.",
       "actions": [
         {
           "title": "Design status indicators from user prototypes",
@@ -2649,7 +2649,7 @@
       "summary": "People systematically underestimate the time, costs, and risks of future tasks.",
       "description": "Users entering time estimates, deadlines, and resource requirements will almost always under-provide. Interfaces that accept estimates without challenge or reference data systematically inherit this optimism bias.",
       "whenToUse": "Use in scheduling tools, project planning, time-entry forms, and any UI where users provide estimates of effort or duration.",
-      "whyItMatches": "Planning fallacy is a near-universal bias — accepting raw estimates without correction builds systematic under-allocation into downstream plans.",
+      "whyItMatches": "Planning fallacy is a near-universal bias; accepting raw estimates without correction builds systematic under-allocation into downstream plans.",
       "actions": [
         {
           "title": "Show historical estimates alongside input fields",
@@ -2720,13 +2720,13 @@
         "intuition"
       ],
       "summary": "Cognition operates through a fast, automatic system and a slow, deliberate one.",
-      "description": "System 1 is fast, intuitive, and pattern-driven; System 2 is slow, effortful, and analytical. Most UX decisions engage System 1 by default. High-stakes decisions require interfaces that interrupt System 1 and force System 2 engagement — without interrupting it for low-stakes routine tasks.",
+      "description": "System 1 is fast, intuitive, and pattern-driven; System 2 is slow, effortful, and analytical. Most UX decisions engage System 1 by default. High-stakes decisions require interfaces that interrupt System 1 and force System 2 engagement, without interrupting it for low-stakes routine tasks.",
       "whenToUse": "Use when deciding whether a decision point warrants friction (to engage System 2) or fluency (to support System 1).",
-      "whyItMatches": "This framework explains why the same interface design principle — reduce friction — is correct for routine tasks and dangerous for high-stakes irreversible ones.",
+      "whyItMatches": "This framework explains why the same interface design principle (reduce friction) is correct for routine tasks and dangerous for high-stakes irreversible ones.",
       "actions": [
         {
           "title": "Add friction selectively for high-stakes actions",
-          "description": "Force a deliberate pause — confirmation, summary, or delay — only for actions that are consequential and hard to reverse."
+          "description": "Force a deliberate pause (confirmation, summary, or delay) only for actions that are consequential and hard to reverse."
         },
         {
           "title": "Remove friction for routine tasks",
@@ -2786,14 +2786,14 @@
         "notification",
         "repetition"
       ],
-      "summary": "Repeated exposure to a stimulus causes diminishing neural response — users stop noticing it.",
+      "summary": "Repeated exposure to a stimulus causes diminishing neural response; users stop noticing it.",
       "description": "Alerts, banners, and notifications that fire repeatedly with low signal-to-noise lose their effectiveness as the nervous system habituates to them. This is the neurological root cause of alert fatigue and banner blindness.",
       "whenToUse": "Use when auditing notification frequency, alert policies, and any system that uses persistent or repeated visual signals.",
-      "whyItMatches": "Habituation is a pre-attentive neurological process — no amount of user training overcomes it. The only fix is reducing stimulus frequency.",
+      "whyItMatches": "Habituation is a pre-attentive neurological process; no amount of user training overcomes it. The only fix is reducing stimulus frequency.",
       "actions": [
         {
           "title": "Reduce alert frequency radically",
-          "description": "Only fire an alert when action is genuinely required — every spurious alert reduces future alert effectiveness."
+          "description": "Only fire an alert when action is genuinely required; every spurious alert reduces future alert effectiveness."
         },
         {
           "title": "Vary presentation of important signals",
@@ -2926,7 +2926,7 @@
         "engagement"
       ],
       "summary": "Emotionally significant events are encoded in memory more strongly than neutral ones.",
-      "description": "The amygdala enhances consolidation of emotionally arousing experiences — both positive and negative. Interfaces that create appropriate emotional resonance at key moments improve retention and recall of important information.",
+      "description": "The amygdala enhances consolidation of emotionally arousing experiences; both positive and negative. Interfaces that create appropriate emotional resonance at key moments improve retention and recall of important information.",
       "whenToUse": "Use in onboarding, risk communication, and key milestone moments where retention of information or emotional association with the product matters.",
       "whyItMatches": "Neutral, clinical interfaces may be accurate but unmemorable; emotionally resonant design at the right moments can significantly improve retention of critical information.",
       "actions": [
@@ -2936,7 +2936,7 @@
         },
         {
           "title": "Use appropriate emotional weight for risk communication",
-          "description": "Risk disclosures that are too dry fail to encode; those that are too alarming cause avoidance — calibrate carefully."
+          "description": "Risk disclosures that are too dry fail to encode; those that are too alarming cause avoidance; calibrate carefully."
         },
         {
           "title": "Avoid emotional manipulation",
@@ -2951,7 +2951,7 @@
       "uiPatterns": [
         "Meaningful completion animations at genuine milestone moments",
         "Conversational, warm tone in first-use experiences",
-        "Calibrated visual weight for risk disclosure — serious but not alarming"
+        "Calibrated visual weight for risk disclosure; serious but not alarming"
       ],
       "examples": [
         "Health app that uses a calm, affirming animation when a user completes their first data entry, reinforcing the habit.",
@@ -2995,7 +2995,7 @@
         "dopamine"
       ],
       "summary": "The brain's reward system is most strongly activated by variable, unpredictable rewards.",
-      "description": "Dopaminergic neurons fire most strongly in anticipation of uncertain rewards. This explains why variable reward patterns (notifications, streaks, unlock moments) can be compelling — and why they can be used ethically to support genuine user goals or unethically to manufacture compulsion.",
+      "description": "Dopaminergic neurons fire most strongly in anticipation of uncertain rewards. This explains why variable reward patterns (notifications, streaks, unlock moments) can be compelling, and why they can be used ethically to support genuine user goals or unethically to manufacture compulsion.",
       "whenToUse": "Use in onboarding, habit-forming workflows, and learning tools where sustained engagement supports genuine user outcomes.",
       "whyItMatches": "Understanding reward circuitry is essential for designing motivational features that support user goals rather than exploiting neurological vulnerabilities.",
       "actions": [
@@ -3062,14 +3062,14 @@
         "motor memory",
         "touch"
       ],
-      "summary": "Cognition is shaped by bodily experience — physical metaphors and motor patterns aid understanding.",
+      "summary": "Cognition is shaped by bodily experience; physical metaphors and motor patterns aid understanding.",
       "description": "Understanding and memory are grounded in physical experience. Drag-to-delete, swipe-to-confirm, and physical layout metaphors (e.g., a stack of cards) leverage motor memory and embodied understanding to reduce the cognitive cost of learning interactions.",
       "whenToUse": "Use when designing touch interactions, drag-and-drop interfaces, and any pattern that maps to a familiar physical metaphor.",
       "whyItMatches": "Interaction patterns grounded in physical metaphor are learned faster and recalled more reliably than purely abstract ones.",
       "actions": [
         {
           "title": "Use physical metaphors for novel interactions",
-          "description": "Map new UI patterns to familiar physical actions — swiping a card away, stacking documents, pinching to zoom."
+          "description": "Map new UI patterns to familiar physical actions; swiping a card away, stacking documents, pinching to zoom."
         },
         {
           "title": "Leverage motor memory for repeated actions",
@@ -3135,13 +3135,13 @@
         "categorical"
       ],
       "summary": "The brain uses colour as a pre-attentive category cue, enabling near-instant classification.",
-      "description": "Colour is processed pre-attentively — before conscious attention — making it the fastest channel for communicating category and status. This power comes with constraints: colour meaning must be consistent, universal conventions must be respected, and colour alone is never sufficient for accessibility.",
+      "description": "Colour is processed pre-attentively (before conscious attention) making it the fastest channel for communicating category and status. This power comes with constraints: colour meaning must be consistent, universal conventions must be respected, and colour alone is never sufficient for accessibility.",
       "whenToUse": "Use when designing status systems, severity indicators, categorical data visualisations, and any interface requiring rapid classification.",
-      "whyItMatches": "Pre-attentive colour processing allows status and category to be communicated in under 200ms — far faster than any other channel.",
+      "whyItMatches": "Pre-attentive colour processing allows status and category to be communicated in under 200ms; far faster than any other channel.",
       "actions": [
         {
           "title": "Define a strict semantic colour system",
-          "description": "Assign one colour per meaning and enforce it globally — red = error, amber = warning, green = success."
+          "description": "Assign one colour per meaning and enforce it globally; red = error, amber = warning, green = success."
         },
         {
           "title": "Never rely on colour alone",
@@ -3205,7 +3205,7 @@
         "safety"
       ],
       "summary": "People systematically believe they are less at risk than others from negative events.",
-      "description": "Optimism bias causes users to underweight personal risk — they know a side effect affects 1 in 100 people but believe it won't apply to them. Risk communication must be personalised and concrete to overcome this systematic self-exemption tendency.",
+      "description": "Optimism bias causes users to underweight personal risk; they know a side effect affects 1 in 100 people but believe it won't apply to them. Risk communication must be personalised and concrete to overcome this systematic self-exemption tendency.",
       "whenToUse": "Use in consent flows, risk disclosure, safety-critical onboarding, and any context where users must accurately assess their own risk.",
       "whyItMatches": "Generic, population-level risk statistics are the least effective format for users who automatically apply optimism bias to abstract averages.",
       "actions": [
@@ -3275,7 +3275,7 @@
       "summary": "The brain automatically detects mismatches between expected and actual outcomes.",
       "description": "The anterior cingulate cortex fires when an action produces an unexpected result. This neurological error signal is the biological basis for learning from mistakes. Interface error feedback that is immediate, clear, and actionable leverages this natural error-detection system; delayed or vague feedback breaks it.",
       "whenToUse": "Use when designing error states, inline validation, and any system where users make and correct errors.",
-      "whyItMatches": "Immediate inline feedback aligns with the brain's natural error-detection timing — it fires on the mismatch, not 2 seconds later at form submit.",
+      "whyItMatches": "Immediate inline feedback aligns with the brain's natural error-detection timing; it fires on the mismatch, not 2 seconds later at form submit.",
       "actions": [
         {
           "title": "Provide immediate inline validation",
@@ -3287,7 +3287,7 @@
         },
         {
           "title": "Preserve correct input on error",
-          "description": "Never clear correct fields when one field fails validation — only highlight the specific problem."
+          "description": "Never clear correct fields when one field fails validation, only highlight the specific problem."
         }
       ],
       "antiPatterns": [
@@ -3344,7 +3344,7 @@
       "summary": "People experience discomfort when their actions and beliefs conflict, and act to resolve it.",
       "description": "After making a choice, users tend to interpret new information in ways that justify it rather than revisit it. In UX, dissonance explains post-purchase regret, resistance to error feedback that implies wrong choices, and the power of small commitments in building compliance with larger ones.",
       "whenToUse": "Use in onboarding commitment flows, behaviour change tools, and any context where users must reconcile a previous choice with new information.",
-      "whyItMatches": "Dissonance reduction is automatic — users will reinterpret error feedback to avoid changing a committed choice unless that feedback is unambiguous.",
+      "whyItMatches": "Dissonance reduction is automatic; users will reinterpret error feedback to avoid changing a committed choice unless that feedback is unambiguous.",
       "actions": [
         {
           "title": "Use commitment escalation strategically",
@@ -3412,9 +3412,9 @@
         "expertise"
       ],
       "summary": "People give disproportionate weight to information from perceived authorities.",
-      "description": "Authority cues — credentials, institutional logos, expert endorsements — increase compliance and trust. In UX, surfacing the provenance and guidelines basis of interface recommendations can improve compliance, but fabricated or inflated authority signals erode long-term trust.",
+      "description": "Authority cues (credentials, institutional logos, expert endorsements) increase compliance and trust. In UX, surfacing the provenance and guidelines basis of interface recommendations can improve compliance, but fabricated or inflated authority signals erode long-term trust.",
       "whenToUse": "Use when designing evidence-based decision support, compliance flows, and any context where source credibility affects willingness to follow guidance.",
-      "whyItMatches": "Authority cues can bridge the gap between what users want to do and what evidence recommends they do — provided the authority is real.",
+      "whyItMatches": "Authority cues can bridge the gap between what users want to do and what evidence recommends they do; provided the authority is real.",
       "actions": [
         {
           "title": "Surface the evidence basis for recommendations",
@@ -3422,7 +3422,7 @@
         },
         {
           "title": "Use institutional credibility appropriately",
-          "description": "Reference real organisations, guidelines, and evidence — do not fabricate authority."
+          "description": "Reference real organisations, guidelines, and evidence; do not fabricate authority."
         },
         {
           "title": "Allow authority cues to be inspected",
@@ -3443,7 +3443,7 @@
         "Drug prescribing tool showing the NICE guideline reference beside the recommended first-line option.",
         "Compliance checklist that links each requirement to the regulatory document it derives from."
       ],
-      "designPrompt": "Your system is an authority. Defaults are authoritative recommendations — use that responsibility carefully."
+      "designPrompt": "Your system is an authority. Defaults are authoritative recommendations; use that responsibility carefully."
     },
     {
       "id": "reactance-theory",
@@ -3481,14 +3481,14 @@
         "nudge",
         "override"
       ],
-      "summary": "When people feel their freedom to choose is threatened, they resist — even choosing the prohibited option.",
-      "description": "High-friction blocks, mandatory overrides, and forced flows that remove user autonomy trigger reactance — users resist or circumvent them. Preserving user autonomy (with a clear opt-out) while nudging toward better choices is more effective than removing choice.",
+      "summary": "When people feel their freedom to choose is threatened, they resist, even choosing the prohibited option.",
+      "description": "High-friction blocks, mandatory overrides, and forced flows that remove user autonomy trigger reactance; users resist or circumvent them. Preserving user autonomy (with a clear opt-out) while nudging toward better choices is more effective than removing choice.",
       "whenToUse": "Use in safety-critical workflows, compliance flows, and any design that restricts user options or imposes mandatory steps.",
-      "whyItMatches": "Reactance explains why hard blocks in clinical decision support are often overridden at higher rates than soft alerts — restriction triggers resistance.",
+      "whyItMatches": "Reactance explains why hard blocks in clinical decision support are often overridden at higher rates than soft alerts; restriction triggers resistance.",
       "actions": [
         {
           "title": "Preserve user autonomy in nudge design",
-          "description": "Always provide an explicit opt-out or override path — if the choice is wrong, explain why; don't block."
+          "description": "Always provide an explicit opt-out or override path; if the choice is wrong, explain why; don't block."
         },
         {
           "title": "Use soft alerts over hard blocks",
@@ -3505,7 +3505,7 @@
         "Warnings that do not explain the reason for the constraint"
       ],
       "uiPatterns": [
-        "Soft interruptive alert with explicit 'Proceed anyway — I understand the risk' override",
+        "Soft interruptive alert with explicit 'Proceed anyway; I understand the risk' override",
         "Friction-with-explanation modal rather than hard block",
         "Autonomy-preserving nudge: recommended option highlighted but alternatives accessible"
       ],
@@ -3551,9 +3551,9 @@
         "resilience"
       ],
       "summary": "Repeated failure leads users to stop trying, even when success becomes possible.",
-      "description": "Users who experience repeated, unexplained errors, unsuccessful searches, or confusing interfaces learn to disengage rather than persist. Once learned helplessness sets in, even a fixed interface does not automatically recover engagement — the damage is to user confidence, not just the task.",
+      "description": "Users who experience repeated, unexplained errors, unsuccessful searches, or confusing interfaces learn to disengage rather than persist. Once learned helplessness sets in, even a fixed interface does not automatically recover engagement; the damage is to user confidence, not just the task.",
       "whenToUse": "Use when reviewing error-dense workflows, failed search experiences, and any interface where users frequently give up or seek help.",
-      "whyItMatches": "Learned helplessness is cumulative — each failure event reduces future willingness to try, even when the interface improves.",
+      "whyItMatches": "Learned helplessness is cumulative; each failure event reduces future willingness to try, even when the interface improves.",
       "actions": [
         {
           "title": "Surface partial success signals during errors",
@@ -3561,7 +3561,7 @@
         },
         {
           "title": "Provide always-available recovery paths",
-          "description": "Ensure every dead end, error state, and failed search has a clear next step — never leave users stuck."
+          "description": "Ensure every dead end, error state, and failed search has a clear next step; never leave users stuck."
         },
         {
           "title": "Use progress indicators during long or complex tasks",
@@ -3579,7 +3579,7 @@
         "Step progress indicator visible throughout multi-step workflows"
       ],
       "examples": [
-        "Failed search that shows 'No exact matches — did you mean X? Or try browsing Y category.'",
+        "Failed search that shows 'No exact matches; did you mean X? Or try browsing Y category.'",
         "Multi-step form that shows '4 of 6 steps complete' with a breakdown of what remains."
       ],
       "designPrompt": "Detect repeated failures on the same step. Offer contextual help after 2 failed attempts."
@@ -3624,7 +3624,7 @@
       "actions": [
         {
           "title": "Require meaningful configuration in onboarding",
-          "description": "Ask users to make at least a few real choices during setup — not trivial aesthetic preferences, but substantive decisions."
+          "description": "Ask users to make at least a few real choices during setup, not trivial aesthetic preferences, but substantive decisions."
         },
         {
           "title": "Reflect user effort back to them",
@@ -3632,7 +3632,7 @@
         },
         {
           "title": "Balance effort with reward",
-          "description": "Configuration effort must lead to an immediately visible outcome improvement — effort without payoff produces frustration."
+          "description": "Configuration effort must lead to an immediately visible outcome improvement; effort without payoff produces frustration."
         }
       ],
       "antiPatterns": [
@@ -3687,13 +3687,13 @@
         "repeated exposure"
       ],
       "summary": "Repeated exposure to something increases liking and trust, even without conscious awareness.",
-      "description": "Familiar interface conventions and patterns feel more trustworthy and usable than novel ones, even when users cannot articulate why. This is the neurological basis for Jakob's Law — familiarity reduces cognitive resistance.",
-      "whenToUse": "Use when evaluating novelty in design — every departure from convention must justify its cognitive cost against the familiarity benefit users lose.",
-      "whyItMatches": "Mere exposure explains why familiar patterns feel 'intuitive' — it is repeated exposure, not inherent simplicity, that creates ease.",
+      "description": "Familiar interface conventions and patterns feel more trustworthy and usable than novel ones, even when users cannot articulate why. This is the neurological basis for Jakob's Law; familiarity reduces cognitive resistance.",
+      "whenToUse": "Use when evaluating novelty in design; every departure from convention must justify its cognitive cost against the familiarity benefit users lose.",
+      "whyItMatches": "Mere exposure explains why familiar patterns feel 'intuitive'; it is repeated exposure, not inherent simplicity, that creates ease.",
       "actions": [
         {
           "title": "Preserve familiar conventions for core patterns",
-          "description": "Use standard patterns for navigation, search, forms, and alerts — innovation is best applied to content, not structure."
+          "description": "Use standard patterns for navigation, search, forms, and alerts; innovation is best applied to content, not structure."
         },
         {
           "title": "Introduce novel patterns gradually",
@@ -3701,7 +3701,7 @@
         },
         {
           "title": "Test novel patterns with first-time and returning users separately",
-          "description": "Familiarity effects compound over time — first-time performance does not predict long-term ease."
+          "description": "Familiarity effects compound over time; first-time performance does not predict long-term ease."
         }
       ],
       "antiPatterns": [
@@ -3755,9 +3755,9 @@
         "handover"
       ],
       "summary": "People feel a strong obligation to return favours and helpful acts.",
-      "description": "Providing genuine value before asking for commitment, data, or action exploits the deeply wired reciprocity norm — users who receive something useful are more likely to engage with subsequent requests. The reverse also holds: asking before giving produces resistance.",
+      "description": "Providing genuine value before asking for commitment, data, or action exploits the deeply wired reciprocity norm; users who receive something useful are more likely to engage with subsequent requests. The reverse also holds: asking before giving produces resistance.",
       "whenToUse": "Use in onboarding value delivery, freemium unlocks, data collection consent, and collaboration handover design.",
-      "whyItMatches": "Reciprocity is one of the most powerful social influence mechanisms — giving genuine value first is both ethically sound and strategically effective.",
+      "whyItMatches": "Reciprocity is one of the most powerful social influence mechanisms; giving genuine value first is both ethically sound and strategically effective.",
       "actions": [
         {
           "title": "Deliver value before requesting data or commitment",
@@ -3769,7 +3769,7 @@
         },
         {
           "title": "Provide generous handover context in collaborative flows",
-          "description": "When transferring work, include more context than strictly required — it builds trust and reduces handover friction."
+          "description": "When transferring work, include more context than strictly required; it builds trust and reduces handover friction."
         }
       ],
       "antiPatterns": [
@@ -3823,18 +3823,18 @@
         "relatedness",
         "intrinsic motivation"
       ],
-      "summary": "Intrinsic motivation requires autonomy, competence, and relatedness — external rewards undermine it.",
+      "summary": "Intrinsic motivation requires autonomy, competence, and relatedness; external rewards undermine it.",
       "description": "People are intrinsically motivated when they feel autonomous (in control of choices), competent (capable and progressing), and related (connected to others with shared purpose). Extrinsic rewards that replace intrinsic motivation reduce sustained engagement.",
       "whenToUse": "Use in onboarding, learning tools, and long-form collaboration platforms where sustained voluntary engagement is the goal.",
-      "whyItMatches": "SDT explains why gamification often produces initial engagement spikes followed by long-term disengagement — points and badges crowd out intrinsic motivation.",
+      "whyItMatches": "SDT explains why gamification often produces initial engagement spikes followed by long-term disengagement; points and badges crowd out intrinsic motivation.",
       "actions": [
         {
           "title": "Design for autonomy",
-          "description": "Give users meaningful choice in how they complete tasks — autonomy is more motivating than mandated workflows."
+          "description": "Give users meaningful choice in how they complete tasks; autonomy is more motivating than mandated workflows."
         },
         {
           "title": "Build in competence progression",
-          "description": "Structure tasks so users can visibly improve and develop skill — not just complete actions."
+          "description": "Structure tasks so users can visibly improve and develop skill, not just complete actions."
         },
         {
           "title": "Strengthen relatedness through shared context",
@@ -3909,7 +3909,7 @@
         },
         {
           "title": "Avoid first-use errors at all costs",
-          "description": "First impressions are set through this bias — a first-use failure can permanently affect perceived quality."
+          "description": "First impressions are set through this bias; a first-use failure can permanently affect perceived quality."
         }
       ],
       "antiPatterns": [
@@ -3965,9 +3965,9 @@
         "red"
       ],
       "summary": "The brain is evolutionarily tuned to detect potential threats even from ambiguous stimuli.",
-      "description": "Threat-related stimuli — red colour, warning icons, high-pitched tones — grab attention automatically and pre-attentively. This can be harnessed to ensure critical alerts are noticed, or misused to create false urgency and dark patterns.",
-      "whenToUse": "Use when designing critical alert systems, safety warnings, and risk communication — and when auditing for dark patterns that misuse threat signals.",
-      "whyItMatches": "Threat-detection is the pre-attentive system that makes red alerts effective — misusing it for non-threats destroys the effectiveness of genuine signals.",
+      "description": "Threat-related stimuli (red colour, warning icons, high-pitched tones) grab attention automatically and pre-attentively. This can be harnessed to ensure critical alerts are noticed, or misused to create false urgency and dark patterns.",
+      "whenToUse": "Use when designing critical alert systems, safety warnings, and risk communication, and when auditing for dark patterns that misuse threat signals.",
+      "whyItMatches": "Threat-detection is the pre-attentive system that makes red alerts effective; misusing it for non-threats destroys the effectiveness of genuine signals.",
       "actions": [
         {
           "title": "Reserve threat signals exclusively for genuine threats",
@@ -3975,7 +3975,7 @@
         },
         {
           "title": "Use pre-attentive threat cues to ensure critical alert visibility",
-          "description": "Design critical alerts to trigger automatic threat-detection — red, high-contrast, motion."
+          "description": "Design critical alerts to trigger automatic threat-detection; red, high-contrast, motion."
         },
         {
           "title": "Audit for manufactured urgency dark patterns",
@@ -4033,9 +4033,9 @@
         "human presence"
       ],
       "summary": "The brain has a dedicated, over-sensitive system for detecting human faces.",
-      "description": "Human faces are processed preferentially and automatically — they capture attention and communicate trustworthiness. User avatars, profile images, and human-centred illustrations leverage this bias to build trust and social presence in digital interfaces.",
+      "description": "Human faces are processed preferentially and automatically; they capture attention and communicate trustworthiness. User avatars, profile images, and human-centred illustrations leverage this bias to build trust and social presence in digital interfaces.",
       "whenToUse": "Use when designing collaboration tools, user attribution, trust signals, and any context where human presence strengthens engagement.",
-      "whyItMatches": "Face presence increases trust and perceived social accountability — avatars on comments and approvals change how users interact with that content.",
+      "whyItMatches": "Face presence increases trust and perceived social accountability; avatars on comments and approvals change how users interact with that content.",
       "actions": [
         {
           "title": "Use real user avatars in collaborative contexts",
@@ -4047,7 +4047,7 @@
         },
         {
           "title": "Avoid generic placeholder avatars for named users",
-          "description": "Named users without faces feel anonymous — use initials with colour as a minimum fallback."
+          "description": "Named users without faces feel anonymous; use initials with colour as a minimum fallback."
         }
       ],
       "antiPatterns": [
@@ -4101,9 +4101,9 @@
         "pricing"
       ],
       "summary": "People judge quality and value by the apparent effort that went into something.",
-      "description": "Users perceive high-effort processes as producing higher quality outcomes — a short consent form feels less thorough than a longer one, a quickly generated report feels less credible than one that takes a moment to compute. This heuristic can be managed by communicating effort without manufacturing false friction.",
+      "description": "Users perceive high-effort processes as producing higher quality outcomes; a short consent form feels less thorough than a longer one, a quickly generated report feels less credible than one that takes a moment to compute. This heuristic can be managed by communicating effort without manufacturing false friction.",
       "whenToUse": "Use when designing consent flows, generated report experiences, and pricing where perceived effort affects perceived value.",
-      "whyItMatches": "The effort heuristic explains why progress indicators during loading can improve perceived quality of the result — even when the computation time is fixed.",
+      "whyItMatches": "The effort heuristic explains why progress indicators during loading can improve perceived quality of the result, even when the computation time is fixed.",
       "actions": [
         {
           "title": "Communicate genuine effort transparently",
@@ -4111,7 +4111,7 @@
         },
         {
           "title": "Avoid manufacturing false friction to signal quality",
-          "description": "Do not add artificial delays or unnecessary steps — communicate effort through transparency, not obstruction."
+          "description": "Do not add artificial delays or unnecessary steps; communicate effort through transparency, not obstruction."
         },
         {
           "title": "Explain complexity in high-stakes outputs",
@@ -4170,7 +4170,7 @@
         "in-group"
       ],
       "summary": "People trust and follow the behaviour of those they perceive as in their own group.",
-      "description": "Social proof from peers in the same role, team, or organisation is more persuasive than evidence from outsiders. Surfacing what colleagues do — rather than what the software recommends — leverages in-group trust for behaviour change and adoption.",
+      "description": "Social proof from peers in the same role, team, or organisation is more persuasive than evidence from outsiders. Surfacing what colleagues do (rather than what the software recommends) leverages in-group trust for behaviour change and adoption.",
       "whenToUse": "Use in peer-based nudges, social proof elements, and any context where adoption or compliance can be influenced by within-group norms.",
       "whyItMatches": "Peer behaviour data from the same role or team is dramatically more effective than generic guidance for driving adoption and compliance.",
       "actions": [
@@ -4198,7 +4198,7 @@
         "Named team member attribution on all shared content"
       ],
       "examples": [
-        "Compliance tool showing 'Your team is 85% complete — 2 members still outstanding' rather than a global percentage.",
+        "Compliance tool showing 'Your team is 85% complete, 2 members still outstanding' rather than a global percentage.",
         "Handover note showing the previous owner's name and role to increase credibility of the context provided."
       ],
       "designPrompt": "Show team context in collaborative tools. We trust our group more than the system."
@@ -4238,7 +4238,7 @@
         "wellbeing"
       ],
       "summary": "Exposure to natural forms and patterns reduces stress and restores directed attention capacity.",
-      "description": "Evolutionarily, the human brain finds natural patterns — organic shapes, green palettes, flowing forms — inherently restorative. In cognitively demanding interfaces, introducing biophilic visual elements reduces stress and sustains attention capacity over longer sessions.",
+      "description": "Evolutionarily, the human brain finds natural patterns (organic shapes, green palettes, flowing forms) inherently restorative. In cognitively demanding interfaces, introducing biophilic visual elements reduces stress and sustains attention capacity over longer sessions.",
       "whenToUse": "Use in high-load operational interfaces, long-session tools, and any product where user cognitive fatigue is a recognised problem.",
       "whyItMatches": "Attention restoration theory shows measurable cognitive capacity recovery from even brief exposure to natural visual patterns.",
       "actions": [
@@ -4311,7 +4311,7 @@
       "summary": "Maximising the ratio of meaningful information to distracting noise improves comprehension speed.",
       "description": "Every element in a UI that does not carry information is noise that reduces the effectiveness of elements that do. Decorative elements, redundant labels, and structural chrome all reduce signal-to-noise ratio and increase the cognitive cost of extracting meaning.",
       "whenToUse": "Use as a diagnostic framework when reviewing dashboard designs, data tables, and any information-dense interface.",
-      "whyItMatches": "SNR is the information-theoretic basis for Tufte's data-ink ratio and the gestalt principle of Prägnanz — all three converge on removing noise to reveal signal.",
+      "whyItMatches": "SNR is the information-theoretic basis for Tufte's data-ink ratio and the gestalt principle of Prägnanz; all three converge on removing noise to reveal signal.",
       "actions": [
         {
           "title": "Remove non-data ink",
@@ -4381,9 +4381,9 @@
         "scanability"
       ],
       "summary": "Structuring information by importance speeds scanning and comprehension.",
-      "description": "Users scan interfaces in predictable patterns (F-shape, Z-shape) driven by visual hierarchy cues — size, weight, contrast, and position. Information that is structurally hierarchical is found faster and understood more accurately than flat lists.",
+      "description": "Users scan interfaces in predictable patterns (F-shape, Z-shape) driven by visual hierarchy cues; size, weight, contrast, and position. Information that is structurally hierarchical is found faster and understood more accurately than flat lists.",
       "whenToUse": "Use when designing navigation structures, data tables, dashboards, and any content with multiple importance levels.",
-      "whyItMatches": "Visual hierarchy reduces search time by converting linear scanning into directed attention — users jump to the right level rather than reading sequentially.",
+      "whyItMatches": "Visual hierarchy reduces search time by converting linear scanning into directed attention; users jump to the right level rather than reading sequentially.",
       "actions": [
         {
           "title": "Establish a clear 3-level visual hierarchy",
@@ -4461,7 +4461,7 @@
         },
         {
           "title": "Avoid redundant on-screen text that repeats audio",
-          "description": "Text and audio covering the same content overloads the visual channel — use each for complementary content."
+          "description": "Text and audio covering the same content overloads the visual channel; use each for complementary content."
         },
         {
           "title": "Separate channels by information type",
@@ -4482,7 +4482,7 @@
         "Product walkthrough using animated visuals with concise narration instead of on-screen caption text.",
         "Training module that uses diagrams to show relationships and narration to explain the sequence of actions."
       ],
-      "designPrompt": "For complex onboarding, use audio + visual together. Complement — don't duplicate."
+      "designPrompt": "For complex onboarding, use audio + visual together. Complement; don't duplicate."
     },
     {
       "id": "redundancy-principle",
@@ -4521,9 +4521,9 @@
         "simplification"
       ],
       "summary": "Adding redundant or interesting-but-irrelevant content reduces learning and comprehension.",
-      "description": "Extra content — interesting examples, background context, decorative illustrations, tangential information — reduces learning even when it is accurate and relevant to the topic. Each additional element competes for limited cognitive resources even when the user finds it interesting.",
+      "description": "Extra content (interesting examples, background context, decorative illustrations, tangential information) reduces learning even when it is accurate and relevant to the topic. Each additional element competes for limited cognitive resources even when the user finds it interesting.",
       "whenToUse": "Use when editing instructional content, UI copy, and any experience where removing content is considered but feels risky.",
-      "whyItMatches": "This principle is the empirical basis for the content editing principle 'kill your darlings' — fascinating details that do not serve the primary task reduce performance.",
+      "whyItMatches": "This principle is the empirical basis for the content editing principle 'kill your darlings'; fascinating details that do not serve the primary task reduce performance.",
       "actions": [
         {
           "title": "Remove interesting but non-essential content",
@@ -4593,7 +4593,7 @@
       "summary": "A small number of items account for the vast majority of user interactions.",
       "description": "In any interface, approximately 20% of features, commands, or items are used for 80% of interactions. The remaining 80% are used rarely. Optimising the design and accessibility of the top 20% delivers disproportionate value; hiding the remaining 80% reduces cognitive cost without meaningfully reducing utility for most users.",
       "whenToUse": "Use in navigation design, command palette architecture, settings organisation, and feature prioritisation.",
-      "whyItMatches": "Zipf's law is the information-theoretic basis for progressive disclosure — the distribution of usage almost always justifies it.",
+      "whyItMatches": "Zipf's law is the information-theoretic basis for progressive disclosure; the distribution of usage almost always justifies it.",
       "actions": [
         {
           "title": "Surface the top 20% of actions prominently",
@@ -4661,10 +4661,10 @@
         "trade-off",
         "system complexity"
       ],
-      "summary": "Every application has an inherent amount of complexity that cannot be eliminated — only shifted.",
-      "description": "You cannot make a complex task simple — you can only decide whether the user or the system bears the complexity. Simplifying the interface by hiding complexity shifts it to the system; hiding it from users means the system must carry it correctly. When the system fails to carry it, the complexity returns to the user as unexpected errors.",
-      "whenToUse": "Use when evaluating simplification decisions — particularly when removing steps, hiding fields, or automating choices.",
-      "whyItMatches": "This law prevents simplification from becoming false simplicity — it forces explicit decisions about where complexity lives rather than assuming it can be eliminated.",
+      "summary": "Every application has an inherent amount of complexity that cannot be eliminated, only shifted.",
+      "description": "You cannot make a complex task simple; you can only decide whether the user or the system bears the complexity. Simplifying the interface by hiding complexity shifts it to the system; hiding it from users means the system must carry it correctly. When the system fails to carry it, the complexity returns to the user as unexpected errors.",
+      "whenToUse": "Use when evaluating simplification decisions; particularly when removing steps, hiding fields, or automating choices.",
+      "whyItMatches": "This law prevents simplification from becoming false simplicity; it forces explicit decisions about where complexity lives rather than assuming it can be eliminated.",
       "actions": [
         {
           "title": "Identify where complexity is being shifted when simplifying",
@@ -4672,7 +4672,7 @@
         },
         {
           "title": "Never hide complexity that users must understand for safe decisions",
-          "description": "Some complexity is intrinsic to the domain and must remain visible — simplifying it away creates risk."
+          "description": "Some complexity is intrinsic to the domain and must remain visible; simplifying it away creates risk."
         },
         {
           "title": "Make system-absorbed complexity auditable",
@@ -4735,8 +4735,8 @@
       ],
       "summary": "Effective communication follows four maxims: quantity, quality, relevance, and manner.",
       "description": "Grice's cooperative principle holds that effective communication is: as informative as needed but not more (quantity), true and evidenced (quality), relevant to the context (relevance), and clear and unambiguous (manner). Violating any maxim creates friction, confusion, or distrust in UI copy.",
-      "whenToUse": "Use as a copy review framework for all user-facing strings — labels, error messages, instructions, CTAs, and confirmation messages.",
-      "whyItMatches": "Most UI copy failures violate at least one Gricean maxim — too much information, unverifiable claims, irrelevant context, or ambiguous wording.",
+      "whenToUse": "Use as a copy review framework for all user-facing strings; labels, error messages, instructions, CTAs, and confirmation messages.",
+      "whyItMatches": "Most UI copy failures violate at least one Gricean maxim; too much information, unverifiable claims, irrelevant context, or ambiguous wording.",
       "actions": [
         {
           "title": "Apply quantity: say exactly enough",
@@ -4762,8 +4762,8 @@
         "Error messages structured as: what happened + why + what to do"
       ],
       "examples": [
-        "Button labelled 'Approve and notify team' instead of 'Approve' — quantity and manner both satisfied.",
-        "Error message: 'Your session expired after 30 minutes of inactivity. Please log in to continue.' — all four maxims satisfied."
+        "Button labelled 'Approve and notify team' instead of 'Approve'; quantity and manner both satisfied.",
+        "Error message: 'Your session expired after 30 minutes of inactivity. Please log in to continue.'; all four maxims satisfied."
       ],
       "designPrompt": "Apply Grice to every string: Is it true? No more than needed? Relevant? Clear?"
     },
@@ -4806,9 +4806,9 @@
         "font"
       ],
       "summary": "Information that is easier to process is judged as more true, more trustworthy, and more credible.",
-      "description": "Processing fluency — how easily information can be read and understood — directly affects perceived truth and trust. High-contrast, legible typography, simple sentence structure, and familiar vocabulary all increase fluency and, consequently, credibility.",
+      "description": "Processing fluency (how easily information can be read and understood) directly affects perceived truth and trust. High-contrast, legible typography, simple sentence structure, and familiar vocabulary all increase fluency and, consequently, credibility.",
       "whenToUse": "Use in consent flows, risk communication, and any context where trust and comprehension of written content are critical.",
-      "whyItMatches": "The same factual content presented in low-fluency typography is rated as less credible and less believable than in high-fluency typography — a direct measure of this effect.",
+      "whyItMatches": "The same factual content presented in low-fluency typography is rated as less credible and less believable than in high-fluency typography; a direct measure of this effect.",
       "actions": [
         {
           "title": "Use highly legible typography for critical content",
@@ -4875,10 +4875,10 @@
         "button copy",
         "CTA"
       ],
-      "summary": "Language performs actions — UI copy can instruct, commit, declare, or request depending on its form.",
-      "description": "Speech Act Theory classifies language by what it does: directives (instructions), commissives (commitments), declarations (state changes), and expressives (emotional acknowledgements). UI copy that mismatches its speech act type to its context creates confusion — a directive framed as a declaration, or a commitment framed as a simple label.",
+      "summary": "Language performs actions; UI copy can instruct, commit, declare, or request depending on its form.",
+      "description": "Speech Act Theory classifies language by what it does: directives (instructions), commissives (commitments), declarations (state changes), and expressives (emotional acknowledgements). UI copy that mismatches its speech act type to its context creates confusion; a directive framed as a declaration, or a commitment framed as a simple label.",
       "whenToUse": "Use when designing button labels, confirmation messages, instruction copy, and any UI string where the intent of the text must be precisely communicated.",
-      "whyItMatches": "UI copy that clearly performs the right speech act reduces decision time and error — users know immediately whether they are being asked to do something or informed that something happened.",
+      "whyItMatches": "UI copy that clearly performs the right speech act reduces decision time and error; users know immediately whether they are being asked to do something or informed that something happened.",
       "actions": [
         {
           "title": "Use directives for instructional copy",
@@ -4947,9 +4947,9 @@
         "prototypes"
       ],
       "summary": "People understand categories through the most typical member, not logical definitions.",
-      "description": "Users do not classify by rule — they classify by resemblance to a prototype (the most typical member of a category). Navigation labels, filter categories, and content classification systems that match prototypical examples are found faster than those built from logical definitions.",
+      "description": "Users do not classify by rule; they classify by resemblance to a prototype (the most typical member of a category). Navigation labels, filter categories, and content classification systems that match prototypical examples are found faster than those built from logical definitions.",
       "whenToUse": "Use when designing navigation labels, filter categories, content taxonomies, and any classification system users must navigate.",
-      "whyItMatches": "This explains why card sorting sessions reveal very different category structures than what engineers or product managers expect — user categories are built from prototypes, not logic.",
+      "whyItMatches": "This explains why card sorting sessions reveal very different category structures than what engineers or product managers expect; user categories are built from prototypes, not logic.",
       "actions": [
         {
           "title": "Use card sorting to identify user-built prototypes",
@@ -5018,7 +5018,7 @@
       "summary": "Sentences that lead users toward one interpretation before revealing a different one require costly mental backtracking.",
       "description": "Garden path sentences cause the reader to commit to an initial parsing that turns out to be wrong, requiring them to reparse. In UI copy, this occurs when instructions or labels appear to mean one thing until the end, then require re-reading. This increases cognitive load and error rate.",
       "whenToUse": "Use when reviewing instruction copy, confirmation messages, and form labels for ambiguity that resolves late.",
-      "whyItMatches": "Garden path structures are common in complex instructions and legal copy — and they are directly responsible for users misunderstanding what is being asked of them.",
+      "whyItMatches": "Garden path structures are common in complex instructions and legal copy, and they are directly responsible for users misunderstanding what is being asked of them.",
       "actions": [
         {
           "title": "Front-load the most important information",
@@ -5026,7 +5026,7 @@
         },
         {
           "title": "Test copy with first-reading comprehension",
-          "description": "Ask users to explain what an instruction means after reading it once — garden path failures appear immediately."
+          "description": "Ask users to explain what an instruction means after reading it once; garden path failures appear immediately."
         },
         {
           "title": "Avoid embedded clauses in instructions",
@@ -5086,9 +5086,9 @@
         "common case"
       ],
       "summary": "Unmarked (default) forms are processed faster than marked (exceptional) forms.",
-      "description": "In language, the unmarked form is the default — 'doctor' is the base form, 'female doctor' is marked. In UI, unmarked interface states are processed faster than marked ones. Labels, options, and states that require no qualifier are cognitively cheaper than those that do. Every qualifier adds processing cost.",
+      "description": "In language, the unmarked form is the default, 'doctor' is the base form, 'female doctor' is marked. In UI, unmarked interface states are processed faster than marked ones. Labels, options, and states that require no qualifier are cognitively cheaper than those that do. Every qualifier adds processing cost.",
       "whenToUse": "Use when designing option labels, status indicators, and any UI element that distinguishes a default state from an exception.",
-      "whyItMatches": "This principle explains why the most common option should be presented with the simplest label — adding qualifiers to the default case increases processing cost unnecessarily.",
+      "whyItMatches": "This principle explains why the most common option should be presented with the simplest label; adding qualifiers to the default case increases processing cost unnecessarily.",
       "actions": [
         {
           "title": "Use the shortest label for the most common case",
@@ -5096,7 +5096,7 @@
         },
         {
           "title": "Add qualifiers only to non-default states",
-          "description": "Exception states, rare options, and edge cases should carry the qualifiers — not the common case."
+          "description": "Exception states, rare options, and edge cases should carry the qualifiers, not the common case."
         },
         {
           "title": "Audit option sets for inverted markedness",
@@ -5156,8 +5156,8 @@
         "collaboration",
         "system design"
       ],
-      "summary": "Cognition is distributed across people, artefacts, and environments — not just individual minds.",
-      "description": "Complex tasks are performed through systems of people and artefacts that together carry cognitive work no individual could manage alone. Interfaces that treat cognitive load as a purely individual problem miss the systemic perspective — the right external representations, shared records, and artefacts can reduce individual cognitive demand dramatically.",
+      "summary": "Cognition is distributed across people, artefacts, and environments, not just individual minds.",
+      "description": "Complex tasks are performed through systems of people and artefacts that together carry cognitive work no individual could manage alone. Interfaces that treat cognitive load as a purely individual problem miss the systemic perspective; the right external representations, shared records, and artefacts can reduce individual cognitive demand dramatically.",
       "whenToUse": "Use when designing collaborative workflows, shared records, and any system where teams must coordinate complex distributed tasks.",
       "whyItMatches": "Distributed cognition explains why checklist artefacts, shared dashboards, and structured handover templates outperform individual memory and informal communication.",
       "actions": [
@@ -5225,10 +5225,10 @@
         "situated",
         "real task"
       ],
-      "summary": "Cognition is inseparable from the context in which it occurs — learning and doing are most effective in situ.",
-      "description": "Knowledge and skills are best acquired and applied in the context where they will be used. Onboarding and training that is detached from the real work context fails to transfer — guidance embedded at the moment of actual task performance is retained and used far more effectively.",
+      "summary": "Cognition is inseparable from the context in which it occurs; learning and doing are most effective in situ.",
+      "description": "Knowledge and skills are best acquired and applied in the context where they will be used. Onboarding and training that is detached from the real work context fails to transfer; guidance embedded at the moment of actual task performance is retained and used far more effectively.",
       "whenToUse": "Use in onboarding design, contextual help, and any training or guidance experience that is currently separated from the real workflow.",
-      "whyItMatches": "This is the theoretical basis for contextual in-app guidance — knowledge acquired in the abstract rarely transfers to the actual task context.",
+      "whyItMatches": "This is the theoretical basis for contextual in-app guidance; knowledge acquired in the abstract rarely transfers to the actual task context.",
       "actions": [
         {
           "title": "Embed guidance at the point of real task execution",
@@ -5297,7 +5297,7 @@
         "workflow"
       ],
       "summary": "Human activity is structured hierarchically: objectives, actions to achieve them, and automatic operations.",
-      "description": "Activity theory distinguishes three levels: the motive-driven objective (why), the goal-directed action (what), and the conditions-driven operation (how). Interfaces that mismatch their design level to the user's current cognitive level create friction — asking users to consciously specify operations they want to automate, or hiding the goal they are trying to achieve.",
+      "description": "Activity theory distinguishes three levels: the motive-driven objective (why), the goal-directed action (what), and the conditions-driven operation (how). Interfaces that mismatch their design level to the user's current cognitive level create friction; asking users to consciously specify operations they want to automate, or hiding the goal they are trying to achieve.",
       "whenToUse": "Use when designing complex multi-step workflows, automation features, and any system where the relationship between user goals and interface actions needs alignment.",
       "whyItMatches": "Activity theory explains why expert users find wizards patronising (they want to control actions, not be guided through operations) while novices find direct manipulation interfaces intimidating.",
       "actions": [
@@ -5365,22 +5365,22 @@
         "whitespace",
         "information distance"
       ],
-      "summary": "Spatial distance communicates relationship and importance — UI spacing follows the same cognitive rules.",
+      "summary": "Spatial distance communicates relationship and importance; UI spacing follows the same cognitive rules.",
       "description": "Hall's proxemics theory describes how distance communicates relationship (intimate, personal, social, public). The same principle applies to UI layouts: elements placed in close proximity imply intimate relationship (same group), while distant elements imply separation. Designers control relationship meaning through spatial decisions.",
       "whenToUse": "Use when making spacing decisions in dense layouts, card designs, and any information architecture where spatial relationship communicates meaning.",
-      "whyItMatches": "Proxemics is the anthropological grounding for the gestalt Law of Proximity — both explain why spacing communicates relationship.",
+      "whyItMatches": "Proxemics is the anthropological grounding for the gestalt Law of Proximity; both explain why spacing communicates relationship.",
       "actions": [
         {
           "title": "Use intimate spacing for tightly related elements",
-          "description": "Labels, inputs, and their associated hints belong within 4-8px of each other — intimate space."
+          "description": "Labels, inputs, and their associated hints belong within 4-8px of each other; intimate space."
         },
         {
           "title": "Use personal spacing for grouped sections",
-          "description": "Related sections within a form should be 16-24px apart — personal space."
+          "description": "Related sections within a form should be 16-24px apart; personal space."
         },
         {
           "title": "Use social spacing to separate major information blocks",
-          "description": "Distinct functional areas — header, content, actions — should be 32-48px apart to signal public separation."
+          "description": "Distinct functional areas (header, content, actions) should be 32-48px apart to signal public separation."
         }
       ],
       "antiPatterns": [
@@ -5435,9 +5435,9 @@
         "first-person"
       ],
       "summary": "Design should be grounded in the first-person lived experience of users, not system abstractions.",
-      "description": "Phenomenology insists that the meaning of an experience is constituted by the person living it — not by external observers or system designers. Design grounded in genuine first-person user experience (through observation, diary studies, and contextual enquiry) produces fundamentally different solutions than design grounded in task analysis alone.",
+      "description": "Phenomenology insists that the meaning of an experience is constituted by the person living it, not by external observers or system designers. Design grounded in genuine first-person user experience (through observation, diary studies, and contextual enquiry) produces fundamentally different solutions than design grounded in task analysis alone.",
       "whenToUse": "Use when framing user research methods, evaluating personas, and any design process where genuine empathy with lived experience is required.",
-      "whyItMatches": "Most UX design failures stem from designers substituting their own imagined experience for the user's actual lived experience — phenomenology is the corrective.",
+      "whyItMatches": "Most UX design failures stem from designers substituting their own imagined experience for the user's actual lived experience; phenomenology is the corrective.",
       "actions": [
         {
           "title": "Use diary studies for experience-based insights",
@@ -5445,7 +5445,7 @@
         },
         {
           "title": "Conduct contextual enquiry in actual use environments",
-          "description": "Observe users in their real work setting, not a lab — context shapes experience."
+          "description": "Observe users in their real work setting, not a lab; context shapes experience."
         },
         {
           "title": "Frame design questions from the user's first-person perspective",
@@ -5464,7 +5464,7 @@
       ],
       "examples": [
         "Intensive care dashboard redesign grounded in 40 hours of contextual observation, revealing that the critical friction was not feature gaps but spatial arrangement during crisis moments.",
-        "Onboarding redesigned after diary study revealed users experienced the most anxiety not at complexity but at moments of unexpected silence — no feedback, no confirmation."
+        "Onboarding redesigned after diary study revealed users experienced the most anxiety not at complexity but at moments of unexpected silence; no feedback, no confirmation."
       ],
       "designPrompt": "Name the primary intentional object on each screen. If you can't name it, the screen has a problem."
     },
@@ -5504,13 +5504,13 @@
         "pragmatic"
       ],
       "summary": "Design decisions should be evaluated by their real-world consequences, not theoretical correctness.",
-      "description": "Pragmatism judges the value of a design decision by whether it produces the desired outcome in practice — not by whether it conforms to a principle in theory. A design that is theoretically elegant but produces worse user outcomes is simply worse. This corrects against dogmatic principle-following without empirical validation.",
+      "description": "Pragmatism judges the value of a design decision by whether it produces the desired outcome in practice, not by whether it conforms to a principle in theory. A design that is theoretically elegant but produces worse user outcomes is simply worse. This corrects against dogmatic principle-following without empirical validation.",
       "whenToUse": "Use when evaluating competing design decisions, arbitrating between principles, and deciding whether to follow a guideline that may not apply in the current context.",
-      "whyItMatches": "Pragmatism is the philosophical grounding for user testing over design debates — consequences in practice are the final arbiter of design quality.",
+      "whyItMatches": "Pragmatism is the philosophical grounding for user testing over design debates; consequences in practice are the final arbiter of design quality.",
       "actions": [
         {
           "title": "Test design decisions empirically",
-          "description": "Do not argue from principle alone — measure the outcome of design decisions with real users."
+          "description": "Do not argue from principle alone; measure the outcome of design decisions with real users."
         },
         {
           "title": "Arbitrate principle conflicts with outcomes data",
@@ -5518,7 +5518,7 @@
         },
         {
           "title": "Treat guidelines as hypotheses, not laws",
-          "description": "Every design principle is a well-evidenced hypothesis — it should be tested, not treated as universally applicable."
+          "description": "Every design principle is a well-evidenced hypothesis; it should be tested, not treated as universally applicable."
         }
       ],
       "antiPatterns": [
@@ -5575,13 +5575,13 @@
         "interactive cues"
       ],
       "summary": "Interactive elements must visually signal their own interactivity and the action they afford.",
-      "description": "An affordance is an action possibility — a button affords clicking, a handle affords pulling. In digital interfaces, affordances must be communicated through signifiers (visual cues) since there is no physical feedback. Elements that look interactive but are not, or that look static but are interactive, create errors and frustration.",
+      "description": "An affordance is an action possibility; a button affords clicking, a handle affords pulling. In digital interfaces, affordances must be communicated through signifiers (visual cues) since there is no physical feedback. Elements that look interactive but are not, or that look static but are interactive, create errors and frustration.",
       "whenToUse": "Use when designing interactive elements, evaluating discoverability, and reviewing any interface where users fail to find or understand controls.",
-      "whyItMatches": "Most 'where is the button?' usability failures are affordance failures — the element exists but its interactivity is not communicated.",
+      "whyItMatches": "Most 'where is the button?' usability failures are affordance failures; the element exists but its interactivity is not communicated.",
       "actions": [
         {
           "title": "Ensure interactive elements are visually distinct from static ones",
-          "description": "Buttons, links, and controls must look different from non-interactive elements — use colour, border, shadow, or underline."
+          "description": "Buttons, links, and controls must look different from non-interactive elements; use colour, border, shadow, or underline."
         },
         {
           "title": "Design hover and focus states for all interactive elements",
@@ -5589,7 +5589,7 @@
         },
         {
           "title": "Eliminate false affordances",
-          "description": "Remove or restyle elements that look interactive but are not — underlined non-link text, button-like decorative elements."
+          "description": "Remove or restyle elements that look interactive but are not; underlined non-link text, button-like decorative elements."
         }
       ],
       "antiPatterns": [
@@ -5603,7 +5603,7 @@
         "Hover state that changes cursor, colour, or elevation to confirm interactivity"
       ],
       "examples": [
-        "CTA button redesigned from borderless text to filled M3 button — task completion rate increased by 23%.",
+        "CTA button redesigned from borderless text to filled M3 button; task completion rate increased by 23%.",
         "Clickable table rows given a hover background state to signal interactivity that was previously invisible."
       ],
       "designPrompt": "Test every interactive element: is its affordance immediately perceivable without instruction?"
@@ -5647,9 +5647,9 @@
         "input format"
       ],
       "summary": "Grouping information into meaningful chunks reduces working memory load and improves recall.",
-      "description": "Working memory holds approximately 4±1 chunks of information — but a chunk can contain multiple sub-items if they form a meaningful unit (a familiar pattern, a word, a group). Formatting phone numbers, card numbers, and long codes as chunks, and grouping form fields into logical sections, directly reduces working memory cost.",
+      "description": "Working memory holds approximately 4±1 chunks of information, but a chunk can contain multiple sub-items if they form a meaningful unit (a familiar pattern, a word, a group). Formatting phone numbers, card numbers, and long codes as chunks, and grouping form fields into logical sections, directly reduces working memory cost.",
       "whenToUse": "Use whenever presenting long numbers, multi-field forms, complex instructions, or dense information that must be held in working memory.",
-      "whyItMatches": "Chunking is the most direct application of Miller's Law to practical interface design — segmentation is almost always free to implement and immediately effective.",
+      "whyItMatches": "Chunking is the most direct application of Miller's Law to practical interface design; segmentation is almost always free to implement and immediately effective.",
       "actions": [
         {
           "title": "Format long numbers as chunks",
@@ -5657,7 +5657,7 @@
         },
         {
           "title": "Group form fields into semantic sections",
-          "description": "Visually group related form fields with labels and spacing — treat each section as a chunk."
+          "description": "Visually group related form fields with labels and spacing; treat each section as a chunk."
         },
         {
           "title": "Break long instructional content into numbered steps",
@@ -5718,7 +5718,7 @@
         "persistence"
       ],
       "summary": "People continue investing in a failing course of action because of prior investment, not future value.",
-      "description": "Users who have invested significant time or effort in a partially completed process are more likely to continue even when it is no longer in their interest — the sunk cost fallacy. This can be harnessed ethically to reduce abandonment of genuinely valuable processes, or misused to keep users trapped in harmful or low-value experiences.",
+      "description": "Users who have invested significant time or effort in a partially completed process are more likely to continue even when it is no longer in their interest; the sunk cost fallacy. This can be harnessed ethically to reduce abandonment of genuinely valuable processes, or misused to keep users trapped in harmful or low-value experiences.",
       "whenToUse": "Use when designing multi-step processes where partial completion affects willingness to continue, and when reviewing whether progress mechanics are being used ethically.",
       "whyItMatches": "Sunk cost explains both why progress bars reduce form abandonment (ethical use) and why platforms deliberately make accounts hard to delete after investment (unethical use).",
       "actions": [
@@ -5728,7 +5728,7 @@
         },
         {
           "title": "Audit whether progress mechanics trap users rather than serve them",
-          "description": "Review whether sunk cost mechanics in the product serve user goals or commercial ones — the ethical test."
+          "description": "Review whether sunk cost mechanics in the product serve user goals or commercial ones; the ethical test."
         },
         {
           "title": "Provide graceful exit paths from genuinely abandoned processes",
@@ -5746,7 +5746,7 @@
         "Ethical sunk cost audit checklist for engagement and retention mechanics"
       ],
       "examples": [
-        "Multi-step registration showing 'You've completed 70% — just 2 steps left' to ethically reduce abandonment of a genuinely beneficial process.",
+        "Multi-step registration showing 'You've completed 70%; just 2 steps left' to ethically reduce abandonment of a genuinely beneficial process.",
         "Subscription cancellation that provides a straightforward path out rather than exploiting sunk investment through complexity and dark patterns."
       ],
       "designPrompt": "Make abandonment and undo explicit and frictionless. Don't punish quitting."
@@ -5789,7 +5789,7 @@
       "summary": "Small environmental changes predictably alter behaviour without restricting freedom of choice.",
       "description": "Cognitive load is reduced when the environment is structured so the best option is also the easiest option.",
       "designPrompt": "Structure the environment so the desired action is the path of least resistance. Remove friction from good choices; add it to harmful ones.",
-      "whenToUse": "When users need to be guided toward better choices without being forced — onboarding, consent flows, and default settings.",
+      "whenToUse": "When users need to be guided toward better choices without being forced; onboarding, consent flows, and default settings.",
       "whyItMatches": "Nudge theory is strongest when users are prone to inertia or overwhelm and the designer knows what the optimal choice is.",
       "actions": [
         {
@@ -5811,7 +5811,7 @@
         "Benefit-first prompts before requests"
       ],
       "examples": [
-        "Pre-selecting the recommended tier in a pricing screen — users can change it, but rarely do."
+        "Pre-selecting the recommended tier in a pricing screen; users can change it, but rarely do."
       ],
       "number": "84"
     },
@@ -5850,8 +5850,8 @@
         "value function"
       ],
       "summary": "People evaluate outcomes relative to a reference point and are more sensitive to losses than equivalent gains.",
-      "description": "Losses feel approximately twice as impactful as gains of the same size — the psychological value curve is asymmetric.",
-      "designPrompt": "Anchor all risk communication to a reference point. Frame losses explicitly — users feel them more acutely than gains.",
+      "description": "Losses feel approximately twice as impactful as gains of the same size; the psychological value curve is asymmetric.",
+      "designPrompt": "Anchor all risk communication to a reference point. Frame losses explicitly; users feel them more acutely than gains.",
       "whenToUse": "When communicating risk, pricing, plan comparisons, or any scenario where users weigh gains against losses.",
       "whyItMatches": "Prospect theory explains why users react disproportionately to warnings, fees, and potential losses.",
       "actions": [
@@ -5935,7 +5935,7 @@
         "Feature bundles named by job role or outcome"
       ],
       "examples": [
-        "Breaking an annual subscription cost into a per-run cost maps it to an operational budget — not a capital one."
+        "Breaking an annual subscription cost into a per-run cost maps it to an operational budget, not a capital one."
       ],
       "number": "86"
     },
@@ -5973,11 +5973,11 @@
         "retention",
         "perceived value"
       ],
-      "summary": "People value things more highly once they own them — even briefly. Ownership increases perceived worth.",
+      "summary": "People value things more highly once they own them, even briefly. Ownership increases perceived worth.",
       "description": "Giving users a sense of ownership before a commitment dramatically increases willingness to continue and reduces churn.",
       "designPrompt": "Let users experience ownership before the ask. Free trials, saved work, and personalised configurations all create endowment.",
       "whenToUse": "In trial-to-paid conversion flows, onboarding, and any scenario where early investment increases commitment.",
-      "whyItMatches": "The endowment effect explains why users who've invested effort in a product are harder to churn — loss aversion applies to their ownership.",
+      "whyItMatches": "The endowment effect explains why users who've invested effort in a product are harder to churn; loss aversion applies to their ownership.",
       "actions": [
         {
           "title": "Create early ownership moments",
@@ -5985,7 +5985,7 @@
         },
         {
           "title": "Surface their investment",
-          "description": "Remind users what they've built or configured — making the cost of leaving visible."
+          "description": "Remind users what they've built or configured; making the cost of leaving visible."
         }
       ],
       "antiPatterns": [
@@ -5997,7 +5997,7 @@
         "Progress indicators showing user-built data"
       ],
       "examples": [
-        "A system that lets users build their own configuration during a trial creates endowment — losing it on expiry is felt as a loss, not a missed gain."
+        "A system that lets users build their own configuration during a trial creates endowment; losing it on expiry is felt as a loss, not a missed gain."
       ],
       "number": "87"
     },
@@ -6039,11 +6039,11 @@
       "description": "Long-term benefits are heavily discounted in user decision-making. Immediate feedback loops and quick wins are essential to motivation.",
       "designPrompt": "Make the immediate benefit of any action visible at the moment of decision. Long-term payoffs must be made tangible now.",
       "whenToUse": "In habit formation, onboarding, and any task that requires deferred gratification or sustained effort.",
-      "whyItMatches": "Present bias explains why describing long-term benefits fails to motivate immediate adoption — the payoff feels too distant.",
+      "whyItMatches": "Present bias explains why describing long-term benefits fails to motivate immediate adoption; the payoff feels too distant.",
       "actions": [
         {
           "title": "Surface immediate value",
-          "description": "Show what the user gets right now from completing a step — not what they get in 3 months."
+          "description": "Show what the user gets right now from completing a step, not what they get in 3 months."
         },
         {
           "title": "Build fast feedback loops",
@@ -6099,10 +6099,10 @@
         "limited availability"
       ],
       "summary": "People value things more when they are rare or diminishing in availability.",
-      "description": "Scarcity signals trigger faster decision-making by increasing perceived value — but misuse damages trust irreparably.",
+      "description": "Scarcity signals trigger faster decision-making by increasing perceived value, but misuse damages trust irreparably.",
       "designPrompt": "Use scarcity only when it is genuine. False scarcity destroys trust the moment users discover it.",
       "whenToUse": "When limited availability is real and relevant to the user's decision. Never fabricate scarcity.",
-      "whyItMatches": "The scarcity heuristic accelerates decisions by making inaction feel costly — useful in genuine deadline or capacity scenarios.",
+      "whyItMatches": "The scarcity heuristic accelerates decisions by making inaction feel costly; useful in genuine deadline or capacity scenarios.",
       "actions": [
         {
           "title": "Surface genuine constraints",
@@ -6110,7 +6110,7 @@
         },
         {
           "title": "Time-bound offers transparently",
-          "description": "Explain exactly why an offer has a deadline — transparency preserves trust."
+          "description": "Explain exactly why an offer has a deadline; transparency preserves trust."
         }
       ],
       "antiPatterns": [
@@ -6124,7 +6124,7 @@
         "Waitlist flows for truly limited access"
       ],
       "examples": [
-        "Showing \"Certification intake closes this quarter on Friday\" when that is genuinely true — not a fabricated deadline."
+        "Showing \"Certification intake closes this quarter on Friday\" when that is genuinely true, not a fabricated deadline."
       ],
       "number": "89"
     },
@@ -6168,7 +6168,7 @@
       "description": "The most recent interaction with a system shapes the user's overall perception, overriding a longer history.",
       "designPrompt": "Design your most recent touchpoints with the user as carefully as your first. The last interaction defines current perception.",
       "whenToUse": "When designing notifications, summary screens, and any post-task or end-of-session experience.",
-      "whyItMatches": "Recency bias explains why a single bad recent experience can override many previous positive ones — and why end states matter.",
+      "whyItMatches": "Recency bias explains why a single bad recent experience can override many previous positive ones, and why end states matter.",
       "actions": [
         {
           "title": "Optimise end states",
@@ -6176,7 +6176,7 @@
         },
         {
           "title": "Use recent history as context",
-          "description": "Surface recently accessed items prominently — they feel most relevant because they're most mentally available."
+          "description": "Surface recently accessed items prominently; they feel most relevant because they're most mentally available."
         }
       ],
       "antiPatterns": [
@@ -6295,10 +6295,10 @@
         "context"
       ],
       "summary": "The mind constructs coherent narratives from available information, ignoring what it doesn't know it's missing.",
-      "description": "Users build confident mental models from incomplete data — they don't know what they haven't seen.",
+      "description": "Users build confident mental models from incomplete data; they don't know what they haven't seen.",
       "designPrompt": "Surface what users need to know, not just what they asked for. Design for the information they don't know they're missing.",
       "whenToUse": "In data dashboards, decision support tools, and any interface where incomplete information could lead to confident but wrong conclusions.",
-      "whyItMatches": "WYSIATI explains why dashboards can be dangerous — they create confidence from whatever is displayed, even when key data is absent.",
+      "whyItMatches": "WYSIATI explains why dashboards can be dangerous; they create confidence from whatever is displayed, even when key data is absent.",
       "actions": [
         {
           "title": "Signal data completeness",
@@ -6319,7 +6319,7 @@
         "Confidence intervals alongside metrics"
       ],
       "examples": [
-        "\"Based on 3 of 7 reporting regions — 4 not yet submitted\" prevents confident but incomplete decisions."
+        "\"Based on 3 of 7 reporting regions, 4 not yet submitted\" prevents confident but incomplete decisions."
       ],
       "number": "92"
     },
@@ -6360,7 +6360,7 @@
         "familiarity"
       ],
       "summary": "Knowledge is organised into structured mental frameworks (schemas) that shape perception, interpretation, and expectation.",
-      "description": "Interfaces that violate existing schemas require users to rebuild mental frameworks — a high-load process.",
+      "description": "Interfaces that violate existing schemas require users to rebuild mental frameworks; a high-load process.",
       "designPrompt": "Identify the schemas your users bring from existing tools. Design to extend them, not replace them.",
       "whenToUse": "In any interface where users are experienced professionals with established mental models of how their domain works.",
       "whyItMatches": "Schema-consistent design is processed automatically (System 1). Schema-violating design forces effortful relearning (System 2).",
@@ -6371,7 +6371,7 @@
         },
         {
           "title": "Use familiar terminology",
-          "description": "Adopt the language of your user's domain — not the language of your engineering team."
+          "description": "Adopt the language of your user's domain, not the language of your engineering team."
         }
       ],
       "antiPatterns": [
@@ -6384,7 +6384,7 @@
         "Onboarding flows that build on existing knowledge"
       ],
       "examples": [
-        "A system that uses industry-standard terminology matches practitioner schemas exactly — internal system names create schema conflict."
+        "A system that uses industry-standard terminology matches practitioner schemas exactly; internal system names create schema conflict."
       ],
       "number": "93"
     },
@@ -6425,9 +6425,9 @@
       ],
       "summary": "The smallest detectable change is a constant proportion of the original stimulus, not a fixed amount.",
       "description": "Small UI changes relative to a large visual baseline go unnoticed. Changes must be proportionally significant to register.",
-      "designPrompt": "Make changes proportionally visible — a 1px border change is invisible; a colour shift or size change registers.",
+      "designPrompt": "Make changes proportionally visible; a 1px border change is invisible; a colour shift or size change registers.",
       "whenToUse": "When designing state changes, progress indicators, or feedback animations where the user must notice a change.",
-      "whyItMatches": "Weber's Law explains why subtle UI feedback fails — the change must be large relative to the baseline to cross the perception threshold.",
+      "whyItMatches": "Weber's Law explains why subtle UI feedback fails; the change must be large relative to the baseline to cross the perception threshold.",
       "actions": [
         {
           "title": "Use proportionally significant changes",
@@ -6449,7 +6449,7 @@
         "Animation on state transitions"
       ],
       "examples": [
-        "A progress bar with a clearly moving fill — not a subtle shift on a grey bar that users miss."
+        "A progress bar with a clearly moving fill, not a subtle shift on a grey bar that users miss."
       ],
       "number": "94"
     },
@@ -6489,15 +6489,15 @@
         "proactive",
         "retroactive"
       ],
-      "summary": "Memory is disrupted when new and old information conflict — old learning interferes with new, and vice versa.",
+      "summary": "Memory is disrupted when new and old information conflict; old learning interferes with new, and vice versa.",
       "description": "When users learn a new interface that conflicts with a previous one, both are recalled less accurately.",
       "designPrompt": "When replacing familiar patterns, explicitly contrast old vs new. Don't assume old habits will be overwritten cleanly.",
       "whenToUse": "In redesigns, migrations, or any flow where users are transitioning from an established system to a new one.",
-      "whyItMatches": "Interference theory predicts the error spike seen after interface redesigns — users blend old and new memories incorrectly.",
+      "whyItMatches": "Interference theory predicts the error spike seen after interface redesigns; users blend old and new memories incorrectly.",
       "actions": [
         {
           "title": "Contrast old and new explicitly",
-          "description": "During transitions, show users what changed and why — don't leave them to relearn through errors."
+          "description": "During transitions, show users what changed and why; don't leave them to relearn through errors."
         },
         {
           "title": "Introduce changes sequentially",
@@ -6554,9 +6554,9 @@
         "cognitive effort"
       ],
       "summary": "Slightly harder-to-process information is retained better, because it forces deeper cognitive engagement.",
-      "description": "Extreme clarity reduces retention. A small amount of processing friction drives deeper encoding — but only in non-critical task flows.",
+      "description": "Extreme clarity reduces retention. A small amount of processing friction drives deeper encoding, but only in non-critical task flows.",
       "designPrompt": "Reserve intentional friction for learning moments only. Never add disfluency to task-critical paths.",
-      "whenToUse": "In onboarding, training flows, and content designed for long-term retention — not for task completion flows.",
+      "whenToUse": "In onboarding, training flows, and content designed for long-term retention, not for task completion flows.",
       "whyItMatches": "Disfluency improves retention in learning contexts but adds unnecessary load in task execution. Context determines whether it helps or hurts.",
       "actions": [
         {
@@ -6565,7 +6565,7 @@
         },
         {
           "title": "Test retention, not just completion",
-          "description": "Measure whether users remember what they learned — not just whether they clicked through."
+          "description": "Measure whether users remember what they learned, not just whether they clicked through."
         }
       ],
       "antiPatterns": [
@@ -6617,10 +6617,10 @@
         "jargon",
         "communication"
       ],
-      "summary": "Experts find it difficult to imagine not knowing what they know — leading to explanations that assume knowledge the audience doesn't have.",
+      "summary": "Experts find it difficult to imagine not knowing what they know; leading to explanations that assume knowledge the audience doesn't have.",
       "description": "Designers and domain experts unconsciously design for themselves, creating interfaces inaccessible to less experienced users.",
       "designPrompt": "Design for the new user, not the power user. Expose every design decision to someone who has never seen your product.",
-      "whenToUse": "Always — but especially critical when the design team has deep domain expertise in the product they're building.",
+      "whenToUse": "Always, but especially critical when the design team has deep domain expertise in the product they're building.",
       "whyItMatches": "The paradox of expertise is one of the most common sources of UX failure in expert-built enterprise software.",
       "actions": [
         {
@@ -6641,7 +6641,7 @@
         "Contextual help written at domain-novice level"
       ],
       "examples": [
-        "Help text written by domain experts reads as obvious to them but opaque to a first-time user — non-expert review is essential."
+        "Help text written by domain experts reads as obvious to them but opaque to a first-time user; non-expert review is essential."
       ],
       "number": "97"
     },
@@ -6688,11 +6688,11 @@
       "actions": [
         {
           "title": "Maintain task context on screen",
-          "description": "Keep relevant reference information visible during the task — not behind separate navigation."
+          "description": "Keep relevant reference information visible during the task, not behind separate navigation."
         },
         {
           "title": "Use spatial consistency",
-          "description": "Keep UI elements in consistent positions across sessions — spatial memory is a powerful retrieval cue."
+          "description": "Keep UI elements in consistent positions across sessions; spatial memory is a powerful retrieval cue."
         }
       ],
       "antiPatterns": [
@@ -6704,7 +6704,7 @@
         "Consistent element positioning across screens"
       ],
       "examples": [
-        "A data entry form that shows relevant reference values alongside input fields — without requiring navigation to find them."
+        "A data entry form that shows relevant reference values alongside input fields, without requiring navigation to find them."
       ],
       "number": "98"
     },
@@ -6743,10 +6743,10 @@
         "processing speed"
       ],
       "summary": "Easy-to-process information is judged as more likely to be true, more familiar, and more credible.",
-      "description": "Cognitive ease functions as a metacognitive signal — if something is hard to read, users assume it's hard to understand or do.",
+      "description": "Cognitive ease functions as a metacognitive signal; if something is hard to read, users assume it's hard to understand or do.",
       "designPrompt": "Make information easy to read and easy to scan. Processing difficulty reads as content difficulty, not visual complexity.",
       "whenToUse": "In any content-heavy interface, particularly in documentation, instructions, and onboarding copy.",
-      "whyItMatches": "The fluency heuristic explains why poorly designed interfaces feel harder to use than they actually are — and vice versa.",
+      "whyItMatches": "The fluency heuristic explains why poorly designed interfaces feel harder to use than they actually are, and vice versa.",
       "actions": [
         {
           "title": "Optimise typographic readability",
@@ -6818,7 +6818,7 @@
         },
         {
           "title": "Use social presence positively for motivation",
-          "description": "Surface who else is active or has completed a task — social presence motivates on familiar workflows."
+          "description": "Surface who else is active or has completed a task; social presence motivates on familiar workflows."
         }
       ],
       "antiPatterns": [
@@ -6831,7 +6831,7 @@
         "\"Who completed this\" social proof on routine tasks"
       ],
       "examples": [
-        "\"Your team has submitted their reports\" shown on a reporting dashboard motivates the remaining user — social presence on a familiar task drives completion."
+        "\"Your team has submitted their reports\" shown on a reporting dashboard motivates the remaining user; social presence on a familiar task drives completion."
       ],
       "number": "100"
     },
@@ -6871,9 +6871,9 @@
         "external",
         "error"
       ],
-      "summary": "People explain events by attributing them to internal factors (skill) or external factors (system) — and the attribution shapes future behaviour.",
+      "summary": "People explain events by attributing them to internal factors (skill) or external factors (system), and the attribution shapes future behaviour.",
       "description": "When users fail at a task, whether they blame themselves or the system determines whether they retry or abandon.",
-      "designPrompt": "Write error messages that attribute failure to the system or to correctable external factors — never to user incompetence.",
+      "designPrompt": "Write error messages that attribute failure to the system or to correctable external factors; never to user incompetence.",
       "whenToUse": "In error flows, onboarding friction points, and any scenario where users may fail and form attributions about why.",
       "whyItMatches": "Attribution theory explains why \"You entered an invalid value\" causes abandonment but an explanatory message causes retry.",
       "actions": [
@@ -6896,7 +6896,7 @@
         "Inline validation with positive attribution framing"
       ],
       "examples": [
-        "\"This field requires DD/MM/YYYY format\" — external attribution — drives retry. \"Invalid date\" — internal attribution — drives abandonment."
+        "\"This field requires DD/MM/YYYY format\" (external attribution) drives retry. \"Invalid date\" (internal attribution) drives abandonment."
       ],
       "number": "101"
     },
@@ -6936,14 +6936,14 @@
         "empowerment"
       ],
       "summary": "People have a fundamental psychological need to feel in control of their own choices and actions.",
-      "description": "Interfaces that remove user control — through forced flows, locked options, or opaque automation — create resistance and reduce engagement.",
+      "description": "Interfaces that remove user control (through forced flows, locked options, or opaque automation) create resistance and reduce engagement.",
       "designPrompt": "Always provide a visible escape, override, or manual option alongside any automation. Never remove the illusion of control.",
       "whenToUse": "In any system with automation, mandatory flows, or locked states where users feel their agency is constrained.",
-      "whyItMatches": "Autonomy bias explains why even rarely-used manual overrides dramatically increase user satisfaction — their existence matters more than their use.",
+      "whyItMatches": "Autonomy bias explains why even rarely-used manual overrides dramatically increase user satisfaction; their existence matters more than their use.",
       "actions": [
         {
           "title": "Provide visible overrides",
-          "description": "Every automation should have a visible manual alternative — even if users rarely use it."
+          "description": "Every automation should have a visible manual alternative, even if users rarely use it."
         },
         {
           "title": "Explain system decisions",
@@ -6961,7 +6961,7 @@
         "Transparent automation with clear override paths"
       ],
       "examples": [
-        "An auto-filled form field with a visible edit option feels like convenience; the same field locked feels like loss of control — even if users never change it."
+        "An auto-filled form field with a visible edit option feels like convenience; the same field locked feels like loss of control, even if users never change it."
       ],
       "number": "102"
     },
@@ -7000,11 +7000,11 @@
         "imitation",
         "social brain"
       ],
-      "summary": "Neurons that fire when performing an action also fire when observing the same action — the neural basis of empathy and imitation learning.",
-      "description": "Observing others perform tasks activates the same neural pathways as doing the task — making demonstration more effective than instruction.",
+      "summary": "Neurons that fire when performing an action also fire when observing the same action; the neural basis of empathy and imitation learning.",
+      "description": "Observing others perform tasks activates the same neural pathways as doing the task; making demonstration more effective than instruction.",
       "designPrompt": "Show, don't tell. Video demonstrations and animated walkthroughs are processed with significantly less cognitive effort than written instructions.",
       "whenToUse": "In onboarding, help documentation, and any scenario where users must learn a new behaviour or workflow.",
-      "whyItMatches": "Mirror neuron activation from observation reduces the cognitive load of learning — watching is neurologically cheaper than reading then imagining.",
+      "whyItMatches": "Mirror neuron activation from observation reduces the cognitive load of learning; watching is neurologically cheaper than reading then imagining.",
       "actions": [
         {
           "title": "Use demonstration over description",
@@ -7065,11 +7065,11 @@
         "randomness",
         "data"
       ],
-      "summary": "The brain is wired to find patterns — even in random noise — which leads to seeing meaningful trends in meaningless data.",
+      "summary": "The brain is wired to find patterns (even in random noise) which leads to seeing meaningful trends in meaningless data.",
       "description": "Users will construct causal narratives from random variation in data visualisations, creating confident but false conclusions.",
       "designPrompt": "Surface statistical significance alongside data. Never show data visualisation without context for what counts as a meaningful pattern.",
       "whenToUse": "In data dashboards, analytics tools, and any interface where users interpret visualised data.",
-      "whyItMatches": "Apophenia explains why users confidently draw wrong conclusions from dashboards — the brain is optimised to find patterns, not to ignore them.",
+      "whyItMatches": "Apophenia explains why users confidently draw wrong conclusions from dashboards; the brain is optimised to find patterns, not to ignore them.",
       "actions": [
         {
           "title": "Add statistical context to data",
@@ -7091,7 +7091,7 @@
         "Trend comparisons with baseline periods"
       ],
       "examples": [
-        "A week-on-week chart should indicate whether the difference is statistically significant — otherwise users will act on noise."
+        "A week-on-week chart should indicate whether the difference is statistically significant; otherwise users will act on noise."
       ],
       "number": "104"
     },
@@ -7130,11 +7130,11 @@
         "uncertainty",
         "signal"
       ],
-      "summary": "Information entropy measures the unpredictability of a system — high entropy means high cognitive load for the receiver.",
+      "summary": "Information entropy measures the unpredictability of a system; high entropy means high cognitive load for the receiver.",
       "description": "Highly unpredictable interfaces require users to expend more cognitive resources to interpret each new element.",
       "designPrompt": "Reduce interface entropy by making behaviour predictable. Every surprise costs working memory.",
       "whenToUse": "In navigation design, interaction patterns, and any system where unpredictability creates user overhead.",
-      "whyItMatches": "Shannon entropy provides a formal framework for why inconsistent, surprising interfaces are harder to use — they are literally higher-entropy systems.",
+      "whyItMatches": "Shannon entropy provides a formal framework for why inconsistent, surprising interfaces are harder to use; they are literally higher-entropy systems.",
       "actions": [
         {
           "title": "Make interactions predictable",
@@ -7156,7 +7156,7 @@
         "Stable layout grids"
       ],
       "examples": [
-        "A navigation menu that shows different items based on hidden context (without explaining why) is high-entropy — users must re-evaluate it every time."
+        "A navigation menu that shows different items based on hidden context (without explaining why) is high-entropy; users must re-evaluate it every time."
       ],
       "number": "105"
     },
@@ -7200,7 +7200,7 @@
       "summary": "Among competing explanations or designs, the simplest one that fully satisfies the requirements should be preferred.",
       "description": "Every added element, feature, or decision point adds cognitive overhead. The simplest solution that works is always the correct starting point.",
       "designPrompt": "Before adding any element, ask: what does this remove? If the answer is nothing, remove the element instead.",
-      "whenToUse": "At every design decision point — as a default principle for evaluating whether to add, keep, or remove any element.",
+      "whenToUse": "At every design decision point, as a default principle for evaluating whether to add, keep, or remove any element.",
       "whyItMatches": "Occam's Razor is the meta-principle underlying most cognitive load reduction. Simpler = less load, always.",
       "actions": [
         {
@@ -7223,7 +7223,7 @@
         "Feature usage tracking to justify retention"
       ],
       "examples": [
-        "A settings screen with 40 options should be audited against usage data — in most cases, 80% of users interact with fewer than 8 options."
+        "A settings screen with 40 options should be audited against usage data, in most cases, 80% of users interact with fewer than 8 options."
       ],
       "number": "106"
     },
@@ -7262,19 +7262,19 @@
         "mental model",
         "terminology"
       ],
-      "summary": "The language we use shapes how we think about and categorise the world — different terminology creates different mental models.",
+      "summary": "The language we use shapes how we think about and categorise the world; different terminology creates different mental models.",
       "description": "The words your interface uses to label categories and actions directly shape the mental model users build of your system.",
-      "designPrompt": "Choose your UI vocabulary with the same care as your visual design. Labels are architecture — they constrain how users think.",
+      "designPrompt": "Choose your UI vocabulary with the same care as your visual design. Labels are architecture; they constrain how users think.",
       "whenToUse": "In information architecture, navigation design, and any interface where the naming of categories and actions determines how users conceptualise the system.",
       "whyItMatches": "Sapir-Whorf explains why renaming a feature category often changes user behaviour more than redesigning its visual appearance.",
       "actions": [
         {
           "title": "Source terminology from users",
-          "description": "Use language users already use to describe the domain — not internal system or engineering terminology."
+          "description": "Use language users already use to describe the domain, not internal system or engineering terminology."
         },
         {
           "title": "Test labels for mental model alignment",
-          "description": "Ask users to sort items labelled with your proposed terminology — does the grouping match your intended IA?"
+          "description": "Ask users to sort items labelled with your proposed terminology; does the grouping match your intended IA?"
         }
       ],
       "antiPatterns": [
@@ -7288,7 +7288,7 @@
         "Terminology glossaries in onboarding"
       ],
       "examples": [
-        "Whether a section is called \"Orders\", \"Requests\", or \"Submissions\" fundamentally changes what users expect to find in it — the word is the mental model."
+        "Whether a section is called \"Orders\", \"Requests\", or \"Submissions\" fundamentally changes what users expect to find in it; the word is the mental model."
       ],
       "number": "107"
     },
@@ -7327,11 +7327,11 @@
         "routine",
         "engagement"
       ],
-      "summary": "Rituals — structured, repeated sequences of action — create meaning, identity, and strong habitual bonds.",
+      "summary": "Rituals (structured, repeated sequences of action) create meaning, identity, and strong habitual bonds.",
       "description": "Designing deliberate rituals into digital products creates strong habitual use patterns and emotional attachment.",
-      "designPrompt": "Identify the daily or weekly routine use case for your product. Design it as a ritual — consistent, distinctive, meaningful.",
+      "designPrompt": "Identify the daily or weekly routine use case for your product. Design it as a ritual; consistent, distinctive, meaningful.",
       "whenToUse": "In products intended for recurring daily use where habit formation is a key success metric.",
-      "whyItMatches": "Ritual theory explains why certain products become habits while functionally equivalent alternatives are forgotten — ritualised design creates identity, not just utility.",
+      "whyItMatches": "Ritual theory explains why certain products become habits while functionally equivalent alternatives are forgotten; ritualised design creates identity, not just utility.",
       "actions": [
         {
           "title": "Design for the recurring use case",
@@ -7339,7 +7339,7 @@
         },
         {
           "title": "Create meaningful opening moments",
-          "description": "The start of each session should feel consistent and intentional — a ritual opener that cues habitual use."
+          "description": "The start of each session should feel consistent and intentional; a ritual opener that cues habitual use."
         }
       ],
       "antiPatterns": [
@@ -7353,7 +7353,7 @@
         "Progress streaks and recurring milestone acknowledgements"
       ],
       "examples": [
-        "A daily lab logging tool with a consistent \"Good morning, here's today's checklist\" opener builds ritual — users return because the routine feels familiar."
+        "A daily lab logging tool with a consistent \"Good morning, here's today's checklist\" opener builds ritual; users return because the routine feels familiar."
       ],
       "number": "108"
     },
@@ -7392,7 +7392,7 @@
         "globalisation",
         "mental model"
       ],
-      "summary": "Cultural background shapes the schemas users apply to interpret interfaces — the same design can mean different things across cultures.",
+      "summary": "Cultural background shapes the schemas users apply to interpret interfaces; the same design can mean different things across cultures.",
       "description": "Interface metaphors, colour meanings, and interaction conventions that feel intuitive in one culture can be opaque or offensive in another.",
       "designPrompt": "Audit every metaphor, colour, and icon for cultural portability. What feels universal is often deeply local.",
       "whenToUse": "When designing products for users across multiple cultural or geographic contexts.",
@@ -7418,7 +7418,7 @@
         "Regional user testing in diverse markets"
       ],
       "examples": [
-        "A thumbs-up icon is positive in most Western markets but can be offensive in others — cultural schema testing before launch prevents this."
+        "A thumbs-up icon is positive in most Western markets but can be offensive in others; cultural schema testing before launch prevents this."
       ],
       "number": "109"
     },
@@ -7458,15 +7458,15 @@
         "giving",
         "social obligation"
       ],
-      "summary": "In all human cultures, gifts create social obligations — receiving something creates a felt need to give in return.",
+      "summary": "In all human cultures, gifts create social obligations; receiving something creates a felt need to give in return.",
       "description": "Digital products that give generously before asking receive significantly higher engagement and conversion in return.",
       "designPrompt": "Calculate what you give before what you ask. Your free offer should feel genuinely valuable, not like a calculated hook.",
       "whenToUse": "In freemium products, onboarding flows, and any scenario where the product needs to earn the right to ask for something.",
-      "whyItMatches": "Gift economy theory explains why generous free tiers outperform restrictive trials — the gift creates social obligation to reciprocate with commitment.",
+      "whyItMatches": "Gift economy theory explains why generous free tiers outperform restrictive trials; the gift creates social obligation to reciprocate with commitment.",
       "actions": [
         {
           "title": "Give before you ask",
-          "description": "Provide meaningful value — tools, insights, saved time — before requesting sign-up, data, or payment."
+          "description": "Provide meaningful value (tools, insights, saved time) before requesting sign-up, data, or payment."
         },
         {
           "title": "Make gifts feel genuine",
@@ -7525,10 +7525,10 @@
         "discoverability"
       ],
       "summary": "Affordances are action possibilities; signifiers are the signals that communicate those affordances. Without signifiers, affordances are invisible.",
-      "description": "An affordance that has no signifier does not exist in the user's mental model — it will not be discovered or used.",
+      "description": "An affordance that has no signifier does not exist in the user's mental model; it will not be discovered or used.",
       "designPrompt": "For every affordance in your interface: what is the signifier? If you can't name it, the affordance is invisible.",
-      "whenToUse": "When evaluating whether interactive elements are discoverable — particularly in minimal or icon-heavy interfaces.",
-      "whyItMatches": "The signifiers/affordances distinction explains why \"clean\" interfaces with implicit interactions are consistently underperformed — the affordances exist but users can't see them.",
+      "whenToUse": "When evaluating whether interactive elements are discoverable; particularly in minimal or icon-heavy interfaces.",
+      "whyItMatches": "The signifiers/affordances distinction explains why \"clean\" interfaces with implicit interactions are consistently underperformed; the affordances exist but users can't see them.",
       "actions": [
         {
           "title": "Name signifiers explicitly",
@@ -7550,7 +7550,7 @@
         "Persistent visible signifiers for primary actions"
       ],
       "examples": [
-        "A gesture-based navigation with no visible indicator is an affordance without a signifier — users cannot discover what they cannot perceive."
+        "A gesture-based navigation with no visible indicator is an affordance without a signifier; users cannot discover what they cannot perceive."
       ],
       "number": "111"
     },
@@ -7590,11 +7590,11 @@
         "context",
         "usage"
       ],
-      "summary": "Word meaning is determined by use within a community, not by abstract definition — context is everything.",
+      "summary": "Word meaning is determined by use within a community, not by abstract definition; context is everything.",
       "description": "The same term means different things in different professional or cultural contexts. Interface language must match the specific language game of the target user community.",
-      "designPrompt": "Don't define your terms — find the terms your users already use and use them. Meaning is use, not definition.",
+      "designPrompt": "Don't define your terms; find the terms your users already use and use them. Meaning is use, not definition.",
       "whenToUse": "In any interface serving a specific professional community with its own established vocabulary.",
-      "whyItMatches": "Wittgenstein's framework explains why technically correct but professionally unfamiliar terminology fails — it's not playing the right language game.",
+      "whyItMatches": "Wittgenstein's framework explains why technically correct but professionally unfamiliar terminology fails; it's not playing the right language game.",
       "actions": [
         {
           "title": "Embed in user vocabulary",
@@ -7615,7 +7615,7 @@
         "Contextual terminology help that explains system terms in domain terms"
       ],
       "examples": [
-        "A platform serving finance professionals that uses \"transactions\" where they say \"trades\" is playing the wrong language game — the mismatch creates friction."
+        "A platform serving finance professionals that uses \"transactions\" where they say \"trades\" is playing the wrong language game; the mismatch creates friction."
       ],
       "number": "112"
     },
@@ -7656,11 +7656,11 @@
         "flow",
         "invisible interface"
       ],
-      "summary": "Tools in skilled use become transparent — they disappear from consciousness and the user focuses entirely on the goal.",
+      "summary": "Tools in skilled use become transparent; they disappear from consciousness and the user focuses entirely on the goal.",
       "description": "The best interface is one the user stops thinking about. Friction breaks the \"ready-to-hand\" state and forces the tool itself into attention.",
       "designPrompt": "Design for invisibility. Every moment a user thinks about the interface, they are not thinking about their work.",
       "whenToUse": "In task-focused productivity tools where deep work and flow state are the goal.",
-      "whyItMatches": "Heidegger's framework explains why friction is so cognitively costly — it breaks the ready-to-hand state and forces the tool into conscious attention.",
+      "whyItMatches": "Heidegger's framework explains why friction is so cognitively costly; it breaks the ready-to-hand state and forces the tool into conscious attention.",
       "actions": [
         {
           "title": "Remove interface friction from expert flows",
@@ -7724,19 +7724,19 @@
         "gesture",
         "tool extension"
       ],
-      "summary": "The body's schema extends to include tools in skilled use — a practised tool becomes felt as an extension of the body, not a separate object.",
-      "description": "Interfaces that become \"body-like\" through practice are used with near-zero conscious cognitive load — the skill becomes embodied.",
+      "summary": "The body's schema extends to include tools in skilled use; a practised tool becomes felt as an extension of the body, not a separate object.",
+      "description": "Interfaces that become \"body-like\" through practice are used with near-zero conscious cognitive load; the skill becomes embodied.",
       "designPrompt": "Design for the moment when the interface disappears into muscle memory. Consistent interaction patterns are the prerequisite for embodied mastery.",
-      "whenToUse": "In tools that professionals use repeatedly for years — where transition from conscious to automatic use is a key UX milestone.",
-      "whyItMatches": "Merleau-Ponty's body schema explains why expert users resist interface changes so strongly — they're not resisting learning; they're resisting un-embodying a skill.",
+      "whenToUse": "In tools that professionals use repeatedly for years, where transition from conscious to automatic use is a key UX milestone.",
+      "whyItMatches": "Merleau-Ponty's body schema explains why expert users resist interface changes so strongly; they're not resisting learning; they're resisting un-embodying a skill.",
       "actions": [
         {
           "title": "Stabilise core interaction patterns",
-          "description": "The foundational interactions of a professional tool should never change — they are being built into muscle memory."
+          "description": "The foundational interactions of a professional tool should never change; they are being built into muscle memory."
         },
         {
           "title": "Provide keyboard and gesture alternatives",
-          "description": "Keyboard shortcuts and consistent gestures allow the interface to become embodied — click-based flows do not."
+          "description": "Keyboard shortcuts and consistent gestures allow the interface to become embodied; click-based flows do not."
         }
       ],
       "antiPatterns": [
@@ -7750,7 +7750,7 @@
         "Customisable toolbars that users can stabilise to their own body schema"
       ],
       "examples": [
-        "Expert users of a spreadsheet tool have its keyboard shortcuts embodied — changing them is felt as physical disorientation, not just inconvenience."
+        "Expert users of a spreadsheet tool have its keyboard shortcuts embodied; changing them is felt as physical disorientation, not just inconvenience."
       ],
       "number": "114"
     },
@@ -7794,10 +7794,10 @@
         "design philosophy"
       ],
       "summary": "\"Simple things should be simple; complex things should be possible.\" The best systems make easy things easy and hard things achievable.",
-      "description": "Good design serves both the novice who needs simplicity and the expert who needs power — failing either group is a design failure.",
+      "description": "Good design serves both the novice who needs simplicity and the expert who needs power; failing either group is a design failure.",
       "designPrompt": "Design your product at two levels: one interaction for the common case (simple), one path for the expert case (powerful). Neither should compromise the other.",
-      "whenToUse": "In any product serving both novice and expert users — which is most enterprise and productivity software.",
-      "whyItMatches": "Alan Kay's principle explains why expert-only tools feel alienating to beginners, and why over-simplified tools feel limiting to experts — both are design failures.",
+      "whenToUse": "In any product serving both novice and expert users, which is most enterprise and productivity software.",
+      "whyItMatches": "Alan Kay's principle explains why expert-only tools feel alienating to beginners, and why over-simplified tools feel limiting to experts; both are design failures.",
       "actions": [
         {
           "title": "Design the simple path first",
@@ -7805,7 +7805,7 @@
         },
         {
           "title": "Layer complexity progressively",
-          "description": "Build from simple to complex — the novice path is the foundation on which expert features are layered."
+          "description": "Build from simple to complex; the novice path is the foundation on which expert features are layered."
         }
       ],
       "antiPatterns": [

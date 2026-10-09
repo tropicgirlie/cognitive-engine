@@ -1,13 +1,13 @@
 /**
- * Cognitive Engine Tour — Editorial Spotlight + Side Panel
+ * Cognitive Engine Tour; Editorial Spotlight + Side Panel
  *
  * Design rationale (from cognitive science perspective):
- * - Spotlight pattern: Von Restorff effect — the highlighted element is the
+ * - Spotlight pattern: Von Restorff effect; the highlighted element is the
  *   only bright thing on screen, making it impossible to miss
  * - Side panel: Reduces cognitive load by separating explanation from action
  * - Progressive disclosure: Each step reveals only what's needed right now
  * - User control: every step can be skipped, the whole tour discarded with
- *   Esc / ✕ / "Skip tour" — autonomy bias works for onboarding too
+ *   Esc / ✕ / "Skip tour"; autonomy bias works for onboarding too
  *
  * Page keys: 'library' (index.html), 'prompt-generator' (advanced-prompt-generator.html)
  */
@@ -31,15 +31,15 @@ class CognitiveTour {
           id: 'welcome',
           icon: 'psychology',
           title: 'I study how people think under pressure.',
-          body: 'This dashboard turns your UX problem into ranked, research-backed interventions. I\'ll show you the flow in about a minute — discard it any time with Esc.',
-          detail: 'The principles here come from peer-reviewed research in cognitive load theory, attention, and behavioural economics — not guesswork.',
+          body: 'This dashboard turns your UX problem into ranked, research-backed interventions. I\'ll show you the flow in about a minute. You can leave at any time with Esc.',
+          detail: 'The principles here come from peer-reviewed research in cognitive load theory, attention, and behavioural economics, not guesswork.',
           target: null
         },
         {
           id: 'goal',
           icon: 'flag',
           title: 'Start with the outcome you want.',
-          body: 'Reduce errors, speed decisions, cut overload — each goal re-ranks the principles the engine pulls from the research literature.',
+          body: 'Reduce errors, speed decisions, or cut overload. Each goal re-ranks the principles the engine pulls from the research literature.',
           detail: '"Reduce errors" pulls from error prevention and defensive design. "Speed up decisions" draws on Hick\'s Law and recognition over recall.',
           target: '#goal-group'
         },
@@ -54,9 +54,9 @@ class CognitiveTour {
         {
           id: 'problem',
           icon: 'edit_note',
-          title: 'Describe what you observe — not the solution you imagine.',
+          title: 'Describe what you observe, not the solution you imagine.',
           body: '"Technicians miss out-of-range values" tells us more than "add more colour". The engine matches principles to the actual behaviour.',
-          detail: 'This is the difference between a symptom and a diagnosis. Cognitive science gives us frameworks for understanding why a behaviour occurs — and that is what leads to better design.',
+          detail: 'This is the difference between a symptom and a diagnosis. Cognitive science gives us frameworks for understanding why a behaviour occurs, and that is what leads to better design.',
           target: '#problem-input'
         },
         {
@@ -72,7 +72,7 @@ class CognitiveTour {
           icon: 'auto_awesome',
           title: 'One click turns a principle into a design brief.',
           body: '"Generate Prompt" packages the principle, rationale, actions, anti-patterns, and validation criteria into a structured brief.',
-          detail: 'Hand it to your team or paste it into an AI design tool — the structure (Role → Problem → Principle → Actions → Constraints → Validation) keeps the output testable.',
+          detail: 'Hand it to your team or paste it into an AI design tool. The structure (Role → Problem → Principle → Actions → Constraints → Validation) keeps the output testable.',
           target: '.btn-tonal'
         },
         {
@@ -89,8 +89,8 @@ class CognitiveTour {
           id: 'welcome',
           icon: 'psychology',
           title: 'I study how people think under pressure.',
-          body: 'This engine translates cognitive science research into design decisions. I\'ll show you how to use it in about 90 seconds — and why each step matters. Discard it any time with Esc.',
-          detail: 'The principles here come from peer-reviewed research in cognitive load theory, attention, and behavioural economics — not guesswork.',
+          body: 'This engine translates cognitive science research into design decisions. I\'ll show you how to use it in about 90 seconds, and why each step matters. Discard it any time with Esc.',
+          detail: 'The principles here come from peer-reviewed research in cognitive load theory, attention, and behavioural economics, not guesswork.',
           target: null
         },
         {
@@ -112,9 +112,9 @@ class CognitiveTour {
         {
           id: 'problem',
           icon: 'edit_note',
-          title: 'Describe what you observe — not what you think the solution is.',
+          title: 'Describe what you observe, not what you think the solution is.',
           body: '"Users miss the save button" tells us more than "make the button bigger". The engine matches principles to the actual behaviour.',
-          detail: 'This is the difference between a symptom and a diagnosis. Cognitive science gives us frameworks for understanding why a behaviour occurs — and that\'s what leads to better design.',
+          detail: 'This is the difference between a symptom and a diagnosis. Cognitive science gives us frameworks for understanding why a behaviour occurs, and that\'s what leads to better design.',
           target: '#problem-description'
         },
         {
@@ -129,7 +129,7 @@ class CognitiveTour {
           id: 'example',
           icon: 'compare',
           title: 'Every principle becomes a visible before/after.',
-          body: 'This panel translates the selected principle into an interface decision — what changes on screen, and why it works.',
+          body: 'This panel translates the selected principle into an interface decision: what changes on screen, and why it works.',
           detail: 'Abstract theory is hard to act on. A concrete before/after gives you a testable design move: one primary action, one chunking scheme, one salience decision.',
           target: '#live-example'
         },
@@ -137,7 +137,7 @@ class CognitiveTour {
           id: 'generate',
           icon: 'auto_awesome',
           title: 'One click turns a principle into a design brief.',
-          body: 'From any card, "Generate AI Prompt" seeds the Prompt Generator with your principle, goal, context, and problem description — pre-filled, not re-typed.',
+          body: 'From any card, "Generate AI Prompt" seeds the Prompt Generator with your principle, goal, context, and problem description. The fields are prefilled, so you do not have to enter them again.',
           detail: 'The generated brief is a structured argument: principle, rationale, actions, anti-patterns, and validation criteria you can hand to a team or an AI design tool.',
           target: '.results-head .btn-primary'
         },
@@ -145,7 +145,7 @@ class CognitiveTour {
           id: 'atlas',
           icon: 'hub',
           title: 'Want the whole landscape? Open the Atlas.',
-          body: 'The Atlas lays out all 115 principles as a living map — 14 fields of study, every connection drawn. Take its Grand Tour to learn the territory behind these rankings.',
+          body: 'The Atlas maps all 115 principles across 14 fields of study, with every connection drawn. Take its Grand Tour to learn the territory behind these rankings.',
           detail: 'The Library answers "what should I do now?". The Atlas answers "what is there to learn?". Dots you open there stay marked as explored.',
           target: '.ntab[href="cognitive-atlas.html"]'
         }
@@ -156,7 +156,7 @@ class CognitiveTour {
           icon: 'psychology',
           title: 'This is where cognitive science becomes a design brief.',
           body: 'You\'ll get a prompt grounded in research, not guesswork. Let me walk you through it. Discard it any time with Esc.',
-          detail: 'The prompt generator takes your specific UX problem and maps it to the most relevant cognitive principle — then structures a complete design brief around it.',
+          detail: 'The prompt generator maps your specific UX problem to the most relevant cognitive principle, then structures a complete design brief around it.',
           target: null
         },
         {
@@ -164,7 +164,7 @@ class CognitiveTour {
           icon: 'edit_note',
           title: 'Be specific about the friction.',
           body: '"Nurses are overriding drug interaction alerts" tells us more than "alerts aren\'t working". Describe the behaviour you observe.',
-          detail: 'The more specific your problem description, the more precisely the engine can match a principle. Vague inputs lead to generic outputs — this is Garbage In, Garbage Out, but for cognitive science.',
+          detail: 'The more specific your problem description, the more precisely the engine can match a principle. Vague inputs lead to generic outputs; this is Garbage In, Garbage Out, but for cognitive science.',
           target: '#problemInput'
         },
         {
@@ -172,7 +172,7 @@ class CognitiveTour {
           icon: 'explore',
           title: 'These narrow the principle space.',
           body: 'The context and goal selectors tell the engine which research domain to pull from. The more specific you are, the more targeted the output.',
-          detail: 'Think of it like a differential diagnosis in medicine. The same symptom (e.g. "users ignore warnings") has different causes depending on context — alarm fatigue in healthcare vs. banner blindness in e-commerce.',
+          detail: 'Think of it like a differential diagnosis in medicine. The same symptom (e.g. "users ignore warnings") has different causes depending on context: alarm fatigue in healthcare vs. banner blindness in e-commerce.',
           target: '#contextSelect'
         },
         {

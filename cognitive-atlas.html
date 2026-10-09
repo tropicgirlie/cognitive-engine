@@ -212,7 +212,7 @@ button,input,select,textarea{font:inherit;}
   <span class="toolbar-spacer"></span>
   <span class="explored-pill" id="explored-pill" title="Principles you have opened in the atlas"><span class="ring" id="explored-ring" style="--p:0;"></span><span id="explored-label">0 / 115 explored</span></span>
   <button class="ibtn" id="fit-btn" title="Fit whole map" aria-label="Fit whole map"><span class="mi">center_focus_strong</span></button>
-  <button class="tour-btn" id="tour-start"><span class="mi" aria-hidden="true">rocket_launch</span><span class="tour-label">Grand Tour — all 14 fields</span></button>
+  <button class="tour-btn" id="tour-start"><span class="mi" aria-hidden="true">rocket_launch</span><span class="tour-label">Grand Tour: all 14 fields</span></button>
 </div>
 
 <div id="stage">
@@ -287,20 +287,20 @@ const DISC_COLORS = {
 };
 
 const DISC_NARRATIVE = {
-  'cognitive-psychology':      'How attention, memory and mental load actually work — the physics of the mind your interface must respect.',
-  'gestalt-psychology':        'How the eye groups what it sees before the mind reads a single word — proximity, similarity, closure, common fate.',
-  'neuroscience':              'What the brain rewards, detects and ignores — dopamine loops, error signals, habituation.',
-  'behavioral-economics':      'Why people do not optimise — defaults, anchors, losses and the shortcuts hiding in every decision.',
-  'social-psychology':         'Why people follow, trust, resist and reciprocate — the social forces living inside every product.',
-  'evolutionary-psychology':   'Ancient biases in modern interfaces — threat detection, face detection, in-group instincts.',
-  'information-theory':        'Signal versus noise — how much information a screen can carry before meaning collapses.',
-  'linguistics':               'How wording shapes thought — conversational maxims, prototypes, garden paths and language games.',
-  'ux-design':                 'Field-tested laws of interaction — Jakob’s familiarity, Tesler’s conserved complexity, Kay’s simplicity.',
-  'human-computer-interaction':'Where cognition meets the machine — affordances, signifiers, distributed and situated thinking.',
-  'instructional-design':      'How people learn — spacing, chunking and sequencing knowledge so it actually sticks.',
-  'visual-design':             'Hierarchy, contrast and colour as cognitive shortcuts — making the important thing findable.',
-  'anthropology':              'Ritual, culture and gift economies — the human meaning systems every product inherits.',
-  'philosophy':                'The deep assumptions — embodiment, ready-to-hand tools, and what simplicity really means.'
+  'cognitive-psychology':      'How attention, memory and mental load actually work: the physics of the mind your interface must respect.',
+  'gestalt-psychology':        'How the eye groups what it sees before the mind reads a single word: proximity, similarity, closure, common fate.',
+  'neuroscience':              'What the brain rewards, detects and ignores: dopamine loops, error signals, habituation.',
+  'behavioral-economics':      'Why people do not optimise: defaults, anchors, losses and the shortcuts hiding in every decision.',
+  'social-psychology':         'Why people follow, trust, resist and reciprocate: the social forces living inside every product.',
+  'evolutionary-psychology':   'Ancient biases in modern interfaces: threat detection, face detection, in-group instincts.',
+  'information-theory':        'Signal versus noise: how much information a screen can carry before meaning collapses.',
+  'linguistics':               'How wording shapes thought: conversational maxims, prototypes, garden paths and language games.',
+  'ux-design':                 'Field-tested laws of interaction: Jakob’s familiarity, Tesler’s conserved complexity, Kay’s simplicity.',
+  'human-computer-interaction':'Where cognition meets the machine: affordances, signifiers, distributed and situated thinking.',
+  'instructional-design':      'How people learn: spacing, chunking and sequencing knowledge so it actually sticks.',
+  'visual-design':             'Hierarchy, contrast and colour as cognitive shortcuts that make the important thing findable.',
+  'anthropology':              'Ritual, culture and gift economies: the human meaning systems every product inherits.',
+  'philosophy':                'The deep assumptions: embodiment, ready-to-hand tools, and what simplicity really means.'
 };
 
 const DISC_PROFESSIONS = {
@@ -429,7 +429,7 @@ function buildGraph(data) {
     });
   });
 
-  // edges: real joins — shared problem types weigh double, shared contexts single
+  // edges: real joins; shared problem types weigh double, shared contexts single
   const cand = new Map();
   for (let i = 0; i < S.nodes.length; i++) {
     const scored = [];
@@ -676,7 +676,7 @@ function syncUrl() {
     else if (S.selDisc) params.set('disc', S.selDisc);
     const qs = params.toString();
     history.replaceState(null, '', location.pathname + (qs ? '?' + qs : ''));
-  } catch (e) { /* file:// or restricted context — skip silently */ }
+  } catch (e) { /* file:// or restricted context; skip silently */ }
 }
 
 /* ---------------- panels ---------------- */
@@ -693,7 +693,7 @@ function renderWelcomePanel() {
   panelHead.innerHTML = `
     <p class="p-eyebrow"><span class="mi" style="font-size:15px;">hub</span>The whole map</p>
     <h2 class="p-title">Every principle. Every connection.</h2>
-    <p class="p-sub">This is the engine's full knowledge base laid out as a landscape. Each island is a field of study; each dot is a principle; each line is a real connection — two principles that solve the same class of problem.</p>`;
+    <p class="p-sub">This is the engine's full knowledge base laid out as a landscape. Each island is a field of study, each dot is a principle, and each line connects principles that solve the same class of problem.</p>`;
   const stats = `
     <div class="p-stats">
       <div class="p-stat"><b>${S.nodes.length}</b><span>Principles</span></div>
@@ -744,7 +744,7 @@ function renderDisciplinePanel(hub, forTour) {
     <div class="p-sec"><h4>Connected fields</h4><div class="chiprow">${connected.length ? connected.map((c) => `<span class="chip" data-disc="${c.other.id}" tabindex="0" role="button"><span class="swatch" style="background:${c.other.color};"></span>${esc(c.other.label)} · ${c.n}</span>`).join('') : '<span class="chip static">Mostly self-contained</span>'}</div></div>
     <div class="p-sec"><h4>Every principle in this field</h4><ul class="plist">${list}</ul></div>
     ${forTour
-      ? `<div class="tour-note"><span class="mi">flight</span><span>Tour stop ${S.tour.idx + 1} of ${TOUR_ORDER.length + 2}. Open any principle — the tour waits for you.</span></div>`
+      ? `<div class="tour-note"><span class="mi">flight</span><span>Tour stop ${S.tour.idx + 1} of ${TOUR_ORDER.length + 2}. Open any principle; the tour waits for you.</span></div>`
       : `<div class="p-actions"><button class="btn-ghost" data-tour="start"><span class="mi" style="font-size:15px;">rocket_launch</span>See it in the Grand Tour</button></div>`}`;
 }
 
@@ -806,7 +806,7 @@ function renderTourIntroPanel() {
   panelHead.innerHTML = `
     <p class="p-eyebrow"><span class="mi" style="font-size:15px;">flight_takeoff</span>Grand Tour · stop 1 of ${TOUR_ORDER.length + 2}</p>
     <h2 class="p-title">The whole territory, first.</h2>
-    <p class="p-sub">${S.nodes.length} principles from ${S.hubs.length} fields — cognitive psychology to philosophy — connected by ${S.edges.length} shared-problem lines. Next stops fly into each field, largest to most surprising.</p>`;
+    <p class="p-sub">${S.nodes.length} principles from ${S.hubs.length} fields (cognitive psychology to philosophy) connected by ${S.edges.length} shared-problem lines. Next stops fly into each field, largest to most surprising.</p>`;
   panelBody.innerHTML = `
     <div class="tour-note"><span class="mi">touch_app</span><span>You stay in control: pause below, jump with the rail on the left, or open any dot. The tour resumes when you are ready.</span></div>`;
 }
@@ -821,7 +821,7 @@ function renderTourOutroPanel() {
       <a class="btn-primary" href="index.html"><span class="mi" style="font-size:15px;">auto_stories</span>Open the Library</a>
       <button class="btn-ghost" data-tour="start"><span class="mi" style="font-size:15px;">replay</span>Restart tour</button>
     </div>
-    <div class="tour-note"><span class="mi">school</span><span>Tip: principles you open are marked as explored — ${S.visited.size} of ${S.nodes.length} so far. Hover any dot to trace what it connects to.</span></div>`;
+    <div class="tour-note"><span class="mi">school</span><span>Tip: principles you open are marked as explored, ${S.visited.size} of ${S.nodes.length} so far. Hover any dot to trace what it connects to.</span></div>`;
 }
 
 /* panel event delegation */
@@ -1087,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     S.data = await loadData();
   } catch (err) {
     panelHead.innerHTML = '<h2 class="p-title">Atlas could not load its data</h2>';
-    panelBody.innerHTML = '<p class="p-sub">This page reads the JSON files in <code>data/</code> — open it through a local web server (for example <code>npm run dev</code>) rather than directly from the file system.</p>';
+    panelBody.innerHTML = '<p class="p-sub">This page reads the JSON files in <code>data/</code>; open it through a local web server (for example <code>npm run dev</code>) rather than directly from the file system.</p>';
     return;
   }
 

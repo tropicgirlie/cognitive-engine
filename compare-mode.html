@@ -83,7 +83,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:16px;flex-wrap:wrap;">
       <div>
         <h1 style="font:700 24px/1.2 'Roboto Flex',sans-serif;color:var(--on-surf);margin:0 0 6px;">Compare Mode</h1>
-        <p style="font:400 13.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:560px;">Evaluate cognitive principles side-by-side — mechanism, design actions, risks, and the primary sources behind each. Everything below is rendered live from the knowledge base.</p>
+        <p style="font:400 13.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0;max-width:560px;">Evaluate cognitive principles side by side. Compare their mechanisms, design actions, risks, and primary sources. Everything below is rendered live from the knowledge base.</p>
       </div>
       <figure class="ce-art ce-art--compare">
         <img src="assets/illustrations/compare-overlap.svg" width="480" height="320" alt="Two annotated ideas overlap around a shared insight"/>
@@ -139,7 +139,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf-low);color:var
 
 <script>
 'use strict';
-/* Compare Mode — fully data-driven.
+/* Compare Mode; fully data-driven.
    State lives in the URL (?p=id1,id2,id3) so every comparison is shareable. */
 
 const MAX_COLS = 4;
@@ -260,7 +260,7 @@ const ROWS = [
   },
   {
     label: 'When to use',
-    render: (p) => `<p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.6;">${esc(p.whenToUse || '—')}</p>`
+    render: (p) => `<p style="font-size:12.5px;color:var(--on-surf-var);margin:0;line-height:1.6;">${esc(p.whenToUse || 'Not specified')}</p>`
   },
   {
     label: 'Design Actions',
@@ -347,8 +347,8 @@ function renderInsights(cols) {
       </div>
       ${sharedChips.length
         ? `<div>${sharedChips.map((c) => `<span class="mchip">${esc(c)}</span>`).join('')}</div>
-           <p style="font-size:12.5px;color:var(--on-surf-var);margin:8px 0 0;line-height:1.6;">Every selected principle speaks to these situations — combining them there is lowest-risk.</p>`
-        : `<p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">No shared context or problem type — these principles address different situations. Combine with care.</p>`}
+           <p style="font-size:12.5px;color:var(--on-surf-var);margin:8px 0 0;line-height:1.6;">Every selected principle speaks to these situations; combining them there is lowest-risk.</p>`
+        : `<p style="font-size:13px;color:var(--on-surf-var);margin:0;line-height:1.65;">No shared context or problem type; these principles address different situations. Combine with care.</p>`}
     </div>
 
     <div class="insight-card">
@@ -382,7 +382,7 @@ function intersect(arrays) {
 function addPrinciple(id) {
   if (state.selected.includes(id)) return;
   if (state.selected.length >= MAX_COLS) {
-    showToast('info', `Compare is limited to ${MAX_COLS} columns — remove one first`);
+    showToast('info', `Compare is limited to ${MAX_COLS} columns; remove one first`);
     return;
   }
   state.selected.push(id);

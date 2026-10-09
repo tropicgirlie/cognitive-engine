@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// fix-principles.js — Run: node scripts/fix-principles.js
+// fix-principles.js; Run: node scripts/fix-principles.js
 // Removes duplicates, adds designPrompt, renames non-research IDs
 const fs = require('fs'), path = require('path');
 
@@ -34,7 +34,7 @@ const PROMPTS = {
   'recognition-over-recall':'Replace every free-text input that has finite valid values with a selection component.',
   'zeigarnik-effect':'Persist and surface incomplete tasks. Closure reduces cognitive residue.',
   'satisficing':'Assume users take the first option they see. Make the first path the correct path.',
-  'confirmation-bias':'Never ask users "did you find that easy?" Watch behaviour — don\'t ask.',
+  'confirmation-bias':'Never ask users "did you find that easy?" Watch behaviour; don\'t ask.',
   'cognitive-ease':'Run every user-facing string through a plain-language check. Jargon equals distrust.',
   'spacing-effect':'Design feature discovery that unfolds over the first week of use, not a single tutorial.',
   'dual-coding-theory':'Never use icons without labels in enterprise tools. Pair every symbol with words.',
@@ -65,7 +65,7 @@ const PROMPTS = {
   'optimism-bias':'Design for the optimistic user who won\'t use your safety features. Make safeguards invisible-by-default.',
   'anterior-cingulate-error-detection':'Inconsistency is neurological load. Audit interaction patterns relentlessly.',
   'cognitive-dissonance':'When breaking established patterns, always explain why. Unexplained change creates dissonance.',
-  'authority-bias':'Your system is an authority. Defaults are authoritative recommendations — use that responsibility carefully.',
+  'authority-bias':'Your system is an authority. Defaults are authoritative recommendations; use that responsibility carefully.',
   'reactance-theory':'Every mandatory field needs a micro-explanation of why it\'s required.',
   'learned-helplessness':'Detect repeated failures on the same step. Offer contextual help after 2 failed attempts.',
   'ikea-effect':'Build meaningful customisation into complex workflows. Participation creates ownership.',
@@ -80,7 +80,7 @@ const PROMPTS = {
   'biophilia-effect':'Consider subtle organic shapes and muted natural tones in high-stress technical tools.',
   'signal-to-noise-ratio':'For every data table: remove grid lines and colour fills unless they carry information.',
   'information-hierarchy':'Design three visual weight levels: large = critical, medium = supporting, small = context.',
-  'modality-effect':'For complex onboarding, use audio + visual together. Complement — don\'t duplicate.',
+  'modality-effect':'For complex onboarding, use audio + visual together. Complement; don\'t duplicate.',
   'redundancy-principle':'Never use icon + label + tooltip when one suffices. Pick the right form; remove the rest.',
   'zipfs-law':'Run usage analytics. Surface the top 5 actions in 1 click. Deprioritise the long tail.',
   'gricean-maxims':'Apply Grice to every string: Is it true? No more than needed? Relevant? Clear?',

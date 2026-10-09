@@ -24,7 +24,7 @@ failures = []
 
 
 def check(label, ok, detail=""):
-    print(f"  {'PASS' if ok else 'FAIL'}  {label}" + (f" — {detail}" if detail else ""))
+    print(f"  {'PASS' if ok else 'FAIL'}  {label}" + (f", {detail}" if detail else ""))
     if not ok:
         failures.append(label)
 

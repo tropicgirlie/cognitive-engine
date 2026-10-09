@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// add-missing-1.js — Behavioral Economics + Cognitive Psychology additions
+// add-missing-1.js; Behavioral Economics + Cognitive Psychology additions
 // Run: node scripts/add-missing-1.js
 const fs = require('fs'), path = require('path');
 const DATA_PATH = path.join(__dirname, '../data/principles-v2.json');
@@ -17,7 +17,7 @@ const NEW = [
     summary:'Small environmental changes predictably alter behaviour without restricting freedom of choice.',
     description:'Cognitive load is reduced when the environment is structured so the best option is also the easiest option.',
     designPrompt:'Structure the environment so the desired action is the path of least resistance. Remove friction from good choices; add it to harmful ones.',
-    whenToUse:'When users need to be guided toward better choices without being forced — onboarding, consent flows, and default settings.',
+    whenToUse:'When users need to be guided toward better choices without being forced; onboarding, consent flows, and default settings.',
     whyItMatches:'Nudge theory is strongest when users are prone to inertia or overwhelm and the designer knows what the optimal choice is.',
     actions:[
       {title:'Engineer default states', description:'Set defaults to the optimal choice for most users. Opt-out beats opt-in for beneficial behaviours.'},
@@ -25,7 +25,7 @@ const NEW = [
     ],
     antiPatterns:['Nudging toward options that benefit the business but not the user','Dark patterns disguised as nudges'],
     uiPatterns:['Pre-selected recommended options','Friction on opt-out flows','Benefit-first prompts before requests'],
-    examples:['Pre-selecting the recommended tier in a pricing screen — users can change it, but rarely do.']
+    examples:['Pre-selecting the recommended tier in a pricing screen; users can change it, but rarely do.']
   },
   {
     id:'prospect-theory', name:'Prospect Theory', aliases:['Kahneman-Tversky Model'],
@@ -37,8 +37,8 @@ const NEW = [
     problemTypes:['choice-paralysis','risk-misperception'],
     tags:['prospect theory','gains','losses','risk','value function'],
     summary:'People evaluate outcomes relative to a reference point and are more sensitive to losses than equivalent gains.',
-    description:'Losses feel approximately twice as impactful as gains of the same size — the psychological value curve is asymmetric.',
-    designPrompt:'Anchor all risk communication to a reference point. Frame losses explicitly — users feel them more acutely than gains.',
+    description:'Losses feel approximately twice as impactful as gains of the same size; the psychological value curve is asymmetric.',
+    designPrompt:'Anchor all risk communication to a reference point. Frame losses explicitly; users feel them more acutely than gains.',
     whenToUse:'When communicating risk, pricing, plan comparisons, or any scenario where users weigh gains against losses.',
     whyItMatches:'Prospect theory explains why users react disproportionately to warnings, fees, and potential losses.',
     actions:[
@@ -69,7 +69,7 @@ const NEW = [
     ],
     antiPatterns:['Presenting all costs as a single line item','Ignoring the user\'s existing mental budget categories'],
     uiPatterns:['Cost-per-unit breakdowns','Feature bundles named by job role or outcome'],
-    examples:['Breaking an annual subscription cost into a per-run cost maps it to an operational budget — not a capital one.']
+    examples:['Breaking an annual subscription cost into a per-run cost maps it to an operational budget, not a capital one.']
   },
   {
     id:'endowment-effect', name:'Endowment Effect', aliases:['Ownership Bias'],
@@ -80,18 +80,18 @@ const NEW = [
     contexts:['onboarding-learning','decision-approvals'],
     problemTypes:['low-engagement','adoption-barriers'],
     tags:['ownership','endowment','free trial','retention','perceived value'],
-    summary:'People value things more highly once they own them — even briefly. Ownership increases perceived worth.',
+    summary:'People value things more highly once they own them, even briefly. Ownership increases perceived worth.',
     description:'Giving users a sense of ownership before a commitment dramatically increases willingness to continue and reduces churn.',
     designPrompt:'Let users experience ownership before the ask. Free trials, saved work, and personalised configurations all create endowment.',
     whenToUse:'In trial-to-paid conversion flows, onboarding, and any scenario where early investment increases commitment.',
-    whyItMatches:'The endowment effect explains why users who\'ve invested effort in a product are harder to churn — loss aversion applies to their ownership.',
+    whyItMatches:'The endowment effect explains why users who\'ve invested effort in a product are harder to churn; loss aversion applies to their ownership.',
     actions:[
       {title:'Create early ownership moments', description:'Let users name things, customise views, or save work before the paywall moment.'},
-      {title:'Surface their investment', description:'Remind users what they\'ve built or configured — making the cost of leaving visible.'}
+      {title:'Surface their investment', description:'Remind users what they\'ve built or configured; making the cost of leaving visible.'}
     ],
     antiPatterns:['Asking for commitment before users have any stake','Resetting progress or preferences after trial expiry'],
     uiPatterns:['Named workspaces and saved configurations','Progress indicators showing user-built data'],
-    examples:['A system that lets users build their own configuration during a trial creates endowment — losing it on expiry is felt as a loss, not a missed gain.']
+    examples:['A system that lets users build their own configuration during a trial creates endowment; losing it on expiry is felt as a loss, not a missed gain.']
   },
   {
     id:'present-bias', name:'Present Bias', aliases:['Hyperbolic Discounting','Temporal Discounting'],
@@ -106,9 +106,9 @@ const NEW = [
     description:'Long-term benefits are heavily discounted in user decision-making. Immediate feedback loops and quick wins are essential to motivation.',
     designPrompt:'Make the immediate benefit of any action visible at the moment of decision. Long-term payoffs must be made tangible now.',
     whenToUse:'In habit formation, onboarding, and any task that requires deferred gratification or sustained effort.',
-    whyItMatches:'Present bias explains why describing long-term benefits fails to motivate immediate adoption — the payoff feels too distant.',
+    whyItMatches:'Present bias explains why describing long-term benefits fails to motivate immediate adoption; the payoff feels too distant.',
     actions:[
-      {title:'Surface immediate value', description:'Show what the user gets right now from completing a step — not what they get in 3 months.'},
+      {title:'Surface immediate value', description:'Show what the user gets right now from completing a step, not what they get in 3 months.'},
       {title:'Build fast feedback loops', description:'Provide instant confirmation, progress indicators, and immediate micro-rewards after each action.'}
     ],
     antiPatterns:['Describing only long-term benefits in onboarding','Delayed confirmation messages'],
@@ -125,17 +125,17 @@ const NEW = [
     problemTypes:['low-engagement','choice-paralysis'],
     tags:['scarcity','urgency','FOMO','limited availability'],
     summary:'People value things more when they are rare or diminishing in availability.',
-    description:'Scarcity signals trigger faster decision-making by increasing perceived value — but misuse damages trust irreparably.',
+    description:'Scarcity signals trigger faster decision-making by increasing perceived value, but misuse damages trust irreparably.',
     designPrompt:'Use scarcity only when it is genuine. False scarcity destroys trust the moment users discover it.',
     whenToUse:'When limited availability is real and relevant to the user\'s decision. Never fabricate scarcity.',
-    whyItMatches:'The scarcity heuristic accelerates decisions by making inaction feel costly — useful in genuine deadline or capacity scenarios.',
+    whyItMatches:'The scarcity heuristic accelerates decisions by making inaction feel costly; useful in genuine deadline or capacity scenarios.',
     actions:[
       {title:'Surface genuine constraints', description:'If capacity or availability genuinely limits options, surface this clearly and honestly.'},
-      {title:'Time-bound offers transparently', description:'Explain exactly why an offer has a deadline — transparency preserves trust.'}
+      {title:'Time-bound offers transparently', description:'Explain exactly why an offer has a deadline; transparency preserves trust.'}
     ],
     antiPatterns:['Fabricated countdown timers','Artificial stock limits','Urgency cues that reset on page refresh'],
     uiPatterns:['Genuine availability indicators','Deadline explanations with context','Waitlist flows for truly limited access'],
-    examples:['Showing "Certification intake closes this quarter on Friday" when that is genuinely true — not a fabricated deadline.']
+    examples:['Showing "Certification intake closes this quarter on Friday" when that is genuinely true, not a fabricated deadline.']
   },
   {
     id:'recency-bias', name:'Recency Bias', aliases:['Recency Effect','Recency Heuristic'],
@@ -150,10 +150,10 @@ const NEW = [
     description:'The most recent interaction with a system shapes the user\'s overall perception, overriding a longer history.',
     designPrompt:'Design your most recent touchpoints with the user as carefully as your first. The last interaction defines current perception.',
     whenToUse:'When designing notifications, summary screens, and any post-task or end-of-session experience.',
-    whyItMatches:'Recency bias explains why a single bad recent experience can override many previous positive ones — and why end states matter.',
+    whyItMatches:'Recency bias explains why a single bad recent experience can override many previous positive ones, and why end states matter.',
     actions:[
       {title:'Optimise end states', description:'The last screen a user sees in a session shapes their perception of the whole session. Design it deliberately.'},
-      {title:'Use recent history as context', description:'Surface recently accessed items prominently — they feel most relevant because they\'re most mentally available.'}
+      {title:'Use recent history as context', description:'Surface recently accessed items prominently; they feel most relevant because they\'re most mentally available.'}
     ],
     antiPatterns:['Ignoring end-of-task states','Generic "completed" confirmations after complex tasks'],
     uiPatterns:['Recently accessed items in navigation','Session end summaries','Deliberate closing screens after complex workflows'],
@@ -191,17 +191,17 @@ const NEW = [
     problemTypes:['information-overload','risk-misperception'],
     tags:['WYSIATI','narrative','missing information','coherence','context'],
     summary:'The mind constructs coherent narratives from available information, ignoring what it doesn\'t know it\'s missing.',
-    description:'Users build confident mental models from incomplete data — they don\'t know what they haven\'t seen.',
+    description:'Users build confident mental models from incomplete data; they don\'t know what they haven\'t seen.',
     designPrompt:'Surface what users need to know, not just what they asked for. Design for the information they don\'t know they\'re missing.',
     whenToUse:'In data dashboards, decision support tools, and any interface where incomplete information could lead to confident but wrong conclusions.',
-    whyItMatches:'WYSIATI explains why dashboards can be dangerous — they create confidence from whatever is displayed, even when key data is absent.',
+    whyItMatches:'WYSIATI explains why dashboards can be dangerous; they create confidence from whatever is displayed, even when key data is absent.',
     actions:[
       {title:'Signal data completeness', description:'Always show data coverage, date ranges, and missing values explicitly. Never let absence read as zero.'},
       {title:'Add what-you-might-not-know context', description:'Proactively surface related data or caveats alongside key metrics.'}
     ],
     antiPatterns:['Dashboards that hide missing data behind blank cells','Metrics displayed without coverage context'],
     uiPatterns:['Data freshness indicators','Missing data placeholders with explanations','Confidence intervals alongside metrics'],
-    examples:['"Based on 3 of 7 reporting regions — 4 not yet submitted" prevents confident but incomplete decisions.']
+    examples:['"Based on 3 of 7 reporting regions, 4 not yet submitted" prevents confident but incomplete decisions.']
   },
   {
     id:'schema-theory', name:'Schema Theory', aliases:['Mental Schemas','Cognitive Schemas'],
@@ -213,17 +213,17 @@ const NEW = [
     problemTypes:['adoption-barriers','information-overload'],
     tags:['schema','mental model','pattern','expectation','familiarity'],
     summary:'Knowledge is organised into structured mental frameworks (schemas) that shape perception, interpretation, and expectation.',
-    description:'Interfaces that violate existing schemas require users to rebuild mental frameworks — a high-load process.',
+    description:'Interfaces that violate existing schemas require users to rebuild mental frameworks; a high-load process.',
     designPrompt:'Identify the schemas your users bring from existing tools. Design to extend them, not replace them.',
     whenToUse:'In any interface where users are experienced professionals with established mental models of how their domain works.',
     whyItMatches:'Schema-consistent design is processed automatically (System 1). Schema-violating design forces effortful relearning (System 2).',
     actions:[
       {title:'Audit existing user schemas', description:'Research what tools and workflows users already know. Design to match or clearly extend those patterns.'},
-      {title:'Use familiar terminology', description:'Adopt the language of your user\'s domain — not the language of your engineering team.'}
+      {title:'Use familiar terminology', description:'Adopt the language of your user\'s domain, not the language of your engineering team.'}
     ],
     antiPatterns:['Renaming familiar concepts with novel terminology','Ignoring domain-specific schemas in enterprise tools'],
     uiPatterns:['Domain-familiar navigation structures','Terminology sourced from user research','Onboarding flows that build on existing knowledge'],
-    examples:['A system that uses industry-standard terminology matches practitioner schemas exactly — internal system names create schema conflict.']
+    examples:['A system that uses industry-standard terminology matches practitioner schemas exactly; internal system names create schema conflict.']
   },
   {
     id:'webers-law', name:"Weber's Law", aliases:['Just Noticeable Difference','JND'],
@@ -236,16 +236,16 @@ const NEW = [
     tags:['Weber','JND','perception threshold','change detection','signal'],
     summary:'The smallest detectable change is a constant proportion of the original stimulus, not a fixed amount.',
     description:'Small UI changes relative to a large visual baseline go unnoticed. Changes must be proportionally significant to register.',
-    designPrompt:'Make changes proportionally visible — a 1px border change is invisible; a colour shift or size change registers.',
+    designPrompt:'Make changes proportionally visible; a 1px border change is invisible; a colour shift or size change registers.',
     whenToUse:'When designing state changes, progress indicators, or feedback animations where the user must notice a change.',
-    whyItMatches:"Weber's Law explains why subtle UI feedback fails — the change must be large relative to the baseline to cross the perception threshold.",
+    whyItMatches:"Weber's Law explains why subtle UI feedback fails; the change must be large relative to the baseline to cross the perception threshold.",
     actions:[
       {title:'Use proportionally significant changes', description:'State changes, hover effects, and progress indicators must be visually dramatic enough to register.'},
       {title:'Test noticeability explicitly', description:'User-test all state transitions: can users actually see the change?'}
     ],
     antiPatterns:['Tiny colour-shift feedback on dark backgrounds','1px border changes to indicate state','Progress bars that don\'t visibly move for small increments'],
     uiPatterns:['High-contrast state change indicators','Proportionally scaled progress feedback','Animation on state transitions'],
-    examples:['A progress bar with a clearly moving fill — not a subtle shift on a grey bar that users miss.']
+    examples:['A progress bar with a clearly moving fill, not a subtle shift on a grey bar that users miss.']
   },
   {
     id:'interference-theory', name:'Interference Theory', aliases:['Proactive Interference','Retroactive Interference'],
@@ -256,13 +256,13 @@ const NEW = [
     contexts:['onboarding-learning','data-entry-forms'],
     problemTypes:['error-prone-input','adoption-barriers'],
     tags:['interference','memory','forgetting','conflict','proactive','retroactive'],
-    summary:'Memory is disrupted when new and old information conflict — old learning interferes with new, and vice versa.',
+    summary:'Memory is disrupted when new and old information conflict; old learning interferes with new, and vice versa.',
     description:'When users learn a new interface that conflicts with a previous one, both are recalled less accurately.',
     designPrompt:'When replacing familiar patterns, explicitly contrast old vs new. Don\'t assume old habits will be overwritten cleanly.',
     whenToUse:'In redesigns, migrations, or any flow where users are transitioning from an established system to a new one.',
-    whyItMatches:'Interference theory predicts the error spike seen after interface redesigns — users blend old and new memories incorrectly.',
+    whyItMatches:'Interference theory predicts the error spike seen after interface redesigns; users blend old and new memories incorrectly.',
     actions:[
-      {title:'Contrast old and new explicitly', description:'During transitions, show users what changed and why — don\'t leave them to relearn through errors.'},
+      {title:'Contrast old and new explicitly', description:'During transitions, show users what changed and why; don\'t leave them to relearn through errors.'},
       {title:'Introduce changes sequentially', description:'Change one major pattern at a time to minimise the interference surface.'}
     ],
     antiPatterns:['Full redesigns launched without transition guides','Mixing old and new patterns in the same interface'],
@@ -279,13 +279,13 @@ const NEW = [
     problemTypes:['adoption-barriers','error-prone-input'],
     tags:['disfluency','desirable difficulty','retention','readability','cognitive effort'],
     summary:'Slightly harder-to-process information is retained better, because it forces deeper cognitive engagement.',
-    description:'Extreme clarity reduces retention. A small amount of processing friction drives deeper encoding — but only in non-critical task flows.',
+    description:'Extreme clarity reduces retention. A small amount of processing friction drives deeper encoding, but only in non-critical task flows.',
     designPrompt:'Reserve intentional friction for learning moments only. Never add disfluency to task-critical paths.',
-    whenToUse:'In onboarding, training flows, and content designed for long-term retention — not for task completion flows.',
+    whenToUse:'In onboarding, training flows, and content designed for long-term retention, not for task completion flows.',
     whyItMatches:'Disfluency improves retention in learning contexts but adds unnecessary load in task execution. Context determines whether it helps or hurts.',
     actions:[
       {title:'Add friction only in learning contexts', description:'Quizzes and reflective prompts improve retention in onboarding but should never appear in task flows.'},
-      {title:'Test retention, not just completion', description:'Measure whether users remember what they learned — not just whether they clicked through.'}
+      {title:'Test retention, not just completion', description:'Measure whether users remember what they learned, not just whether they clicked through.'}
     ],
     antiPatterns:['Adding difficulty to task-critical paths to "encourage thought"','Applying disfluency to error messages or instructions'],
     uiPatterns:['Spaced recall prompts in onboarding','Reflective questions mid-tutorial','Intentional pauses in learning flows'],
@@ -300,10 +300,10 @@ const NEW = [
     contexts:['onboarding-learning','data-entry-forms'],
     problemTypes:['adoption-barriers','information-overload'],
     tags:['expertise','curse of knowledge','expert blind spot','jargon','communication'],
-    summary:"Experts find it difficult to imagine not knowing what they know — leading to explanations that assume knowledge the audience doesn't have.",
+    summary:"Experts find it difficult to imagine not knowing what they know; leading to explanations that assume knowledge the audience doesn't have.",
     description:'Designers and domain experts unconsciously design for themselves, creating interfaces inaccessible to less experienced users.',
     designPrompt:'Design for the new user, not the power user. Expose every design decision to someone who has never seen your product.',
-    whenToUse:'Always — but especially critical when the design team has deep domain expertise in the product they\'re building.',
+    whenToUse:'Always, but especially critical when the design team has deep domain expertise in the product they\'re building.',
     whyItMatches:'The paradox of expertise is one of the most common sources of UX failure in expert-built enterprise software.',
     actions:[
       {title:'Test with genuine novices', description:'Every design review must include at least one person with no prior exposure to the system.'},
@@ -311,7 +311,7 @@ const NEW = [
     ],
     antiPatterns:['Releasing features without non-expert usability testing','Using internal terminology in user-facing labels'],
     uiPatterns:['Plain-language labels reviewed by non-experts','Contextual help written at domain-novice level'],
-    examples:['Help text written by domain experts reads as obvious to them but opaque to a first-time user — non-expert review is essential.']
+    examples:['Help text written by domain experts reads as obvious to them but opaque to a first-time user; non-expert review is essential.']
   },
   {
     id:'context-effect', name:'Context Effect', aliases:['Context-Dependent Memory','Environmental Context'],
@@ -328,12 +328,12 @@ const NEW = [
     whenToUse:'In complex multi-step tasks, reference-heavy workflows, and any scenario where users need to recall prior information mid-task.',
     whyItMatches:'Context effect explains why removing related information from a task screen (to "simplify" it) often increases error rates.',
     actions:[
-      {title:'Maintain task context on screen', description:'Keep relevant reference information visible during the task — not behind separate navigation.'},
-      {title:'Use spatial consistency', description:'Keep UI elements in consistent positions across sessions — spatial memory is a powerful retrieval cue.'}
+      {title:'Maintain task context on screen', description:'Keep relevant reference information visible during the task, not behind separate navigation.'},
+      {title:'Use spatial consistency', description:'Keep UI elements in consistent positions across sessions; spatial memory is a powerful retrieval cue.'}
     ],
     antiPatterns:['Hiding reference information behind separate navigation during a task','Modal dialogs that remove context'],
     uiPatterns:['Persistent side panels for reference data','Consistent element positioning across screens'],
-    examples:['A data entry form that shows relevant reference values alongside input fields — without requiring navigation to find them.']
+    examples:['A data entry form that shows relevant reference values alongside input fields, without requiring navigation to find them.']
   },
   {
     id:'fluency-heuristic', name:'Fluency Heuristic', aliases:['Processing Fluency Heuristic'],
@@ -345,10 +345,10 @@ const NEW = [
     problemTypes:['information-overload','adoption-barriers'],
     tags:['fluency','ease','readability','trust','processing speed'],
     summary:'Easy-to-process information is judged as more likely to be true, more familiar, and more credible.',
-    description:'Cognitive ease functions as a metacognitive signal — if something is hard to read, users assume it\'s hard to understand or do.',
+    description:'Cognitive ease functions as a metacognitive signal; if something is hard to read, users assume it\'s hard to understand or do.',
     designPrompt:'Make information easy to read and easy to scan. Processing difficulty reads as content difficulty, not visual complexity.',
     whenToUse:'In any content-heavy interface, particularly in documentation, instructions, and onboarding copy.',
-    whyItMatches:'The fluency heuristic explains why poorly designed interfaces feel harder to use than they actually are — and vice versa.',
+    whyItMatches:'The fluency heuristic explains why poorly designed interfaces feel harder to use than they actually are, and vice versa.',
     actions:[
       {title:'Optimise typographic readability', description:'Use sufficient font size, line spacing, and contrast. Difficult-to-read text implies difficult-to-do tasks.'},
       {title:'Use high-contrast, clean layouts', description:'Clear visual structure reduces perceived complexity and increases confidence.'}

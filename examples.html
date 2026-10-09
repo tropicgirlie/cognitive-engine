@@ -33,7 +33,7 @@ body{font:400 14px/20px 'Roboto',sans-serif;background:var(--surf);color:var(--o
 
 .page{max-width:1080px;margin:0 auto;padding:40px 24px 64px;}
 
-/* header — left-aligned, ruled, no hero theatre */
+/* header; left-aligned, ruled, no hero theatre */
 .eyebrow{font:800 11px/1 'Roboto';text-transform:uppercase;letter-spacing:.1em;color:var(--pri);margin:0 0 10px;}
 h1{font:800 clamp(26px,3.4vw,38px)/1.1 'Roboto Flex',sans-serif;margin:0 0 12px;letter-spacing:-.01em;max-width:640px;}
 .lede{font:400 15.5px/1.65 'Roboto';color:var(--on-surf-var);margin:0 0 8px;max-width:640px;}
@@ -116,7 +116,7 @@ h1{font:800 clamp(26px,3.4vw,38px)/1.1 'Roboto Flex',sans-serif;margin:0 0 12px;
     <div class="examples-intro-copy">
       <p class="eyebrow">Scenario library</p>
       <h1>Case files: behavioral science, applied.</h1>
-      <p class="lede">Each case file records an observed behavior, exactly what changed in the interface, and the principles that explain why it works — with links to run the same analysis yourself.</p>
+      <p class="lede">Each case file records an observed behavior, exactly what changed in the interface, and the principles that explain why it works, with links to run the same analysis yourself.</p>
     </div>
     <figure class="ce-art ce-art--examples">
       <img src="assets/illustrations/examples-casefile.svg" width="480" height="320" alt="An annotated case file marks a problem and a clearer outcome"/>
@@ -136,7 +136,7 @@ h1{font:800 clamp(26px,3.4vw,38px)/1.1 'Roboto Flex',sans-serif;margin:0 0 12px;
   <div id="cases"></div>
 
   <div class="closing">
-    <p><strong>Your situation isn't listed?</strong> The engine ranks principles for any described problem — these cases are simply its reasoning made visible. Or explore the full territory in the Atlas.</p>
+    <p><strong>Your situation isn't listed?</strong> The engine ranks principles for any described problem; these cases are simply its reasoning made visible. Or explore the full territory in the Atlas.</p>
     <div style="display:flex;gap:8px;">
       <a class="btn-ghost" href="cognitive-atlas.html"><span class="mi" style="font-size:15px;">hub</span>Open the Atlas</a>
       <a class="btn-primary" href="index.html"><span class="mi" style="font-size:15px;">edit_note</span>Describe your problem</a>
@@ -146,7 +146,7 @@ h1{font:800 clamp(26px,3.4vw,38px)/1.1 'Roboto Flex',sans-serif;margin:0 0 12px;
 
 <script>
 'use strict';
-/* Case files — content is bespoke teaching material; principle names and
+/* Case files; content is bespoke teaching material; principle names and
    links are resolved live from data/principles-v2.json so they can never
    drift from the knowledge base. */
 
@@ -158,7 +158,7 @@ const CASES = [
     observed: 'Clinicians scanning dense result grids overlook abnormal values, because critical findings are rendered with the same visual weight as routine rows.',
     before: ['Every result row identical in size, weight and colour', 'Severity carried only by a text label in a column', 'Routine confirmations and critical alerts in one stream'],
     after: ['Severity drives visual weight: abnormal values break the grid rhythm', 'Critical alerts get contrast, position and wording that isolate them', 'Routine noise recedes to a lower-contrast, collapsible tier'],
-    why: 'Attention is captured by what violates the pattern, not by what is marked "important". Salience only works when it is scarce — if everything shouts, nothing is salient.',
+    why: 'Attention is captured by what violates the pattern, not by what is marked "important". Salience only works when it is scarce; if everything shouts, nothing is salient.',
     principles: ['von-restorff-effect', 'signal-to-noise-ratio', 'progressive-disclosure'],
     seed: { goal: 'reduce-errors', context: 'monitoring-alerts', problem: 'Clinicians missing critical lab values in patient dashboards' }
   },
@@ -177,8 +177,8 @@ const CASES = [
     no: '03', domain: 'ecommerce', domainLabel: 'E-commerce',
     ctx: 'Data entry & forms', forWhom: 'For checkout and conversion designers',
     title: 'A checkout form that feels like an interrogation',
-    observed: 'Shoppers reach payment and abandon — not because the form is long in absolute terms, but because its full length is visible at once.',
-    before: ['All fields — shipping, billing, marketing opt-ins — on one screen', 'Optional and required fields visually indistinguishable', 'Primary action small and competing with secondary links'],
+    observed: 'Shoppers reach payment and abandon, not because the form is long in absolute terms, but because its full length is visible at once.',
+    before: ['All fields (shipping, billing, marketing opt-ins) on one screen', 'Optional and required fields visually indistinguishable', 'Primary action small and competing with secondary links'],
     after: ['Fields grouped into a few named chunks with clear section headers', 'Optional fields tucked behind a deliberate reveal', 'The pay action is the largest, closest target on the screen'],
     why: 'Working memory holds only a handful of items at once. Chunking shrinks the perceived task, disclosure defers optional burden, and target size decides whether the final step feels effortless.',
     principles: ['millers-law', 'progressive-disclosure', 'fitts-law'],
@@ -221,10 +221,10 @@ const CASES = [
     no: '07', domain: 'productivity', domainLabel: 'SaaS & productivity',
     ctx: 'Monitoring & alerts', forWhom: 'For ops, devtools and platform teams',
     title: 'Alert fatigue in an operations channel',
-    observed: 'After weeks of low-value notifications, the team starts dismissing everything — including the alert that mattered.',
+    observed: 'After weeks of low-value notifications, the team starts dismissing everything, including the alert that mattered.',
     before: ['Every event notifies: info, warning and critical alike', 'Recurring known issues re-alert on every occurrence', 'No severity gradient in how alerts arrive'],
     after: ['Only state changes and threshold breaches notify by default', 'Known issues are acknowledged once and suppressed until resolved', 'A strict severity gradient: critical interrupts, the rest digests'],
-    why: 'The nervous system habituates to repeated stimulation — an alarm that cries wolf trains people to ignore alarms. Signal-to-noise ratio is a safety property, not a nicety.',
+    why: 'The nervous system habituates to repeated stimulation; an alarm that cries wolf trains people to ignore alarms. Signal-to-noise ratio is a safety property, not a nicety.',
     principles: ['neural-habituation', 'signal-to-noise-ratio', 'cognitive-load-theory'],
     seed: { goal: 'reduce-errors', context: 'monitoring-alerts', problem: 'Team ignores monitoring alerts after too many false alarms' }
   },
@@ -232,7 +232,7 @@ const CASES = [
     no: '08', domain: 'productivity', domainLabel: 'SaaS & productivity',
     ctx: 'Onboarding & learning', forWhom: 'For growth and onboarding designers',
     title: 'Setup abandonment before first value',
-    observed: 'New users start setup in good faith and drop out partway — the product asks for twelve decisions before it has shown any value.',
+    observed: 'New users start setup in good faith and drop out partway; the product asks for twelve decisions before it has shown any value.',
     before: ['Full configuration demanded up front', 'No visible progress or sense of remaining effort', 'Setup ends on a bare settings page, not a result'],
     after: ['First value shown within one minute; configuration deferred', 'A short visible sequence: each step ends with something working', 'The flow closes on the user\'s first real outcome, not a form'],
     why: 'People persist when reward is near and progress is visible, and they remember experiences by their peak and their end. Onboarding should be sequenced as motivation, not administration.',
@@ -293,11 +293,11 @@ function renderCases(domain) {
       <p class="observed">${esc(c.observed)}</p>
       <div class="delta">
         <div class="before">
-          <h5><span class="mi" style="font-size:14px;">close</span>Before — what the interface did</h5>
+          <h5><span class="mi" style="font-size:14px;">close</span>Before: what the interface did</h5>
           <ul>${c.before.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
         </div>
         <div class="after">
-          <h5><span class="mi" style="font-size:14px;">check</span>After — what changed</h5>
+          <h5><span class="mi" style="font-size:14px;">check</span>After: what changed</h5>
           <ul>${c.after.map((a) => `<li>${esc(a)}</li>`).join('')}</ul>
         </div>
         <div class="why">

@@ -4,13 +4,13 @@
   /* Warm, muted palette - no pure black or stark white */
   --ti-bg: #F6F4F0; /* warm off-white background */
   --ti-surface: #ECE7DF; /* card and panel surfaces */
-  --ti-primary: #3C7F8C; /* teal — primary actions */
-  --ti-primary-soft: #D1E5E8; /* light teal — chips, badges, selected */
-  --ti-secondary: #7C8F7A; /* sage — grounding accents */
-  --ti-accent: #8C7BAF; /* lavender — use sparingly */
-  --ti-danger: #B06565; /* desaturated rose — never alarm-red */
-  --ti-warning: #C39A4A; /* golden ochre — informational */
-  --ti-text: #2F3134; /* soft charcoal — no pure black */
+  --ti-primary: #3C7F8C; /* teal; primary actions */
+  --ti-primary-soft: #D1E5E8; /* light teal; chips, badges, selected */
+  --ti-secondary: #7C8F7A; /* sage; grounding accents */
+  --ti-accent: #8C7BAF; /* lavender; use sparingly */
+  --ti-danger: #B06565; /* desaturated rose; never alarm-red */
+  --ti-warning: #C39A4A; /* golden ochre; informational */
+  --ti-text: #2F3134; /* soft charcoal; no pure black */
   --ti-border: #D7D2C8; /* low-noise dividers */
   --ti-focus-ring: 0 0 0 3px rgba(60,127,140,0.4);
   

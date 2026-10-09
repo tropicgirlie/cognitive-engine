@@ -173,4 +173,4 @@ OPENAI_API_KEY=your-openai-key
 4. **Evidence-Based**: Research-backed principles with strength ratings
 5. **Sector-Specific**: Real examples from relevant industries
 
-This isn't another UX encyclopedia—it's decision infrastructure for designers.
+This isn't another UX encyclopedia. It's decision infrastructure for designers.
