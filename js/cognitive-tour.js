@@ -1,5 +1,5 @@
 /**
- * Cognitive Engine Tour — Figma-style Spotlight + Side Panel
+ * Cognitive Engine Tour — Editorial Spotlight + Side Panel
  *
  * Design rationale (from cognitive science perspective):
  * - Spotlight pattern: Von Restorff effect — the highlighted element is the
@@ -211,59 +211,36 @@ class CognitiveTour {
   buildUI() {
     this.cleanup();
 
-    // Full-screen overlay (clicking it discards the tour)
     this.overlay = document.createElement('div');
     this.overlay.id = 'cog-tour-overlay';
-    this.overlay.style.cssText = `
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 10000;
-      transition: opacity 0.4s ease;
-      opacity: 0;
-    `;
     this.overlay.addEventListener('click', () => this.endTour());
 
-    // Spotlight ring around target element
     this.spotlight = document.createElement('div');
     this.spotlight.id = 'cog-tour-spotlight';
-    this.spotlight.style.cssText = `
-      position: fixed;
-      border-radius: 8px;
-      box-shadow: 0 0 0 4px rgba(61,99,221,0.6), 0 0 0 9999px rgba(15,14,20,0.72);
-      transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-      pointer-events: none;
-      z-index: 10001;
-      opacity: 0;
-    `;
 
-    // SVG connector line from spotlight to panel
     this.connector = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     this.connector.id = 'cog-tour-connector';
-    this.connector.style.cssText = `
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: 10001; pointer-events: none; opacity: 0;
-      transition: opacity 0.35s ease;
-    `;
 
-    // Side panel
     this.sidePanel = document.createElement('div');
     this.sidePanel.id = 'cog-tour-panel';
     this.sidePanel.setAttribute('role', 'dialog');
-    this.sidePanel.setAttribute('aria-label', 'Guided tour');
+    this.sidePanel.setAttribute('aria-modal', 'true');
+    this.sidePanel.setAttribute('aria-labelledby', 'cog-tour-title');
     this.sidePanel.tabIndex = -1;
-    this.sidePanel.style.cssText = `
-      position: fixed;
-      top: 0; right: 0; bottom: 0;
-      width: min(420px, 100vw);
-      background: #FFFFFF;
-      box-shadow: -8px 0 40px rgba(0,0,0,0.18);
-      z-index: 10002;
-      display: flex; flex-direction: column;
-      transform: translateX(100%);
-      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-      overflow-y: auto;
-      outline: none;
-      font-family: 'Roboto', -apple-system, sans-serif;
-    `;
+    this.sidePanel.addEventListener('keydown', (event) => {
+      if (event.key !== 'Tab') return;
+      const focusable = Array.from(this.sidePanel.querySelectorAll('button:not([disabled])'));
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    });
 
     document.body.appendChild(this.overlay);
     document.body.appendChild(this.spotlight);
@@ -272,10 +249,8 @@ class CognitiveTour {
 
     requestAnimationFrame(() => {
       this.overlay.style.opacity = '1';
-      this.spotlight.style.opacity = '1';
       this.connector.style.opacity = '1';
       this.sidePanel.style.transform = 'translateX(0)';
-      this.sidePanel.focus({ preventScroll: true });
     });
   }
 
@@ -288,140 +263,55 @@ class CognitiveTour {
     const step = this.tourSteps[this.currentStep];
     const total = this.tourSteps.length;
     const progress = ((this.currentStep + 1) / total) * 100;
+    const number = String(this.currentStep + 1).padStart(2, '0');
+    const totalLabel = String(total).padStart(2, '0');
 
     this.sidePanel.innerHTML = `
-      <!-- Progress bar -->
-      <div style="height:4px; background:#E9E7EE; border-radius:2px; margin:0;">
-        <div style="height:4px; width:${progress}%; background:linear-gradient(90deg,#3D63DD,#6B8FFF); border-radius:2px; transition:width 0.4s ease;"></div>
+      <div class="cog-tour-progress" aria-hidden="true"><div class="cog-tour-progress-fill" style="width:${progress}%"></div></div>
+      <div class="cog-tour-header">
+        <span class="cog-tour-kicker">Cognitive Engine / Field notes</span>
+        <button id="cog-tour-close" class="cog-tour-close" type="button" aria-label="Close guided tour">×</button>
       </div>
-
-      <!-- Close button (discard tour) -->
-      <button id="cog-tour-close" aria-label="Discard tour" style="
-        position:absolute; top:16px; right:16px;
-        width:36px; height:36px; border-radius:50%;
-        border:none; background:transparent; cursor:pointer;
-        display:flex; align-items:center; justify-content:center;
-        color:#767680; font-size:20px; transition:all 0.15s;
-      " onmouseover="this.style.background='#F5F3FA';this.style.color='#1C1B1F'" onmouseout="this.style.background='transparent';this.style.color='#767680'">
-        ✕
-      </button>
-
-      <!-- Panel body -->
-      <div style="padding:40px 32px 32px; flex:1; display:flex; flex-direction:column; justify-content:center;">
-        <!-- Step icon -->
-        <div style="
-          width:56px; height:56px; border-radius:16px;
-          background:linear-gradient(135deg,#DBE1FF,#DFE0F9);
-          display:flex; align-items:center; justify-content:center;
-          margin-bottom:24px;
-        "><span class="mi" style="font-size:28px;color:#3D63DD;">${step.icon}</span></div>
-
-        <!-- Title -->
-        <h2 style="
-          font-size:22px; font-weight:700; line-height:1.3;
-          color:#1C1B1F; margin:0 0 16px; letter-spacing:-0.01em;
-        ">${step.title}</h2>
-
-        <!-- Body -->
-        <p style="
-          font-size:16px; line-height:1.6; color:#46464F;
-          margin:0 0 20px;
-        ">${step.body}</p>
-
-        <!-- Detail (progressive disclosure — collapsible) -->
-        <button id="cog-tour-detail-toggle" style="
-          display:flex; align-items:center; gap:6px;
-          background:none; border:none; cursor:pointer;
-          font-size:14px; font-weight:500; color:#3D63DD;
-          padding:0; margin:0 0 8px; transition:color 0.15s;
-        " onmouseover="this.style.color='#4B73F7'" onmouseout="this.style.color='#3D63DD'">
-          <span style="font-size:18px; transition:transform 0.2s;" id="cog-tour-detail-arrow">▸</span>
-          Why this matters
+      <div class="cog-tour-body">
+        <p class="cog-tour-step-label"><strong>${number}</strong> / ${totalLabel} &nbsp; Guided tour</p>
+        <div class="cog-tour-icon" aria-hidden="true"><span class="mi">${step.icon}</span></div>
+        <h2 id="cog-tour-title" tabindex="-1">${step.title}</h2>
+        <p class="cog-tour-description">${step.body}</p>
+        <button id="cog-tour-detail-toggle" class="cog-tour-detail-toggle" type="button" aria-expanded="false" aria-controls="cog-tour-detail-content">
+          <span class="cog-tour-detail-arrow" aria-hidden="true">▸</span> Why this matters
         </button>
-        <div id="cog-tour-detail-content" style="
-          max-height:0; overflow:hidden; transition:max-height 0.3s ease;
-        ">
-          <p style="
-            font-size:14px; line-height:1.65; color:#767680;
-            margin:0; padding:12px 16px; background:#F5F3FA;
-            border-radius:8px; border-left:3px solid #3D63DD;
-          ">${step.detail}</p>
-        </div>
+        <div id="cog-tour-detail-content" class="cog-tour-detail-content" hidden><p>${step.detail}</p></div>
       </div>
-
-      <!-- Footer navigation -->
-      <div style="
-        padding:20px 32px 28px; border-top:1px solid #E9E7EE;
-        display:flex; align-items:center; justify-content:space-between; gap:12px;
-      ">
-        <!-- Progress dots -->
-        <div style="display:flex; gap:6px; align-items:center;">
-          ${this.tourSteps.map((_, i) => `
-            <div style="
-              width:${i === this.currentStep ? '20px' : '6px'};
-              height:6px; border-radius:3px;
-              background:${i === this.currentStep ? '#3D63DD' : i < this.currentStep ? '#6B8FFF' : '#C7C5D0'};
-              transition:all 0.3s ease;
-            "></div>
-          `).join('')}
+      <div class="cog-tour-footer">
+        <div class="cog-tour-footer-top">
+          <span class="cog-tour-footer-label">Step ${number} of ${totalLabel}</span>
+          <div class="cog-tour-dashes" aria-hidden="true">
+            ${this.tourSteps.map((_, i) => `<span class="cog-tour-dash${i === this.currentStep ? ' is-current' : i < this.currentStep ? ' is-done' : ''}"></span>`).join('')}
+          </div>
         </div>
-
-        <!-- Navigation buttons -->
-        <div style="display:flex; gap:8px; align-items:center;">
-          <button id="cog-tour-skip" style="
-            padding:10px 6px; border:none; background:none;
-            font-size:13px; font-weight:500; color:#767680;
-            cursor:pointer; transition:color 0.15s;
-          " onmouseover="this.style.color='#1C1B1F'" onmouseout="this.style.color='#767680'">
-            Skip tour
-          </button>
-          ${this.currentStep > 0 ? `
-            <button id="cog-tour-back" style="
-              padding:10px 18px; border-radius:8px;
-              border:1px solid #C7C5D0; background:white;
-              font-size:14px; font-weight:500; color:#46464F;
-              cursor:pointer; transition:all 0.15s;
-            " onmouseover="this.style.background='#F5F3FA'" onmouseout="this.style.background='white'">
-              Back
-            </button>
-          ` : ''}
-          <button id="cog-tour-next" style="
-            padding:10px 24px; border-radius:8px;
-            border:none; background:#3D63DD;
-            font-size:14px; font-weight:600; color:white;
-            cursor:pointer; transition:all 0.15s;
-            box-shadow:0 1px 3px rgba(61,99,221,0.3);
-          " onmouseover="this.style.background='#4B73F7'" onmouseout="this.style.background='#3D63DD'">
-            ${this.currentStep === total - 1 ? 'Finish' : 'Next'}
-          </button>
+        <div class="cog-tour-actions">
+          <button id="cog-tour-skip" class="cog-tour-skip" type="button">Skip tour</button>
+          ${this.currentStep > 0 ? '<button id="cog-tour-back" class="cog-tour-back" type="button">Back</button>' : ''}
+          <button id="cog-tour-next" class="cog-tour-next" type="button">${this.currentStep === total - 1 ? 'Finish' : 'Next'} →</button>
         </div>
       </div>
     `;
 
-    // Wire up panel interactions
     this.sidePanel.querySelector('#cog-tour-close').addEventListener('click', () => this.endTour());
     this.sidePanel.querySelector('#cog-tour-skip').addEventListener('click', () => this.endTour());
     this.sidePanel.querySelector('#cog-tour-next').addEventListener('click', () => this.nextStep());
     const backBtn = this.sidePanel.querySelector('#cog-tour-back');
     if (backBtn) backBtn.addEventListener('click', () => this.previousStep());
 
-    // Progressive disclosure toggle
     const toggleBtn = this.sidePanel.querySelector('#cog-tour-detail-toggle');
     const detailContent = this.sidePanel.querySelector('#cog-tour-detail-content');
-    const detailArrow = this.sidePanel.querySelector('#cog-tour-detail-arrow');
-    if (toggleBtn && detailContent) {
-      toggleBtn.addEventListener('click', () => {
-        const isOpen = detailContent.style.maxHeight !== '0px' && detailContent.style.maxHeight !== '';
-        if (isOpen) {
-          detailContent.style.maxHeight = '0px';
-          detailArrow.style.transform = 'rotate(0deg)';
-        } else {
-          detailContent.style.maxHeight = '220px';
-          detailArrow.style.transform = 'rotate(90deg)';
-        }
-      });
-    }
+    toggleBtn.addEventListener('click', () => {
+      const open = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!open));
+      detailContent.hidden = open;
+    });
 
+    this.sidePanel.querySelector('#cog-tour-title').focus({ preventScroll: true });
     this.positionSpotlight(step);
     this.drawConnector(step);
   }
@@ -429,24 +319,28 @@ class CognitiveTour {
   positionSpotlight(step) {
     if (!step.target) {
       this.spotlight.style.opacity = '0';
-      this.spotlight.style.boxShadow = '0 0 0 9999px rgba(15,14,20,0.72)';
+      this.overlay.style.backgroundColor = 'rgba(13,32,27,.72)';
       return;
     }
 
     const target = document.querySelector(step.target);
     if (!target) {
       this.spotlight.style.opacity = '0';
+      this.overlay.style.backgroundColor = 'rgba(13,32,27,.72)';
       return;
     }
 
     target.scrollIntoView({ behavior: this.reduced ? 'auto' : 'smooth', block: 'center' });
 
+    const activeStep = this.currentStep;
     setTimeout(() => {
+      if (!this.isActive || !this.spotlight || this.currentStep !== activeStep) return;
       const rect = target.getBoundingClientRect();
       const pad = 6;
 
+      this.overlay.style.backgroundColor = 'transparent';
       this.spotlight.style.opacity = '1';
-      this.spotlight.style.boxShadow = '0 0 0 4px rgba(61,99,221,0.6), 0 0 0 9999px rgba(15,14,20,0.72)';
+      this.spotlight.style.boxShadow = '0 0 0 3px #ba5538, 0 0 0 9999px rgba(13,32,27,0.72)';
       this.spotlight.style.top = (rect.top - pad) + 'px';
       this.spotlight.style.left = (rect.left - pad) + 'px';
       this.spotlight.style.width = (rect.width + pad * 2) + 'px';
@@ -462,7 +356,9 @@ class CognitiveTour {
     const target = document.querySelector(step.target);
     if (!target) return;
 
+    const activeStep = this.currentStep;
     setTimeout(() => {
+      if (!this.isActive || !this.connector || this.currentStep !== activeStep) return;
       const rect = target.getBoundingClientRect();
       const panelLeft = window.innerWidth - Math.min(420, window.innerWidth);
 
@@ -471,7 +367,7 @@ class CognitiveTour {
       line.setAttribute('y1', rect.top + rect.height / 2);
       line.setAttribute('x2', panelLeft);
       line.setAttribute('y2', rect.top + rect.height / 2);
-      line.setAttribute('stroke', '#3D63DD');
+      line.setAttribute('stroke', '#ba5538');
       line.setAttribute('stroke-width', '1.5');
       line.setAttribute('stroke-dasharray', '6,4');
       line.setAttribute('opacity', '0.5');
@@ -496,40 +392,18 @@ class CognitiveTour {
     if (this.reduced) { this.endTour(); return; }
 
     const celebration = document.createElement('div');
-    celebration.style.cssText = `
-      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-      z-index: 10003; display: flex; align-items: center; justify-content: center;
-      background: rgba(15,14,20,0.6); pointer-events: none;
-    `;
+    celebration.className = 'cog-tour-celebration';
     celebration.innerHTML = `
-      <div style="
-        background: white; border-radius: 20px; padding: 48px;
-        text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.25);
-        animation: cogTourPopIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      ">
-        <div style="font-size:48px; margin-bottom:16px;"><span class="mi" style="font-size:48px;color:#3D63DD;">psychology</span></div>
-        <h2 style="font-size:24px; font-weight:700; color:#1C1B1F; margin:0 0 8px;">
-          You're ready.
-        </h2>
-        <p style="font-size:16px; color:#46464F; margin:0; max-width:300px; line-height:1.5;">
-          Go diagnose some cognitive friction. The principles are waiting.
-        </p>
+      <div class="cog-tour-celebration-card">
+        <img src="assets/brand/cognitive-engine-mark.svg" width="46" height="46" alt="">
+        <h2>You're ready.</h2>
+        <p>Use the Library to turn the next observed problem into a design decision you can explain.</p>
       </div>
     `;
-
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes cogTourPopIn {
-        from { transform: scale(0.7); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-      }
-    `;
-    document.head.appendChild(style);
     document.body.appendChild(celebration);
 
     setTimeout(() => {
       celebration.remove();
-      style.remove();
       this.endTour();
     }, 2200);
   }
@@ -576,35 +450,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
   if (!hasSeenTour) {
     // wait for the library cards to render before spotlighting them
-    setTimeout(() => cognitiveTour.startTour(), 1500);
+    setTimeout(() => {
+      let seen = false;
+      try { seen = localStorage.getItem('cognitiveEngineTourSeen') === 'true'; } catch (e) { /* private mode */ }
+      if (!seen && !cognitiveTour.isActive) cognitiveTour.startTour();
+    }, 1500);
   }
 });
 
-// ── Floating "Learn" trigger (bottom-left, clear of the toast) ──
+// ── Floating entry point ──
 document.addEventListener('DOMContentLoaded', function() {
   const btn = document.createElement('button');
   btn.id = 'cog-tour-trigger';
-  btn.innerHTML = '<span class="mi" style="font-size:18px;color:#3D63DD;">school</span><span>Learn</span>';
+  btn.type = 'button';
+  btn.innerHTML = '<span class="mi" aria-hidden="true">school</span><span>Take the tour</span>';
   btn.setAttribute('aria-label', 'Start the guided tour');
-  btn.style.cssText = `
-    position: fixed; bottom: 24px; left: 24px;
-    display: flex; align-items: center; gap: 8px;
-    background: white; border: 1px solid #C7C5D0;
-    border-radius: 24px; padding: 10px 18px;
-    font: 500 14px 'Roboto', sans-serif; color: #3D63DD;
-    cursor: pointer; z-index: 90;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
-  `;
-  btn.addEventListener('mouseenter', () => {
-    btn.style.boxShadow = '0 4px 16px rgba(61,99,221,0.25)';
-    btn.style.borderColor = '#3D63DD';
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-    btn.style.borderColor = '#C7C5D0';
-  });
   btn.addEventListener('click', () => cognitiveTour.startTour());
-
   document.body.appendChild(btn);
 });
