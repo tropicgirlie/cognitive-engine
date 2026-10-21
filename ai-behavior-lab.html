@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore how AI response settings affect challenge, uncertainty, guidance, and length. A Cognitive Engine interactive example.">
+  <title>AI Behavior Lab | Cognitive Engine</title>
+  <link rel="icon" type="image/svg+xml" href="assets/brand/cognitive-engine-mark.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/site-system.css">
+  <link rel="stylesheet" href="css/ai-behavior-lab.css">
+  <script src="js/ai-behavior-lab.js" defer></script>
+</head>
+<body class="behavior-lab-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="unified-header">
+    <a class="unified-brand" href="index.html"><img class="unified-mark" src="assets/brand/cognitive-engine-mark.svg" width="34" height="34" alt=""><span>Cognitive Engine</span></a>
+    <nav class="unified-nav" aria-label="Primary">
+      <a href="index.html">Library</a>
+      <a href="cognitive-atlas.html">Atlas</a>
+      <a href="compare-mode.html">Compare</a>
+      <a href="advanced-prompt-generator.html">Prompt Generator</a>
+      <a href="examples.html" aria-current="page">Examples</a>
+    </nav>
+  </header>
+
+  <main id="main" class="lab-shell">
+    <a class="back-link" href="examples.html">← Back to case files</a>
+    <div class="lab-intro">
+      <div>
+        <p class="lab-kicker">Interactive example / Human-AI interaction</p>
+        <h1>Make the assistant's defaults visible.</h1>
+        <p class="lab-lede">AI assistants can sound helpful while agreeing too readily or hiding uncertainty. Adjust four response preferences and see how the same design question might be answered.</p>
+      </div>
+      <div class="lab-diagram" aria-hidden="true">
+        <span class="diagram-input">Question</span><span class="diagram-line"></span>
+        <span class="diagram-control">Your preferences<br><b>○ ━ ● ━ ○</b></span><span class="diagram-line"></span>
+        <span class="diagram-output">Response</span>
+      </div>
+    </div>
+
+    <div class="lab-note" role="note"><strong>How this works</strong> The responses below are written examples, not replies from a live AI model. The controls create custom instructions you can copy. Instructions can influence an assistant's behavior, but cannot guarantee a result.</div>
+
+    <section class="lab-workspace" aria-labelledby="workspace-title">
+      <div class="workspace-head">
+        <div><p class="section-number">01 / Experiment</p><h2 id="workspace-title">Tune the interaction</h2></div>
+        <button class="reset-button" id="reset-controls" type="button">Reset controls</button>
+      </div>
+      <p class="question-label">Same question in both examples</p>
+      <blockquote class="question">“Should we add AI summaries to our research repository?”</blockquote>
+
+      <div class="lab-grid">
+        <div class="controls" aria-label="Response preferences">
+          <div class="control" data-control="challenge">
+            <div class="control-heading"><label for="challenge">Challenge my assumptions</label><output id="challenge-value" for="challenge">Balanced</output></div>
+            <p>How readily should the assistant question your idea?</p>
+            <input id="challenge" type="range" min="0" max="2" step="1" value="1" aria-describedby="challenge-ends">
+            <div class="range-ends" id="challenge-ends"><span>Supportive</span><span>Challenging</span></div>
+          </div>
+          <div class="control" data-control="uncertainty">
+            <div class="control-heading"><label for="uncertainty">Show uncertainty</label><output id="uncertainty-value" for="uncertainty">Calibrated</output></div>
+            <p>How visibly should it separate evidence from assumptions?</p>
+            <input id="uncertainty" type="range" min="0" max="2" step="1" value="1" aria-describedby="uncertainty-ends">
+            <div class="range-ends" id="uncertainty-ends"><span>Light</span><span>Explicit</span></div>
+          </div>
+          <div class="control" data-control="guidance">
+            <div class="control-heading"><label for="guidance">Guide the next step</label><output id="guidance-value" for="guidance">One step</output></div>
+            <p>How much help should it give you to move forward?</p>
+            <input id="guidance" type="range" min="0" max="2" step="1" value="1" aria-describedby="guidance-ends">
+            <div class="range-ends" id="guidance-ends"><span>Answer only</span><span>Coach me</span></div>
+          </div>
+          <div class="control" data-control="length">
+            <div class="control-heading"><label for="length">Response length</label><output id="length-value" for="length">Standard</output></div>
+            <p>How much detail should the response include?</p>
+            <input id="length" type="range" min="0" max="2" step="1" value="1" aria-describedby="length-ends">
+            <div class="range-ends" id="length-ends"><span>Brief</span><span>Detailed</span></div>
+          </div>
+        </div>
+
+        <div class="comparison" aria-label="Illustrative response comparison">
+          <article class="response response-before">
+            <p class="response-tag">Example: overly agreeable</p>
+            <h3>Sounds reassuring</h3>
+            <p>Absolutely! AI summaries are a great idea. They will save your team time and make research much easier to use. I would add them to every study.</p>
+          </article>
+          <article class="response response-after">
+            <p class="response-tag">With your preferences</p>
+            <h3>Changes as you adjust</h3>
+            <div id="sample-response" aria-live="off"></div>
+          </article>
+          <p class="sample-caption">Illustrative wording only. A real model may respond differently.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="instruction-section" aria-labelledby="instructions-title">
+      <div class="workspace-head"><div><p class="section-number">02 / Take it with you</p><h2 id="instructions-title">Your custom instructions</h2></div></div>
+      <p>Paste these into an assistant's custom-instructions or preferences field. Edit the wording to suit your work.</p>
+      <textarea id="instruction-output" readonly spellcheck="false" aria-label="Generated custom instructions"></textarea>
+      <div class="instruction-actions"><button class="copy-button" id="copy-instructions" type="button">Copy instructions</button><span id="copy-status" role="status" aria-live="polite"></span></div>
+    </section>
+
+    <section class="learning-section" aria-labelledby="learning-title">
+      <p class="section-number">03 / What this teaches</p><h2 id="learning-title">Control needs a clear mental model.</h2>
+      <div class="learning-grid">
+        <div><span>01</span><h3>Make behavior legible</h3><p>Plain-language controls let people express preferences without learning instruction syntax.</p></div>
+        <div><span>02</span><h3>Show the consequence</h3><p>A before-and-after example makes each setting easier to understand than a label alone.</p></div>
+        <div><span>03</span><h3>State the limit</h3><p>Preferences guide responses. They do not set a universal baseline or guarantee how every model will behave.</p></div>
+      </div>
+      <p class="lab-credit">Inspired by <a href="https://www.linkedin.com/feed/update/urn:li:activity:7487437084211843072/" target="_blank" rel="noopener noreferrer">Nadia Piet's LLM Counter-Defaults experiment <span aria-hidden="true">↗</span></a>. This is an independent Cognitive Engine teaching example.</p>
+    </section>
+  </main>
+</body>
+</html>
